@@ -1,0 +1,153 @@
+{
+  "Source": {
+    "Type": "source",
+    "Database": "EBI_DEV_DB",
+    "Schema": "LND_CORE",
+    "Table Name": "F_DP_INVENTORY",
+    "Name": "LND_CORE"
+  },
+  "Target": {
+    "Schema": "DW",
+    "Table Name": "F_INVENTORY_SNAPSHOT",
+    "materialization": "truncate_load"
+  },
+  "Columns": [
+    {
+      "Target Column": "SNAPSHOT_DATE",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CURRENT_DATE()"
+    },
+    {
+      "Target Column": "WAREHOUSE_ID",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.WAREHOUSE_ID"
+    },
+    {
+      "Target Column": "PRODUCT_ID",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.PRODUCT_ID"
+    },
+    {
+      "Target Column": "WAREHOUSE_NAME",
+      "Source Table": "LND_CORE.D_DP_WAREHOUSE",
+      "Logic": "w.WAREHOUSE_NAME"
+    },
+    {
+      "Target Column": "WAREHOUSE_LOCATION",
+      "Source Table": "LND_CORE.D_DP_WAREHOUSE",
+      "Logic": "w.LOCATION"
+    },
+    {
+      "Target Column": "PRODUCT_NAME",
+      "Source Table": "LND_CORE.D_DP_PRODUCT",
+      "Logic": "p.PRODUCT_NAME"
+    },
+    {
+      "Target Column": "PRODUCT_CATEGORY",
+      "Source Table": "LND_CORE.D_DP_PRODUCT_CATEGORY",
+      "Logic": "pc.CATEGORY_NAME"
+    },
+    {
+      "Target Column": "QUANTITY_ON_HAND",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.QUANTITY_ON_HAND"
+    },
+    {
+      "Target Column": "QUANTITY_ALLOCATED",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.QUANTITY_ALLOCATED"
+    },
+    {
+      "Target Column": "QUANTITY_AVAILABLE",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.QUANTITY_ON_HAND - fdi.QUANTITY_ALLOCATED"
+    },
+    {
+      "Target Column": "UNIT_COST",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.UNIT_COST"
+    },
+    {
+      "Target Column": "TOTAL_VALUE",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.QUANTITY_ON_HAND * fdi.UNIT_COST"
+    },
+    {
+      "Target Column": "LAST_RECEIVED_DATE",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "fdi.LAST_RECEIVED_DATE"
+    },
+    {
+      "Target Column": "DAYS_SINCE_LAST_RECEIVED",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "DATEDIFF(day, fdi.LAST_RECEIVED_DATE, CURRENT_DATE())"
+    },
+    {
+      "Target Column": "IS_LOW_STOCK",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CASE WHEN fdi.QUANTITY_ON_HAND < p.REORDER_POINT THEN 'Y' ELSE 'N' END"
+    },
+    {
+      "Target Column": "DATA_SRC",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "'DW.F_INVENTORY_SNAPSHOT'"
+    },
+    {
+      "Target Column": "CREATE_DT",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
+      "Target Column": "CREATE_BY",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "CREATE_PGM",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "'DW.F_INVENTORY_SNAPSHOT'"
+    },
+    {
+      "Target Column": "UPDATE_DT",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
+      "Target Column": "UPDATE_BY",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "UPDATE_PGM",
+      "Source Table": "LND_CORE.F_DP_INVENTORY",
+      "Logic": "'DW.F_INVENTORY_SNAPSHOT'"
+    }
+  ],
+  "Joins": [
+    {
+      "Join Type": "INNER",
+      "Table Type": "source",
+      "Source Name": "LND_CORE",
+      "Table Name": "D_DP_WAREHOUSE",
+      "Alias": "w",
+      "Join Condition": "fdi.WAREHOUSE_ID = w.WAREHOUSE_ID"
+    },
+    {
+      "Join Type": "INNER",
+      "Table Type": "source",
+      "Source Name": "LND_CORE",
+      "Table Name": "D_DP_PRODUCT",
+      "Alias": "p",
+      "Join Condition": "fdi.PRODUCT_ID = p.PRODUCT_ID"
+    },
+    {
+      "Join Type": "LEFT",
+      "Table Type": "source",
+      "Source Name": "LND_CORE",
+      "Table Name": "D_DP_PRODUCT_CATEGORY",
+      "Alias": "pc",
+      "Join Condition": "p.CATEGORY_ID = pc.CATEGORY_ID"
+    }
+  ],
+  "Where Condition": "fdi.IS_ACTIVE = 'Y' AND w.IS_ACTIVE = 'Y' AND p.IS_ACTIVE = 'Y'"
+} 

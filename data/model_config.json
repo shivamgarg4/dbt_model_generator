@@ -1,0 +1,84 @@
+{
+  "Source": {
+    "Type": "source",
+    "Database": "EBI_DEV_DB",
+    "Schema": "LND_CORE",
+    "Table Name": "D_DP_OPCO",
+    "Name": "LND_CORE"
+  },
+  "Target": {
+    "Schema": "DW",
+    "Table Name": "D_OPCO",
+    "materialization": "incremental",
+    "unique_key": [
+      "OPCO_CD"
+    ]
+  },
+  "Columns": [
+    {
+      "Target Column": "OPCO_ID",
+      "Source Table": null,
+      "Logic": "'1'"
+    },
+    {
+      "Target Column": "DATA_SRC",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "'DW.D_OPCO'"
+    },
+    {
+      "Target Column": "CREATE_BY",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "CREATE_PGM",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "'DW.D_OPCO'"
+    },
+    {
+      "Target Column": "UPDATE_BY",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "UPDATE_PGM",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "'DW.D_OPCO'"
+    },
+    {
+      "Target Column": "OPCO_CD",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "OPCO_CD"
+    },
+    {
+      "Target Column": "OPCO_DSC",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "OPCO_DSC"
+    },
+    {
+      "Target Column": "RPT_OPCO_DSC",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "RPT_OPCO_DSC"
+    },
+    {
+      "Target Column": "RPT_OPCO_ABBRV",
+      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Logic": "RPT_OPCO_ABBRV"
+    },
+    {
+      "Target Column": "TBA_ACTIVE_FLG",
+      "Source Table": null,
+      "Logic": "'Y'"
+    }
+  ],
+  "DAG": {
+    "Type": "dataset_dependency",
+    "Schedule": "0 */4 * * *",
+    "Dependency Schema": [
+      "DW"
+    ],
+    "Dependency Object": [
+      "D_CUSTOMER"
+    ]
+  }
+}

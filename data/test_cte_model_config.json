@@ -1,0 +1,174 @@
+{
+  "Source": {
+    "Type": "source",
+    "Database": "EBI_DEV_DB",
+    "Schema": "LND_CORE",
+    "Table Name": "F_DP_TRANSACTIONS",
+    "Name": "LND_CORE"
+  },
+  "Target": {
+    "Schema": "DW",
+    "Table Name": "F_TRANSACTION_SUMMARY",
+    "materialization": "incremental",
+    "unique_key": ["TRANSACTION_DATE", "STORE_ID", "PRODUCT_CATEGORY_ID"]
+  },
+  "CTEs": [
+    {
+      "Name": "daily_transactions",
+      "SQL": "SELECT\n  DATE_TRUNC('DAY', t.TRANSACTION_TIMESTAMP) AS TRANSACTION_DATE,\n  t.STORE_ID,\n  p.PRODUCT_CATEGORY_ID,\n  COUNT(DISTINCT t.TRANSACTION_ID) AS TRANSACTION_COUNT,\n  SUM(t.QUANTITY) AS TOTAL_QUANTITY,\n  SUM(t.AMOUNT) AS TOTAL_AMOUNT\nFROM {{ source('LND_CORE', 'F_DP_TRANSACTIONS') }} t\nINNER JOIN {{ source('LND_CORE', 'D_DP_PRODUCT') }} p ON t.PRODUCT_ID = p.PRODUCT_ID\nWHERE t.TRANSACTION_TIMESTAMP >= DATEADD(day, -90, CURRENT_DATE())\nGROUP BY 1, 2, 3"
+    },
+    {
+      "Name": "store_info",
+      "SQL": "SELECT\n  s.STORE_ID,\n  s.STORE_NAME,\n  s.STORE_TYPE,\n  r.REGION_ID,\n  r.REGION_NAME\nFROM {{ source('LND_CORE', 'D_DP_STORE') }} s\nLEFT JOIN {{ source('LND_CORE', 'D_DP_REGION') }} r ON s.REGION_ID = r.REGION_ID\nWHERE s.IS_ACTIVE = 'Y'"
+    },
+    {
+      "Name": "category_info",
+      "SQL": "SELECT\n  c.PRODUCT_CATEGORY_ID,\n  c.CATEGORY_NAME,\n  c.CATEGORY_DESCRIPTION,\n  c.DEPARTMENT_ID,\n  d.DEPARTMENT_NAME\nFROM {{ source('LND_CORE', 'D_DP_PRODUCT_CATEGORY') }} c\nLEFT JOIN {{ source('LND_CORE', 'D_DP_DEPARTMENT') }} d ON c.DEPARTMENT_ID = d.DEPARTMENT_ID\nWHERE c.IS_ACTIVE = 'Y'"
+    },
+    {
+      "Name": "previous_day_metrics",
+      "SQL": "SELECT\n  DATEADD(day, 1, TRANSACTION_DATE) AS NEXT_DAY,\n  STORE_ID,\n  PRODUCT_CATEGORY_ID,\n  TRANSACTION_COUNT AS PREV_TRANSACTION_COUNT,\n  TOTAL_QUANTITY AS PREV_TOTAL_QUANTITY,\n  TOTAL_AMOUNT AS PREV_TOTAL_AMOUNT\nFROM daily_transactions"
+    }
+  ],
+  "Columns": [
+    {
+      "Target Column": "TRANSACTION_DATE",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TRANSACTION_DATE"
+    },
+    {
+      "Target Column": "STORE_ID",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.STORE_ID"
+    },
+    {
+      "Target Column": "STORE_NAME",
+      "Source Table": "store_info",
+      "Logic": "si.STORE_NAME"
+    },
+    {
+      "Target Column": "STORE_TYPE",
+      "Source Table": "store_info",
+      "Logic": "si.STORE_TYPE"
+    },
+    {
+      "Target Column": "REGION_ID",
+      "Source Table": "store_info",
+      "Logic": "si.REGION_ID"
+    },
+    {
+      "Target Column": "REGION_NAME",
+      "Source Table": "store_info",
+      "Logic": "si.REGION_NAME"
+    },
+    {
+      "Target Column": "PRODUCT_CATEGORY_ID",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.PRODUCT_CATEGORY_ID"
+    },
+    {
+      "Target Column": "CATEGORY_NAME",
+      "Source Table": "category_info",
+      "Logic": "ci.CATEGORY_NAME"
+    },
+    {
+      "Target Column": "DEPARTMENT_ID",
+      "Source Table": "category_info",
+      "Logic": "ci.DEPARTMENT_ID"
+    },
+    {
+      "Target Column": "DEPARTMENT_NAME",
+      "Source Table": "category_info",
+      "Logic": "ci.DEPARTMENT_NAME"
+    },
+    {
+      "Target Column": "TRANSACTION_COUNT",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TRANSACTION_COUNT"
+    },
+    {
+      "Target Column": "TOTAL_QUANTITY",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TOTAL_QUANTITY"
+    },
+    {
+      "Target Column": "TOTAL_AMOUNT",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TOTAL_AMOUNT"
+    },
+    {
+      "Target Column": "PREV_TRANSACTION_COUNT",
+      "Source Table": "previous_day_metrics",
+      "Logic": "pdm.PREV_TRANSACTION_COUNT"
+    },
+    {
+      "Target Column": "PREV_TOTAL_QUANTITY",
+      "Source Table": "previous_day_metrics",
+      "Logic": "pdm.PREV_TOTAL_QUANTITY"
+    },
+    {
+      "Target Column": "PREV_TOTAL_AMOUNT",
+      "Source Table": "previous_day_metrics",
+      "Logic": "pdm.PREV_TOTAL_AMOUNT"
+    },
+    {
+      "Target Column": "TRANSACTION_COUNT_CHANGE",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TRANSACTION_COUNT - COALESCE(pdm.PREV_TRANSACTION_COUNT, 0)"
+    },
+    {
+      "Target Column": "TRANSACTION_COUNT_CHANGE_PCT",
+      "Source Table": "daily_transactions",
+      "Logic": "CASE WHEN COALESCE(pdm.PREV_TRANSACTION_COUNT, 0) = 0 THEN NULL ELSE (dt.TRANSACTION_COUNT - pdm.PREV_TRANSACTION_COUNT) / pdm.PREV_TRANSACTION_COUNT END"
+    },
+    {
+      "Target Column": "AMOUNT_CHANGE",
+      "Source Table": "daily_transactions",
+      "Logic": "dt.TOTAL_AMOUNT - COALESCE(pdm.PREV_TOTAL_AMOUNT, 0)"
+    },
+    {
+      "Target Column": "AMOUNT_CHANGE_PCT",
+      "Source Table": "daily_transactions",
+      "Logic": "CASE WHEN COALESCE(pdm.PREV_TOTAL_AMOUNT, 0) = 0 THEN NULL ELSE (dt.TOTAL_AMOUNT - pdm.PREV_TOTAL_AMOUNT) / pdm.PREV_TOTAL_AMOUNT END"
+    },
+    {
+      "Target Column": "DATA_SRC",
+      "Source Table": "daily_transactions",
+      "Logic": "'DW.F_TRANSACTION_SUMMARY'"
+    },
+    {
+      "Target Column": "CREATE_DT",
+      "Source Table": "daily_transactions",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
+      "Target Column": "CREATE_BY",
+      "Source Table": "daily_transactions",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    }
+  ],
+  "Joins": [
+    {
+      "Join Type": "INNER",
+      "Table Type": "cte",
+      "Table Name": "store_info",
+      "Alias": "si",
+      "Join Condition": "dt.STORE_ID = si.STORE_ID"
+    },
+    {
+      "Join Type": "INNER",
+      "Table Type": "cte",
+      "Table Name": "category_info",
+      "Alias": "ci",
+      "Join Condition": "dt.PRODUCT_CATEGORY_ID = ci.PRODUCT_CATEGORY_ID"
+    },
+    {
+      "Join Type": "LEFT",
+      "Table Type": "cte",
+      "Table Name": "previous_day_metrics",
+      "Alias": "pdm",
+      "Join Condition": "dt.TRANSACTION_DATE = pdm.NEXT_DAY AND dt.STORE_ID = pdm.STORE_ID AND dt.PRODUCT_CATEGORY_ID = pdm.PRODUCT_CATEGORY_ID"
+    }
+  ],
+  "Where Condition": "dt.TRANSACTION_DATE >= DATEADD(day, -90, CURRENT_DATE())"
+} 

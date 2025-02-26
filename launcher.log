@@ -1,0 +1,222 @@
+2025-02-26 10:58:28,058 - INFO - ==================================================
+2025-02-26 10:58:28,058 - INFO - DBT Model Generator Launcher
+2025-02-26 10:58:28,059 - INFO - ==================================================
+2025-02-26 10:58:28,059 - INFO - Python version check: 3.9
+2025-02-26 10:58:28,059 - INFO - Python version check passed: 3.9
+2025-02-26 10:58:28,059 - INFO - Checking installed packages...
+2025-02-26 10:58:28,068 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 10:58:29,703 - INFO - Package installation completed
+2025-02-26 10:58:29,704 - INFO - Created necessary directories
+2025-02-26 10:58:29,705 - INFO - Setting up script files...
+2025-02-26 10:58:30,022 - INFO - Script files setup completed successfully
+2025-02-26 10:58:30,024 - ERROR - Error running application: No module named 'src'
+2025-02-26 10:58:30,025 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\app_launcher.py", line 117, in run_application
+    from src.dbt_model_generator.main import main
+ModuleNotFoundError: No module named 'src'
+
+2025-02-26 11:00:08,629 - INFO - ==================================================
+2025-02-26 11:00:08,629 - INFO - DBT Model Generator Launcher
+2025-02-26 11:00:08,629 - INFO - ==================================================
+2025-02-26 11:00:08,629 - INFO - Python version check: 3.9
+2025-02-26 11:00:08,629 - INFO - Python version check passed: 3.9
+2025-02-26 11:00:08,630 - INFO - Checking installed packages...
+2025-02-26 11:00:08,639 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:00:10,615 - INFO - Package installation completed
+2025-02-26 11:00:10,616 - INFO - Created necessary directories
+2025-02-26 11:00:10,616 - INFO - Setting up script files...
+2025-02-26 11:00:10,924 - INFO - Script files setup completed successfully
+2025-02-26 11:00:10,926 - ERROR - Error running application: No module named 'src'
+2025-02-26 11:00:10,927 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\app_launcher.py", line 117, in run_application
+    from src.dbt_model_generator.main import main
+ModuleNotFoundError: No module named 'src'
+
+2025-02-26 11:02:41,408 - INFO - ==================================================
+2025-02-26 11:02:41,408 - INFO - DBT Model Generator Launcher
+2025-02-26 11:02:41,408 - INFO - ==================================================
+2025-02-26 11:02:41,409 - INFO - Python version check: 3.9
+2025-02-26 11:02:41,409 - INFO - Python version check passed: 3.9
+2025-02-26 11:02:41,409 - INFO - Checking installed packages...
+2025-02-26 11:02:41,418 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:02:43,015 - INFO - Package installation completed
+2025-02-26 11:02:43,016 - INFO - Created necessary directories
+2025-02-26 11:02:43,016 - INFO - Setting up script files...
+2025-02-26 11:02:43,334 - INFO - Script files setup completed successfully
+2025-02-26 11:02:45,917 - ERROR - Error running application: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+2025-02-26 11:02:45,918 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\app_launcher.py", line 117, in run_application
+    from dag_generator_app.main import main
+ModuleNotFoundError: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+
+2025-02-26 11:03:32,640 - INFO - ==================================================
+2025-02-26 11:03:32,641 - INFO - DBT Model Generator Launcher
+2025-02-26 11:03:32,641 - INFO - ==================================================
+2025-02-26 11:03:32,641 - INFO - Python version check: 3.8
+2025-02-26 11:03:32,641 - INFO - Python version check passed: 3.8
+2025-02-26 11:03:32,643 - INFO - Checking installed packages...
+2025-02-26 11:03:32,649 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:03:35,450 - INFO - Package installation completed
+2025-02-26 11:03:35,451 - INFO - Created necessary directories
+2025-02-26 11:03:35,451 - INFO - Setting up script files...
+2025-02-26 11:03:35,673 - INFO - Script files setup completed successfully
+2025-02-26 11:03:38,027 - INFO - Failed to import optional packages, pyarrow
+2025-02-26 11:03:38,077 - ERROR - Error running application: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+2025-02-26 11:03:38,078 - ERROR - Traceback (most recent call last):
+  File "app_launcher.py", line 117, in run_application
+    from dag_generator_app.main import main
+ModuleNotFoundError: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+
+2025-02-26 11:05:24,888 - INFO - ==================================================
+2025-02-26 11:05:24,888 - INFO - DBT Model Generator Launcher
+2025-02-26 11:05:24,888 - INFO - ==================================================
+2025-02-26 11:05:24,888 - INFO - Python version check: 3.8
+2025-02-26 11:05:24,888 - INFO - Python version check passed: 3.8
+2025-02-26 11:05:24,889 - INFO - Checking installed packages...
+2025-02-26 11:05:24,895 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:05:27,452 - INFO - Package installation completed
+2025-02-26 11:05:27,454 - INFO - Created necessary directories
+2025-02-26 11:05:27,454 - INFO - Setting up script files...
+2025-02-26 11:05:27,677 - INFO - Script files setup completed successfully
+2025-02-26 11:05:29,748 - INFO - Failed to import optional packages, pyarrow
+2025-02-26 11:05:29,800 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:05:29,992 - ERROR - Error running application: can't find package ttk::theme::breeze
+2025-02-26 11:05:29,995 - ERROR - Traceback (most recent call last):
+  File "app_launcher.py", line 125, in run_application
+    app = dag_generator_app.DAGGeneratorApp(root)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 163, in __init__
+    style.theme_use('breeze')
+  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\ttk.py", line 527, in theme_use
+    self.tk.call("ttk::setTheme", themename)
+_tkinter.TclError: can't find package ttk::theme::breeze
+
+2025-02-26 11:06:03,752 - INFO - ==================================================
+2025-02-26 11:06:03,752 - INFO - DBT Model Generator Launcher
+2025-02-26 11:06:03,752 - INFO - ==================================================
+2025-02-26 11:06:03,752 - INFO - Python version check: 3.8
+2025-02-26 11:06:03,752 - INFO - Python version check passed: 3.8
+2025-02-26 11:06:03,753 - INFO - Checking installed packages...
+2025-02-26 11:06:03,759 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:06:06,157 - INFO - Package installation completed
+2025-02-26 11:06:06,158 - INFO - Created necessary directories
+2025-02-26 11:06:06,159 - INFO - Setting up script files...
+2025-02-26 11:06:06,381 - INFO - Script files setup completed successfully
+2025-02-26 11:06:08,476 - INFO - Failed to import optional packages, pyarrow
+2025-02-26 11:06:08,523 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:06:08,668 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 11:06:20,560 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-02-26 11:06:20,560 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 634, in browse_file
+    file_path = filedialog.askopenfilename(
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\filedialog.py", line 376, in askopenfilename
+    return Open(**options).show()
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\commondialog.py", line 44, in show
+    s = w.tk.call(self.command, *w._options(self.options))
+2025-02-26 11:06:20,562 - ERROR - KeyboardInterrupt
+2025-02-26 11:06:34,568 - INFO - Looking for matching DDL file in history...
+2025-02-26 11:06:34,572 - INFO - No matching DDL file found in history
+2025-02-26 11:06:34,572 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 11:06:34,573 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:06:34,609 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 11:06:34,609 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 11:06:34,610 - INFO - Found dependency: sch1.tab1
+2025-02-26 11:06:34,610 - INFO - Found dependency: sch2.tab2
+2025-02-26 11:06:34,611 - INFO - Found dependency: sch3.tab3
+2025-02-26 11:06:34,611 - INFO - Added 3 dependencies to DAG config
+2025-02-26 11:06:34,612 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,614 - INFO - DAG type: dataset_dependency
+2025-02-26 11:06:34,614 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,615 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,618 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 11:06:59,682 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-26 11:06:59,683 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-26 11:06:59,683 - INFO - Setting use_openssl_only mode to False
+2025-02-26 11:07:06,122 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-26 11:07:07,350 - INFO - query execution done
+2025-02-26 11:07:07,378 - INFO - fetching data done
+2025-02-26 11:07:07,378 - INFO - closed
+2025-02-26 11:07:07,639 - INFO - No async queries seem to be running, deleting session
+2025-02-26 11:07:31,646 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:31,648 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:31,649 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:31,650 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:31,650 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:31,650 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:56,008 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,009 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,010 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,012 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:56,013 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:56,013 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:56,013 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:56,014 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:56,014 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 11:07:56,014 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 11:07:56,015 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:07:59,556 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,557 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,559 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,560 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:59,560 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:59,561 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:59,561 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:59,561 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:59,561 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 11:07:59,562 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 11:07:59,562 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:07:59,605 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 11:07:59,606 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch1.tab1
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch2.tab2
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch3.tab3
+2025-02-26 11:07:59,606 - INFO - Added 3 dependencies to DAG config
+2025-02-26 11:07:59,607 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,609 - INFO - DAG type: dataset_dependency
+2025-02-26 11:07:59,610 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,610 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,615 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 11:08:30,837 - INFO - Application closed.
+2025-02-26 11:08:30,838 - INFO - Added unique key to model config: ['OPCO_CD']Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyInitiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...Added unique key to model config: ['OPCO_CD']Added unique key to model config: ['OPCO_CD']Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 11:10:06,136 - INFO - ==================================================
+2025-02-26 11:10:06,137 - INFO - DBT Model Generator Launcher
+2025-02-26 11:10:06,137 - INFO - ==================================================
+2025-02-26 11:10:06,137 - INFO - Python version check: 3.9
+2025-02-26 11:10:06,138 - INFO - Python version check passed: 3.9
+2025-02-26 11:10:06,138 - INFO - Checking installed packages...
+2025-02-26 11:10:06,146 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 11:10:08,230 - INFO - Package installation completed
+2025-02-26 11:10:08,231 - INFO - Created necessary directories
+2025-02-26 11:10:08,231 - INFO - Setting up script files...
+2025-02-26 11:10:08,576 - INFO - Script files setup completed successfully
+2025-02-26 11:10:11,319 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:10:11,572 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 11:10:34,550 - INFO - Application closed.
+2025-02-26 13:00:44,074 - INFO - ==================================================
+2025-02-26 13:00:44,075 - INFO - DBT Model Generator Launcher
+2025-02-26 13:00:44,075 - INFO - ==================================================
+2025-02-26 13:00:44,075 - INFO - Python version check: 3.9
+2025-02-26 13:00:44,075 - INFO - Python version check passed: 3.9
+2025-02-26 13:00:44,076 - INFO - Checking installed packages...
+2025-02-26 13:00:44,087 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-26 13:00:46,572 - INFO - Package installation completed
+2025-02-26 13:00:46,573 - INFO - Created necessary directories
+2025-02-26 13:00:46,573 - INFO - Setting up script files...
+2025-02-26 13:00:46,884 - INFO - Script files setup completed successfully
+2025-02-26 13:00:49,603 - INFO - Starting DBT Model Generator application...
+2025-02-26 13:00:49,782 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 13:00:57,280 - INFO - Looking for matching DDL file in history...
+2025-02-26 13:00:57,282 - INFO - No matching DDL file found in history
+2025-02-26 13:00:57,282 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 13:00:57,282 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 13:00:57,324 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 13:00:57,324 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 13:00:57,325 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 13:00:57,325 - INFO - Added 1 dependencies to DAG config
+2025-02-26 13:00:57,325 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,327 - INFO - DAG type: dataset_dependency
+2025-02-26 13:00:57,328 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,328 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,333 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 13:02:48,123 - INFO - Application closed.
+2025-02-26 13:02:48,124 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py

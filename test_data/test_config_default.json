@@ -1,0 +1,72 @@
+{
+  "Source": {
+    "Type": "source",
+    "Database": "SOURCE_SCHEMA",
+    "Schema": "SOURCE_SCHEMA",
+    "Table Name": "SOURCE_TABLE",
+    "Name": "SOURCE_SCHEMA"
+  },
+  "Target": {
+    "Schema": "TEST_SCHEMA",
+    "Table Name": "TEST_TABLE",
+    "materialization": "incremental",
+    "unique_key": "ID"
+  },
+  "Columns": [
+    {
+      "Target Column": "ID",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "ID"
+    },
+    {
+      "Target Column": "NAME",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "NAME"
+    },
+    {
+      "Target Column": "VALUE",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "VALUE"
+    },
+    {
+      "Target Column": "STATUS",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "STATUS"
+    },
+    {
+      "Target Column": "DATA_SRC",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "'SOURCE_SCHEMA.SOURCE_TABLE'"
+    },
+    {
+      "Target Column": "CREATE_DT",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
+      "Target Column": "CREATE_BY",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "CREATE_PGM",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "'TEST_SCHEMA.TEST_TABLE'"
+    },
+    {
+      "Target Column": "UPDATE_DT",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
+      "Target Column": "UPDATE_BY",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
+    },
+    {
+      "Target Column": "UPDATE_PGM",
+      "Source Table": "SOURCE_SCHEMA",
+      "Logic": "'TEST_SCHEMA.TEST_TABLE'"
+    }
+  ]
+}

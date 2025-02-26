@@ -1,0 +1,438 @@
+2025-02-26 11:02:45,917 - ERROR - Error running application: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+2025-02-26 11:02:45,918 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\app_launcher.py", line 117, in run_application
+    from dag_generator_app.main import main
+ModuleNotFoundError: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+
+2025-02-26 11:03:38,077 - ERROR - Error running application: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+2025-02-26 11:03:38,078 - ERROR - Traceback (most recent call last):
+  File "app_launcher.py", line 117, in run_application
+    from dag_generator_app.main import main
+ModuleNotFoundError: No module named 'dag_generator_app.main'; 'dag_generator_app' is not a package
+
+2025-02-26 11:05:29,800 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:05:29,992 - ERROR - Error running application: can't find package ttk::theme::breeze
+2025-02-26 11:05:29,995 - ERROR - Traceback (most recent call last):
+  File "app_launcher.py", line 125, in run_application
+    app = dag_generator_app.DAGGeneratorApp(root)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 163, in __init__
+    style.theme_use('breeze')
+  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\ttk.py", line 527, in theme_use
+    self.tk.call("ttk::setTheme", themename)
+_tkinter.TclError: can't find package ttk::theme::breeze
+
+2025-02-26 11:06:08,523 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:06:08,668 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 11:06:20,560 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-02-26 11:06:20,560 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 634, in browse_file
+    file_path = filedialog.askopenfilename(
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\filedialog.py", line 376, in askopenfilename
+    return Open(**options).show()
+2025-02-26 11:06:20,562 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\commondialog.py", line 44, in show
+    s = w.tk.call(self.command, *w._options(self.options))
+2025-02-26 11:06:20,562 - ERROR - KeyboardInterrupt
+2025-02-26 11:06:34,568 - INFO - Looking for matching DDL file in history...
+2025-02-26 11:06:34,572 - INFO - No matching DDL file found in history
+2025-02-26 11:06:34,572 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 11:06:34,573 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:06:34,609 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 11:06:34,609 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 11:06:34,610 - INFO - Found dependency: sch1.tab1
+2025-02-26 11:06:34,610 - INFO - Found dependency: sch2.tab2
+2025-02-26 11:06:34,611 - INFO - Found dependency: sch3.tab3
+2025-02-26 11:06:34,611 - INFO - Added 3 dependencies to DAG config
+2025-02-26 11:06:34,612 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,614 - INFO - DAG type: dataset_dependency
+2025-02-26 11:06:34,614 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,615 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:06:34,618 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 11:06:59,682 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-26 11:06:59,683 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-26 11:06:59,683 - INFO - Setting use_openssl_only mode to False
+2025-02-26 11:07:06,122 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-26 11:07:07,350 - INFO - query execution done
+2025-02-26 11:07:07,378 - INFO - fetching data done
+2025-02-26 11:07:07,378 - INFO - closed
+2025-02-26 11:07:07,639 - INFO - No async queries seem to be running, deleting session
+2025-02-26 11:07:31,646 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:31,648 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:31,649 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:31,650 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:31,650 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:31,650 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:56,008 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,009 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,010 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:56,012 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:56,013 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:56,013 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:56,013 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:56,014 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:56,014 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 11:07:56,014 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 11:07:56,015 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:07:59,556 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,557 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,559 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 11:07:59,560 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 11:07:59,560 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 11:07:59,561 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 11:07:59,561 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 11:07:59,561 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 11:07:59,561 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 11:07:59,562 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 11:07:59,562 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 11:07:59,605 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 11:07:59,606 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch1.tab1
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch2.tab2
+2025-02-26 11:07:59,606 - INFO - Found dependency: sch3.tab3
+2025-02-26 11:07:59,606 - INFO - Added 3 dependencies to DAG config
+2025-02-26 11:07:59,607 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,609 - INFO - DAG type: dataset_dependency
+2025-02-26 11:07:59,610 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,610 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-26 11:07:59,615 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 11:08:30,837 - INFO - Application closed.
+2025-02-26 11:08:30,838 - INFO - Added unique key to model config: ['OPCO_CD']Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyInitiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...Added unique key to model config: ['OPCO_CD']Added unique key to model config: ['OPCO_CD']Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 11:10:11,319 - INFO - Starting DBT Model Generator application...
+2025-02-26 11:10:11,572 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 11:10:34,550 - INFO - Application closed.
+2025-02-26 12:25:18,803 - INFO - Testing with MINUS_LOGIC_REQUIRED = NCreated test mapping file: test_data/test_mapping_n.xlsxCreated test JSON config: test_data/test_config_n.jsonAdded unique key to model config: ['ID']Generated DBT model: models\TEST_SCHEMA.TEST_TABLE.sql
+Testing with MINUS_LOGIC_REQUIRED = YCreated test mapping file: test_data/test_mapping_y.xlsxCreated test JSON config: test_data/test_config_y.jsonAdded unique key to model config: ['ID']Generated DBT model: models\TEST_SCHEMA.TEST_TABLE.sql
+Contents of model without minus logic:{{ config(
+    materialized='incremental',
+    schema='TEST_SCHEMA',
+    unique_key="ID"
+)}}
+
+-- Model: TEST_SCHEMA.TEST_TABLE
+-- Source: SOURCE_SCHEMA.SOURCE_SCHEMA.SOURCE_TABLE
+
+SELECT
+    ID as ID,
+    NAME as NAME,
+    VALUE as VALUE,
+    STATUS as STATUS,
+    'SOURCE_SCHEMA.SOURCE_TABLE' as DATA_SRC,
+    CURRENT_TIMESTAMP() as CREATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as CREATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as CREATE_PGM,
+    CURRENT_TIMESTAMP() as UPDATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as UPDATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as UPDATE_PGM
+FROM {{ source('SOURCE_SCHEMA', 'SOURCE_TABLE') }} AS source
+MINUS
+SELECT
+    NAME as NAME,
+    VALUE as VALUE,
+    STATUS as STATUS
+FROM {{ source('SOURCE_SCHEMA', 'SOURCE_TABLE') }} AS source
+Contents of model with minus logic:{{ config(
+    materialized='incremental',
+    schema='TEST_SCHEMA',
+    unique_key="ID"
+)}}
+
+-- Model: TEST_SCHEMA.TEST_TABLE
+-- Source: SOURCE_SCHEMA.SOURCE_SCHEMA.SOURCE_TABLE
+
+SELECT
+    ID as ID,
+    NAME as NAME,
+    VALUE as VALUE,
+    STATUS as STATUS,
+    'SOURCE_SCHEMA.SOURCE_TABLE' as DATA_SRC,
+    CURRENT_TIMESTAMP() as CREATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as CREATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as CREATE_PGM,
+    CURRENT_TIMESTAMP() as UPDATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as UPDATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as UPDATE_PGM
+FROM {{ source('SOURCE_SCHEMA', 'SOURCE_TABLE') }} AS source
+MINUS
+SELECT
+    NAME as NAME,
+    VALUE as VALUE,
+    STATUS as STATUS
+FROM {{ source('SOURCE_SCHEMA', 'SOURCE_TABLE') }} AS source
+Source alias test: PASSEDMinus logic test: PASSED
+2025-02-26 12:29:01,906 - ERROR - --- Logging error ---
+2025-02-26 12:29:01,909 - ERROR - Traceback (most recent call last):
+2025-02-26 12:29:01,909 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\logging\__init__.py", line 1084, in emit
+    stream.write(msg + self.terminator)
+2025-02-26 12:29:01,909 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-02-26 12:29:01,909 - ERROR - UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1031: character maps to <undefined>
+2025-02-26 12:29:01,909 - ERROR - Call stack:
+2025-02-26 12:29:01,910 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 72, in flush
+    logger.log(self.level, self.buffer)
+2025-02-26 12:30:00,557 - ERROR - --- Logging error ---
+2025-02-26 12:30:00,559 - ERROR - Traceback (most recent call last):
+2025-02-26 12:30:00,559 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\logging\__init__.py", line 1084, in emit
+    stream.write(msg + self.terminator)
+2025-02-26 12:30:00,559 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-02-26 12:30:00,559 - ERROR - UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1031: character maps to <undefined>
+2025-02-26 12:30:00,559 - ERROR - Call stack:
+2025-02-26 12:30:00,560 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 72, in flush
+    logger.log(self.level, self.buffer)
+2025-02-26 12:30:42,886 - ERROR - --- Logging error ---
+2025-02-26 12:30:42,887 - ERROR - Traceback (most recent call last):
+2025-02-26 12:30:42,887 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\logging\__init__.py", line 1084, in emit
+    stream.write(msg + self.terminator)
+2025-02-26 12:30:42,887 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-02-26 12:30:42,887 - ERROR - UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 1191: character maps to <undefined>
+2025-02-26 12:30:42,887 - ERROR - Call stack:
+2025-02-26 12:30:42,889 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 72, in flush
+    logger.log(self.level, self.buffer)
+2025-02-26 12:32:00,859 - ERROR - --- Logging error ---
+2025-02-26 12:32:00,860 - ERROR - Traceback (most recent call last):
+2025-02-26 12:32:00,861 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\logging\__init__.py", line 1084, in emit
+    stream.write(msg + self.terminator)
+2025-02-26 12:32:00,861 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-02-26 12:32:00,861 - ERROR - UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 818: character maps to <undefined>
+2025-02-26 12:32:00,861 - ERROR - Call stack:
+2025-02-26 12:32:00,862 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 72, in flush
+    logger.log(self.level, self.buffer)
+2025-02-26 12:32:19,639 - ERROR - import 'dag_generator_app' # <_frozen_importlib_external.SourceFileLoader object at 0x00000210F7D3D190># C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\packaging\__pycache__\extended.cpython-38.pyc matches C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\packaging\extended.py# code object from 'C:\\Users\\shivamgarg4\\Documents\\Python Work\\dbt_model_generator\\.venv\\lib\\site-packages\\openpyxl\\packaging\\__pycache__\\extended.cpython-38.pyc'import 'openpyxl.packaging.extended' # <_frozen_importlib_external.SourceFileLoader object at 0x00000210FC0C9FD0># C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\__pycache__\cp437.cpython-38.pyc matches C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp437.py# code object from 'C:\\Users\\shivamgarg4\\AppData\\Local\\Programs\\Python\\Python38\\lib\\encodings\\__pycache__\\cp437.cpython-38.pyc'import 'encodings.cp437' # <_frozen_importlib_external.SourceFileLoader object at 0x00000210FC0B2DF0>
+2025-02-26 12:32:19,639 - ERROR - --- Logging error ---
+2025-02-26 12:32:19,641 - ERROR - Traceback (most recent call last):
+2025-02-26 12:32:19,641 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\logging\__init__.py", line 1084, in emit
+    stream.write(msg + self.terminator)
+2025-02-26 12:32:19,641 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+2025-02-26 12:32:19,641 - ERROR - UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 818: character maps to <undefined>
+2025-02-26 12:32:19,641 - ERROR - Call stack:
+2025-02-26 12:32:19,642 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 72, in flush
+    logger.log(self.level, self.buffer)
+2025-02-26 12:40:30,962 - INFO - Available themes: ['scidblue', 'blue', 'classic', 'kroc', 'xpnative', 'arc', 'clearlooks', 'adapta', 'scidpurple', 'aquativo', 'breeze', 'scidgrey', 'scidpink', 'radiance', 'yaru', 'plastik', 'ubuntu', 'black', 'scidgreen', 'smog', 'winnative', 'scidmint', 'itft1', 'keramik', 'alt', 'scidsand', 'elegance', 'winxpblue', 'vista', 'default', 'equilux', 'clam']
+2025-02-26 12:40:30,962 - INFO - Available themes: ['scidblue', 'blue', 'classic', 'kroc', 'xpnative', 'arc', 'clearlooks', 'adapta', 'scidpurple', 'aquativo', 'breeze', 'scidgrey', 'scidpink', 'radiance', 'yaru', 'plastik', 'ubuntu', 'black', 'scidgreen', 'smog', 'winnative', 'scidmint', 'itft1', 'keramik', 'alt', 'scidsand', 'elegance', 'winxpblue', 'vista', 'default', 'equilux', 'clam']
+2025-02-26 12:40:31,195 - INFO - Using theme: breeze
+2025-02-26 12:40:31,195 - INFO - Using theme: breeze
+2025-02-26 12:40:54,667 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:40:54,667 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:40:54,670 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 12:40:54,670 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 12:40:54,671 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 12:40:54,671 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 12:40:54,671 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 12:40:54,671 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 12:40:54,671 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 12:40:54,671 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 12:40:54,671 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 12:40:54,671 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 12:43:13,611 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-26 12:43:13,611 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-26 12:43:13,612 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-26 12:43:13,612 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-26 12:43:13,612 - INFO - Setting use_openssl_only mode to False
+2025-02-26 12:43:13,612 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-26 12:43:20,783 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-26 12:43:20,783 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-26 12:43:22,440 - INFO - query execution done
+2025-02-26 12:43:22,440 - INFO - query execution done
+2025-02-26 12:43:22,457 - INFO - fetching data done
+2025-02-26 12:43:22,457 - INFO - fetching data done
+2025-02-26 12:43:22,457 - INFO - closed
+2025-02-26 12:43:22,457 - INFO - closed
+2025-02-26 12:43:22,713 - INFO - No async queries seem to be running, deleting session
+2025-02-26 12:43:22,713 - INFO - No async queries seem to be running, deleting session
+2025-02-26 12:43:54,573 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,573 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,574 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,574 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,574 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,574 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-26 12:43:54,575 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 12:43:54,575 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-26 12:43:54,575 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 12:43:54,575 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 12:43:54,576 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-26 12:43:54,576 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Unique keys: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 12:43:54,576 - INFO - Primary keys: ['OPCO_ID']
+2025-02-26 12:43:54,576 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 12:43:54,576 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-26 12:43:54,576 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 12:43:54,576 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'CREATE_PGM'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-26 12:43:55,301 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:43:55,301 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:43:55,301 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:43:55,301 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:43:55,301 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:43:55,301 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:43:55,301 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:43:55,301 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:43:55,301 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:43:55,301 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:43:55,302 - INFO - DAG type: dataset_dependency
+2025-02-26 12:43:55,302 - INFO - DAG type: dataset_dependency
+2025-02-26 12:43:55,302 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:43:55,302 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:43:55,304 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:43:55,304 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+Found 1 dependency schemas and 1 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 12:43:55,315 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 12:43:55,315 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 12:54:04,261 - ERROR - Traceback (most recent call last):
+2025-02-26 12:54:04,261 - ERROR - Traceback (most recent call last):
+2025-02-26 12:54:04,261 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 12:54:04,261 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 12:54:04,263 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 12:54:04,263 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 12:54:04,264 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 12:54:04,264 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 12:54:09,867 - INFO - Available themes: ['plastik', 'scidgreen', 'breeze', 'alt', 'winnative', 'vista', 'scidpurple', 'smog', 'adapta', 'classic', 'scidmint', 'ubuntu', 'default', 'blue', 'scidgrey', 'xpnative', 'scidsand', 'keramik', 'radiance', 'scidpink', 'clearlooks', 'elegance', 'equilux', 'aquativo', 'arc', 'kroc', 'winxpblue', 'scidblue', 'clam', 'itft1', 'yaru', 'black']
+2025-02-26 12:54:09,867 - INFO - Available themes: ['plastik', 'scidgreen', 'breeze', 'alt', 'winnative', 'vista', 'scidpurple', 'smog', 'adapta', 'classic', 'scidmint', 'ubuntu', 'default', 'blue', 'scidgrey', 'xpnative', 'scidsand', 'keramik', 'radiance', 'scidpink', 'clearlooks', 'elegance', 'equilux', 'aquativo', 'arc', 'kroc', 'winxpblue', 'scidblue', 'clam', 'itft1', 'yaru', 'black']
+2025-02-26 12:54:10,073 - INFO - Using theme: breeze
+2025-02-26 12:54:10,073 - INFO - Using theme: breeze
+2025-02-26 12:54:17,875 - INFO - Looking for matching DDL file in history...
+2025-02-26 12:54:17,875 - INFO - Looking for matching DDL file in history...
+2025-02-26 12:54:17,878 - INFO - No matching DDL file found in history
+2025-02-26 12:54:17,878 - INFO - No matching DDL file found in history
+2025-02-26 12:54:17,878 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 12:54:17,878 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 12:54:17,878 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 12:54:17,878 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Excluding column from MINUS: OPCO_ID (Logic: '1')
+Excluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')
+2025-02-26 12:54:18,037 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:54:18,037 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:54:18,037 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:54:18,037 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:54:18,037 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:54:18,037 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:54:18,037 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:54:18,037 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:54:18,037 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:54:18,037 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:54:18,040 - INFO - DAG type: dataset_dependency
+2025-02-26 12:54:18,040 - INFO - DAG type: dataset_dependency
+2025-02-26 12:54:18,040 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:54:18,040 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:54:18,040 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:54:18,040 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+Found 1 dependency schemas and 1 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 12:54:18,043 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 12:54:18,043 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 12:59:45,733 - ERROR - Traceback (most recent call last):
+2025-02-26 12:59:45,733 - ERROR - Traceback (most recent call last):
+2025-02-26 12:59:45,735 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 12:59:45,735 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 12:59:45,737 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 12:59:45,737 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 12:59:45,738 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 12:59:45,738 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 12:59:51,364 - INFO - Available themes: ['aquativo', 'classic', 'clearlooks', 'xpnative', 'itft1', 'keramik', 'scidblue', 'scidmint', 'yaru', 'scidgreen', 'scidpurple', 'radiance', 'black', 'clam', 'scidsand', 'vista', 'adapta', 'kroc', 'default', 'breeze', 'smog', 'arc', 'ubuntu', 'equilux', 'scidpink', 'alt', 'winnative', 'plastik', 'scidgrey', 'blue', 'elegance', 'winxpblue']
+2025-02-26 12:59:51,364 - INFO - Available themes: ['aquativo', 'classic', 'clearlooks', 'xpnative', 'itft1', 'keramik', 'scidblue', 'scidmint', 'yaru', 'scidgreen', 'scidpurple', 'radiance', 'black', 'clam', 'scidsand', 'vista', 'adapta', 'kroc', 'default', 'breeze', 'smog', 'arc', 'ubuntu', 'equilux', 'scidpink', 'alt', 'winnative', 'plastik', 'scidgrey', 'blue', 'elegance', 'winxpblue']
+2025-02-26 12:59:51,572 - INFO - Using theme: breeze
+2025-02-26 12:59:51,572 - INFO - Using theme: breeze
+2025-02-26 12:59:58,425 - INFO - Looking for matching DDL file in history...
+2025-02-26 12:59:58,425 - INFO - Looking for matching DDL file in history...
+2025-02-26 12:59:58,427 - INFO - No matching DDL file found in history
+2025-02-26 12:59:58,427 - INFO - No matching DDL file found in history
+2025-02-26 12:59:58,427 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 12:59:58,427 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 12:59:58,427 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 12:59:58,427 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Moving primary key column to outer query: OPCO_ID
+Excluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')
+2025-02-26 12:59:58,549 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:59:58,549 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 12:59:58,549 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:59:58,549 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 12:59:58,550 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:59:58,550 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 12:59:58,550 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:59:58,550 - INFO - Added 1 dependencies to DAG config
+2025-02-26 12:59:58,550 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:59:58,550 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:59:58,552 - INFO - DAG type: dataset_dependency
+2025-02-26 12:59:58,552 - INFO - DAG type: dataset_dependency
+2025-02-26 12:59:58,552 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:59:58,552 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:59:58,552 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 12:59:58,552 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+Found 1 dependency schemas and 1 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 12:59:58,554 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 12:59:58,554 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 13:00:35,801 - ERROR - Traceback (most recent call last):
+2025-02-26 13:00:35,801 - ERROR - Traceback (most recent call last):
+2025-02-26 13:00:35,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 13:00:35,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dag_generator_app.py", line 2044, in <module>
+2025-02-26 13:00:35,804 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 13:00:35,804 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-26 13:00:35,805 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 13:00:35,805 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-26 13:00:49,603 - INFO - Starting DBT Model Generator application...
+2025-02-26 13:00:49,782 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-26 13:00:57,280 - INFO - Looking for matching DDL file in history...
+2025-02-26 13:00:57,282 - INFO - No matching DDL file found in history
+2025-02-26 13:00:57,282 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 13:00:57,282 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 13:00:57,324 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 13:00:57,324 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 13:00:57,325 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 13:00:57,325 - INFO - Added 1 dependencies to DAG config
+2025-02-26 13:00:57,325 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,327 - INFO - DAG type: dataset_dependency
+2025-02-26 13:00:57,328 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,328 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:00:57,333 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 13:02:48,123 - INFO - Application closed.
+2025-02-26 13:02:48,124 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 13:10:10,809 - INFO - Available themes: ['vista', 'kroc', 'scidpurple', 'arc', 'radiance', 'scidgreen', 'black', 'scidblue', 'aquativo', 'xpnative', 'ubuntu', 'breeze', 'scidmint', 'keramik', 'smog', 'adapta', 'blue', 'winnative', 'equilux', 'classic', 'scidpink', 'elegance', 'clearlooks', 'winxpblue', 'yaru', 'scidgrey', 'plastik', 'alt', 'default', 'itft1', 'clam', 'scidsand']
+2025-02-26 13:10:10,809 - INFO - Available themes: ['vista', 'kroc', 'scidpurple', 'arc', 'radiance', 'scidgreen', 'black', 'scidblue', 'aquativo', 'xpnative', 'ubuntu', 'breeze', 'scidmint', 'keramik', 'smog', 'adapta', 'blue', 'winnative', 'equilux', 'classic', 'scidpink', 'elegance', 'clearlooks', 'winxpblue', 'yaru', 'scidgrey', 'plastik', 'alt', 'default', 'itft1', 'clam', 'scidsand']
+2025-02-26 13:10:11,030 - INFO - Using theme: breeze
+2025-02-26 13:10:11,030 - INFO - Using theme: breeze
+2025-02-26 13:10:17,459 - INFO - Looking for matching DDL file in history...
+2025-02-26 13:10:17,459 - INFO - Looking for matching DDL file in history...
+2025-02-26 13:10:17,461 - INFO - No matching DDL file found in history
+2025-02-26 13:10:17,461 - INFO - No matching DDL file found in history
+2025-02-26 13:10:17,462 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 13:10:17,462 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-26 13:10:17,462 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-26 13:10:17,462 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Moving primary key column to outer query: OPCO_ID
+Excluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')
+2025-02-26 13:10:18,294 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 13:10:18,294 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-26 13:10:18,294 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 13:10:18,294 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-26 13:10:18,295 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 13:10:18,295 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-26 13:10:18,295 - INFO - Added 1 dependencies to DAG config
+2025-02-26 13:10:18,295 - INFO - Added 1 dependencies to DAG config
+2025-02-26 13:10:18,295 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:10:18,295 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:10:18,296 - INFO - DAG type: dataset_dependency
+2025-02-26 13:10:18,296 - INFO - DAG type: dataset_dependency
+2025-02-26 13:10:18,296 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:10:18,296 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:10:18,297 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-26 13:10:18,297 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+Found 1 dependency schemas and 1 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-26 13:10:18,299 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-26 13:10:18,299 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py

@@ -1,0 +1,23 @@
+{{ config(
+    materialized='incremental',
+    schema='TEST_SCHEMA',
+    unique_key="ID",
+    merge_update_columns = ['NAME', 'VALUE', 'STATUS', 'DATA_SRC', 'CREATE_PGM', 'UPDATE_PGM']
+)}}
+
+-- Model: TEST_SCHEMA.TEST_TABLE
+-- Source: SOURCE_SCHEMA.SOURCE_SCHEMA.SOURCE_TABLE
+
+SELECT
+    ID as ID,
+    NAME as NAME,
+    VALUE as VALUE,
+    STATUS as STATUS,
+    'SOURCE_SCHEMA.SOURCE_TABLE' as DATA_SRC,
+    CURRENT_TIMESTAMP() as CREATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as CREATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as CREATE_PGM,
+    CURRENT_TIMESTAMP() as UPDATE_DT,
+    CAST(CURRENT_USER() AS VARCHAR(200)) as UPDATE_BY,
+    'TEST_SCHEMA.TEST_TABLE' as UPDATE_PGM
+FROM {{ source('SOURCE_SCHEMA', 'SOURCE_TABLE') }} AS source

@@ -1,0 +1,16 @@
+{
+    "mapping_files": [
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_124053.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_084927.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250225_130834.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250225_125728.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250225_120043.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250224_204759.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250224_204332.xlsx"
+    ],
+    "ddl_files": [
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/D_OPCO_DDL.sql",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/data/DW_F_DEPL_RETAIL_INVOICE_CBUS.sql"
+    ]
+}
