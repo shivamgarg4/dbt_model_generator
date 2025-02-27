@@ -1,6 +1,6 @@
 import os
 import json
-from scripts.utils import extract_table_name, parse_ddl_file
+from scripts.utils import parse_ddl_file
 import re
 
 def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=None):
@@ -478,76 +478,6 @@ def extract_group_by(mapping_sheet, main_table_alias='source'):
     
     return None
 
-def get_column_mappings(mapping_sheet):
-    """Extract column mappings from mapping sheet"""
-    mappings = []
-    header_row = 9  # Row where column mapping starts (updated for new layout)
-    
-    # Find the header row
-    for row in range(1, mapping_sheet.max_row + 1):
-        if mapping_sheet.cell(row=row, column=1).value == 'S.NO':
-            header_row = row
-            break
-    
-    # Find the JOIN_TABLES section to determine where column mappings end
-    join_section_row = None
-    for row in range(1, mapping_sheet.max_row + 1):
-        if mapping_sheet.cell(row=row, column=1).value == 'JOIN_TABLES':
-            join_section_row = row
-            break
-    
-    # If JOIN_TABLES section not found, use all rows
-    end_row = join_section_row - 1 if join_section_row else mapping_sheet.max_row
-    
-    for row in range(header_row + 1, end_row + 1):
-        target_col = mapping_sheet.cell(row=row, column=2).value
-        source_col = mapping_sheet.cell(row=row, column=3).value
-        logic = mapping_sheet.cell(row=row, column=4).value
-        
-        if target_col:
-            mappings.append({
-                'target_column': target_col,
-                'source_column': source_col,
-                'logic': logic
-            })
-    
-    return mappings
-
-def get_audit_columns():
-    """Get standard audit columns and their logic"""
-    return [
-        {
-            'column': 'DW_CREATED_DATE',
-            'logic': "CURRENT_TIMESTAMP()"
-        },
-        {
-            'column': 'DW_CREATED_BY',
-            'logic': "'DBT_BUILD_AUTOMATION'"
-        },
-        {
-            'column': 'DW_MODIFIED_DATE',
-            'logic': "CURRENT_TIMESTAMP()"
-        },
-        {
-            'column': 'DW_MODIFIED_BY',
-            'logic': "'DBT_BUILD_AUTOMATION'"
-        }
-    ]
-
-def get_source_type(mapping_sheet):
-    """Get source type from mapping sheet"""
-    for row in range(1, mapping_sheet.max_row + 1):
-        if mapping_sheet.cell(row=row, column=1).value == 'SOURCE_TYPE':
-            return mapping_sheet.cell(row=row, column=2).value
-    return None
-
-def get_source_name(mapping_sheet):
-    """Get source name from mapping sheet"""
-    for row in range(1, mapping_sheet.max_row + 1):
-        if mapping_sheet.cell(row=row, column=1).value == 'SOURCE_NAME':
-            return mapping_sheet.cell(row=row, column=2).value
-    return None
-
 def get_materialization(mapping_sheet):
     """Get materialization from mapping sheet"""
     for row in range(1, mapping_sheet.max_row + 1):
@@ -555,75 +485,4 @@ def get_materialization(mapping_sheet):
             return mapping_sheet.cell(row=row, column=2).value
     return 'incremental'  # Default to incremental if not specified
 
-def extract_unique_keys_from_ddl(ddl_path):
-    """Extract unique key constraints from DDL file"""
-    try:
-        with open(ddl_path, 'r') as file:
-            ddl_content = file.read()
-            
-        # Look for UNIQUE KEY constraints
-        unique_key_pattern = r'CONSTRAINT\s+\w+\s+UNIQUE\s+KEY\s*\(([^)]+)\)'
-        unique_keys = []
-        
-        for match in re.finditer(unique_key_pattern, ddl_content, re.IGNORECASE):
-            columns = match.group(1).split(',')
-            # Clean up column names (remove quotes, trim whitespace)
-            columns = [col.strip().strip('"').strip('`') for col in columns]
-            unique_keys.extend(columns)
-            
-        return unique_keys
-    except Exception:
-        return []
 
-def generate_model_content(config):
-    """Generate model content from config"""
-    # Extract source information
-    source_type = config['Source']['Type'].lower()
-    source_db = config['Source']['Database']
-    source_schema = config['Source']['Schema']
-    source_table = config['Source']['Table Name']
-    source_name = config['Source']['Name']
-    
-    # Build the FROM clause based on source type
-    if source_type == 'source' or source_type == 'src':
-        from_clause = f"{{{{ source('{source_name}', '{source_table}') }}}}"
-    else:
-        # For ref type, combine schema and table
-        ref_path = f"{source_schema}.{source_table}"
-        from_clause = f"{{{{ ref('{ref_path}') }}}}"
-    
-    # Build model content
-    model_content = f"""{{{{ config(
-    materialized='{config['Target']['materialization']}',
-    schema='{config['Target']['Schema']}'
-)}}}}
-
--- Model: {config['Target']['Schema']}.{config['Target']['Table Name']}
--- Source: {source_db}.{source_schema}.{source_table}
-
-SELECT
-"""
-
-    # Add column mappings
-    for column in config['Columns']:
-        target_col = column['Target Column']
-        logic = column['Logic']
-        
-        # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic:
-            continue
-        
-        # Handle special cases for column names with spaces or special characters
-        quoted_target = target_col
-        if ' ' in target_col or '(' in target_col or ')' in target_col:
-            # For columns with spaces or special characters, use quotes
-            quoted_target = f'"{target_col}"'
-        
-        # Use the logic exactly as written without adding table aliases
-        model_content += f"    {logic} as {quoted_target},\n"
-
-    # Remove trailing comma and add FROM clause
-    model_content = model_content.rstrip(',\n')
-    model_content += f"\nFROM {from_clause}"
-    
-    return model_content

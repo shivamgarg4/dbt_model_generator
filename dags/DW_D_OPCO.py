@@ -6,7 +6,7 @@ SCHEMA_NAME, MODEL_TYPE, MODEL_NAME = 'DW', 'DIM', 'D_OPCO'
 DBT_JOB_NAME = SCHEMA_NAME + '_' + MODEL_NAME
 
 DAG_SCHEDULE = [
-    Dataset(f'{workspace_name.upper()}_{workspace_env.upper()}_DW_D_CUSTOMER')
+    Dataset(f'{workspace_name.upper()}_{workspace_env.upper()}_sch1_tab1'), Dataset(f'{workspace_name.upper()}_{workspace_env.upper()}_sch2_tab2'), Dataset(f'{workspace_name.upper()}_{workspace_env.upper()}_sch3_tab3')
 ]
 
 dag_helper = DAG_Helper()

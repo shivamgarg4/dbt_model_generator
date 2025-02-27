@@ -360,3 +360,49 @@ _tkinter.TclError: can't find package ttk::theme::breeze
 2025-02-27 07:48:20,515 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
 2025-02-27 07:48:23,347 - INFO - Application closed.
 2025-02-27 07:48:23,347 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:54,771 - INFO - ==================================================
+2025-02-27 09:59:54,772 - INFO - DBT Model Generator Launcher
+2025-02-27 09:59:54,772 - INFO - ==================================================
+2025-02-27 09:59:54,772 - INFO - Python version check: 3.9
+2025-02-27 09:59:54,772 - INFO - Python version check passed: 3.9
+2025-02-27 09:59:54,772 - INFO - Checking installed packages...
+2025-02-27 09:59:54,783 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 09:59:56,824 - INFO - Package installation completed
+2025-02-27 09:59:56,824 - INFO - Created necessary directories
+2025-02-27 09:59:56,826 - INFO - Setting up script files...
+2025-02-27 09:59:57,122 - INFO - Script files setup completed successfully
+2025-02-27 09:59:59,753 - INFO - Starting DBT Model Generator application...
+2025-02-27 09:59:59,917 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 10:00:07,031 - INFO - Looking for matching DDL file in history...
+2025-02-27 10:00:07,031 - INFO - No matching DDL file found in history
+2025-02-27 10:00:07,032 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 10:00:07,032 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 10:00:07,078 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 10:00:07,078 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 10:00:07,079 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 10:00:07,080 - INFO - Added 1 dependencies to DAG config
+2025-02-27 10:00:07,080 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,083 - INFO - DAG type: dataset_dependency
+2025-02-27 10:00:07,083 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,083 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,087 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 10:00:17,168 - ERROR - C:\Users\shivamgarg4\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\snowflake\connector\config_manager.py:351: UserWarning: Bad owner or permissions on C:\Users\shivamgarg4\.snowflake\connections.toml
+  warn(f"Bad owner or permissions on {str(filep)}{chmod_message}")
+2025-02-27 10:00:17,171 - INFO - Snowflake Connector for Python Version: 3.13.2, Python Version: 3.9.13, Platform: Windows-10-10.0.22631-SP0
+2025-02-27 10:00:17,171 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-27 10:00:17,171 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:00:56,789 - INFO - closed
+2025-02-27 10:00:57,083 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:01:46,857 - INFO - Looking for matching DDL file in history...
+2025-02-27 10:01:46,857 - INFO - No matching DDL file found in history
+2025-02-27 10:01:46,857 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 10:01:46,857 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 10:01:46,885 - INFO - Found DAG Type in mapping: SNS (normalized to sns)
+2025-02-27 10:01:46,885 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 10:01:46,885 - INFO - DAG config from mapping: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,899 - INFO - DAG type: sns
+2025-02-27 10:01:46,899 - INFO - DAG config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,899 - INFO - Generating sns DAG with config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,903 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 10:35:49,120 - INFO - Application closed.
+2025-02-27 10:35:49,121 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyInitiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...Going to open: https://auth.cbrands.com/app/snowflake/exkikpzcoiYGyN5OV696/sso/saml?SAMLRequest=lZLNctowFIVfxaOubckOUNBgMsSQQksIAw792QlbEBVbcnVlDH36ygY6ySKZyU4jnSN9uuf0b4955hy4BqFkiHyPIIfLRKVC7kL0FN%2B7XeSAYTJlmZI8RCcO6HbQB5ZnBR2W5lku%2BZ%2BSg3HsRRJocxCiUkuqGAigkuUcqEnoavgwo4FHaKGVUYnK0AvL%2Bw4GwLWxhFdLCsLiPRtTUIyrqvKqG0%2FpHQ4IIZj0sFXVkk9X%2FdH%2B6Q29j0mr1luFld8rnfDmWyEyuuTIWVxo74Q8D%2BU90M1ZBHQSxwt38biKkTO8wkdKQplzveL6IBL%2BtJydkcAyRXfL4Xy08kpwOQPj%2Bh5IVW0ztueJyovS2Fs9u8JbnuJM7YQdxXQUomIv0vGyau%2FHs27Ept%2B%2BHjejhwgW5fp7d3IcR8tD3JtPorX8cfhdVCRBzvqadVBnPQUo%2BVTWCRu7RYK2SwI3%2BByTFr0h1O96rU7rF3JGNmEhmWmcV2hm5%2BQlG23bAQ0cKwr8nxvz417si7%2BJEj%2B%2FnObtx3Wn18EACteBo3OHaAOgBx%2BdQx%2B%2FdF%2FqOLd5TEcLlYnkVCeZM%2FN2XL7nNzsidbeNlPKciWyYppoD2NiyTFWR5szwSxXw4Pzq694P%2FgE%3D&RelayState=ver%3A1-hint%3A24148586803486766-ETMsDgAAAZVFq3FgABRBRVMvQ0JDL1BLQ1M1UGFkZGluZwEAABAAELxHEvMIF7NV8YD996ky8zcAAACAQsGekGxzkUwWVN%2Bgw0e8IkLMLr1VHNZtmVb6pONJUsqCGxUwBaUEMnQPWN%2B0tBuiE17LP3ZTje8HA6Myr1W1R%2FUN3wqg0DrCTkQ12aTA4C90egudK8G1WGXLG93zEXbF6USopFSATZpIfBM2IBQ%2FQ6jmj49gBa1CfaabdfZbmpEAFKdzkzjPGI8wPngSfH82YXNdXRta to authenticate...Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVGenerating SNS DAG with DOMAIN_NAME=LND_CORE, MODEL_TYPE=DIM, DP_NAME=D_OPCOSNS DAG has been saved to dags\DW_D_OPCO_dag.py

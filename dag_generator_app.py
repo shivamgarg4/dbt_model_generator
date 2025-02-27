@@ -20,6 +20,8 @@ import traceback
 from scripts.excel_to_json import convert_excel_to_json
 from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.dbt_job_generator import create_dbt_job_file
+from scripts.insert_sql_generator import insert_sql_generator
+from scripts.merge_sql_generator import merge_sql_generator
 from scripts.dag_generators import (
     create_dataset_dependency_dag,
     create_cron_dag,
@@ -198,7 +200,11 @@ class DAGGeneratorApp:
         
         # Control variables
         self.generate_dag_var = tk.BooleanVar(value=True)  # Default to True
-        
+        self.generate_model_var = tk.BooleanVar(value=True)  # Default to True
+        self.generate_dbt_job_var = tk.BooleanVar(value=True)  # Default to True
+        self.generate_merge_macro_var = tk.BooleanVar(value=False)  # Default to False
+        self.generate_insert_macro_var = tk.BooleanVar(value=False)  # Default to False
+
         # Initialize ModelMapper
         self.model_mapper = None
         
@@ -283,6 +289,7 @@ class DAGGeneratorApp:
 
         self.notebook.add(self.main_tab, text='DAG Generator')
         self.notebook.add(self.mapping_tab, text='Mapping Tools')
+        self.notebook.add(self.mapping_tab, text='Macro Tools')
 
         # Initialize basic tab content
         self.init_main_tab()
@@ -384,6 +391,34 @@ class DAGGeneratorApp:
             options_frame,
             text="Generate DAG file",
             variable=self.generate_dag_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate Model checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate Model file",
+            variable=self.generate_model_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate dbt job checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate dbt job file",
+            variable=self.generate_dbt_job_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate insert macro checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate insert macro file",
+            variable=self.generate_insert_macro_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate merge_macro checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate merge macro file",
+            variable=self.generate_merge_macro_var
         ).pack(side='left', padx=(0, 10))
 
         # Generate button
@@ -903,23 +938,44 @@ class DAGGeneratorApp:
                 json.dump(model_config, f, indent=2)
                 
             # Generate DBT model
-            model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
-            
+            model_file_path = None
+            if self.generate_model_var.get():
+                model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
+
             # Generate DBT job file
-            job_output_path = 'jobs'
-            job_file_path = create_dbt_job_file(json_output_path, job_output_path)
+            job_output_path = None
+            if self.generate_dbt_job_var.get():
+                job_output_path = 'jobs'
+                job_output_path = create_dbt_job_file(json_output_path, job_output_path)
             
             # Generate DAG file if requested
             dag_file_path = None
             if self.generate_dag_var.get():
                 dag_file_path = self.generate_dag_file(json_output_path, dag_output_path)
-                
+
+            # Generate merge_macro file if requested
+            merge_macro_file_path = None
+            if self.generate_merge_macro_var.get():
+                merge_macro_file_path = merge_sql_generator(json_output_path, merge_macro_file_path)
+
+            # Generate insert_macro file if requested
+            insert_macro_file_path = None
+            if self.generate_insert_macro_var.get():
+                insert_macro_file_path = insert_sql_generator(json_output_path, insert_macro_file_path)
+
+
             # Prepare success message
             success_message = "Files generated successfully!\n\n"
-            success_message += f"Model file: {model_file_path}\n"
-            success_message += f"DBT job file: {job_file_path}\n"
             if dag_file_path:
                 success_message += f"DAG file: {dag_file_path}"
+            if model_file_path:
+                success_message += f"Model file: {model_file_path}\n"
+            if job_output_path:
+                success_message += f"DBT job file: {job_output_path}\n"
+            if merge_macro_file_path:
+                success_message += f"Merge Macro file: {merge_macro_file_path}\n"
+            if insert_macro_file_path:
+                success_message += f"Insert Macro file: {insert_macro_file_path}\n"
                 
             # Show success message
             messagebox.showinfo("Success", success_message)

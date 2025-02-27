@@ -1,10 +1,10 @@
 {
   "Source": {
-    "Type": "source",
+    "Type": "ref",
     "Database": "EBI_DEV_DB",
-    "Schema": "LND_CORE",
-    "Table Name": "D_DP_OPCO",
-    "Name": "LND_CORE"
+    "Schema": "EDW",
+    "Table Name": "BI_D_OPCO_VW",
+    "Name": "EDW"
   },
   "Target": {
     "Schema": "DW",
@@ -17,68 +17,82 @@
   "Columns": [
     {
       "Target Column": "OPCO_ID",
-      "Source Table": null,
-      "Logic": "'1'"
+      "Source Table": "EDW.BI_D_OPCO_VW",
+      "Logic": "OPCO_ID"
     },
     {
       "Target Column": "DATA_SRC",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "'DW.D_OPCO'"
     },
     {
+      "Target Column": "CREATE_DT",
+      "Source Table": "EDW.BI_D_OPCO_VW",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
       "Target Column": "CREATE_BY",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
     },
     {
       "Target Column": "CREATE_PGM",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "'DW.D_OPCO'"
     },
     {
+      "Target Column": "UPDATE_DT",
+      "Source Table": "EDW.BI_D_OPCO_VW",
+      "Logic": "CURRENT_TIMESTAMP()"
+    },
+    {
       "Target Column": "UPDATE_BY",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "CAST(CURRENT_USER() AS VARCHAR(200))"
     },
     {
       "Target Column": "UPDATE_PGM",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "'DW.D_OPCO'"
     },
     {
       "Target Column": "OPCO_CD",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "OPCO_CD"
     },
     {
       "Target Column": "OPCO_DSC",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "OPCO_DSC"
     },
     {
       "Target Column": "RPT_OPCO_DSC",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "RPT_OPCO_DSC"
     },
     {
       "Target Column": "RPT_OPCO_ABBRV",
-      "Source Table": "LND_CORE.D_DP_OPCO",
+      "Source Table": "EDW.BI_D_OPCO_VW",
       "Logic": "RPT_OPCO_ABBRV"
     },
     {
       "Target Column": "TBA_ACTIVE_FLG",
-      "Source Table": null,
-      "Logic": "'Y'"
+      "Source Table": "EDW.BI_D_OPCO_VW",
+      "Logic": "TBA_ACTIVE_FLG"
     }
   ],
   "DAG": {
     "Type": "dataset_dependency",
     "Schedule": "0 */4 * * *",
     "Dependency Schema": [
-      "DW"
+      "sch1",
+      "sch2",
+      "sch3"
     ],
     "Dependency Object": [
-      "D_CUSTOMER"
+      "tab1",
+      "tab2",
+      "tab3"
     ]
   }
 }

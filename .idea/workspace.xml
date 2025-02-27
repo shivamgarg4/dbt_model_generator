@@ -4,7 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e38459be-dcb6-4de1-b705-e1631098ea72" name="Changes" comment="" />
+    <list default="true" id="e38459be-dcb6-4de1-b705-e1631098ea72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/merge_sql_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbt_model_generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbt_model_generator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README_UPDATES.md" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/insert_sql_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/app.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dag_generator_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/dag_generator_app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dags/DW_D_OPCO.py" beforeDir="false" afterPath="$PROJECT_DIR$/dags/DW_D_OPCO.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/model_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/model_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/file_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/file_history.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/launcher.log" beforeDir="false" afterPath="$PROJECT_DIR$/launcher.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_124053.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_124053.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/DW.D_OPCO.sql" beforeDir="false" afterPath="$PROJECT_DIR$/models/DW.D_OPCO.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/dbt_model_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dbt_model_generator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.log" beforeDir="false" afterPath="$PROJECT_DIR$/setup.log" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +34,9 @@
         <option value="Python Script" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/requirements.txt" root0="SKIP_INSPECTION" />
@@ -37,6 +58,7 @@
     &quot;Python.utils.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Shell Script.setup.sh.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dag_generator_app.py&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
   }
@@ -116,5 +138,16 @@
       <updated>1740035380939</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

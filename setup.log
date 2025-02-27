@@ -115,3 +115,12 @@
 2025-02-27 07:48:13,959 - INFO - Script file already exists: scripts/utils.py
 2025-02-27 07:48:13,959 - INFO - Script file already exists: scripts/model_mapper.py
 2025-02-27 07:48:13,959 - INFO - Setup complete
+2025-02-27 09:59:57,113 - INFO - Starting setup_scripts.py
+2025-02-27 09:59:57,113 - INFO - Checking for required script files...
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/excel_to_json.py
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/dbt_model_generator.py
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/dbt_job_generator.py
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/dag_generators.py
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/utils.py
+2025-02-27 09:59:57,113 - INFO - Script file already exists: scripts/model_mapper.py
+2025-02-27 09:59:57,113 - INFO - Setup complete

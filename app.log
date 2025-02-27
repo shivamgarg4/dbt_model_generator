@@ -521,3 +521,1464 @@ Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
 2025-02-27 07:48:20,515 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
 2025-02-27 07:48:23,347 - INFO - Application closed.
 2025-02-27 07:48:23,347 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:03,418 - INFO - Available themes: ['itft1', 'radiance', 'aquativo', 'scidpink', 'xpnative', 'plastik', 'breeze', 'scidgrey', 'scidmint', 'yaru', 'scidpurple', 'elegance', 'adapta', 'equilux', 'kroc', 'alt', 'scidblue', 'clam', 'classic', 'scidsand', 'keramik', 'smog', 'clearlooks', 'blue', 'default', 'black', 'scidgreen', 'ubuntu', 'winxpblue', 'winnative', 'arc', 'vista']
+2025-02-27 09:59:03,418 - INFO - Available themes: ['itft1', 'radiance', 'aquativo', 'scidpink', 'xpnative', 'plastik', 'breeze', 'scidgrey', 'scidmint', 'yaru', 'scidpurple', 'elegance', 'adapta', 'equilux', 'kroc', 'alt', 'scidblue', 'clam', 'classic', 'scidsand', 'keramik', 'smog', 'clearlooks', 'blue', 'default', 'black', 'scidgreen', 'ubuntu', 'winxpblue', 'winnative', 'arc', 'vista']
+2025-02-27 09:59:03,653 - INFO - Using theme: breeze
+2025-02-27 09:59:03,653 - INFO - Using theme: breeze
+2025-02-27 09:59:12,501 - INFO - Looking for matching DDL file in history...
+2025-02-27 09:59:12,501 - INFO - Looking for matching DDL file in history...
+2025-02-27 09:59:12,502 - INFO - No matching DDL file found in history
+2025-02-27 09:59:12,502 - INFO - No matching DDL file found in history
+2025-02-27 09:59:12,502 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 09:59:12,502 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 09:59:12,502 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 09:59:12,502 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 09:59:13,233 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 09:59:13,233 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 09:59:13,233 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 09:59:13,233 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch1.tab1
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch1.tab1
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch2.tab2
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch2.tab2
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch3.tab3
+2025-02-27 09:59:13,234 - INFO - Found dependency: sch3.tab3
+2025-02-27 09:59:13,234 - INFO - Added 3 dependencies to DAG config
+2025-02-27 09:59:13,234 - INFO - Added 3 dependencies to DAG config
+2025-02-27 09:59:13,234 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 09:59:13,234 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 09:59:13,241 - INFO - DAG type: dataset_dependency
+2025-02-27 09:59:13,241 - INFO - DAG type: dataset_dependency
+2025-02-27 09:59:13,241 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 09:59:13,241 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 09:59:13,241 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 09:59:13,241 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:13,244 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:13,244 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:30,558 - INFO - Looking for matching DDL file in history...
+2025-02-27 09:59:30,558 - INFO - Looking for matching DDL file in history...
+2025-02-27 09:59:30,559 - INFO - No matching DDL file found in history
+2025-02-27 09:59:30,559 - INFO - No matching DDL file found in history
+2025-02-27 09:59:30,559 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 09:59:30,559 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 09:59:30,559 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 09:59:30,559 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Moving primary key column to outer query: OPCO_ID
+Excluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')
+Adding column to outer query: OPCO_ID
+Adding column to outer query: DATA_SRC
+Adding column to outer query: CREATE_BY
+Adding column to outer query: CREATE_PGM
+Adding column to outer query: UPDATE_BY
+Adding column to outer query: UPDATE_PGM
+Adding column to outer query: TBA_ACTIVE_FLG
+Adding column to MINUS subquery: OPCO_CD
+Adding column to MINUS subquery: OPCO_DSC
+Adding column to MINUS subquery: RPT_OPCO_DSC
+Adding column to MINUS subquery: RPT_OPCO_ABBRV
+2025-02-27 09:59:31,235 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 09:59:31,235 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 09:59:31,235 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 09:59:31,235 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 09:59:31,235 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 09:59:31,235 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 09:59:31,235 - INFO - Added 1 dependencies to DAG config
+2025-02-27 09:59:31,235 - INFO - Added 1 dependencies to DAG config
+2025-02-27 09:59:31,235 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 09:59:31,235 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 09:59:31,237 - INFO - DAG type: dataset_dependency
+2025-02-27 09:59:31,237 - INFO - DAG type: dataset_dependency
+2025-02-27 09:59:31,238 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 09:59:31,238 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 09:59:31,238 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 09:59:31,238 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+Found 1 dependency schemas and 1 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:31,240 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:31,240 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 09:59:43,001 - ERROR - Traceback (most recent call last):
+2025-02-27 09:59:43,001 - ERROR - Traceback (most recent call last):
+2025-02-27 09:59:43,001 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2043, in <module>
+2025-02-27 09:59:43,001 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2043, in <module>
+2025-02-27 09:59:43,002 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 09:59:43,002 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 09:59:43,003 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 09:59:43,003 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 09:59:59,753 - INFO - Starting DBT Model Generator application...
+2025-02-27 09:59:59,917 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 10:00:07,031 - INFO - Looking for matching DDL file in history...
+2025-02-27 10:00:07,031 - INFO - No matching DDL file found in history
+2025-02-27 10:00:07,032 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 10:00:07,032 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 10:00:07,078 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 10:00:07,078 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 10:00:07,079 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 10:00:07,080 - INFO - Added 1 dependencies to DAG config
+2025-02-27 10:00:07,080 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,083 - INFO - DAG type: dataset_dependency
+2025-02-27 10:00:07,083 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,083 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 10:00:07,087 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 10:00:17,168 - ERROR - C:\Users\shivamgarg4\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.9_qbz5n2kfra8p0\LocalCache\local-packages\Python39\site-packages\snowflake\connector\config_manager.py:351: UserWarning: Bad owner or permissions on C:\Users\shivamgarg4\.snowflake\connections.toml
+  warn(f"Bad owner or permissions on {str(filep)}{chmod_message}")
+2025-02-27 10:00:17,171 - INFO - Snowflake Connector for Python Version: 3.13.2, Python Version: 3.9.13, Platform: Windows-10-10.0.22631-SP0
+2025-02-27 10:00:17,171 - INFO - Connecting to GLOBAL Snowflake domain
+2025-02-27 10:00:17,171 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:00:56,789 - INFO - closed
+2025-02-27 10:00:57,083 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:01:46,857 - INFO - Looking for matching DDL file in history...
+2025-02-27 10:01:46,857 - INFO - No matching DDL file found in history
+2025-02-27 10:01:46,857 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 10:01:46,857 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 10:01:46,885 - INFO - Found DAG Type in mapping: SNS (normalized to sns)
+2025-02-27 10:01:46,885 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 10:01:46,885 - INFO - DAG config from mapping: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,899 - INFO - DAG type: sns
+2025-02-27 10:01:46,899 - INFO - DAG config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,899 - INFO - Generating sns DAG with config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 10:01:46,903 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 10:35:49,120 - INFO - Application closed.
+2025-02-27 10:35:49,121 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyInitiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...Going to open: https://auth.cbrands.com/app/snowflake/exkikpzcoiYGyN5OV696/sso/saml?SAMLRequest=lZLNctowFIVfxaOubckOUNBgMsSQQksIAw792QlbEBVbcnVlDH36ygY6ySKZyU4jnSN9uuf0b4955hy4BqFkiHyPIIfLRKVC7kL0FN%2B7XeSAYTJlmZI8RCcO6HbQB5ZnBR2W5lku%2BZ%2BSg3HsRRJocxCiUkuqGAigkuUcqEnoavgwo4FHaKGVUYnK0AvL%2Bw4GwLWxhFdLCsLiPRtTUIyrqvKqG0%2FpHQ4IIZj0sFXVkk9X%2FdH%2B6Q29j0mr1luFld8rnfDmWyEyuuTIWVxo74Q8D%2BU90M1ZBHQSxwt38biKkTO8wkdKQplzveL6IBL%2BtJydkcAyRXfL4Xy08kpwOQPj%2Bh5IVW0ztueJyovS2Fs9u8JbnuJM7YQdxXQUomIv0vGyau%2FHs27Ept%2B%2BHjejhwgW5fp7d3IcR8tD3JtPorX8cfhdVCRBzvqadVBnPQUo%2BVTWCRu7RYK2SwI3%2BByTFr0h1O96rU7rF3JGNmEhmWmcV2hm5%2BQlG23bAQ0cKwr8nxvz417si7%2BJEj%2B%2FnObtx3Wn18EACteBo3OHaAOgBx%2BdQx%2B%2FdF%2FqOLd5TEcLlYnkVCeZM%2FN2XL7nNzsidbeNlPKciWyYppoD2NiyTFWR5szwSxXw4Pzq694P%2FgE%3D&RelayState=ver%3A1-hint%3A24148586803486766-ETMsDgAAAZVFq3FgABRBRVMvQ0JDL1BLQ1M1UGFkZGluZwEAABAAELxHEvMIF7NV8YD996ky8zcAAACAQsGekGxzkUwWVN%2Bgw0e8IkLMLr1VHNZtmVb6pONJUsqCGxUwBaUEMnQPWN%2B0tBuiE17LP3ZTje8HA6Myr1W1R%2FUN3wqg0DrCTkQ12aTA4C90egudK8G1WGXLG93zEXbF6USopFSATZpIfBM2IBQ%2FQ6jmj49gBa1CfaabdfZbmpEAFKdzkzjPGI8wPngSfH82YXNdXRta to authenticate...Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVGenerating SNS DAG with DOMAIN_NAME=LND_CORE, MODEL_TYPE=DIM, DP_NAME=D_OPCOSNS DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 10:46:37,621 - INFO - Available themes: ['scidsand', 'scidgrey', 'equilux', 'blue', 'scidpurple', 'clearlooks', 'scidmint', 'vista', 'classic', 'adapta', 'winxpblue', 'alt', 'scidgreen', 'ubuntu', 'black', 'breeze', 'default', 'elegance', 'xpnative', 'keramik', 'winnative', 'plastik', 'arc', 'clam', 'itft1', 'aquativo', 'radiance', 'scidpink', 'yaru', 'kroc', 'scidblue', 'smog']
+2025-02-27 10:46:37,621 - INFO - Available themes: ['scidsand', 'scidgrey', 'equilux', 'blue', 'scidpurple', 'clearlooks', 'scidmint', 'vista', 'classic', 'adapta', 'winxpblue', 'alt', 'scidgreen', 'ubuntu', 'black', 'breeze', 'default', 'elegance', 'xpnative', 'keramik', 'winnative', 'plastik', 'arc', 'clam', 'itft1', 'aquativo', 'radiance', 'scidpink', 'yaru', 'kroc', 'scidblue', 'smog']
+2025-02-27 10:46:37,829 - INFO - Using theme: breeze
+2025-02-27 10:46:37,829 - INFO - Using theme: breeze
+2025-02-27 10:46:56,715 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 10:46:56,715 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 10:46:56,716 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 10:46:56,716 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 10:46:56,716 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 10:46:56,716 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 10:46:56,716 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 10:46:56,716 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 10:46:56,716 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 10:46:56,716 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 10:46:56,717 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 10:46:56,717 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 10:47:13,833 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:47:13,833 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:47:13,833 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:47:13,833 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:47:13,834 - INFO - Setting use_openssl_only mode to False
+2025-02-27 10:47:13,834 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 10:47:20,041 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:47:20,041 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:47:23,262 - INFO - query execution done
+2025-02-27 10:47:23,262 - INFO - query execution done
+2025-02-27 10:47:23,277 - INFO - fetching data done
+2025-02-27 10:47:23,277 - INFO - fetching data done
+2025-02-27 10:47:23,277 - INFO - closed
+2025-02-27 10:47:23,277 - INFO - closed
+2025-02-27 10:47:23,536 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:47:23,536 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:49:12,441 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:49:12,441 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:49:12,441 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:49:12,441 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 10:49:18,125 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:49:18,125 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:49:20,319 - INFO - query execution done
+2025-02-27 10:49:20,319 - INFO - query execution done
+2025-02-27 10:49:20,319 - INFO - fetching data done
+2025-02-27 10:49:20,319 - INFO - fetching data done
+2025-02-27 10:49:20,319 - INFO - closed
+2025-02-27 10:49:20,319 - INFO - closed
+2025-02-27 10:49:20,575 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:49:20,575 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:50:43,849 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:50:43,849 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 10:50:43,849 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 10:50:43,849 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 10:50:49,520 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:50:49,520 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 10:50:51,710 - INFO - query execution done
+2025-02-27 10:50:51,710 - INFO - query execution done
+2025-02-27 10:50:51,711 - INFO - fetching data done
+2025-02-27 10:50:51,711 - INFO - fetching data done
+2025-02-27 10:50:51,711 - INFO - closed
+2025-02-27 10:50:51,711 - INFO - closed
+2025-02-27 10:50:51,969 - INFO - No async queries seem to be running, deleting session
+2025-02-27 10:50:51,969 - INFO - No async queries seem to be running, deleting session
+2025-02-27 11:01:13,237 - ERROR - Traceback (most recent call last):
+2025-02-27 11:01:13,237 - ERROR - Traceback (most recent call last):
+2025-02-27 11:01:13,237 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2043, in <module>
+2025-02-27 11:01:13,237 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2043, in <module>
+2025-02-27 11:01:13,240 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 11:01:13,240 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 11:01:13,242 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 11:01:13,242 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 11:02:06,472 - INFO - Available themes: ['scidgrey', 'smog', 'scidpurple', 'kroc', 'winxpblue', 'keramik', 'blue', 'default', 'clam', 'black', 'scidsand', 'xpnative', 'elegance', 'scidgreen', 'vista', 'winnative', 'yaru', 'scidblue', 'breeze', 'plastik', 'aquativo', 'radiance', 'scidpink', 'adapta', 'alt', 'arc', 'scidmint', 'ubuntu', 'equilux', 'clearlooks', 'itft1', 'classic']
+2025-02-27 11:02:06,472 - INFO - Available themes: ['scidgrey', 'smog', 'scidpurple', 'kroc', 'winxpblue', 'keramik', 'blue', 'default', 'clam', 'black', 'scidsand', 'xpnative', 'elegance', 'scidgreen', 'vista', 'winnative', 'yaru', 'scidblue', 'breeze', 'plastik', 'aquativo', 'radiance', 'scidpink', 'adapta', 'alt', 'arc', 'scidmint', 'ubuntu', 'equilux', 'clearlooks', 'itft1', 'classic']
+2025-02-27 11:02:06,690 - INFO - Using theme: breeze
+2025-02-27 11:02:06,690 - INFO - Using theme: breeze
+2025-02-27 11:02:36,700 - INFO - Available themes: ['equilux', 'blue', 'smog', 'clam', 'itft1', 'xpnative', 'adapta', 'scidsand', 'scidgrey', 'scidblue', 'winxpblue', 'default', 'classic', 'scidpink', 'yaru', 'alt', 'radiance', 'ubuntu', 'aquativo', 'plastik', 'breeze', 'scidpurple', 'scidgreen', 'clearlooks', 'elegance', 'keramik', 'kroc', 'vista', 'winnative', 'black', 'scidmint', 'arc']
+2025-02-27 11:02:36,700 - INFO - Available themes: ['equilux', 'blue', 'smog', 'clam', 'itft1', 'xpnative', 'adapta', 'scidsand', 'scidgrey', 'scidblue', 'winxpblue', 'default', 'classic', 'scidpink', 'yaru', 'alt', 'radiance', 'ubuntu', 'aquativo', 'plastik', 'breeze', 'scidpurple', 'scidgreen', 'clearlooks', 'elegance', 'keramik', 'kroc', 'vista', 'winnative', 'black', 'scidmint', 'arc']
+2025-02-27 11:02:36,886 - INFO - Using theme: breeze
+2025-02-27 11:02:36,886 - INFO - Using theme: breeze
+2025-02-27 11:02:52,769 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 11:02:52,769 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 11:02:52,770 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 11:02:52,770 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 11:02:52,770 - INFO - Setting use_openssl_only mode to False
+2025-02-27 11:02:52,770 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 11:02:58,823 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 11:02:58,823 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 11:03:00,528 - INFO - query execution done
+2025-02-27 11:03:00,528 - INFO - query execution done
+2025-02-27 11:03:00,529 - INFO - fetching data done
+2025-02-27 11:03:00,529 - INFO - fetching data done
+2025-02-27 11:03:00,529 - INFO - closed
+2025-02-27 11:03:00,529 - INFO - closed
+2025-02-27 11:03:00,788 - INFO - No async queries seem to be running, deleting session
+2025-02-27 11:03:00,788 - INFO - No async queries seem to be running, deleting session
+2025-02-27 11:03:45,298 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 11:03:45,298 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 11:03:45,299 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 11:03:45,299 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 11:03:50,664 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 11:03:50,664 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 11:03:52,374 - INFO - query execution done
+2025-02-27 11:03:52,374 - INFO - query execution done
+2025-02-27 11:03:52,405 - INFO - fetching data done
+2025-02-27 11:03:52,405 - INFO - fetching data done
+2025-02-27 11:03:52,406 - INFO - closed
+2025-02-27 11:03:52,406 - INFO - closed
+2025-02-27 11:03:52,680 - INFO - No async queries seem to be running, deleting session
+2025-02-27 11:03:52,680 - INFO - No async queries seem to be running, deleting session
+2025-02-27 11:04:48,926 - INFO - Looking for matching DDL file in history...
+2025-02-27 11:04:48,926 - INFO - Looking for matching DDL file in history...
+2025-02-27 11:04:48,936 - INFO - No matching DDL file found in history
+2025-02-27 11:04:48,936 - INFO - No matching DDL file found in history
+2025-02-27 11:04:48,936 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 11:04:48,936 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 11:04:48,938 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 11:04:48,938 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 11:04:49,630 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 11:04:49,630 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 11:04:49,630 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 11:04:49,630 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch1.tab1
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch1.tab1
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch2.tab2
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch2.tab2
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch3.tab3
+2025-02-27 11:04:49,630 - INFO - Found dependency: sch3.tab3
+2025-02-27 11:04:49,630 - INFO - Added 3 dependencies to DAG config
+2025-02-27 11:04:49,630 - INFO - Added 3 dependencies to DAG config
+2025-02-27 11:04:49,630 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:04:49,630 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:04:49,632 - INFO - DAG type: dataset_dependency
+2025-02-27 11:04:49,632 - INFO - DAG type: dataset_dependency
+2025-02-27 11:04:49,632 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:04:49,632 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:04:49,632 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:04:49,632 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 11:04:49,634 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 11:04:49,634 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 11:06:03,234 - INFO - Looking for matching DDL file in history...
+2025-02-27 11:06:03,234 - INFO - Looking for matching DDL file in history...
+2025-02-27 11:06:03,236 - INFO - No matching DDL file found in history
+2025-02-27 11:06:03,236 - INFO - No matching DDL file found in history
+2025-02-27 11:06:03,236 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 11:06:03,236 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 11:06:03,236 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 11:06:03,236 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 11:06:04,037 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 11:06:04,037 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 11:06:04,037 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 11:06:04,037 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch1.tab1
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch1.tab1
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch2.tab2
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch2.tab2
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch3.tab3
+2025-02-27 11:06:04,037 - INFO - Found dependency: sch3.tab3
+2025-02-27 11:06:04,037 - INFO - Added 3 dependencies to DAG config
+2025-02-27 11:06:04,037 - INFO - Added 3 dependencies to DAG config
+2025-02-27 11:06:04,037 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:06:04,037 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:06:04,040 - INFO - DAG type: dataset_dependency
+2025-02-27 11:06:04,040 - INFO - DAG type: dataset_dependency
+2025-02-27 11:06:04,040 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:06:04,040 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:06:04,040 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 11:06:04,040 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 11:06:04,043 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 11:06:04,043 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:12:27,187 - INFO - Available themes: ['yaru', 'aquativo', 'breeze', 'radiance', 'scidblue', 'winnative', 'scidgrey', 'scidmint', 'scidpink', 'clearlooks', 'keramik', 'scidsand', 'kroc', 'clam', 'blue', 'winxpblue', 'xpnative', 'classic', 'elegance', 'alt', 'itft1', 'scidpurple', 'smog', 'arc', 'equilux', 'plastik', 'adapta', 'black', 'scidgreen', 'default', 'vista', 'ubuntu']
+2025-02-27 12:12:27,187 - INFO - Available themes: ['yaru', 'aquativo', 'breeze', 'radiance', 'scidblue', 'winnative', 'scidgrey', 'scidmint', 'scidpink', 'clearlooks', 'keramik', 'scidsand', 'kroc', 'clam', 'blue', 'winxpblue', 'xpnative', 'classic', 'elegance', 'alt', 'itft1', 'scidpurple', 'smog', 'arc', 'equilux', 'plastik', 'adapta', 'black', 'scidgreen', 'default', 'vista', 'ubuntu']
+2025-02-27 12:12:27,409 - INFO - Using theme: breeze
+2025-02-27 12:12:27,409 - INFO - Using theme: breeze
+2025-02-27 12:12:39,209 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:12:39,209 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:12:39,210 - INFO - No matching DDL file found in history
+2025-02-27 12:12:39,210 - INFO - No matching DDL file found in history
+2025-02-27 12:12:39,210 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:12:39,210 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:12:39,210 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:12:39,210 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:12:39,230 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:12:39,230 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:12:39,230 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:12:39,230 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:12:39,230 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:12:39,230 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:12:39,230 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:12:39,230 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:12:39,230 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:12:39,232 - INFO - DAG type: dataset_dependency
+2025-02-27 12:12:39,232 - INFO - DAG type: dataset_dependency
+2025-02-27 12:12:39,232 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:12:39,232 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:12:39,232 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:12:39,232 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:12:39,235 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:12:39,235 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:13:03,596 - INFO - Available themes: ['scidsand', 'alt', 'aquativo', 'clam', 'yaru', 'itft1', 'equilux', 'winnative', 'default', 'vista', 'ubuntu', 'black', 'radiance', 'scidgrey', 'winxpblue', 'clearlooks', 'scidpink', 'arc', 'classic', 'scidgreen', 'kroc', 'scidmint', 'xpnative', 'scidblue', 'plastik', 'breeze', 'smog', 'scidpurple', 'adapta', 'blue', 'keramik', 'elegance']
+2025-02-27 12:13:03,596 - INFO - Available themes: ['scidsand', 'alt', 'aquativo', 'clam', 'yaru', 'itft1', 'equilux', 'winnative', 'default', 'vista', 'ubuntu', 'black', 'radiance', 'scidgrey', 'winxpblue', 'clearlooks', 'scidpink', 'arc', 'classic', 'scidgreen', 'kroc', 'scidmint', 'xpnative', 'scidblue', 'plastik', 'breeze', 'smog', 'scidpurple', 'adapta', 'blue', 'keramik', 'elegance']
+2025-02-27 12:13:03,798 - INFO - Using theme: breeze
+2025-02-27 12:13:03,798 - INFO - Using theme: breeze
+2025-02-27 12:13:09,759 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:13:09,759 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:13:09,759 - INFO - No matching DDL file found in history
+2025-02-27 12:13:09,759 - INFO - No matching DDL file found in history
+2025-02-27 12:13:09,759 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:13:09,759 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:13:09,759 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:13:09,759 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:13:10,539 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:13:10,539 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:13:10,539 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:13:10,539 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:13:10,539 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:13:10,539 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:13:10,539 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:13:10,539 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:13:10,539 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:13:10,541 - INFO - DAG type: dataset_dependency
+2025-02-27 12:13:10,541 - INFO - DAG type: dataset_dependency
+2025-02-27 12:13:10,541 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:13:10,541 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:13:10,541 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:13:10,541 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:13:10,545 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:13:10,545 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:18:29,901 - INFO - Available themes: ['adapta', 'alt', 'yaru', 'scidpurple', 'elegance', 'ubuntu', 'xpnative', 'equilux', 'arc', 'scidsand', 'scidblue', 'scidpink', 'scidmint', 'keramik', 'vista', 'scidgreen', 'plastik', 'classic', 'clam', 'smog', 'breeze', 'winnative', 'kroc', 'winxpblue', 'blue', 'clearlooks', 'itft1', 'black', 'default', 'scidgrey', 'aquativo', 'radiance']
+2025-02-27 12:18:29,901 - INFO - Available themes: ['adapta', 'alt', 'yaru', 'scidpurple', 'elegance', 'ubuntu', 'xpnative', 'equilux', 'arc', 'scidsand', 'scidblue', 'scidpink', 'scidmint', 'keramik', 'vista', 'scidgreen', 'plastik', 'classic', 'clam', 'smog', 'breeze', 'winnative', 'kroc', 'winxpblue', 'blue', 'clearlooks', 'itft1', 'black', 'default', 'scidgrey', 'aquativo', 'radiance']
+2025-02-27 12:18:30,088 - INFO - Using theme: breeze
+2025-02-27 12:18:30,088 - INFO - Using theme: breeze
+2025-02-27 12:19:16,469 - INFO - Available themes: ['itft1', 'aquativo', 'arc', 'scidmint', 'kroc', 'scidblue', 'alt', 'clearlooks', 'blue', 'winnative', 'scidgrey', 'keramik', 'classic', 'yaru', 'black', 'breeze', 'radiance', 'vista', 'ubuntu', 'elegance', 'scidpink', 'plastik', 'default', 'smog', 'equilux', 'adapta', 'xpnative', 'winxpblue', 'clam', 'scidgreen', 'scidpurple', 'scidsand']
+2025-02-27 12:19:16,469 - INFO - Available themes: ['itft1', 'aquativo', 'arc', 'scidmint', 'kroc', 'scidblue', 'alt', 'clearlooks', 'blue', 'winnative', 'scidgrey', 'keramik', 'classic', 'yaru', 'black', 'breeze', 'radiance', 'vista', 'ubuntu', 'elegance', 'scidpink', 'plastik', 'default', 'smog', 'equilux', 'adapta', 'xpnative', 'winxpblue', 'clam', 'scidgreen', 'scidpurple', 'scidsand']
+2025-02-27 12:19:16,655 - INFO - Using theme: breeze
+2025-02-27 12:19:16,655 - INFO - Using theme: breeze
+2025-02-27 12:29:54,592 - INFO - Available themes: ['ubuntu', 'plastik', 'default', 'winxpblue', 'arc', 'scidpurple', 'yaru', 'classic', 'scidblue', 'scidsand', 'alt', 'xpnative', 'clearlooks', 'radiance', 'equilux', 'itft1', 'aquativo', 'vista', 'winnative', 'scidpink', 'black', 'elegance', 'clam', 'smog', 'keramik', 'breeze', 'scidmint', 'adapta', 'scidgreen', 'kroc', 'blue', 'scidgrey']
+2025-02-27 12:29:54,592 - INFO - Available themes: ['ubuntu', 'plastik', 'default', 'winxpblue', 'arc', 'scidpurple', 'yaru', 'classic', 'scidblue', 'scidsand', 'alt', 'xpnative', 'clearlooks', 'radiance', 'equilux', 'itft1', 'aquativo', 'vista', 'winnative', 'scidpink', 'black', 'elegance', 'clam', 'smog', 'keramik', 'breeze', 'scidmint', 'adapta', 'scidgreen', 'kroc', 'blue', 'scidgrey']
+2025-02-27 12:29:54,784 - INFO - Using theme: breeze
+2025-02-27 12:29:54,784 - INFO - Using theme: breeze
+2025-02-27 12:30:05,972 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:30:05,972 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:30:05,974 - INFO - No matching DDL file found in history
+2025-02-27 12:30:05,974 - INFO - No matching DDL file found in history
+2025-02-27 12:30:05,974 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:30:05,974 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:30:05,974 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:30:05,974 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:30:06,700 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:30:06,700 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:30:06,701 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:30:06,701 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:30:06,701 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:30:06,701 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:30:06,701 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:30:06,701 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:30:06,701 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:30:06,704 - INFO - DAG type: dataset_dependency
+2025-02-27 12:30:06,704 - INFO - DAG type: dataset_dependency
+2025-02-27 12:30:06,704 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:30:06,704 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:30:06,704 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:30:06,704 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:30:06,707 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:30:06,707 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:31:41,950 - ERROR - Traceback (most recent call last):
+2025-02-27 12:31:41,950 - ERROR - Traceback (most recent call last):
+2025-02-27 12:31:41,950 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:31:41,950 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:31:41,952 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:31:41,952 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:31:41,953 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:31:41,953 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:31:50,745 - INFO - Available themes: ['arc', 'scidsand', 'plastik', 'aquativo', 'keramik', 'equilux', 'winxpblue', 'scidpink', 'radiance', 'elegance', 'classic', 'breeze', 'ubuntu', 'xpnative', 'kroc', 'adapta', 'vista', 'scidgrey', 'scidpurple', 'black', 'alt', 'yaru', 'scidmint', 'winnative', 'scidblue', 'clam', 'clearlooks', 'default', 'itft1', 'blue', 'smog', 'scidgreen']
+2025-02-27 12:31:50,745 - INFO - Available themes: ['arc', 'scidsand', 'plastik', 'aquativo', 'keramik', 'equilux', 'winxpblue', 'scidpink', 'radiance', 'elegance', 'classic', 'breeze', 'ubuntu', 'xpnative', 'kroc', 'adapta', 'vista', 'scidgrey', 'scidpurple', 'black', 'alt', 'yaru', 'scidmint', 'winnative', 'scidblue', 'clam', 'clearlooks', 'default', 'itft1', 'blue', 'smog', 'scidgreen']
+2025-02-27 12:31:50,941 - INFO - Using theme: breeze
+2025-02-27 12:31:50,941 - INFO - Using theme: breeze
+2025-02-27 12:32:11,581 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:32:11,581 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:32:11,581 - INFO - No matching DDL file found in history
+2025-02-27 12:32:11,581 - INFO - No matching DDL file found in history
+2025-02-27 12:32:11,583 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:32:11,583 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:32:11,583 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:32:11,583 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Moving primary key column to outer query: OPCO_ID
+Excluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')
+Adding column to outer query: OPCO_ID
+Adding column to outer query: DATA_SRC
+Adding column to outer query: CREATE_BY
+Adding column to outer query: CREATE_PGM
+Adding column to outer query: UPDATE_BY
+Adding column to outer query: UPDATE_PGM
+Adding column to outer query: TBA_ACTIVE_FLG
+Adding column to MINUS subquery: OPCO_CD
+Adding column to MINUS subquery: OPCO_DSC
+Adding column to MINUS subquery: RPT_OPCO_DSC
+Adding column to MINUS subquery: RPT_OPCO_ABBRV
+2025-02-27 12:32:11,746 - INFO - Found DAG Type in mapping: SNS (normalized to sns)
+2025-02-27 12:32:11,746 - INFO - Found DAG Type in mapping: SNS (normalized to sns)
+2025-02-27 12:32:11,747 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:32:11,747 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:32:11,747 - INFO - DAG config from mapping: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 12:32:11,747 - INFO - DAG config from mapping: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 12:32:11,749 - INFO - DAG type: sns
+2025-02-27 12:32:11,749 - INFO - DAG type: sns
+2025-02-27 12:32:11,749 - INFO - DAG config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 12:32:11,749 - INFO - DAG config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 12:32:11,749 - INFO - Generating sns DAG with config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+2025-02-27 12:32:11,749 - INFO - Generating sns DAG with config: {'Type': 'sns', 'Schedule': '0 */4 * * *'}
+Generating SNS DAG with DOMAIN_NAME=LND_CORE, MODEL_TYPE=DIM, DP_NAME=D_OPCO
+SNS DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:32:11,752 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:32:11,752 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:34:03,263 - INFO - Available themes: ['blue', 'equilux', 'clam', 'scidpink', 'default', 'elegance', 'clearlooks', 'scidgreen', 'scidgrey', 'adapta', 'arc', 'radiance', 'alt', 'scidmint', 'vista', 'kroc', 'ubuntu', 'scidblue', 'keramik', 'smog', 'breeze', 'itft1', 'classic', 'aquativo', 'winxpblue', 'scidpurple', 'yaru', 'winnative', 'black', 'plastik', 'xpnative', 'scidsand']
+2025-02-27 12:34:03,263 - INFO - Available themes: ['blue', 'equilux', 'clam', 'scidpink', 'default', 'elegance', 'clearlooks', 'scidgreen', 'scidgrey', 'adapta', 'arc', 'radiance', 'alt', 'scidmint', 'vista', 'kroc', 'ubuntu', 'scidblue', 'keramik', 'smog', 'breeze', 'itft1', 'classic', 'aquativo', 'winxpblue', 'scidpurple', 'yaru', 'winnative', 'black', 'plastik', 'xpnative', 'scidsand']
+2025-02-27 12:34:03,453 - INFO - Using theme: breeze
+2025-02-27 12:34:03,453 - INFO - Using theme: breeze
+2025-02-27 12:34:09,949 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:34:09,949 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:34:09,950 - INFO - No matching DDL file found in history
+2025-02-27 12:34:09,950 - INFO - No matching DDL file found in history
+2025-02-27 12:34:09,950 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:34:09,950 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:34:09,950 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:34:09,950 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:34:10,804 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:34:10,804 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:34:10,804 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:34:10,804 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:34:10,804 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:34:10,804 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:34:10,804 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:34:10,804 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:10,804 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:10,807 - INFO - DAG type: dataset_dependency
+2025-02-27 12:34:10,807 - INFO - DAG type: dataset_dependency
+2025-02-27 12:34:10,807 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:10,807 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:10,807 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:10,807 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:34:10,809 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:34:10,809 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+{'Source': {'Type': 'ref', 'Database': 'EBI_DEV_DB', 'Schema': 'EDW', 'Table Name': 'BI_D_OPCO_VW', 'Name': 'EDW'}, 'Target': {'Schema': 'DW', 'Table Name': 'D_OPCO', 'materialization': 'incremental', 'unique_key': ['OPCO_CD']}, 'Columns': [{'Target Column': 'OPCO_ID', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_ID'}, {'Target Column': 'DATA_SRC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'CREATE_DT', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CURRENT_TIMESTAMP()'}, {'Target Column': 'CREATE_BY', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CAST(CURRENT_USER() AS VARCHAR(200))'}, {'Target Column': 'CREATE_PGM', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'UPDATE_DT', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CURRENT_TIMESTAMP()'}, {'Target Column': 'UPDATE_BY', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CAST(CURRENT_USER() AS VARCHAR(200))'}, {'Target Column': 'UPDATE_PGM', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'OPCO_CD', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_CD'}, {'Target Column': 'OPCO_DSC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_DSC'}, {'Target Column': 'RPT_OPCO_DSC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'RPT_OPCO_DSC'}, {'Target Column': 'RPT_OPCO_ABBRV', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'RPT_OPCO_ABBRV'}, {'Target Column': 'TBA_ACTIVE_FLG', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'TBA_ACTIVE_FLG'}], 'DAG': {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}}
+2025-02-27 12:34:17,014 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:34:17,014 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:34:17,015 - INFO - No matching DDL file found in history
+2025-02-27 12:34:17,015 - INFO - No matching DDL file found in history
+2025-02-27 12:34:17,015 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:34:17,015 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:34:17,016 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:34:17,016 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:34:17,136 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:34:17,136 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:34:17,136 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:34:17,136 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:34:17,136 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:34:17,136 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:34:17,136 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:34:17,136 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:17,136 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:17,138 - INFO - DAG type: dataset_dependency
+2025-02-27 12:34:17,138 - INFO - DAG type: dataset_dependency
+2025-02-27 12:34:17,138 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:17,138 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:17,138 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:34:17,138 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:34:17,142 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:34:17,142 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+{'Source': {'Type': 'ref', 'Database': 'EBI_DEV_DB', 'Schema': 'EDW', 'Table Name': 'BI_D_OPCO_VW', 'Name': 'EDW'}, 'Target': {'Schema': 'DW', 'Table Name': 'D_OPCO', 'materialization': 'incremental', 'unique_key': ['OPCO_CD']}, 'Columns': [{'Target Column': 'OPCO_ID', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_ID'}, {'Target Column': 'DATA_SRC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'CREATE_DT', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CURRENT_TIMESTAMP()'}, {'Target Column': 'CREATE_BY', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CAST(CURRENT_USER() AS VARCHAR(200))'}, {'Target Column': 'CREATE_PGM', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'UPDATE_DT', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CURRENT_TIMESTAMP()'}, {'Target Column': 'UPDATE_BY', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'CAST(CURRENT_USER() AS VARCHAR(200))'}, {'Target Column': 'UPDATE_PGM', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': "'DW.D_OPCO'"}, {'Target Column': 'OPCO_CD', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_CD'}, {'Target Column': 'OPCO_DSC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'OPCO_DSC'}, {'Target Column': 'RPT_OPCO_DSC', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'RPT_OPCO_DSC'}, {'Target Column': 'RPT_OPCO_ABBRV', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'RPT_OPCO_ABBRV'}, {'Target Column': 'TBA_ACTIVE_FLG', 'Source Table': 'EDW.BI_D_OPCO_VW', 'Logic': 'TBA_ACTIVE_FLG'}], 'DAG': {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}}
+2025-02-27 12:35:12,980 - INFO - Available themes: ['default', 'scidblue', 'aquativo', 'smog', 'yaru', 'itft1', 'scidgreen', 'arc', 'black', 'clearlooks', 'scidsand', 'winxpblue', 'vista', 'scidmint', 'ubuntu', 'blue', 'radiance', 'adapta', 'plastik', 'keramik', 'xpnative', 'clam', 'scidgrey', 'winnative', 'scidpurple', 'breeze', 'classic', 'kroc', 'elegance', 'alt', 'scidpink', 'equilux']
+2025-02-27 12:35:12,980 - INFO - Available themes: ['default', 'scidblue', 'aquativo', 'smog', 'yaru', 'itft1', 'scidgreen', 'arc', 'black', 'clearlooks', 'scidsand', 'winxpblue', 'vista', 'scidmint', 'ubuntu', 'blue', 'radiance', 'adapta', 'plastik', 'keramik', 'xpnative', 'clam', 'scidgrey', 'winnative', 'scidpurple', 'breeze', 'classic', 'kroc', 'elegance', 'alt', 'scidpink', 'equilux']
+2025-02-27 12:35:13,175 - INFO - Using theme: breeze
+2025-02-27 12:35:13,175 - INFO - Using theme: breeze
+2025-02-27 12:35:21,900 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:21,900 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:21,901 - INFO - No matching DDL file found in history
+2025-02-27 12:35:21,901 - INFO - No matching DDL file found in history
+2025-02-27 12:35:21,901 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:21,901 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:21,901 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:35:21,901 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:35:22,071 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:35:22,071 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:35:22,071 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:35:22,071 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:35:22,071 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:35:22,071 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:35:22,071 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:35:22,071 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:22,071 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:22,073 - INFO - DAG type: dataset_dependency
+2025-02-27 12:35:22,073 - INFO - DAG type: dataset_dependency
+2025-02-27 12:35:22,073 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:22,073 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:22,073 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:22,073 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:22,076 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:22,076 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:40,829 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:40,829 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:40,830 - INFO - No matching DDL file found in history
+2025-02-27 12:35:40,830 - INFO - No matching DDL file found in history
+2025-02-27 12:35:40,830 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:40,830 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:40,831 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:35:40,831 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:35:41,270 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:35:41,270 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:35:41,271 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:35:41,271 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:35:41,271 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:35:41,271 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:35:41,271 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:35:41,271 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:41,271 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:41,272 - INFO - DAG type: dataset_dependency
+2025-02-27 12:35:41,272 - INFO - DAG type: dataset_dependency
+2025-02-27 12:35:41,273 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:41,273 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:41,273 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:35:41,273 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:41,274 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:41,274 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:35:53,049 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:53,049 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:53,050 - INFO - No matching DDL file found in history
+2025-02-27 12:35:53,050 - INFO - No matching DDL file found in history
+2025-02-27 12:35:53,050 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:53,050 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:53,050 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:35:53,050 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:35:58,288 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:58,288 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:35:58,289 - INFO - No matching DDL file found in history
+2025-02-27 12:35:58,289 - INFO - No matching DDL file found in history
+2025-02-27 12:35:58,289 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:58,289 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:35:58,289 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:35:58,289 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:36:03,198 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:36:03,198 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:36:03,199 - INFO - No matching DDL file found in history
+2025-02-27 12:36:03,199 - INFO - No matching DDL file found in history
+2025-02-27 12:36:03,200 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:36:03,200 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:36:03,200 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:36:03,200 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:36:09,318 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:36:09,318 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:36:09,321 - INFO - No matching DDL file found in history
+2025-02-27 12:36:09,321 - INFO - No matching DDL file found in history
+2025-02-27 12:36:09,321 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:36:09,321 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:36:09,321 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:36:09,321 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:37:00,444 - ERROR - Traceback (most recent call last):
+2025-02-27 12:37:00,444 - ERROR - Traceback (most recent call last):
+2025-02-27 12:37:00,444 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:37:00,444 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:37:00,446 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:37:00,446 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:37:00,448 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:37:00,448 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:37:06,763 - INFO - Available themes: ['yaru', 'aquativo', 'scidpink', 'smog', 'scidgreen', 'arc', 'equilux', 'scidsand', 'ubuntu', 'clam', 'clearlooks', 'itft1', 'classic', 'alt', 'default', 'xpnative', 'scidmint', 'scidgrey', 'adapta', 'scidpurple', 'scidblue', 'vista', 'blue', 'winxpblue', 'keramik', 'kroc', 'radiance', 'elegance', 'plastik', 'winnative', 'black', 'breeze']
+2025-02-27 12:37:06,763 - INFO - Available themes: ['yaru', 'aquativo', 'scidpink', 'smog', 'scidgreen', 'arc', 'equilux', 'scidsand', 'ubuntu', 'clam', 'clearlooks', 'itft1', 'classic', 'alt', 'default', 'xpnative', 'scidmint', 'scidgrey', 'adapta', 'scidpurple', 'scidblue', 'vista', 'blue', 'winxpblue', 'keramik', 'kroc', 'radiance', 'elegance', 'plastik', 'winnative', 'black', 'breeze']
+2025-02-27 12:37:06,977 - INFO - Using theme: breeze
+2025-02-27 12:37:06,977 - INFO - Using theme: breeze
+2025-02-27 12:37:13,770 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:37:13,770 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:37:13,771 - INFO - No matching DDL file found in history
+2025-02-27 12:37:13,771 - INFO - No matching DDL file found in history
+2025-02-27 12:37:13,771 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:37:13,771 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:37:13,771 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:37:13,771 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:37:14,142 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:37:14,142 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:37:14,142 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:37:14,142 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:37:14,142 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:37:14,142 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:37:14,142 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:37:14,142 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:14,142 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:14,144 - INFO - DAG type: dataset_dependency
+2025-02-27 12:37:14,144 - INFO - DAG type: dataset_dependency
+2025-02-27 12:37:14,144 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:14,144 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:14,144 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:14,144 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:37:14,146 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:37:14,146 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:37:48,125 - INFO - Available themes: ['clearlooks', 'scidpink', 'scidpurple', 'breeze', 'keramik', 'kroc', 'arc', 'aquativo', 'adapta', 'vista', 'scidsand', 'ubuntu', 'clam', 'smog', 'plastik', 'xpnative', 'elegance', 'scidgreen', 'classic', 'radiance', 'scidmint', 'alt', 'scidblue', 'winxpblue', 'winnative', 'default', 'blue', 'black', 'equilux', 'itft1', 'scidgrey', 'yaru']
+2025-02-27 12:37:48,125 - INFO - Available themes: ['clearlooks', 'scidpink', 'scidpurple', 'breeze', 'keramik', 'kroc', 'arc', 'aquativo', 'adapta', 'vista', 'scidsand', 'ubuntu', 'clam', 'smog', 'plastik', 'xpnative', 'elegance', 'scidgreen', 'classic', 'radiance', 'scidmint', 'alt', 'scidblue', 'winxpblue', 'winnative', 'default', 'blue', 'black', 'equilux', 'itft1', 'scidgrey', 'yaru']
+2025-02-27 12:37:48,310 - INFO - Using theme: breeze
+2025-02-27 12:37:48,310 - INFO - Using theme: breeze
+2025-02-27 12:37:54,949 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:37:54,949 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:37:54,949 - INFO - No matching DDL file found in history
+2025-02-27 12:37:54,949 - INFO - No matching DDL file found in history
+2025-02-27 12:37:54,950 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:37:54,950 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:37:54,950 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:37:54,950 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:37:55,656 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:37:55,656 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:37:55,657 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:37:55,657 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:37:55,657 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:37:55,657 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:37:55,657 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:37:55,657 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:55,657 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:55,659 - INFO - DAG type: dataset_dependency
+2025-02-27 12:37:55,659 - INFO - DAG type: dataset_dependency
+2025-02-27 12:37:55,659 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:55,659 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:55,659 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:37:55,659 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:37:55,661 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:37:55,661 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:40:52,959 - ERROR - Traceback (most recent call last):
+2025-02-27 12:40:52,959 - ERROR - Traceback (most recent call last):
+2025-02-27 12:40:52,959 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:40:52,959 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 12:40:52,961 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:40:52,961 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 12:40:52,962 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:40:52,962 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 12:40:59,527 - INFO - Available themes: ['plastik', 'aquativo', 'default', 'winxpblue', 'vista', 'keramik', 'arc', 'scidpink', 'adapta', 'scidsand', 'scidpurple', 'scidgrey', 'smog', 'blue', 'equilux', 'black', 'winnative', 'scidgreen', 'scidmint', 'xpnative', 'radiance', 'yaru', 'ubuntu', 'clam', 'itft1', 'scidblue', 'classic', 'elegance', 'clearlooks', 'alt', 'breeze', 'kroc']
+2025-02-27 12:40:59,527 - INFO - Available themes: ['plastik', 'aquativo', 'default', 'winxpblue', 'vista', 'keramik', 'arc', 'scidpink', 'adapta', 'scidsand', 'scidpurple', 'scidgrey', 'smog', 'blue', 'equilux', 'black', 'winnative', 'scidgreen', 'scidmint', 'xpnative', 'radiance', 'yaru', 'ubuntu', 'clam', 'itft1', 'scidblue', 'classic', 'elegance', 'clearlooks', 'alt', 'breeze', 'kroc']
+2025-02-27 12:40:59,731 - INFO - Using theme: breeze
+2025-02-27 12:40:59,731 - INFO - Using theme: breeze
+2025-02-27 12:41:07,089 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:41:07,089 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:41:07,091 - INFO - No matching DDL file found in history
+2025-02-27 12:41:07,091 - INFO - No matching DDL file found in history
+2025-02-27 12:41:07,091 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:41:07,091 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:41:07,091 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:41:07,091 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:41:07,258 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:41:07,258 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:41:07,258 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:41:07,258 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:41:07,258 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:41:07,258 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:41:07,259 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:41:07,259 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:41:07,259 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:41:07,259 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:41:07,259 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:41:07,259 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:41:07,259 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:41:07,259 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:41:07,261 - INFO - DAG type: dataset_dependency
+2025-02-27 12:41:07,261 - INFO - DAG type: dataset_dependency
+2025-02-27 12:41:07,261 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:41:07,261 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:41:07,261 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:41:07,261 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:41:07,263 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:41:07,263 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:42:33,855 - INFO - Available themes: ['blue', 'scidgreen', 'vista', 'alt', 'adapta', 'yaru', 'breeze', 'plastik', 'winxpblue', 'keramik', 'clearlooks', 'ubuntu', 'xpnative', 'scidpink', 'arc', 'scidsand', 'equilux', 'clam', 'scidblue', 'itft1', 'winnative', 'radiance', 'black', 'scidpurple', 'aquativo', 'scidmint', 'kroc', 'default', 'smog', 'classic', 'elegance', 'scidgrey']
+2025-02-27 12:42:33,855 - INFO - Available themes: ['blue', 'scidgreen', 'vista', 'alt', 'adapta', 'yaru', 'breeze', 'plastik', 'winxpblue', 'keramik', 'clearlooks', 'ubuntu', 'xpnative', 'scidpink', 'arc', 'scidsand', 'equilux', 'clam', 'scidblue', 'itft1', 'winnative', 'radiance', 'black', 'scidpurple', 'aquativo', 'scidmint', 'kroc', 'default', 'smog', 'classic', 'elegance', 'scidgrey']
+2025-02-27 12:42:34,049 - INFO - Using theme: breeze
+2025-02-27 12:42:34,049 - INFO - Using theme: breeze
+2025-02-27 12:42:44,828 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:42:44,828 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:42:44,828 - INFO - No matching DDL file found in history
+2025-02-27 12:42:44,828 - INFO - No matching DDL file found in history
+2025-02-27 12:42:44,829 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:42:44,829 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:42:44,829 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:42:44,829 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:42:45,555 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:42:45,555 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:42:45,555 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:42:45,555 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:42:45,555 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:42:45,555 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:42:45,555 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:42:45,555 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:42:45,556 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:42:45,556 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:42:45,556 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:42:45,556 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:42:45,556 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:42:45,556 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:42:45,557 - INFO - DAG type: dataset_dependency
+2025-02-27 12:42:45,557 - INFO - DAG type: dataset_dependency
+2025-02-27 12:42:45,557 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:42:45,557 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:42:45,558 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:42:45,558 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:42:45,560 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:42:45,560 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:48:36,676 - INFO - Available themes: ['radiance', 'scidgrey', 'alt', 'plastik', 'blue', 'breeze', 'winnative', 'itft1', 'scidpurple', 'keramik', 'elegance', 'aquativo', 'kroc', 'default', 'scidgreen', 'clam', 'arc', 'scidmint', 'clearlooks', 'vista', 'scidblue', 'xpnative', 'winxpblue', 'black', 'classic', 'equilux', 'scidpink', 'yaru', 'adapta', 'scidsand', 'smog', 'ubuntu']
+2025-02-27 12:48:36,676 - INFO - Available themes: ['radiance', 'scidgrey', 'alt', 'plastik', 'blue', 'breeze', 'winnative', 'itft1', 'scidpurple', 'keramik', 'elegance', 'aquativo', 'kroc', 'default', 'scidgreen', 'clam', 'arc', 'scidmint', 'clearlooks', 'vista', 'scidblue', 'xpnative', 'winxpblue', 'black', 'classic', 'equilux', 'scidpink', 'yaru', 'adapta', 'scidsand', 'smog', 'ubuntu']
+2025-02-27 12:48:36,873 - INFO - Using theme: breeze
+2025-02-27 12:48:36,873 - INFO - Using theme: breeze
+2025-02-27 12:48:43,062 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:48:43,062 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:48:43,063 - INFO - No matching DDL file found in history
+2025-02-27 12:48:43,063 - INFO - No matching DDL file found in history
+2025-02-27 12:48:43,063 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:48:43,063 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:48:43,063 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:48:43,063 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:48:43,597 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:48:43,597 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:48:43,597 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:48:43,597 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:48:43,597 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:48:43,597 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:48:43,597 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:48:43,598 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:48:43,598 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:48:43,599 - INFO - DAG type: dataset_dependency
+2025-02-27 12:48:43,599 - INFO - DAG type: dataset_dependency
+2025-02-27 12:48:43,600 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:48:43,600 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:48:43,600 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:48:43,600 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:48:43,602 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:48:43,602 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:49:13,764 - INFO - Available themes: ['yaru', 'keramik', 'aquativo', 'scidblue', 'default', 'scidgreen', 'xpnative', 'ubuntu', 'scidgrey', 'scidpink', 'radiance', 'plastik', 'clearlooks', 'scidsand', 'black', 'kroc', 'equilux', 'blue', 'itft1', 'smog', 'elegance', 'breeze', 'winnative', 'winxpblue', 'vista', 'scidpurple', 'clam', 'arc', 'adapta', 'scidmint', 'alt', 'classic']
+2025-02-27 12:49:13,764 - INFO - Available themes: ['yaru', 'keramik', 'aquativo', 'scidblue', 'default', 'scidgreen', 'xpnative', 'ubuntu', 'scidgrey', 'scidpink', 'radiance', 'plastik', 'clearlooks', 'scidsand', 'black', 'kroc', 'equilux', 'blue', 'itft1', 'smog', 'elegance', 'breeze', 'winnative', 'winxpblue', 'vista', 'scidpurple', 'clam', 'arc', 'adapta', 'scidmint', 'alt', 'classic']
+2025-02-27 12:49:13,958 - INFO - Using theme: breeze
+2025-02-27 12:49:13,958 - INFO - Using theme: breeze
+2025-02-27 12:49:20,141 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:49:20,141 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:49:20,142 - INFO - No matching DDL file found in history
+2025-02-27 12:49:20,142 - INFO - No matching DDL file found in history
+2025-02-27 12:49:20,143 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:49:20,143 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:49:20,143 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:49:20,143 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:49:20,735 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:49:20,735 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:49:20,735 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:49:20,735 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:49:20,736 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:49:20,736 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:49:20,736 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:49:20,736 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:49:20,736 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:49:20,737 - INFO - DAG type: dataset_dependency
+2025-02-27 12:49:20,737 - INFO - DAG type: dataset_dependency
+2025-02-27 12:49:20,737 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:49:20,737 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:49:20,738 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:49:20,738 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:49:20,740 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:49:20,740 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:50:12,295 - INFO - Available themes: ['breeze', 'scidsand', 'radiance', 'alt', 'ubuntu', 'black', 'clam', 'winxpblue', 'equilux', 'itft1', 'keramik', 'classic', 'arc', 'aquativo', 'adapta', 'blue', 'plastik', 'scidpink', 'clearlooks', 'vista', 'scidgrey', 'smog', 'xpnative', 'elegance', 'kroc', 'scidpurple', 'winnative', 'scidblue', 'yaru', 'default', 'scidgreen', 'scidmint']
+2025-02-27 12:50:12,295 - INFO - Available themes: ['breeze', 'scidsand', 'radiance', 'alt', 'ubuntu', 'black', 'clam', 'winxpblue', 'equilux', 'itft1', 'keramik', 'classic', 'arc', 'aquativo', 'adapta', 'blue', 'plastik', 'scidpink', 'clearlooks', 'vista', 'scidgrey', 'smog', 'xpnative', 'elegance', 'kroc', 'scidpurple', 'winnative', 'scidblue', 'yaru', 'default', 'scidgreen', 'scidmint']
+2025-02-27 12:50:12,487 - INFO - Using theme: breeze
+2025-02-27 12:50:12,487 - INFO - Using theme: breeze
+2025-02-27 12:50:19,072 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:50:19,072 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:50:19,073 - INFO - No matching DDL file found in history
+2025-02-27 12:50:19,073 - INFO - No matching DDL file found in history
+2025-02-27 12:50:19,073 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:50:19,073 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:50:19,073 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:50:19,073 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:50:19,484 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:50:19,484 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:50:19,484 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:50:19,484 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:50:19,484 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:50:19,484 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:50:19,484 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:50:19,484 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:50:19,484 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:50:19,486 - INFO - DAG type: dataset_dependency
+2025-02-27 12:50:19,486 - INFO - DAG type: dataset_dependency
+2025-02-27 12:50:19,486 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:50:19,486 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:50:19,486 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:50:19,486 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:50:19,488 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:50:19,488 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:53:48,027 - INFO - Available themes: ['equilux', 'xpnative', 'vista', 'winxpblue', 'arc', 'clam', 'keramik', 'scidpurple', 'scidgrey', 'scidgreen', 'default', 'yaru', 'smog', 'kroc', 'aquativo', 'scidsand', 'plastik', 'adapta', 'scidblue', 'alt', 'radiance', 'clearlooks', 'itft1', 'black', 'scidmint', 'breeze', 'blue', 'ubuntu', 'classic', 'scidpink', 'elegance', 'winnative']
+2025-02-27 12:53:48,027 - INFO - Available themes: ['equilux', 'xpnative', 'vista', 'winxpblue', 'arc', 'clam', 'keramik', 'scidpurple', 'scidgrey', 'scidgreen', 'default', 'yaru', 'smog', 'kroc', 'aquativo', 'scidsand', 'plastik', 'adapta', 'scidblue', 'alt', 'radiance', 'clearlooks', 'itft1', 'black', 'scidmint', 'breeze', 'blue', 'ubuntu', 'classic', 'scidpink', 'elegance', 'winnative']
+2025-02-27 12:53:48,228 - INFO - Using theme: breeze
+2025-02-27 12:53:48,228 - INFO - Using theme: breeze
+2025-02-27 12:53:55,283 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:53:55,283 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:53:55,284 - INFO - No matching DDL file found in history
+2025-02-27 12:53:55,284 - INFO - No matching DDL file found in history
+2025-02-27 12:53:55,284 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:53:55,284 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:53:55,284 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:53:55,284 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:53:55,990 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:53:55,990 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:53:55,990 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:53:55,990 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:53:55,990 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:53:55,990 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:53:55,990 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:53:55,990 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:53:55,990 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:53:55,992 - INFO - DAG type: dataset_dependency
+2025-02-27 12:53:55,992 - INFO - DAG type: dataset_dependency
+2025-02-27 12:53:55,992 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:53:55,992 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:53:55,992 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:53:55,992 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:53:55,994 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:53:55,994 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:55:52,398 - INFO - Available themes: ['scidblue', 'scidgrey', 'arc', 'vista', 'breeze', 'smog', 'kroc', 'plastik', 'radiance', 'blue', 'keramik', 'classic', 'adapta', 'xpnative', 'clearlooks', 'alt', 'scidgreen', 'clam', 'scidpurple', 'scidpink', 'aquativo', 'equilux', 'elegance', 'default', 'winnative', 'scidsand', 'yaru', 'scidmint', 'ubuntu', 'itft1', 'black', 'winxpblue']
+2025-02-27 12:55:52,398 - INFO - Available themes: ['scidblue', 'scidgrey', 'arc', 'vista', 'breeze', 'smog', 'kroc', 'plastik', 'radiance', 'blue', 'keramik', 'classic', 'adapta', 'xpnative', 'clearlooks', 'alt', 'scidgreen', 'clam', 'scidpurple', 'scidpink', 'aquativo', 'equilux', 'elegance', 'default', 'winnative', 'scidsand', 'yaru', 'scidmint', 'ubuntu', 'itft1', 'black', 'winxpblue']
+2025-02-27 12:55:52,593 - INFO - Using theme: breeze
+2025-02-27 12:55:52,593 - INFO - Using theme: breeze
+2025-02-27 12:55:57,028 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:55:57,028 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:55:57,030 - INFO - No matching DDL file found in history
+2025-02-27 12:55:57,030 - INFO - No matching DDL file found in history
+2025-02-27 12:55:57,030 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:55:57,030 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:55:57,030 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:55:57,030 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:55:57,747 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:55:57,747 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:55:57,747 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:55:57,747 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:55:57,748 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:55:57,748 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:55:57,748 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:55:57,748 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:55:57,748 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:55:57,749 - INFO - DAG type: dataset_dependency
+2025-02-27 12:55:57,749 - INFO - DAG type: dataset_dependency
+2025-02-27 12:55:57,749 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:55:57,749 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:55:57,750 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:55:57,750 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:55:57,751 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:55:57,751 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:56:33,546 - INFO - Available themes: ['vista', 'kroc', 'scidgrey', 'ubuntu', 'elegance', 'equilux', 'winxpblue', 'scidsand', 'scidpurple', 'xpnative', 'radiance', 'plastik', 'yaru', 'itft1', 'classic', 'clam', 'aquativo', 'keramik', 'scidpink', 'adapta', 'blue', 'alt', 'scidblue', 'smog', 'scidgreen', 'default', 'clearlooks', 'winnative', 'scidmint', 'black', 'breeze', 'arc']
+2025-02-27 12:56:33,546 - INFO - Available themes: ['vista', 'kroc', 'scidgrey', 'ubuntu', 'elegance', 'equilux', 'winxpblue', 'scidsand', 'scidpurple', 'xpnative', 'radiance', 'plastik', 'yaru', 'itft1', 'classic', 'clam', 'aquativo', 'keramik', 'scidpink', 'adapta', 'blue', 'alt', 'scidblue', 'smog', 'scidgreen', 'default', 'clearlooks', 'winnative', 'scidmint', 'black', 'breeze', 'arc']
+2025-02-27 12:56:33,741 - INFO - Using theme: breeze
+2025-02-27 12:56:33,741 - INFO - Using theme: breeze
+2025-02-27 12:56:39,735 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:56:39,735 - INFO - Looking for matching DDL file in history...
+2025-02-27 12:56:39,736 - INFO - No matching DDL file found in history
+2025-02-27 12:56:39,736 - INFO - No matching DDL file found in history
+2025-02-27 12:56:39,736 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:56:39,736 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 12:56:39,737 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 12:56:39,737 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 12:56:40,458 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:56:40,458 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 12:56:40,459 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:56:40,459 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch1.tab1
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch2.tab2
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:56:40,459 - INFO - Found dependency: sch3.tab3
+2025-02-27 12:56:40,459 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:56:40,459 - INFO - Added 3 dependencies to DAG config
+2025-02-27 12:56:40,459 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:56:40,459 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:56:40,461 - INFO - DAG type: dataset_dependency
+2025-02-27 12:56:40,461 - INFO - DAG type: dataset_dependency
+2025-02-27 12:56:40,461 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:56:40,461 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:56:40,461 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 12:56:40,461 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 12:56:40,462 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 12:56:40,462 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:00:49,244 - INFO - Available themes: ['scidsand', 'scidgrey', 'scidblue', 'plastik', 'black', 'ubuntu', 'scidmint', 'equilux', 'aquativo', 'scidpink', 'smog', 'scidgreen', 'classic', 'xpnative', 'elegance', 'scidpurple', 'yaru', 'keramik', 'arc', 'winxpblue', 'alt', 'vista', 'itft1', 'default', 'adapta', 'blue', 'clam', 'clearlooks', 'winnative', 'kroc', 'radiance', 'breeze']
+2025-02-27 13:00:49,244 - INFO - Available themes: ['scidsand', 'scidgrey', 'scidblue', 'plastik', 'black', 'ubuntu', 'scidmint', 'equilux', 'aquativo', 'scidpink', 'smog', 'scidgreen', 'classic', 'xpnative', 'elegance', 'scidpurple', 'yaru', 'keramik', 'arc', 'winxpblue', 'alt', 'vista', 'itft1', 'default', 'adapta', 'blue', 'clam', 'clearlooks', 'winnative', 'kroc', 'radiance', 'breeze']
+2025-02-27 13:00:49,435 - INFO - Using theme: breeze
+2025-02-27 13:00:49,435 - INFO - Using theme: breeze
+2025-02-27 13:00:54,511 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:00:54,511 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:00:54,512 - INFO - No matching DDL file found in history
+2025-02-27 13:00:54,512 - INFO - No matching DDL file found in history
+2025-02-27 13:00:54,512 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:00:54,512 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:00:54,512 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 13:00:54,512 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 13:00:55,228 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:00:55,228 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:00:55,228 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:00:55,228 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:00:55,228 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:00:55,228 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:00:55,228 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:00:55,228 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:00:55,228 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:00:55,230 - INFO - DAG type: dataset_dependency
+2025-02-27 13:00:55,230 - INFO - DAG type: dataset_dependency
+2025-02-27 13:00:55,230 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:00:55,230 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:00:55,230 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:00:55,230 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 13:00:55,232 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:00:55,232 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:01:47,767 - ERROR - Traceback (most recent call last):
+2025-02-27 13:01:47,767 - ERROR - Traceback (most recent call last):
+2025-02-27 13:01:47,767 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 13:01:47,767 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2098, in <module>
+2025-02-27 13:01:47,769 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 13:01:47,769 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-02-27 13:01:47,770 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 13:01:47,770 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-02-27 13:01:53,803 - INFO - Available themes: ['aquativo', 'adapta', 'alt', 'clam', 'vista', 'kroc', 'winnative', 'scidgrey', 'scidpurple', 'keramik', 'scidpink', 'plastik', 'default', 'equilux', 'xpnative', 'clearlooks', 'black', 'breeze', 'ubuntu', 'yaru', 'scidmint', 'elegance', 'winxpblue', 'scidgreen', 'classic', 'smog', 'blue', 'radiance', 'itft1', 'scidblue', 'scidsand', 'arc']
+2025-02-27 13:01:53,803 - INFO - Available themes: ['aquativo', 'adapta', 'alt', 'clam', 'vista', 'kroc', 'winnative', 'scidgrey', 'scidpurple', 'keramik', 'scidpink', 'plastik', 'default', 'equilux', 'xpnative', 'clearlooks', 'black', 'breeze', 'ubuntu', 'yaru', 'scidmint', 'elegance', 'winxpblue', 'scidgreen', 'classic', 'smog', 'blue', 'radiance', 'itft1', 'scidblue', 'scidsand', 'arc']
+2025-02-27 13:01:54,004 - INFO - Using theme: breeze
+2025-02-27 13:01:54,004 - INFO - Using theme: breeze
+2025-02-27 13:02:00,504 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:02:00,504 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:02:00,506 - INFO - No matching DDL file found in history
+2025-02-27 13:02:00,506 - INFO - No matching DDL file found in history
+2025-02-27 13:02:00,506 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:02:00,506 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:02:00,506 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 13:02:00,506 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 13:02:01,031 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:02:01,031 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:02:01,031 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:02:01,031 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:02:01,031 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:02:01,031 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:02:01,031 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:02:01,031 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:01,031 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:01,033 - INFO - DAG type: dataset_dependency
+2025-02-27 13:02:01,033 - INFO - DAG type: dataset_dependency
+2025-02-27 13:02:01,033 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:01,033 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:01,033 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:01,033 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 13:02:01,035 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:02:01,035 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:02:07,670 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:02:07,670 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:02:07,672 - INFO - No matching DDL file found in history
+2025-02-27 13:02:07,672 - INFO - No matching DDL file found in history
+2025-02-27 13:02:07,672 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:02:07,672 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:02:07,673 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 13:02:07,673 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 13:02:08,447 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:02:08,447 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:02:08,447 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:02:08,447 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:02:08,447 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:02:08,447 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:02:08,447 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:02:08,447 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:08,447 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:08,458 - INFO - DAG type: dataset_dependency
+2025-02-27 13:02:08,458 - INFO - DAG type: dataset_dependency
+2025-02-27 13:02:08,459 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:08,459 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:08,459 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:02:08,459 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 13:02:08,461 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:02:08,461 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:03:05,075 - INFO - Available themes: ['kroc', 'scidmint', 'scidgreen', 'clam', 'black', 'yaru', 'alt', 'clearlooks', 'radiance', 'blue', 'scidgrey', 'scidsand', 'plastik', 'vista', 'scidpurple', 'adapta', 'elegance', 'default', 'smog', 'classic', 'breeze', 'aquativo', 'winxpblue', 'ubuntu', 'scidpink', 'itft1', 'arc', 'winnative', 'xpnative', 'scidblue', 'keramik', 'equilux']
+2025-02-27 13:03:05,075 - INFO - Available themes: ['kroc', 'scidmint', 'scidgreen', 'clam', 'black', 'yaru', 'alt', 'clearlooks', 'radiance', 'blue', 'scidgrey', 'scidsand', 'plastik', 'vista', 'scidpurple', 'adapta', 'elegance', 'default', 'smog', 'classic', 'breeze', 'aquativo', 'winxpblue', 'ubuntu', 'scidpink', 'itft1', 'arc', 'winnative', 'xpnative', 'scidblue', 'keramik', 'equilux']
+2025-02-27 13:03:05,265 - INFO - Using theme: breeze
+2025-02-27 13:03:05,265 - INFO - Using theme: breeze
+2025-02-27 13:03:11,674 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:03:11,674 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:03:11,675 - INFO - No matching DDL file found in history
+2025-02-27 13:03:11,675 - INFO - No matching DDL file found in history
+2025-02-27 13:03:11,675 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:03:11,675 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:03:11,675 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 13:03:11,675 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 13:03:12,378 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:03:12,378 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 13:03:12,378 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:03:12,378 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 13:03:12,378 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:03:12,378 - INFO - Found dependency: sch1.tab1
+2025-02-27 13:03:12,379 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:03:12,379 - INFO - Found dependency: sch2.tab2
+2025-02-27 13:03:12,379 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:03:12,379 - INFO - Found dependency: sch3.tab3
+2025-02-27 13:03:12,379 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:03:12,379 - INFO - Added 3 dependencies to DAG config
+2025-02-27 13:03:12,379 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:03:12,379 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:03:12,380 - INFO - DAG type: dataset_dependency
+2025-02-27 13:03:12,380 - INFO - DAG type: dataset_dependency
+2025-02-27 13:03:12,381 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:03:12,381 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:03:12,381 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 13:03:12,381 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 13:03:12,383 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:03:12,383 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 13:07:53,794 - INFO - Available themes: ['scidpink', 'clearlooks', 'vista', 'yaru', 'scidpurple', 'breeze', 'xpnative', 'scidblue', 'default', 'kroc', 'scidgrey', 'radiance', 'smog', 'classic', 'clam', 'aquativo', 'scidgreen', 'blue', 'ubuntu', 'plastik', 'winnative', 'adapta', 'winxpblue', 'scidsand', 'itft1', 'alt', 'keramik', 'scidmint', 'elegance', 'arc', 'black', 'equilux']
+2025-02-27 13:07:53,794 - INFO - Available themes: ['scidpink', 'clearlooks', 'vista', 'yaru', 'scidpurple', 'breeze', 'xpnative', 'scidblue', 'default', 'kroc', 'scidgrey', 'radiance', 'smog', 'classic', 'clam', 'aquativo', 'scidgreen', 'blue', 'ubuntu', 'plastik', 'winnative', 'adapta', 'winxpblue', 'scidsand', 'itft1', 'alt', 'keramik', 'scidmint', 'elegance', 'arc', 'black', 'equilux']
+2025-02-27 13:07:54,037 - INFO - Using theme: breeze
+2025-02-27 13:07:54,037 - INFO - Using theme: breeze
+2025-02-27 13:08:49,812 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:08:49,812 - INFO - Looking for matching DDL file in history...
+2025-02-27 13:08:49,814 - INFO - No matching DDL file found in history
+2025-02-27 13:08:49,814 - INFO - No matching DDL file found in history
+2025-02-27 13:08:49,814 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:08:49,814 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 13:08:49,814 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 13:08:49,814 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 15:58:12,430 - INFO - Available themes: ['clam', 'scidpurple', 'itft1', 'vista', 'blue', 'scidsand', 'keramik', 'winnative', 'plastik', 'black', 'alt', 'aquativo', 'default', 'smog', 'winxpblue', 'scidpink', 'breeze', 'scidblue', 'kroc', 'xpnative', 'elegance', 'classic', 'scidmint', 'scidgrey', 'equilux', 'radiance', 'scidgreen', 'clearlooks', 'ubuntu', 'adapta', 'yaru', 'arc']
+2025-02-27 15:58:12,430 - INFO - Available themes: ['clam', 'scidpurple', 'itft1', 'vista', 'blue', 'scidsand', 'keramik', 'winnative', 'plastik', 'black', 'alt', 'aquativo', 'default', 'smog', 'winxpblue', 'scidpink', 'breeze', 'scidblue', 'kroc', 'xpnative', 'elegance', 'classic', 'scidmint', 'scidgrey', 'equilux', 'radiance', 'scidgreen', 'clearlooks', 'ubuntu', 'adapta', 'yaru', 'arc']
+2025-02-27 15:58:12,654 - INFO - Using theme: breeze
+2025-02-27 15:58:12,654 - INFO - Using theme: breeze
+2025-02-27 15:58:22,274 - INFO - Looking for matching DDL file in history...
+2025-02-27 15:58:22,274 - INFO - Looking for matching DDL file in history...
+2025-02-27 15:58:22,275 - INFO - No matching DDL file found in history
+2025-02-27 15:58:22,275 - INFO - No matching DDL file found in history
+2025-02-27 15:58:22,276 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 15:58:22,276 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 15:58:22,276 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 15:58:22,276 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 15:58:45,500 - INFO - Available themes: ['vista', 'radiance', 'plastik', 'scidpurple', 'clam', 'ubuntu', 'classic', 'scidgreen', 'winnative', 'default', 'black', 'scidgrey', 'blue', 'equilux', 'aquativo', 'xpnative', 'kroc', 'winxpblue', 'yaru', 'alt', 'clearlooks', 'scidblue', 'itft1', 'adapta', 'scidpink', 'breeze', 'smog', 'arc', 'keramik', 'scidsand', 'elegance', 'scidmint']
+2025-02-27 15:58:45,500 - INFO - Available themes: ['vista', 'radiance', 'plastik', 'scidpurple', 'clam', 'ubuntu', 'classic', 'scidgreen', 'winnative', 'default', 'black', 'scidgrey', 'blue', 'equilux', 'aquativo', 'xpnative', 'kroc', 'winxpblue', 'yaru', 'alt', 'clearlooks', 'scidblue', 'itft1', 'adapta', 'scidpink', 'breeze', 'smog', 'arc', 'keramik', 'scidsand', 'elegance', 'scidmint']
+2025-02-27 15:58:45,713 - INFO - Using theme: breeze
+2025-02-27 15:58:45,713 - INFO - Using theme: breeze
+2025-02-27 15:58:54,212 - INFO - Looking for matching DDL file in history...
+2025-02-27 15:58:54,212 - INFO - Looking for matching DDL file in history...
+2025-02-27 15:58:54,213 - INFO - No matching DDL file found in history
+2025-02-27 15:58:54,213 - INFO - No matching DDL file found in history
+2025-02-27 15:58:54,214 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 15:58:54,214 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 15:58:54,214 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 15:58:54,214 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 16:02:58,619 - INFO - Available themes: ['scidpink', 'scidsand', 'ubuntu', 'alt', 'keramik', 'scidgrey', 'scidblue', 'adapta', 'default', 'arc', 'itft1', 'black', 'scidgreen', 'equilux', 'elegance', 'plastik', 'winnative', 'radiance', 'scidpurple', 'winxpblue', 'xpnative', 'aquativo', 'clearlooks', 'yaru', 'blue', 'clam', 'breeze', 'scidmint', 'vista', 'kroc', 'smog', 'classic']
+2025-02-27 16:02:58,619 - INFO - Available themes: ['scidpink', 'scidsand', 'ubuntu', 'alt', 'keramik', 'scidgrey', 'scidblue', 'adapta', 'default', 'arc', 'itft1', 'black', 'scidgreen', 'equilux', 'elegance', 'plastik', 'winnative', 'radiance', 'scidpurple', 'winxpblue', 'xpnative', 'aquativo', 'clearlooks', 'yaru', 'blue', 'clam', 'breeze', 'scidmint', 'vista', 'kroc', 'smog', 'classic']
+2025-02-27 16:02:58,822 - INFO - Using theme: breeze
+2025-02-27 16:02:58,822 - INFO - Using theme: breeze
+2025-02-27 16:03:06,701 - INFO - Looking for matching DDL file in history...
+2025-02-27 16:03:06,701 - INFO - Looking for matching DDL file in history...
+2025-02-27 16:03:06,703 - INFO - No matching DDL file found in history
+2025-02-27 16:03:06,703 - INFO - No matching DDL file found in history
+2025-02-27 16:03:06,703 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 16:03:06,703 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 16:03:06,703 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 16:03:06,703 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 16:03:07,434 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:03:07,434 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:03:07,434 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:03:07,434 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:03:07,434 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:03:07,434 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:03:07,434 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:03:07,434 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:03:07,434 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:03:07,436 - INFO - DAG type: dataset_dependency
+2025-02-27 16:03:07,436 - INFO - DAG type: dataset_dependency
+2025-02-27 16:03:07,436 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:03:07,436 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:03:07,436 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:03:07,436 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 16:03:07,438 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 16:03:07,438 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 16:05:11,613 - INFO - Available themes: ['smog', 'xpnative', 'radiance', 'ubuntu', 'scidsand', 'scidblue', 'elegance', 'arc', 'kroc', 'keramik', 'aquativo', 'blue', 'scidpurple', 'vista', 'breeze', 'winnative', 'default', 'itft1', 'scidgreen', 'scidmint', 'scidpink', 'yaru', 'scidgrey', 'alt', 'clearlooks', 'equilux', 'black', 'clam', 'plastik', 'classic', 'adapta', 'winxpblue']
+2025-02-27 16:05:11,613 - INFO - Available themes: ['smog', 'xpnative', 'radiance', 'ubuntu', 'scidsand', 'scidblue', 'elegance', 'arc', 'kroc', 'keramik', 'aquativo', 'blue', 'scidpurple', 'vista', 'breeze', 'winnative', 'default', 'itft1', 'scidgreen', 'scidmint', 'scidpink', 'yaru', 'scidgrey', 'alt', 'clearlooks', 'equilux', 'black', 'clam', 'plastik', 'classic', 'adapta', 'winxpblue']
+2025-02-27 16:05:11,807 - INFO - Using theme: breeze
+2025-02-27 16:05:11,807 - INFO - Using theme: breeze
+2025-02-27 16:05:19,827 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:05:19,827 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:05:19,828 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 16:05:19,828 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 16:05:19,828 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 16:05:19,828 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 16:05:19,829 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 16:05:19,829 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 16:05:19,829 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 16:05:19,829 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 16:05:19,829 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 16:05:19,829 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 16:05:28,268 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 16:05:28,268 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 16:05:28,268 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 16:05:28,268 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 16:05:28,268 - INFO - Setting use_openssl_only mode to False
+2025-02-27 16:05:28,268 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 16:05:34,884 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 16:05:34,884 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 16:05:36,816 - INFO - query execution done
+2025-02-27 16:05:36,816 - INFO - query execution done
+2025-02-27 16:05:36,833 - INFO - fetching data done
+2025-02-27 16:05:36,833 - INFO - fetching data done
+2025-02-27 16:05:36,833 - INFO - closed
+2025-02-27 16:05:36,833 - INFO - closed
+2025-02-27 16:05:37,093 - INFO - No async queries seem to be running, deleting session
+2025-02-27 16:05:37,093 - INFO - No async queries seem to be running, deleting session
+2025-02-27 16:05:37,407 - ERROR - Error in model_mapper.generate_model_mapping: Model mapping generation failed: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+2025-02-27 16:05:37,407 - ERROR - Error in model_mapper.generate_model_mapping: Model mapping generation failed: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+2025-02-27 16:05:37,415 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\model_mapper.py", line 46, in generate_model_mapping
+    workbook.save(file_path)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\zipfile.py", line 1216, in __init__
+    self.fp = io.open(file, filemode)
+PermissionError: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 1314, in run_model_mapping
+    mapped_count, total_count = self.model_mapper.generate_model_mapping(file_path)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\model_mapper.py", line 51, in generate_model_mapping
+    raise Exception(f"Model mapping generation failed: {str(e)}")
+Exception: Model mapping generation failed: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+
+2025-02-27 16:05:37,415 - ERROR - Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\model_mapper.py", line 46, in generate_model_mapping
+    workbook.save(file_path)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\workbook\workbook.py", line 386, in save
+    save_workbook(self, filename)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\.venv\lib\site-packages\openpyxl\writer\excel.py", line 291, in save_workbook
+    archive = ZipFile(filename, 'w', ZIP_DEFLATED, allowZip64=True)
+  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\zipfile.py", line 1216, in __init__
+    self.fp = io.open(file, filemode)
+PermissionError: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 1314, in run_model_mapping
+    mapped_count, total_count = self.model_mapper.generate_model_mapping(file_path)
+  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\model_mapper.py", line 51, in generate_model_mapping
+    raise Exception(f"Model mapping generation failed: {str(e)}")
+Exception: Model mapping generation failed: [Errno 13] Permission denied: 'C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx'
+
+2025-02-27 16:05:48,974 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 16:05:48,974 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-02-27 16:05:48,974 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-02-27 16:05:48,974 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-02-27 16:05:54,625 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 16:05:54,625 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-02-27 16:05:56,431 - INFO - query execution done
+2025-02-27 16:05:56,431 - INFO - query execution done
+2025-02-27 16:05:56,432 - INFO - fetching data done
+2025-02-27 16:05:56,432 - INFO - fetching data done
+2025-02-27 16:05:56,432 - INFO - closed
+2025-02-27 16:05:56,432 - INFO - closed
+2025-02-27 16:05:56,699 - INFO - No async queries seem to be running, deleting session
+2025-02-27 16:05:56,699 - INFO - No async queries seem to be running, deleting session
+2025-02-27 16:06:04,421 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,421 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,422 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,422 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,423 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,423 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-02-27 16:06:04,424 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 16:06:04,424 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-02-27 16:06:04,424 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Unique keys: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Primary keys: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-02-27 16:06:04,424 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 16:06:04,424 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Ordered columns based on target DDL: ['OPCO_ID', 'DATA_SRC', 'CREATE_DT', 'CREATE_BY', 'CREATE_PGM', 'UPDATE_DT', 'UPDATE_BY', 'UPDATE_PGM', 'OPCO_CD', 'OPCO_DSC', 'RPT_OPCO_DSC', 'RPT_OPCO_ABBRV', 'TBA_ACTIVE_FLG']
+2025-02-27 16:06:04,668 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:06:04,668 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:06:04,668 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:06:04,668 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:06:04,669 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:06:04,669 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:06:04,669 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:06:04,669 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:04,669 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:04,671 - INFO - DAG type: dataset_dependency
+2025-02-27 16:06:04,671 - INFO - DAG type: dataset_dependency
+2025-02-27 16:06:04,671 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:04,671 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:04,671 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:04,671 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 16:06:04,674 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 16:06:04,674 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 16:06:52,332 - INFO - Available themes: ['itft1', 'scidsand', 'xpnative', 'scidblue', 'alt', 'classic', 'winxpblue', 'keramik', 'scidmint', 'vista', 'blue', 'scidgrey', 'scidpink', 'smog', 'adapta', 'plastik', 'scidgreen', 'breeze', 'arc', 'kroc', 'elegance', 'clam', 'black', 'clearlooks', 'equilux', 'winnative', 'default', 'yaru', 'scidpurple', 'radiance', 'aquativo', 'ubuntu']
+2025-02-27 16:06:52,332 - INFO - Available themes: ['itft1', 'scidsand', 'xpnative', 'scidblue', 'alt', 'classic', 'winxpblue', 'keramik', 'scidmint', 'vista', 'blue', 'scidgrey', 'scidpink', 'smog', 'adapta', 'plastik', 'scidgreen', 'breeze', 'arc', 'kroc', 'elegance', 'clam', 'black', 'clearlooks', 'equilux', 'winnative', 'default', 'yaru', 'scidpurple', 'radiance', 'aquativo', 'ubuntu']
+2025-02-27 16:06:52,557 - INFO - Using theme: breeze
+2025-02-27 16:06:52,557 - INFO - Using theme: breeze
+2025-02-27 16:06:58,066 - INFO - Looking for matching DDL file in history...
+2025-02-27 16:06:58,066 - INFO - Looking for matching DDL file in history...
+2025-02-27 16:06:58,067 - INFO - No matching DDL file found in history
+2025-02-27 16:06:58,067 - INFO - No matching DDL file found in history
+2025-02-27 16:06:58,067 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 16:06:58,067 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 16:06:58,067 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 16:06:58,067 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+2025-02-27 16:06:58,801 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:06:58,801 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 16:06:58,801 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:06:58,801 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch1.tab1
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch2.tab2
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:06:58,801 - INFO - Found dependency: sch3.tab3
+2025-02-27 16:06:58,801 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:06:58,801 - INFO - Added 3 dependencies to DAG config
+2025-02-27 16:06:58,801 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:58,801 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:58,803 - INFO - DAG type: dataset_dependency
+2025-02-27 16:06:58,803 - INFO - DAG type: dataset_dependency
+2025-02-27 16:06:58,803 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:58,803 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:58,803 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-02-27 16:06:58,803 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
