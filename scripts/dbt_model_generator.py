@@ -308,7 +308,12 @@ SELECT
         # Add the MINUS columns to the subquery
         final_model_content += "SELECT\n"
         for quoted_target, logic in minus_columns:
-            final_model_content += f"    {logic} AS {quoted_target},\n"
+            # If logic contains an alias (pattern: alias.column), remove the alias
+            if '.' in logic:
+                final_model_content += f"    {logic} AS {quoted_target},\n"
+            else:
+                final_model_content += f"    source.{logic} AS {quoted_target},\n"
+
         
         # Remove trailing comma
         final_model_content = final_model_content.rstrip(',\n')
