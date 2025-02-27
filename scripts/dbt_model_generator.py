@@ -337,10 +337,7 @@ SELECT
         
         # Add the same columns to the MINUS part for exact matching
         for quoted_target, logic in minus_columns:
-            # If logic contains an alias (pattern: alias.column), remove the alias
-            if '.' in logic:
-                logic = logic.split('.')[-1]  # Take only the part after the last dot
-            final_model_content += f"    {logic} AS {quoted_target},\n"
+            final_model_content += f"    {quoted_target},\n"
         
         # Remove trailing comma
         final_model_content = final_model_content.rstrip(',\n')
