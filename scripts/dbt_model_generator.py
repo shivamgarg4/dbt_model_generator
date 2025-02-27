@@ -63,12 +63,12 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
         tags=['{config['Target']['Table Name']}'],
         alias='{config['Target']['Table Name']}',
         materialized='{materialization}',
-        transient={(lambda: 'true' if transient_logic_required else 'false')()},"""
+        transient={(lambda: 'true' if transient_logic_required else 'false')()}"""
     # Add pre-hook for truncate_load
     if materialization == 'truncate_load':
         # Use table instead of incremental materialization with truncate pre-hook
         model_config = model_config.replace("materialized='truncate_load'", "materialized='table'")
-        model_config += f"""
+        model_config += f""",
         pre_hook=["TRUNCATE TABLE {target_table}"]"""
     
     # Add unique keys for incremental models if provided
@@ -79,11 +79,11 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             # Format list of keys as a comma-separated string
             unique_key_str = ', '.join([f'"{key}"' for key in unique_keys])
             model_config += f""",
-    unique_key=[{unique_key_str}]"""
+        unique_key=[{unique_key_str}]"""
         else:
             # Single key
             model_config += f""",
-    unique_key="{unique_keys}\""""
+        unique_key="{unique_keys}\""""
             unique_keys = [unique_keys]  # Convert to list for later use
         
         # Print debug info
@@ -120,7 +120,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             # Format the list of columns as a comma-separated string with single quotes
             update_columns_str = ', '.join([f"'{col}'" for col in update_columns])
             model_config += f""",
-    merge_update_columns = [{update_columns_str}]"""
+        merge_update_columns = [{update_columns_str}]"""
             # Print debug info with the actual columns that are added to the model configuration
             formatted_columns = [f"'{col}'" for col in update_columns]
             print(f"Added merge_update_columns to model config: {formatted_columns}")
