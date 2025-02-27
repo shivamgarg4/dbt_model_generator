@@ -3,7 +3,7 @@ import json
 from scripts.utils import extract_table_name, parse_ddl_file
 import re
 
-def create_dbt_model_from_json(config_file, mapping_sheet=None):
+def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=None):
     """Generate a DBT model file from JSON configuration"""
     with open(config_file) as f:
         config = json.load(f)
@@ -15,6 +15,14 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None):
     source_table = config['Source']['Table Name']
     source_name = config['Source']['Name']
 
+    # Get target DDL columns and unique keys if path provided
+    target_columns = []
+    target_unique_keys = []
+    if target_ddl_path and os.path.exists(target_ddl_path):
+        target_columns, target_unique_keys = parse_ddl_file(target_ddl_path)
+        # Convert target_columns to dict for easier lookup
+        target_columns_dict = {col[0]: idx for idx, col in enumerate(target_columns)}
+    
     # Use "source" as the alias for the main table
     main_table_alias = 'source'
 
@@ -127,8 +135,18 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None):
 SELECT
 """
 
-    # Add column mappings
-    for column in config['Columns']:
+    # Sort columns based on target DDL order if available
+    ordered_columns = list(config['Columns'])
+    if target_columns:
+        # Create a lookup for target column positions
+        target_pos = {col[0]: idx for idx, col in enumerate(target_columns)}
+        
+        # Sort columns based on target DDL order
+        ordered_columns.sort(key=lambda x: target_pos.get(x['Target Column'], float('inf')))
+        print(f"Ordered columns based on target DDL: {[col['Target Column'] for col in ordered_columns]}")
+    
+    # Add column mappings in the correct order
+    for column in ordered_columns:
         target_col = column['Target Column']
         logic = column['Logic']
         
@@ -227,143 +245,101 @@ SELECT
                     computed_columns.append(column)
                     print(f"Excluding column from MINUS: {target_col} (Logic: {logic})")
         
-        # Add all computed columns and audit columns to the outer query
-        # First add computed columns
-        for column in computed_columns:
-            target_col = column['Target Column']
-            logic = column['Logic']
-            
-            # Handle special cases for column names with spaces or special characters
-            quoted_target = target_col
-            if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
-                quoted_target = f'"{target_col}"'
-            
-            # Use the logic exactly as written
-            final_model_content += f"    {logic} AS {quoted_target},\n"
-            
-        # Add primary key columns next
-        for column in primary_key_columns:
-            target_col = column['Target Column']
-            logic = column['Logic']
-            
-            # Handle special cases for column names with spaces or special characters
-            quoted_target = target_col
-            if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
-                quoted_target = f'"{target_col}"'
-            
-            # Use the logic exactly as written
-            final_model_content += f"    {logic} AS {quoted_target},\n"
-            
-        # Add unique key columns next
-        for column in unique_key_columns:
-            target_col = column['Target Column']
-            logic = column['Logic']
-            
-            # Handle special cases for column names with spaces or special characters
-            quoted_target = target_col
-            if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
-                quoted_target = f'"{target_col}"'
-            
-            # Use the logic exactly as written
-            final_model_content += f"    {logic} AS {quoted_target},\n"
+        # Add all computed columns and audit columns to the outer query in target DDL order
+        outer_columns = []
         
-        # Then add audit columns
-        for column in config['Columns']:
+        # First collect all outer columns while preserving target DDL order
+        for column in ordered_columns:
             target_col = column['Target Column']
             logic = column['Logic']
             
-            # Only include audit columns
-            if target_col not in audit_columns:
-                continue
+            # Check if this column should be in the outer query
+            # Unique key columns that exist in target should NOT be in outer query
+            if ((column in computed_columns or
+                target_col in audit_columns or
+                column in primary_key_columns) and
+                (column not in unique_key_columns or 
+                 (column in unique_key_columns and target_col not in target_unique_keys))):
+                outer_columns.append(column)
+                print(f"Adding column to outer query: {target_col}")
+        
+        # Add the outer columns in target DDL order
+        for column in outer_columns:
+            target_col = column['Target Column']
+            logic = column['Logic']
             
             # Handle special cases for column names with spaces or special characters
             quoted_target = target_col
             if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
                 quoted_target = f'"{target_col}"'
             
-            # Use the logic exactly as written
             final_model_content += f"    {logic} AS {quoted_target},\n"
-        
+            
         # Add * to include all columns from the subquery
         final_model_content += "    *\nFROM\n(\n"
         
-        # Create a list of columns for the MINUS comparison (excluding computed, audit, unique key, and primary key columns)
+        # Create a list of columns for the MINUS comparison
         minus_columns = []
-        for column in config['Columns']:
+        for column in ordered_columns:
             target_col = column['Target Column']
             logic = column['Logic']
             
-            # Skip unwanted columns, audit columns, computed columns, unique key columns, and primary key columns
-            if (target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic or
-                target_col in audit_columns or column in computed_columns or
-                target_col in unique_keys or column in primary_key_columns):
-                continue
+            # Include column if:
+            # 1. Not a computed column
+            # 2. Not an audit column
+            # 3. Not a primary key column
+            # 4. Either a regular column or a unique key that exists in target
+            if (column not in computed_columns and
+                target_col not in audit_columns and
+                column not in primary_key_columns):
                 
-            minus_columns.append(column)
+                # Handle special cases for column names with spaces or special characters
+                quoted_target = target_col
+                if ' ' in target_col or '(' in target_col or ')' in target_col:
+                    quoted_target = f'"{target_col}"'
+                
+                minus_columns.append((quoted_target, logic))
+                print(f"Adding column to MINUS subquery: {target_col}")
         
-        # Start the subquery
-        subquery_content = "SELECT\n"
-        
-        # Add columns for the main query (only those that will be in the MINUS)
-        for column in minus_columns:
-            target_col = column['Target Column']
-            
-            # Handle special cases for column names with spaces or special characters
-            quoted_target = target_col
-            if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
-                quoted_target = f'"{target_col}"'
-            
-            # Use the target column name directly
-            subquery_content += f"    {quoted_target},\n"
+        # Add the MINUS columns to the subquery
+        final_model_content += "SELECT\n"
+        for quoted_target, logic in minus_columns:
+            final_model_content += f"    {logic} AS {quoted_target},\n"
         
         # Remove trailing comma
-        subquery_content = subquery_content.rstrip(',\n')
+        final_model_content = final_model_content.rstrip(',\n')
         
         # Add FROM clause for the subquery
-        subquery_content += f"\nFROM {from_clause}"
+        final_model_content += f"\nFROM {from_clause}"
         
         # Add JOIN clauses if mapping_sheet is provided and contains joins
         if mapping_sheet:
             join_clauses = extract_join_clauses(mapping_sheet, main_table_alias)
             if join_clauses:
-                subquery_content += "\n" + "\n".join(join_clauses)
+                final_model_content += "\n" + "\n".join(join_clauses)
             
             # Add WHERE clause if provided
             where_condition = extract_where_condition(mapping_sheet, main_table_alias)
             if where_condition:
-                subquery_content += f"\nWHERE {where_condition}"
+                final_model_content += f"\nWHERE {where_condition}"
         
         # Add MINUS section
-        subquery_content += f"\n\nMINUS\n\nSELECT\n"
+        final_model_content += f"\n\nMINUS\n\nSELECT\n"
         
         # Add the same columns to the MINUS part for exact matching
-        for column in minus_columns:
-            target_col = column['Target Column']
-            
-            # Handle special cases for column names with spaces or special characters
-            quoted_target = target_col
-            if ' ' in target_col or '(' in target_col or ')' in target_col:
-                # For columns with spaces or special characters, use quotes
-                quoted_target = f'"{target_col}"'
-            
-            # For the MINUS part, use the target column name directly
-            subquery_content += f"    {quoted_target},\n"
+        for quoted_target, logic in minus_columns:
+            final_model_content += f"    {logic} AS {quoted_target},\n"
         
         # Remove trailing comma
-        subquery_content = subquery_content.rstrip(',\n')
+        final_model_content = final_model_content.rstrip(',\n')
         
         # Add the target table reference for the MINUS part
         target_table_ref = f"{{{{ source('{config['Target']['Schema']}','{config['Target']['Table Name']}') }}}}"
-        subquery_content += f"\nFROM {target_table_ref}"
+        final_model_content += f"\nFROM {target_table_ref}"
         
         # Add the subquery with proper indentation
-        indented_subquery = "\n".join(["    " + line for line in subquery_content.split("\n")])
-        final_model_content += indented_subquery
+        indented_subquery = "\n".join(["    " + line for line in final_model_content.split("\n")])
+        final_model_content = indented_subquery
         
         # Close the subquery
         final_model_content += "\n)"

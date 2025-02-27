@@ -1,0 +1,12 @@
+app.log
+app.log
+file_history.json
+launcher.log
+setup.log
+__pycache__/dag_generator_app.cpython-310.pyc
+docs/CHANGELOG.md
+mappings/~$D_OPCO_DDL_mapping_20250226_124053.xlsx
+scripts/utils/__pycache__/__init__.cpython-310.pyc
+scripts/utils/__pycache__/excel_utils.cpython-310.pyc
+scripts/utils/__pycache__/file_utils.cpython-310.pyc
+scripts/utils/__pycache__/snowflake_utils.cpython-310.pyc
