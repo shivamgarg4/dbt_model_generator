@@ -369,10 +369,9 @@ class DAGGeneratorApp:
             command=self.browse_file,
             width=10  # Fixed width for button
         ).pack(side='right')
-        
-        # Enhanced tooltip functionality
+
         self.create_enhanced_tooltip(self.file_combo, "Select an Excel mapping file")
-        
+
         # Bind events
         self.file_combo.bind('<<ComboboxSelected>>', self.on_combo_select)
 
@@ -904,7 +903,7 @@ class DAGGeneratorApp:
                 json.dump(model_config, f, indent=2)
                 
             # Generate DBT model
-            model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet)
+            model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
             
             # Generate DBT job file
             job_output_path = 'jobs'
@@ -1289,7 +1288,7 @@ class DAGGeneratorApp:
         try:
             with open(ddl_path, 'r') as file:
                 ddl_content = file.read()
-                
+            
             logging.info(f"Parsing DDL file: {ddl_path}")
 
             # Find the create table statement
