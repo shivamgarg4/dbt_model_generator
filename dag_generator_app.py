@@ -1,40 +1,31 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox, ttk, Toplevel
-from PIL import Image, ImageTk
-import os
-import json
 import datetime
-import threading
-import subprocess
+import json
+import logging
+import os
 import re
+import subprocess
+import sys
+import threading
+import tkinter as tk
+import traceback
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
+from tkinter import filedialog, messagebox, ttk
+
 from openpyxl import load_workbook, Workbook
 from openpyxl.styles import Font
-from functools import lru_cache
-from concurrent.futures import ThreadPoolExecutor
-import snowflake.connector
 from ttkthemes import ThemedTk, THEMES
-import logging
-import sys
-import traceback
 
-from scripts.excel_to_json import convert_excel_to_json
-from scripts.dbt_model_generator import create_dbt_model_from_json
-from scripts.dbt_job_generator import create_dbt_job_file
-from scripts.insert_sql_generator import insert_sql_generator
-from scripts.merge_sql_generator import merge_sql_generator
 from scripts.dag_generators import (
     create_dataset_dependency_dag,
     create_cron_dag,
     create_sns_dag
 )
-from scripts.utils import (
-    get_snowflake_connection,
-    get_table_columns,
-    get_config_from_sheet,
-    get_table_info_from_sheet,
-    extract_table_name,
-    parse_ddl_file
-)
+from scripts.dbt_job_generator import create_dbt_job_file
+from scripts.dbt_model_generator import create_dbt_model_from_json
+from scripts.insert_sql_generator import insert_sql_generator
+from scripts.merge_sql_generator import merge_sql_generator
+
 
 # Configure logging
 def setup_logging():
@@ -87,9 +78,7 @@ logger = setup_logging()
 # Lazy imports - only import when needed
 def lazy_import():
     global openpyxl, Image, ImageTk, ModelMapper
-    import openpyxl
-    from PIL import Image, ImageTk
-    from scripts.model_mapper import ModelMapper
+
 
 # Helper function to find similar files when exact match is not found
 def find_similar_file(target_path):
