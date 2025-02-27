@@ -14,6 +14,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     source_schema = config['Source']['Schema']
     source_table = config['Source']['Table Name']
     source_name = config['Source']['Name']
+    target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -40,28 +41,35 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     
     # Check if minus logic is required
     minus_logic_required = False
+    transient_logic_required = False
     if mapping_sheet:
         for row in range(1, 10):  # Check first few rows
+
             if mapping_sheet.cell(row=row, column=1).value == 'MINUS_LOGIC_REQUIRED':
                 minus_value = mapping_sheet.cell(row=row, column=2).value
                 if minus_value and minus_value.upper() == 'Y':
                     minus_logic_required = True
+
+            if mapping_sheet.cell(row=row, column=1).value == 'TRANSIENT_TABLE':
+                transient_value = mapping_sheet.cell(row=row, column=2).value
+                if transient_value and transient_value.upper() == 'Y':
+                    transient_logic_required = True
                 break
-    
+
+
     # Build model config with appropriate settings
-    model_config = f"""{{{{ config(
-    materialized='{materialization}',
-    schema='{config['Target']['Schema']}'"""
-    
+    model_config = f"""{{ config(
+        schema='{config['Target']['Schema']}',
+        tags=['{config['Target']['Table Name']}'],
+        alias='{config['Target']['Table Name']}',
+        materialized='{materialization}',
+        transient={(lambda: 'true' if transient_logic_required else 'false')()},"""
     # Add pre-hook for truncate_load
     if materialization == 'truncate_load':
         # Use table instead of incremental materialization with truncate pre-hook
         model_config = model_config.replace("materialized='truncate_load'", "materialized='table'")
-        target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
-        model_config += f""",
-    pre_hook=\"\"\"
-        TRUNCATE TABLE {target_table}
-    \"\"\""""
+        model_config += f"""
+        pre_hook=["TRUNCATE TABLE {target_table}"]"""
     
     # Add unique keys for incremental models if provided
     unique_keys = []

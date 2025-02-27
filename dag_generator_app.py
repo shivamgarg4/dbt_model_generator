@@ -1612,13 +1612,28 @@ class DAGGeneratorApp:
         # Add a comment to explain the format
         minus_comment = openpyxl.comments.Comment('Set to Y to exclude audit columns and unique key combination in the minus logic', 'System')
         minus_logic_cell.comment = minus_comment
-        
+        transient_cell_label = mapping_sheet.cell(row=9, column=1, value='TRANSIENT_TABLE')
+        transient_cell_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",fill_type="solid")
+        transient_cell = mapping_sheet.cell(row=9, column=2)
+        # Add data validation for Y/N
+        transient_cell_dv = openpyxl.worksheet.datavalidation.DataValidation(
+            type="list",
+            formula1='"Y,N"',
+            allow_blank=True
+        )
+        mapping_sheet.add_data_validation(transient_cell_dv)
+        transient_cell_dv.add(transient_cell)
+        # Default to N
+        transient_cell.value = "N"
+        # Add a comment to explain the format
+        transient_comment = openpyxl.comments.Comment('Set to Y to set true tag for transient model property', 'System')
+        transient_cell.comment = transient_comment
         # Add blank row before column mappings
         mapping_sheet.append([])
 
         # Add column headers (start from row 10 now to account for the MINUS_LOGIC_REQUIRED row)
         headers = ['S.NO', 'TargetColumn', 'Source Table', 'Logic/Mapping/Constant Value']  # Removed Source Type and Source Name
-        header_row = 10
+        header_row = 11
         for col, header in enumerate(headers, start=1):
             cell = mapping_sheet.cell(row=header_row, column=col, value=header)
             cell.font = openpyxl.styles.Font(bold=True, color='FFFFFF')
