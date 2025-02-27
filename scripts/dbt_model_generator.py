@@ -25,6 +25,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     
     # Use "source" as the alias for the main table
     main_table_alias = 'source'
+    join_aliases=[]
 
     # Build the FROM clause based on source type
     if source_type == 'source' or source_type == 'src':
@@ -169,7 +170,7 @@ SELECT
     
     # Add JOIN clauses if mapping_sheet is provided and contains joins
     if mapping_sheet:
-        join_clauses = extract_join_clauses(mapping_sheet, main_table_alias)
+        join_clauses,join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
         if join_clauses:
             model_content += "\n" + "\n".join(join_clauses)
         
@@ -240,7 +241,9 @@ SELECT
                  "(" in logic or    # Contains function call
                  " " in logic.strip() or  # Contains spaces (likely an expression)
                  any(op in logic for op in ["+", "-", "*", "/", "||"]) or  # Contains operators
-                 "CASE" in logic.upper())):  # Contains CASE statement
+                 "CASE" in logic.upper()) and  # Contains CASE statement
+                  not any(logic.startswith(f"{alias}.") for alias in join_aliases)):  # Not starting with join alias
+
                 if target_col not in audit_columns:
                     computed_columns.append(column)
                     print(f"Excluding column from MINUS: {target_col} (Logic: {logic})")
@@ -312,10 +315,10 @@ SELECT
         
         # Add FROM clause for the subquery
         final_model_content += f"\nFROM {from_clause}"
-        
+
         # Add JOIN clauses if mapping_sheet is provided and contains joins
         if mapping_sheet:
-            join_clauses = extract_join_clauses(mapping_sheet, main_table_alias)
+            join_clauses,join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
             if join_clauses:
                 final_model_content += "\n" + "\n".join(join_clauses)
             
@@ -329,6 +332,9 @@ SELECT
         
         # Add the same columns to the MINUS part for exact matching
         for quoted_target, logic in minus_columns:
+            # If logic contains an alias (pattern: alias.column), remove the alias
+            if '.' in logic:
+                logic = logic.split('.')[-1]  # Take only the part after the last dot
             final_model_content += f"    {logic} AS {quoted_target},\n"
         
         # Remove trailing comma
@@ -366,7 +372,7 @@ SELECT
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
     """Extract join clauses from mapping sheet"""
     join_clauses = []
-    
+    join_aliases = []
     # Find the JOIN_TABLES section
     join_section_row = None
     for row in range(1, mapping_sheet.max_row + 1):
@@ -432,8 +438,14 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
             join_clause += f" ON {join_condition}"
         
         join_clauses.append(join_clause)
+        join_aliases = set()
+        for row in range(join_header_row + 1, mapping_sheet.max_row + 1):
+            alias = mapping_sheet.cell(row=row, column=5).value
+            if alias:
+                join_aliases.add(alias)
+
     
-    return join_clauses
+    return join_clauses, join_aliases
 
 def extract_where_condition(mapping_sheet, main_table_alias='source'):
     """Extract WHERE condition from mapping sheet"""
