@@ -16,7 +16,7 @@ def extract_table_name(ddl_path):
     return "Unknown_Table"
 
 def parse_ddl_file(ddl_path):
-    """Parse DDL file to extract column information"""
+    """Parse DDL file to extract column information and constraints"""
     with open(ddl_path, 'r') as f:
         ddl_content = f.read()
     
@@ -29,10 +29,20 @@ def parse_ddl_file(ddl_path):
         
     columns_text = match.group(1)
     columns = []
+    unique_keys = []
     
     for line in columns_text.split('\n'):
         line = line.strip()
         if not line or line.startswith('--'):
+            continue
+            
+        # Check for UNIQUE KEY constraint
+        if 'UNIQUE' in line.upper() and 'KEY' in line.upper():
+            uk_pattern = r'\((.*?)\)'
+            uk_match = re.search(uk_pattern, line)
+            if uk_match:
+                uk_cols = [col.strip().strip('"') for col in uk_match.group(1).split(',')]
+                unique_keys.extend(uk_cols)
             continue
             
         parts = line.split(None, 2)
@@ -41,4 +51,4 @@ def parse_ddl_file(ddl_path):
             column_type = parts[1]
             columns.append((column_name, column_type))
     
-    return columns 
+    return columns, unique_keys

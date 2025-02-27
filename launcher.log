@@ -220,3 +220,143 @@ _tkinter.TclError: can't find package ttk::theme::breeze
 2025-02-26 13:00:57,333 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
 2025-02-26 13:02:48,123 - INFO - Application closed.
 2025-02-26 13:02:48,124 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 07:37:44,281 - INFO - ==================================================
+2025-02-27 07:37:44,282 - INFO - DBT Model Generator Launcher
+2025-02-27 07:37:44,282 - INFO - ==================================================
+2025-02-27 07:37:44,282 - INFO - Python version check: 3.10
+2025-02-27 07:37:44,282 - INFO - Python version check passed: 3.10
+2025-02-27 07:37:44,282 - INFO - Checking installed packages...
+2025-02-27 07:37:44,290 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 07:37:47,781 - INFO - Package installation completed
+2025-02-27 07:37:47,782 - INFO - Created necessary directories
+2025-02-27 07:37:47,783 - INFO - Setting up script files...
+2025-02-27 07:37:47,886 - INFO - Script files setup completed successfully
+2025-02-27 07:37:50,349 - INFO - Starting DBT Model Generator application...
+2025-02-27 07:37:50,549 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 07:37:58,132 - INFO - Looking for matching DDL file in history...
+2025-02-27 07:37:58,132 - INFO - No matching DDL file found in history
+2025-02-27 07:37:58,133 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 07:37:58,133 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 07:37:58,232 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 07:37:58,233 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 07:37:58,234 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 07:37:58,234 - INFO - Added 1 dependencies to DAG config
+2025-02-27 07:37:58,234 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:37:58,241 - INFO - DAG type: dataset_dependency
+2025-02-27 07:37:58,242 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:37:58,244 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:37:58,269 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 07:38:01,469 - INFO - Application closed.
+2025-02-27 07:38:01,470 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 07:41:25,887 - INFO - ==================================================
+2025-02-27 07:41:25,888 - INFO - DBT Model Generator Launcher
+2025-02-27 07:41:25,889 - INFO - ==================================================
+2025-02-27 07:41:25,890 - INFO - Python version check: 3.10
+2025-02-27 07:41:25,890 - INFO - Python version check passed: 3.10
+2025-02-27 07:41:25,890 - INFO - Checking installed packages...
+2025-02-27 07:41:25,895 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 07:41:29,132 - INFO - Package installation completed
+2025-02-27 07:41:29,133 - INFO - Created necessary directories
+2025-02-27 07:41:29,133 - INFO - Setting up script files...
+2025-02-27 07:41:29,235 - INFO - Script files setup completed successfully
+2025-02-27 07:41:30,789 - INFO - Starting DBT Model Generator application...
+2025-02-27 07:41:30,941 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 07:41:35,367 - INFO - Looking for matching DDL file in history...
+2025-02-27 07:41:35,368 - INFO - No matching DDL file found in history
+2025-02-27 07:41:35,368 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 07:41:35,369 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 07:41:35,414 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 07:41:35,415 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 07:41:35,416 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 07:41:35,416 - INFO - Added 1 dependencies to DAG config
+2025-02-27 07:41:35,417 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:41:35,421 - INFO - DAG type: dataset_dependency
+2025-02-27 07:41:35,423 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:41:35,424 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:41:35,441 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 07:42:10,871 - INFO - Application closed.
+2025-02-27 07:42:10,872 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 07:44:08,440 - INFO - ==================================================
+2025-02-27 07:44:08,441 - INFO - DBT Model Generator Launcher
+2025-02-27 07:44:08,441 - INFO - ==================================================
+2025-02-27 07:44:08,441 - INFO - Python version check: 3.10
+2025-02-27 07:44:08,441 - INFO - Python version check passed: 3.10
+2025-02-27 07:44:08,442 - INFO - Checking installed packages...
+2025-02-27 07:44:08,447 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 07:44:11,701 - INFO - Package installation completed
+2025-02-27 07:44:11,703 - INFO - Created necessary directories
+2025-02-27 07:44:11,704 - INFO - Setting up script files...
+2025-02-27 07:44:11,809 - INFO - Script files setup completed successfully
+2025-02-27 07:44:13,451 - INFO - Starting DBT Model Generator application...
+2025-02-27 07:44:13,596 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 07:44:18,645 - INFO - Looking for matching DDL file in history...
+2025-02-27 07:44:18,645 - INFO - No matching DDL file found in history
+2025-02-27 07:44:18,646 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 07:44:18,647 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 07:44:18,703 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 07:44:18,704 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 07:44:18,704 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 07:44:18,705 - INFO - Added 1 dependencies to DAG config
+2025-02-27 07:44:18,705 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:44:18,708 - INFO - DAG type: dataset_dependency
+2025-02-27 07:44:18,708 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:44:18,709 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:44:18,722 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 07:46:25,175 - INFO - Application closed.
+2025-02-27 07:46:25,175 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Found 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 07:46:28,938 - INFO - ==================================================
+2025-02-27 07:46:28,939 - INFO - DBT Model Generator Launcher
+2025-02-27 07:46:28,940 - INFO - ==================================================
+2025-02-27 07:46:28,940 - INFO - Python version check: 3.10
+2025-02-27 07:46:28,941 - INFO - Python version check passed: 3.10
+2025-02-27 07:46:28,941 - INFO - Checking installed packages...
+2025-02-27 07:46:28,952 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 07:46:32,232 - INFO - Package installation completed
+2025-02-27 07:46:32,234 - INFO - Created necessary directories
+2025-02-27 07:46:32,234 - INFO - Setting up script files...
+2025-02-27 07:46:32,335 - INFO - Script files setup completed successfully
+2025-02-27 07:46:33,908 - INFO - Starting DBT Model Generator application...
+2025-02-27 07:46:34,114 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 07:46:39,897 - INFO - Looking for matching DDL file in history...
+2025-02-27 07:46:39,898 - INFO - No matching DDL file found in history
+2025-02-27 07:46:39,898 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 07:46:39,899 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 07:46:39,937 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 07:46:39,937 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 07:46:39,938 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 07:46:39,939 - INFO - Added 1 dependencies to DAG config
+2025-02-27 07:46:39,941 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:46:39,952 - INFO - DAG type: dataset_dependency
+2025-02-27 07:46:39,952 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:46:39,953 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:46:39,978 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 07:47:53,790 - INFO - Application closed.
+2025-02-27 07:47:53,791 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-02-27 07:48:10,641 - INFO - ==================================================
+2025-02-27 07:48:10,641 - INFO - DBT Model Generator Launcher
+2025-02-27 07:48:10,642 - INFO - ==================================================
+2025-02-27 07:48:10,642 - INFO - Python version check: 3.10
+2025-02-27 07:48:10,642 - INFO - Python version check passed: 3.10
+2025-02-27 07:48:10,643 - INFO - Checking installed packages...
+2025-02-27 07:48:10,649 - INFO - Installing missing packages: snowflake-connector-python>=2.3.0, Pillow>=8.0.0, python-dateutil>=2.8.0, PyYAML>=6.0.0
+2025-02-27 07:48:13,863 - INFO - Package installation completed
+2025-02-27 07:48:13,865 - INFO - Created necessary directories
+2025-02-27 07:48:13,865 - INFO - Setting up script files...
+2025-02-27 07:48:13,967 - INFO - Script files setup completed successfully
+2025-02-27 07:48:15,536 - INFO - Starting DBT Model Generator application...
+2025-02-27 07:48:15,687 - WARNING - Could not set theme: can't find package ttk::theme::breeze. Using default theme.
+2025-02-27 07:48:20,455 - INFO - Looking for matching DDL file in history...
+2025-02-27 07:48:20,456 - INFO - No matching DDL file found in history
+2025-02-27 07:48:20,456 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-02-27 07:48:20,457 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-02-27 07:48:20,495 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-02-27 07:48:20,496 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-02-27 07:48:20,497 - INFO - Found dependency: DW.D_CUSTOMER
+2025-02-27 07:48:20,497 - INFO - Added 1 dependencies to DAG config
+2025-02-27 07:48:20,498 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:48:20,501 - INFO - DAG type: dataset_dependency
+2025-02-27 07:48:20,502 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:48:20,503 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['DW'], 'Dependency Object': ['D_CUSTOMER']}
+2025-02-27 07:48:20,515 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-02-27 07:48:23,347 - INFO - Application closed.
+2025-02-27 07:48:23,347 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Moving primary key column to outer query: OPCO_IDExcluding column from MINUS: TBA_ACTIVE_FLG (Logic: 'Y')Adding column to outer query: OPCO_IDAdding column to outer query: DATA_SRCAdding column to outer query: CREATE_BYAdding column to outer query: CREATE_PGMAdding column to outer query: UPDATE_BYAdding column to outer query: UPDATE_PGMAdding column to outer query: TBA_ACTIVE_FLGAdding column to MINUS subquery: OPCO_CDAdding column to MINUS subquery: OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_DSCAdding column to MINUS subquery: RPT_OPCO_ABBRVFound 1 dependency schemas and 1 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
