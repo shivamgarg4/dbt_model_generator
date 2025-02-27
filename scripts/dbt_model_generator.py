@@ -93,7 +93,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
                     break
         
         # Add unique keys to excluded columns
-        excluded_columns.extend(unique_keys)
+        # excluded_columns.extend(unique_keys)
         
         # This includes all columns except excluded columns and unwanted columns
         update_columns = []
@@ -101,7 +101,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             target_col = column['Target Column']
             # Skip unwanted columns and excluded columns
             if (target_col in ["List (Y,N)", "Table Type", "ref"] or 
-                target_col in excluded_columns or "=" in column['Logic']):
+                target_col in excluded_columns or "=" in column['Logic'] or "NEXTVAL" in column['Logic']):
                 continue
             
             # Add the column to the update_columns list
@@ -151,7 +151,7 @@ SELECT
         logic = column['Logic']
         
         # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic:
+        if target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic or "NEXTVAL" in column['Logic']:
             continue
         
         # Handle special cases for column names with spaces or special characters
@@ -208,11 +208,11 @@ SELECT
         primary_key_columns = []  # For columns like OPCO_ID that should be in the outer query
         
         # First, identify primary key columns (like OPCO_ID)
-        for column in config['Columns']:
-            target_col = column['Target Column']
-            if target_col.endswith('_ID') and target_col not in audit_columns:
-                primary_key_columns.append(column)
-                print(f"Moving primary key column to outer query: {target_col}")
+        # for column in config['Columns']:
+        #     target_col = column['Target Column']
+        #     if target_col.endswith('_ID') and target_col not in audit_columns:
+        #         primary_key_columns.append(column)
+        #         print(f"Moving primary key column to outer query: {target_col}")
         
         for column in config['Columns']:
             target_col = column['Target Column']
@@ -220,8 +220,8 @@ SELECT
             source_col = column.get('Source Table', '')
             
             # Skip columns already identified as primary keys
-            if column in primary_key_columns:
-                continue
+            # if column in primary_key_columns:
+            #     continue
                 
             # Check if this is a unique key column
             if target_col in unique_keys:
@@ -256,8 +256,9 @@ SELECT
             # Check if this column should be in the outer query
             # Unique key columns that exist in target should NOT be in outer query
             if ((column in computed_columns or
-                target_col in audit_columns or
-                column in primary_key_columns) and
+                target_col in audit_columns
+                # or column in primary_key_columns
+                ) and
                 (column not in unique_key_columns or 
                  (column in unique_key_columns and target_col not in target_unique_keys))):
                 outer_columns.append(column)

@@ -289,7 +289,6 @@ class DAGGeneratorApp:
 
         self.notebook.add(self.main_tab, text='DAG Generator')
         self.notebook.add(self.mapping_tab, text='Mapping Tools')
-        self.notebook.add(self.mapping_tab, text='Macro Tools')
 
         # Initialize basic tab content
         self.init_main_tab()
@@ -1209,7 +1208,7 @@ class DAGGeneratorApp:
         # Show progress
         self.set_status("Generating mapping template...")
         self.show_progress()
-        self.generate_mapping_button.configure(state='disabled')
+        self.generate_mapping_button.configure(state='normal')
         
         # Run in a separate thread
         threading.Thread(target=self.run_mapping_generation).start()

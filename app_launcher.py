@@ -12,7 +12,8 @@ import logging
 import importlib.util
 import traceback
 from datetime import datetime
-import tkinter as tk
+from ttkthemes import ThemedTk, THEMES
+from dag_generator_app import DAGGeneratorApp
 
 # Set up logging
 logging.basicConfig(
@@ -116,13 +117,13 @@ def run_application():
     """Run the main application"""
     try:
         # Import the main module from the correct file
-        import dag_generator_app
         
         # Run the application
         logger.info("Starting DBT Model Generator application...")
         # Create the root window and start the application
-        root = tk.Tk()
-        app = dag_generator_app.DAGGeneratorApp(root)
+        root = ThemedTk()
+        root.set_theme("breeze")
+        app = DAGGeneratorApp(root)
         root.mainloop()
         logger.info("Application closed.")
         return True
