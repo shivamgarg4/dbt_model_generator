@@ -8,6 +8,7 @@ import sys
 import threading
 import tkinter as tk
 import traceback
+import openpyxl
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from tkinter import filedialog, messagebox, ttk
@@ -1570,7 +1571,7 @@ class DAGGeneratorApp:
         # Add data validation for Materialization
         mat_dv = openpyxl.worksheet.datavalidation.DataValidation(
             type="list",
-            formula1='"incremental,truncate_load"',
+            formula1='"incremental,truncate_load,lnd_load"',  # Add an empty option
             allow_blank=True
         )
         mapping_sheet.add_data_validation(mat_dv)

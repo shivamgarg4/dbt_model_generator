@@ -58,12 +58,18 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
 
 
     # Build model config with appropriate settings
-    model_config = f"""{{ config(
+    model_config='{'
+    model_config += f"""{{ config(
         schema='{config['Target']['Schema']}',
         tags=['{config['Target']['Table Name']}'],
         alias='{config['Target']['Table Name']}',
         materialized='{materialization}',
         transient={(lambda: 'true' if transient_logic_required else 'false')()}"""
+
+    if materialization == 'lnd_load':
+        model_config = model_config.replace(f"""materialized='{materialization}',
+        transient={(lambda: 'true' if transient_logic_required else 'false')()}""", f"""transient={(lambda: 'true' if transient_logic_required else 'false')()}""")
+
     # Add pre-hook for truncate_load
     if materialization == 'truncate_load':
         # Use table instead of incremental materialization with truncate pre-hook
@@ -81,11 +87,14 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             model_config += f""",
         unique_key=[{unique_key_str}]"""
         else:
-            # Single key
-            model_config += f""",
-        unique_key="{unique_keys}\""""
+            if source_table not in "DP_" or source_table not in"_VW":
+                # Single key
+                model_config += f""",
+            unique_key="{unique_keys}\""""
             unique_keys = [unique_keys]  # Convert to list for later use
-        
+
+
+
         # Print debug info
         print(f"Added unique key to model config: {unique_keys}")
         
