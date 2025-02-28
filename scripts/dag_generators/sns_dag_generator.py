@@ -15,8 +15,8 @@ def create_sns_dag(json_path, dag_output_path):
         DBT_JOB_NAME = f"{SCHEMA_NAME}_{MODEL_NAME}"
 
         # Get domain name and DP view from source details or DAG details
-        DOMAIN_NAME = source_details.get("Schema") or SCHEMA_NAME
-        DP_NAME = source_details.get("DP View") or MODEL_NAME
+        DOMAIN_NAME = target_details.get("Schema") or SCHEMA_NAME
+        DP_NAME = target_details.get("Table Name") or MODEL_NAME
         
         # Log what we're using
         print(f"Generating SNS DAG with DOMAIN_NAME={DOMAIN_NAME}, MODEL_TYPE={MODEL_TYPE}, DP_NAME={DP_NAME}")
