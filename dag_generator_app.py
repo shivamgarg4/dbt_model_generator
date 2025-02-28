@@ -1819,17 +1819,17 @@ class DAGGeneratorApp:
         snowflake_options = [
             {
                 'param': 'ROLE',
-                'value': 'CORE_DEV_MANAGER_ROLE',
+                'value': 'REV_GROWTH_MGMT_DEV_EDITOR_ROLE',
                 'description': 'Snowflake role to use'
             },
             {
                 'param': 'WAREHOUSE',
-                'value': 'CORE_DEV_SELECT_WH',
+                'value': 'REV_GROWTH_MGMT_DEV_LOAD_WH',
                 'description': 'Snowflake warehouse to use'
             },
             {
                 'param': 'DATABASE',
-                'value': 'CORE_DEV_DB',
+                'value': 'REV_GROWTH_MGMT_DEV_DB',
                 'description': 'Snowflake database to use'
             },
             {
