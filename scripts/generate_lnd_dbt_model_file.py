@@ -113,6 +113,7 @@ def generate_lnd_dbt_model_file(config, file_path):
                 schema = '{target_schema}',
                 alias = '{target_table_name}',
                 tags = '{target_table_name}',
+                materialized='table',
                 transient = false
             )
         }}
