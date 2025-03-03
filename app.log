@@ -1982,3 +1982,23 @@ Found 3 dependency schemas and 3 dependency objects
 Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
 2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
 2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-01 19:47:07,155 - INFO - Available themes: ['scidgrey', 'alt', 'plastik', 'ubuntu', 'scidpink', 'arc', 'yaru', 'winxpblue', 'clearlooks', 'default', 'breeze', 'aquativo', 'adapta', 'classic', 'itft1', 'elegance', 'xpnative', 'scidblue', 'scidpurple', 'radiance', 'blue', 'winnative', 'black', 'scidsand', 'clam', 'scidgreen', 'smog', 'vista', 'equilux', 'kroc', 'keramik', 'scidmint']
+2025-03-01 19:47:07,155 - INFO - Available themes: ['scidgrey', 'alt', 'plastik', 'ubuntu', 'scidpink', 'arc', 'yaru', 'winxpblue', 'clearlooks', 'default', 'breeze', 'aquativo', 'adapta', 'classic', 'itft1', 'elegance', 'xpnative', 'scidblue', 'scidpurple', 'radiance', 'blue', 'winnative', 'black', 'scidsand', 'clam', 'scidgreen', 'smog', 'vista', 'equilux', 'kroc', 'keramik', 'scidmint']
+2025-03-01 19:47:07,327 - INFO - Using theme: breeze
+2025-03-01 19:47:07,327 - INFO - Using theme: breeze
+2025-03-01 19:48:20,745 - INFO - Parsing DDL file: C:/Users/Welcome/Documents/GitHub/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-01 19:48:20,745 - INFO - Parsing DDL file: C:/Users/Welcome/Documents/GitHub/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-01 19:48:20,747 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-01 19:48:20,747 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-01 19:48:20,747 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-01 19:48:20,747 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-01 19:48:20,748 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-01 19:48:20,748 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-01 19:48:20,748 - INFO - Unique keys: ['OPCO_CD']
+2025-03-01 19:48:20,748 - INFO - Unique keys: ['OPCO_CD']
+2025-03-01 19:48:20,748 - INFO - Primary keys: ['OPCO_ID']
+2025-03-01 19:48:20,748 - INFO - Primary keys: ['OPCO_ID']
+2025-03-03 09:56:14,483 - INFO - Available themes: ['radiance', 'scidgrey', 'clearlooks', 'black', 'clam', 'classic', 'smog', 'itft1', 'xpnative', 'scidsand', 'default', 'plastik', 'adapta', 'yaru', 'scidmint', 'scidblue', 'blue', 'arc', 'aquativo', 'vista', 'equilux', 'alt', 'kroc', 'scidpink', 'scidpurple', 'elegance', 'winxpblue', 'keramik', 'ubuntu', 'scidgreen', 'winnative', 'breeze']
+2025-03-03 09:56:14,483 - INFO - Available themes: ['radiance', 'scidgrey', 'clearlooks', 'black', 'clam', 'classic', 'smog', 'itft1', 'xpnative', 'scidsand', 'default', 'plastik', 'adapta', 'yaru', 'scidmint', 'scidblue', 'blue', 'arc', 'aquativo', 'vista', 'equilux', 'alt', 'kroc', 'scidpink', 'scidpurple', 'elegance', 'winxpblue', 'keramik', 'ubuntu', 'scidgreen', 'winnative', 'breeze']
+2025-03-03 09:56:14,669 - INFO - Using theme: breeze
+2025-03-03 09:56:14,669 - INFO - Using theme: breeze
