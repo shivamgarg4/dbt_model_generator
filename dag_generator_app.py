@@ -26,6 +26,7 @@ from scripts.dbt_job_generator import create_dbt_job_file
 from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
+from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file
 
 
 # Configure logging
@@ -194,6 +195,7 @@ class DAGGeneratorApp:
         self.generate_dbt_job_var = tk.BooleanVar(value=True)  # Default to True
         self.generate_merge_macro_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_insert_macro_var = tk.BooleanVar(value=False)  # Default to False
+        self.generate_lnd_model_var = tk.BooleanVar(value=False)  # Default to False
 
         # Initialize ModelMapper
         self.model_mapper = None
@@ -408,6 +410,13 @@ class DAGGeneratorApp:
             options_frame,
             text="Generate merge macro file",
             variable=self.generate_merge_macro_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate lnd_model checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate LND dbt model file",
+            variable=self.generate_lnd_model_var
         ).pack(side='left', padx=(0, 10))
 
         # Generate button
@@ -952,11 +961,15 @@ class DAGGeneratorApp:
             if self.generate_insert_macro_var.get():
                 insert_macro_file_path = insert_sql_generator(json_output_path, insert_macro_file_path)
 
+            # Generate lnd_model file if requested
+            lnd_model_file_path = None
+            if self.generate_lnd_model_var.get():
+                lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, mapping_file_path)
 
             # Prepare success message
             success_message = "Files generated successfully!\n\n"
             if dag_file_path:
-                success_message += f"DAG file: {dag_file_path}"
+                success_message += f"DAG file: {dag_file_path}\n"
             if model_file_path:
                 success_message += f"Model file: {model_file_path}\n"
             if job_output_path:
@@ -965,6 +978,8 @@ class DAGGeneratorApp:
                 success_message += f"Merge Macro file: {merge_macro_file_path}\n"
             if insert_macro_file_path:
                 success_message += f"Insert Macro file: {insert_macro_file_path}\n"
+            if lnd_model_file_path:
+                success_message += f"LND Model file: {lnd_model_file_path}\n"
                 
             # Show success message
             messagebox.showinfo("Success", success_message)
