@@ -95,6 +95,7 @@ The mapping Excel file contains two sheets:
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+This project was created and tested by Shivam Garg and Yashwantha S.K.
 
 ## License
 
