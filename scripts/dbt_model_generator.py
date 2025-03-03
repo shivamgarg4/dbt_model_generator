@@ -14,6 +14,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     source_schema = config['Source']['Schema']
     source_table = config['Source']['Table Name']
     source_name = config['Source']['Name']
+    target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -25,6 +26,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     
     # Use "source" as the alias for the main table
     main_table_alias = 'source'
+    join_aliases=[]
 
     # Build the FROM clause based on source type
     if source_type == 'source' or source_type == 'src':
@@ -39,28 +41,41 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     
     # Check if minus logic is required
     minus_logic_required = False
+    transient_logic_required = False
     if mapping_sheet:
         for row in range(1, 10):  # Check first few rows
+
             if mapping_sheet.cell(row=row, column=1).value == 'MINUS_LOGIC_REQUIRED':
                 minus_value = mapping_sheet.cell(row=row, column=2).value
                 if minus_value and minus_value.upper() == 'Y':
                     minus_logic_required = True
+
+            if mapping_sheet.cell(row=row, column=1).value == 'TRANSIENT_TABLE':
+                transient_value = mapping_sheet.cell(row=row, column=2).value
+                if transient_value and transient_value.upper() == 'Y':
+                    transient_logic_required = True
                 break
-    
+
+
     # Build model config with appropriate settings
-    model_config = f"""{{{{ config(
-    materialized='{materialization}',
-    schema='{config['Target']['Schema']}'"""
-    
+    model_config='{'
+    model_config += f"""{{ config(
+        schema='{config['Target']['Schema']}',
+        tags=['{config['Target']['Table Name']}'],
+        alias='{config['Target']['Table Name']}',
+        materialized='{materialization}',
+        transient={(lambda: 'true' if transient_logic_required else 'false')()}"""
+
+    if materialization == 'lnd_load':
+        model_config = model_config.replace(f"""materialized='{materialization}',
+        transient={(lambda: 'true' if transient_logic_required else 'false')()}""", f"""transient={(lambda: 'true' if transient_logic_required else 'false')()}""")
+
     # Add pre-hook for truncate_load
     if materialization == 'truncate_load':
         # Use table instead of incremental materialization with truncate pre-hook
         model_config = model_config.replace("materialized='truncate_load'", "materialized='table'")
-        target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
         model_config += f""",
-    pre_hook=\"\"\"
-        TRUNCATE TABLE {target_table}
-    \"\"\""""
+        pre_hook=["TRUNCATE TABLE {target_table}"]"""
     
     # Add unique keys for incremental models if provided
     unique_keys = []
@@ -70,13 +85,16 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             # Format list of keys as a comma-separated string
             unique_key_str = ', '.join([f'"{key}"' for key in unique_keys])
             model_config += f""",
-    unique_key=[{unique_key_str}]"""
+        unique_key=[{unique_key_str}]"""
         else:
-            # Single key
-            model_config += f""",
-    unique_key="{unique_keys}\""""
+            if source_table not in "DP_" or source_table not in"_VW":
+                # Single key
+                model_config += f""",
+            unique_key="{unique_keys}\""""
             unique_keys = [unique_keys]  # Convert to list for later use
-        
+
+
+
         # Print debug info
         print(f"Added unique key to model config: {unique_keys}")
         
@@ -111,7 +129,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             # Format the list of columns as a comma-separated string with single quotes
             update_columns_str = ', '.join([f"'{col}'" for col in update_columns])
             model_config += f""",
-    merge_update_columns = [{update_columns_str}]"""
+        merge_update_columns = [{update_columns_str}]"""
             # Print debug info with the actual columns that are added to the model configuration
             formatted_columns = [f"'{col}'" for col in update_columns]
             print(f"Added merge_update_columns to model config: {formatted_columns}")
@@ -169,7 +187,7 @@ SELECT
     
     # Add JOIN clauses if mapping_sheet is provided and contains joins
     if mapping_sheet:
-        join_clauses = extract_join_clauses(mapping_sheet, main_table_alias)
+        join_clauses,join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
         if join_clauses:
             model_content += "\n" + "\n".join(join_clauses)
         
@@ -240,7 +258,9 @@ SELECT
                  "(" in logic or    # Contains function call
                  " " in logic.strip() or  # Contains spaces (likely an expression)
                  any(op in logic for op in ["+", "-", "*", "/", "||"]) or  # Contains operators
-                 "CASE" in logic.upper())):  # Contains CASE statement
+                 "CASE" in logic.upper()) and  # Contains CASE statement
+                  not any(logic.startswith(f"{alias}.") for alias in join_aliases)):  # Not starting with join alias
+
                 if target_col not in audit_columns:
                     computed_columns.append(column)
                     print(f"Excluding column from MINUS: {target_col} (Logic: {logic})")
@@ -305,17 +325,22 @@ SELECT
         # Add the MINUS columns to the subquery
         final_model_content += "SELECT\n"
         for quoted_target, logic in minus_columns:
-            final_model_content += f"    {logic} AS {quoted_target},\n"
+            # If logic contains an alias (pattern: alias.column), remove the alias
+            if '.' in logic:
+                final_model_content += f"    {logic} AS {quoted_target},\n"
+            else:
+                final_model_content += f"    source.{logic} AS {quoted_target},\n"
+
         
         # Remove trailing comma
         final_model_content = final_model_content.rstrip(',\n')
         
         # Add FROM clause for the subquery
         final_model_content += f"\nFROM {from_clause}"
-        
+
         # Add JOIN clauses if mapping_sheet is provided and contains joins
         if mapping_sheet:
-            join_clauses = extract_join_clauses(mapping_sheet, main_table_alias)
+            join_clauses,join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
             if join_clauses:
                 final_model_content += "\n" + "\n".join(join_clauses)
             
@@ -329,7 +354,7 @@ SELECT
         
         # Add the same columns to the MINUS part for exact matching
         for quoted_target, logic in minus_columns:
-            final_model_content += f"    {logic} AS {quoted_target},\n"
+            final_model_content += f"    {quoted_target},\n"
         
         # Remove trailing comma
         final_model_content = final_model_content.rstrip(',\n')
@@ -366,7 +391,7 @@ SELECT
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
     """Extract join clauses from mapping sheet"""
     join_clauses = []
-    
+    join_aliases = []
     # Find the JOIN_TABLES section
     join_section_row = None
     for row in range(1, mapping_sheet.max_row + 1):
@@ -432,8 +457,14 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
             join_clause += f" ON {join_condition}"
         
         join_clauses.append(join_clause)
+        join_aliases = set()
+        for row in range(join_header_row + 1, mapping_sheet.max_row + 1):
+            alias = mapping_sheet.cell(row=row, column=5).value
+            if alias:
+                join_aliases.add(alias)
+
     
-    return join_clauses
+    return join_clauses, join_aliases
 
 def extract_where_condition(mapping_sheet, main_table_alias='source'):
     """Extract WHERE condition from mapping sheet"""

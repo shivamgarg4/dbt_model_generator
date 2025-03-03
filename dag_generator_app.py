@@ -1,40 +1,33 @@
-import tkinter as tk
-from tkinter import filedialog, messagebox, ttk, Toplevel
-from PIL import Image, ImageTk
-import os
-import json
 import datetime
-import threading
-import subprocess
+import json
+import logging
+import os
 import re
+import subprocess
+import sys
+import threading
+import tkinter as tk
+import traceback
+import openpyxl
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
+from tkinter import filedialog, messagebox, ttk
+
 from openpyxl import load_workbook, Workbook
 from openpyxl.styles import Font
-from functools import lru_cache
-from concurrent.futures import ThreadPoolExecutor
-import snowflake.connector
 from ttkthemes import ThemedTk, THEMES
-import logging
-import sys
-import traceback
 
-from scripts.excel_to_json import convert_excel_to_json
-from scripts.dbt_model_generator import create_dbt_model_from_json
-from scripts.dbt_job_generator import create_dbt_job_file
-from scripts.insert_sql_generator import insert_sql_generator
-from scripts.merge_sql_generator import merge_sql_generator
 from scripts.dag_generators import (
     create_dataset_dependency_dag,
     create_cron_dag,
     create_sns_dag
 )
-from scripts.utils import (
-    get_snowflake_connection,
-    get_table_columns,
-    get_config_from_sheet,
-    get_table_info_from_sheet,
-    extract_table_name,
-    parse_ddl_file
-)
+from scripts.dbt_job_generator import create_dbt_job_file
+from scripts.dbt_model_generator import create_dbt_model_from_json
+from scripts.insert_sql_generator import insert_sql_generator
+from scripts.merge_sql_generator import merge_sql_generator
+from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file
+
 
 # Configure logging
 def setup_logging():
@@ -87,9 +80,7 @@ logger = setup_logging()
 # Lazy imports - only import when needed
 def lazy_import():
     global openpyxl, Image, ImageTk, ModelMapper
-    import openpyxl
-    from PIL import Image, ImageTk
-    from scripts.model_mapper import ModelMapper
+
 
 # Helper function to find similar files when exact match is not found
 def find_similar_file(target_path):
@@ -204,6 +195,7 @@ class DAGGeneratorApp:
         self.generate_dbt_job_var = tk.BooleanVar(value=True)  # Default to True
         self.generate_merge_macro_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_insert_macro_var = tk.BooleanVar(value=False)  # Default to False
+        self.generate_lnd_model_var = tk.BooleanVar(value=False)  # Default to False
 
         # Initialize ModelMapper
         self.model_mapper = None
@@ -418,6 +410,13 @@ class DAGGeneratorApp:
             options_frame,
             text="Generate merge macro file",
             variable=self.generate_merge_macro_var
+        ).pack(side='left', padx=(0, 10))
+
+        # Generate lnd_model checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate LND dbt model file",
+            variable=self.generate_lnd_model_var
         ).pack(side='left', padx=(0, 10))
 
         # Generate button
@@ -962,11 +961,15 @@ class DAGGeneratorApp:
             if self.generate_insert_macro_var.get():
                 insert_macro_file_path = insert_sql_generator(json_output_path, insert_macro_file_path)
 
+            # Generate lnd_model file if requested
+            lnd_model_file_path = None
+            if self.generate_lnd_model_var.get():
+                lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, mapping_file_path)
 
             # Prepare success message
             success_message = "Files generated successfully!\n\n"
             if dag_file_path:
-                success_message += f"DAG file: {dag_file_path}"
+                success_message += f"DAG file: {dag_file_path}\n"
             if model_file_path:
                 success_message += f"Model file: {model_file_path}\n"
             if job_output_path:
@@ -975,6 +978,8 @@ class DAGGeneratorApp:
                 success_message += f"Merge Macro file: {merge_macro_file_path}\n"
             if insert_macro_file_path:
                 success_message += f"Insert Macro file: {insert_macro_file_path}\n"
+            if lnd_model_file_path:
+                success_message += f"LND Model file: {lnd_model_file_path}\n"
                 
             # Show success message
             messagebox.showinfo("Success", success_message)
@@ -1581,7 +1586,7 @@ class DAGGeneratorApp:
         # Add data validation for Materialization
         mat_dv = openpyxl.worksheet.datavalidation.DataValidation(
             type="list",
-            formula1='"incremental,truncate_load"',
+            formula1='"incremental,truncate_load,lnd_load"',  # Add an empty option
             allow_blank=True
         )
         mapping_sheet.add_data_validation(mat_dv)
@@ -1612,13 +1617,28 @@ class DAGGeneratorApp:
         # Add a comment to explain the format
         minus_comment = openpyxl.comments.Comment('Set to Y to exclude audit columns and unique key combination in the minus logic', 'System')
         minus_logic_cell.comment = minus_comment
-        
+        transient_cell_label = mapping_sheet.cell(row=9, column=1, value='TRANSIENT_TABLE')
+        transient_cell_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",fill_type="solid")
+        transient_cell = mapping_sheet.cell(row=9, column=2)
+        # Add data validation for Y/N
+        transient_cell_dv = openpyxl.worksheet.datavalidation.DataValidation(
+            type="list",
+            formula1='"Y,N"',
+            allow_blank=True
+        )
+        mapping_sheet.add_data_validation(transient_cell_dv)
+        transient_cell_dv.add(transient_cell)
+        # Default to N
+        transient_cell.value = "N"
+        # Add a comment to explain the format
+        transient_comment = openpyxl.comments.Comment('Set to Y to set true tag for transient model property', 'System')
+        transient_cell.comment = transient_comment
         # Add blank row before column mappings
         mapping_sheet.append([])
 
         # Add column headers (start from row 10 now to account for the MINUS_LOGIC_REQUIRED row)
         headers = ['S.NO', 'TargetColumn', 'Source Table', 'Logic/Mapping/Constant Value']  # Removed Source Type and Source Name
-        header_row = 10
+        header_row = 11
         for col, header in enumerate(headers, start=1):
             cell = mapping_sheet.cell(row=header_row, column=col, value=header)
             cell.font = openpyxl.styles.Font(bold=True, color='FFFFFF')
@@ -1814,17 +1834,17 @@ class DAGGeneratorApp:
         snowflake_options = [
             {
                 'param': 'ROLE',
-                'value': 'CORE_DEV_MANAGER_ROLE',
+                'value': 'REV_GROWTH_MGMT_DEV_EDITOR_ROLE',
                 'description': 'Snowflake role to use'
             },
             {
                 'param': 'WAREHOUSE',
-                'value': 'CORE_DEV_SELECT_WH',
+                'value': 'REV_GROWTH_MGMT_DEV_LOAD_WH',
                 'description': 'Snowflake warehouse to use'
             },
             {
                 'param': 'DATABASE',
-                'value': 'CORE_DEV_DB',
+                'value': 'REV_GROWTH_MGMT_DEV_DB',
                 'description': 'Snowflake database to use'
             },
             {
