@@ -1,5 +1,7 @@
 import json
+from openpyxl import load_workbook
 import snowflake.connector
+import openpyxl.worksheet.datavalidation
 import os
 from   .model_mapper  import ModelMapper
 def format_columns(columns):
@@ -26,44 +28,108 @@ def replace_audit_columns(columns, source_schema_name, source_view_name, target_
     except Exception as e:
         raise Exception(f"An error occurred while replacing audit columns: {e}")
 
-def generate_lnd_dbt_model_file(config, mapping_file_path):
+def generate_lnd_dbt_model_file(config, file_path):
     
     """Generate the dbt model file."""
     try:
-        model_mapper = ModelMapper()
-        workbook, mapping_sheet, config_sheet = model_mapper._load_workbook(mapping_file_path)
-        # Get Snowflake configuration
-        snowflake_config = model_mapper._get_snowflake_config(config_sheet)      
-        # Connect to Snowflake and get column information
-        columns = model_mapper._get_snowflake_columns(snowflake_config, source_info)
-        
-        source_schema = config['Source']['Schema']
-        source_table = config['Source']['Table Name']
+        with open(config) as f:
+            config = json.load(f)
 
+        # Extract source information
+        source_name = config['Source']['Name']
+
+
+        workbook = load_workbook(file_path)
+        mapping_sheet, config_sheet = workbook['Mapping'], workbook['Config']
+
+        """Extract target and source table information from mapping sheet"""
+        target_table = None
+        source_table = None
+
+        for row in range(1, mapping_sheet.max_row + 1):
+            cell_value = mapping_sheet.cell(row=row, column=1).value
+            if cell_value == 'TARGET_TABLE':
+                target_table = mapping_sheet.cell(row=row, column=2).value
+            elif cell_value == 'SOURCE_TABLE':
+                source_table = mapping_sheet.cell(row=row, column=2).value
+            if target_table and source_table:
+                break
+
+        if not source_table:
+            raise ValueError("Source table not found in mapping sheet")
+
+
+        source_db, source_schema, source_table_name = source_table.split('.')
+        target_parts = target_table.split('.')
+        target_schema = target_parts[0] if len(target_parts) > 1 else None
+        target_table_name = target_parts[-1]
+
+        """Extract Snowflake configuration from Config sheet"""
+        snowflake_config = {}
+        in_snowflake_section = False
+
+        for row in range(2, config_sheet.max_row + 1):
+            param = config_sheet.cell(row=row, column=1).value
+            if not param:
+                continue
+            if param == 'Snowflake Configuration':
+                in_snowflake_section = True
+                continue
+            if in_snowflake_section and param in ['ROLE', 'WAREHOUSE', 'DATABASE', 'ACCOUNT', 'USER', 'AUTHENTICATOR']:
+                value = config_sheet.cell(row=row, column=2).value
+                if value:
+                    snowflake_config[param] = value
+
+        """Get column information from Snowflake"""
+        conn = None
+        cursor = None
+        conn = snowflake.connector.connect(
+            account=snowflake_config['ACCOUNT'],
+            user=snowflake_config['USER'],
+            authenticator=snowflake_config['AUTHENTICATOR'],
+            warehouse=snowflake_config['WAREHOUSE'],
+            role=snowflake_config['ROLE'],
+            database=source_db,
+            schema=source_schema
+        )
+
+        print(conn)
+
+        cursor = conn.cursor()
+        cursor.execute(f"""
+            SELECT COLUMN_NAME
+            FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = '{source_schema}'
+            AND TABLE_NAME = '{source_table_name}'
+            ORDER BY ORDINAL_POSITION
+        """)
+
+        columns = cursor.fetchall()
         formatted_columns = format_columns(columns)
-        replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table, config['Target']['Schema'], config['Target']['Table Name'])
-       
+        replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema, target_table_name)
         model_config = f"""
         {{
             config(
-                schema = '{config['Target']['Schema']}',
-                alias = '{config['Target']['Table Name']}',
-                tags = '{config['Target']['Table Name']}',
+                schema = '{target_schema}',
+                alias = '{target_table_name}',
+                tags = '{target_table_name}',
                 transient = false
             )
         }}
+        -- Model: {target_schema}.{target_table_name}
+        -- Source: {source_db}.{source_schema}.{source_table_name}
         """
 
         model_config += "\n\nSELECT\n"
         model_config += ",\n".join(replaced_columns) + "\n"
-        model_config += f"FROM {{{{ source('{source_schema}', '{source_table}') }}}}\n"
+        model_config += f"FROM {{{{ source('{source_name}', '{source_table_name}') }}}}\n"
 
         # Create output directory if it doesn't exist
         output_dir = 'models'
         os.makedirs(output_dir, exist_ok=True)
     
         # Generate file name
-        model_name = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
+        model_name = f"{target_schema}.{target_table_name}"
         file_name = f"{model_name}.sql"
         file_path = os.path.join(output_dir, file_name)
 

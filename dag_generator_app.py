@@ -142,9 +142,11 @@ def generate_safe_timestamp():
 class DAGGeneratorApp:
     def __init__(self, root):
         """Initialize the application"""
+        self.animation_duration = 0.5
+        self.animation_steps = 120
         self.root = root
         self.root.title("DBT Model Generator")
-        self.root.geometry("1000x800")
+        self.root.geometry("1366x768")
         
         # Initialize thread pool
         self.executor = ThreadPoolExecutor(max_workers=3)
@@ -415,7 +417,7 @@ class DAGGeneratorApp:
         # Generate lnd_model checkbox
         ttk.Checkbutton(
             options_frame,
-            text="Generate LND dbt model file",
+            text="Generate LND Model file",
             variable=self.generate_lnd_model_var
         ).pack(side='left', padx=(0, 10))
 
@@ -964,7 +966,8 @@ class DAGGeneratorApp:
             # Generate lnd_model file if requested
             lnd_model_file_path = None
             if self.generate_lnd_model_var.get():
-                lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, mapping_file_path)
+                print(json_output_path)
+                lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
 
             # Prepare success message
             success_message = "Files generated successfully!\n\n"
