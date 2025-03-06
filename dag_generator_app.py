@@ -941,12 +941,6 @@ class DAGGeneratorApp:
             model_file_path = None
             if self.generate_model_var.get():
                 model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
-
-            # Generate DBT job file
-            job_output_path = None
-            if self.generate_dbt_job_var.get():
-                job_output_path = 'jobs'
-                job_output_path = create_dbt_job_file(json_output_path, job_output_path)
             
             # Generate DAG file if requested
             dag_file_path = None
@@ -955,19 +949,27 @@ class DAGGeneratorApp:
 
             # Generate merge_macro file if requested
             merge_macro_file_path = None
+            merge_dbt_job_additon_flg=False
             if self.generate_merge_macro_var.get():
-                merge_macro_file_path = merge_sql_generator(json_output_path,mapping_sheet, merge_macro_file_path)
+                merge_dbt_job_additon_flg,merge_macro_file_path = merge_sql_generator(json_output_path,mapping_sheet, merge_macro_file_path)
 
             # Generate insert_macro file if requested
             insert_macro_file_path = None
+            insert_dbt_job_additon_flg = False
             if self.generate_insert_macro_var.get():
-                insert_macro_file_path = insert_sql_generator(json_output_path,mapping_sheet, insert_macro_file_path)
+                insert_dbt_job_additon_flg,insert_macro_file_path = insert_sql_generator(json_output_path,mapping_sheet, insert_macro_file_path)
 
             # Generate lnd_model file if requested
             lnd_model_file_path = None
             if self.generate_lnd_model_var.get():
                 print(json_output_path)
                 lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
+
+            # Generate DBT job file
+            job_output_path = None
+            if self.generate_dbt_job_var.get():
+                job_output_path = 'jobs'
+                job_output_path = create_dbt_job_file(json_output_path, job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
 
             # Prepare success message
             success_message = "Files generated successfully!\n\n"

@@ -143,7 +143,7 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     target_schema = config['Target']['Schema']
     target_table = config['Target']['Table Name']
 
-    main_table_alias = 'source'
+    main_table_alias = 'source_table'
     # Generate file name
     macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_MERGE"
 
@@ -256,4 +256,4 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     with open(file_path, 'w') as f:
         f.write(merge_sql)
 
-    return file_path
+    return True,file_path
