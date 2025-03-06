@@ -119,7 +119,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             target_col = column['Target Column']
             # Skip unwanted columns and excluded columns
             if (target_col in ["List (Y,N)", "Table Type", "ref"] or 
-                target_col in excluded_columns or "=" in column['Logic'] or "NEXTVAL" in column['Logic']):
+                target_col in excluded_columns or "NEXTVAL" in column['Logic']):
                 continue
             
             # Add the column to the update_columns list
@@ -160,16 +160,16 @@ SELECT
         target_pos = {col[0]: idx for idx, col in enumerate(target_columns)}
         
         # Sort columns based on target DDL order
-        ordered_columns.sort(key=lambda x: target_pos.get(x['Target Column'], float('inf')))
+        ordered_columns.sort(key=lambda x: str(target_pos.get(x['Target Column'], float('inf'))))
         print(f"Ordered columns based on target DDL: {[col['Target Column'] for col in ordered_columns]}")
     
     # Add column mappings in the correct order
     for column in ordered_columns:
-        target_col = column['Target Column']
-        logic = column['Logic']
+        target_col = str(column['Target Column'])
+        logic = str(column['Logic'])
         
         # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic or "NEXTVAL" in column['Logic']:
+        if target_col in ["List (Y,N)", "Table Type", "ref"] or "NEXTVAL" in logic:
             continue
         
         # Handle special cases for column names with spaces or special characters
