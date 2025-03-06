@@ -956,12 +956,12 @@ class DAGGeneratorApp:
             # Generate merge_macro file if requested
             merge_macro_file_path = None
             if self.generate_merge_macro_var.get():
-                merge_macro_file_path = merge_sql_generator(json_output_path, merge_macro_file_path)
+                merge_macro_file_path = merge_sql_generator(json_output_path,mapping_sheet, merge_macro_file_path)
 
             # Generate insert_macro file if requested
             insert_macro_file_path = None
             if self.generate_insert_macro_var.get():
-                insert_macro_file_path = insert_sql_generator(json_output_path, insert_macro_file_path)
+                insert_macro_file_path = insert_sql_generator(json_output_path,mapping_sheet, insert_macro_file_path)
 
             # Generate lnd_model file if requested
             lnd_model_file_path = None

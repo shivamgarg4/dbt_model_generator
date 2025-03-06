@@ -4,7 +4,131 @@ import sqlparse
 
 from scripts.utils import parse_ddl_file
 
-def merge_sql_generator(config_file, target_ddl_path=None):
+
+def extract_join_clauses(mapping_sheet, main_table_alias='source'):
+    """Extract join clauses from mapping sheet"""
+    join_clauses = []
+    join_aliases = []
+    # Find the JOIN_TABLES section
+    join_section_row = None
+    for row in range(1, mapping_sheet.max_row + 1):
+        if mapping_sheet.cell(row=row, column=1).value == 'JOIN_TABLES':
+            join_section_row = row
+            break
+
+    if not join_section_row:
+        return []
+
+    # Join table headers are in the next row
+    join_header_row = join_section_row + 1
+
+    # Process join tables (starting from the row after headers)
+    for row in range(join_header_row + 1, mapping_sheet.max_row + 1):
+        join_type = mapping_sheet.cell(row=row, column=1).value
+        table_type = mapping_sheet.cell(row=row, column=2).value
+        source_name = mapping_sheet.cell(row=row, column=3).value
+        table_name = mapping_sheet.cell(row=row, column=4).value
+        alias = mapping_sheet.cell(row=row, column=5).value
+        join_condition = mapping_sheet.cell(row=row, column=6).value
+
+        # Stop when we reach an empty row or a new section
+        if not join_type or not table_name:
+            next_row = row + 1
+            if next_row <= mapping_sheet.max_row:
+                next_value = mapping_sheet.cell(row=next_row, column=1).value
+                if next_value and next_value in ['WHERE_CONDITIONS', 'GROUP BY']:
+                    break
+            continue
+
+        # Build the join clause
+        join_clause = f"{join_type} JOIN "
+
+        # Add the table reference based on type
+        if table_type and table_type.lower() == 'source' and source_name:
+            join_clause += f"{{{{ source('{source_name}', '{table_name}') }}}}"
+        else:
+            join_clause += f"{{{{ ref('{table_name}') }}}}"
+
+        # Add alias if provided
+        if alias:
+            join_clause += f" AS {alias}"
+
+        # Add join condition
+        if join_condition:
+            # Replace table aliases if needed
+            join_condition = join_condition.replace("main.", f"{main_table_alias}.")
+
+            # Add source alias to column references if not already present
+            # This regex finds column names that don't have a table prefix
+            import re
+            column_pattern = r'(?<![a-zA-Z0-9_\.])([a-zA-Z0-9_]+)(?=\s*=)'
+
+            def add_source_alias(match):
+                col = match.group(1)
+                # Skip adding alias to literals or functions
+                if col.upper() in ['AND', 'OR', 'ON', 'NULL']:
+                    return col
+                return f"{main_table_alias}.{col}"
+
+            join_condition = re.sub(column_pattern, add_source_alias, join_condition)
+            join_clause += f" ON {join_condition}"
+
+        join_clauses.append(join_clause)
+        join_aliases = set()
+        for row in range(join_header_row + 1, mapping_sheet.max_row + 1):
+            alias = mapping_sheet.cell(row=row, column=5).value
+            if alias:
+                join_aliases.add(alias)
+
+    return join_clauses, join_aliases
+
+
+def extract_where_condition(mapping_sheet, main_table_alias='source'):
+    """Extract WHERE condition from mapping sheet"""
+    # Find the WHERE_CONDITIONS section
+    where_section_row = None
+    for row in range(1, mapping_sheet.max_row + 1):
+        if mapping_sheet.cell(row=row, column=1).value == 'WHERE_CONDITIONS':
+            where_section_row = row
+            break
+
+    if not where_section_row:
+        return None
+
+    # Get the condition from the merged cell
+    where_condition = mapping_sheet.cell(row=where_section_row, column=2).value
+
+    if where_condition:
+        # Replace table aliases if needed
+        where_condition = where_condition.replace("main.", f"{main_table_alias}.")
+        return where_condition
+
+    return None
+
+
+def extract_group_by(mapping_sheet, main_table_alias='source'):
+    """Extract GROUP BY clause from mapping sheet"""
+    # Find the GROUP BY section
+    group_by_row = None
+    for row in range(1, mapping_sheet.max_row + 1):
+        if mapping_sheet.cell(row=row, column=1).value == 'GROUP BY':
+            group_by_row = row
+            break
+
+    if not group_by_row:
+        return None
+
+    # Get the group by columns from the merged cell
+    group_by = mapping_sheet.cell(row=group_by_row, column=2).value
+
+    if group_by:
+        # Replace table aliases if needed
+        group_by = group_by.replace("main.", f"{main_table_alias}.")
+        return group_by
+
+    return None
+
+def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     """Generate a MERGE SQL statement from JSON configuration"""
 
     with open(config_file) as f:
@@ -18,6 +142,10 @@ def merge_sql_generator(config_file, target_ddl_path=None):
     # Extract target information
     target_schema = config['Target']['Schema']
     target_table = config['Target']['Table Name']
+
+    main_table_alias = 'source'
+
+
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -42,10 +170,10 @@ def merge_sql_generator(config_file, target_ddl_path=None):
 
     for column in config['Columns']:
         target_col = column['Target Column']
-        logic = column['Logic']
+        logic = str(column['Logic'])
 
         # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"] or "=" in logic:
+        if target_col in ["List (Y,N)", "Table Type", "ref"]:
             continue
 
         insert_columns.append(target_col)
@@ -56,12 +184,31 @@ def merge_sql_generator(config_file, target_ddl_path=None):
     insert_values_str = ", ".join(insert_values)
     update_clauses_str = ", ".join(update_clauses)
 
+    model_content=f"""
+        SELECT {insert_values_str}
+        FROM {source_schema}.{source_table} AS source
+    """
+    # Add JOIN clauses if mapping_sheet is provided and contains joins
+    if mapping_sheet:
+        join_clauses, join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
+        if join_clauses:
+            model_content += "\n" + "\n".join(join_clauses)
+
+        # Add WHERE clause if provided
+    where_condition = extract_where_condition(mapping_sheet, main_table_alias)
+    if where_condition:
+        model_content += f"\nWHERE {where_condition}"
+
+    # Add GROUP BY clause if provided
+    group_by = extract_group_by(mapping_sheet, main_table_alias)
+    if group_by:
+        model_content += f"\nGROUP BY {group_by}"
+
     # Construct the MERGE SQL statement
     merge_sql = f"""
 MERGE INTO {target_schema}.{target_table} AS target
 USING (
-    SELECT {insert_values_str}
-    FROM {source_schema}.{source_table} AS source
+    {model_content}
 ) AS source
 ON {on_condition}
 WHEN MATCHED THEN
