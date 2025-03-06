@@ -144,6 +144,8 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     target_table = config['Target']['Table Name']
 
     main_table_alias = 'source'
+    # Generate file name
+    macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_MERGE"
 
 
 
@@ -183,6 +185,10 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     insert_columns_str = ", ".join(insert_columns)
     insert_values_str = ", ".join(insert_values)
     update_clauses_str = ", ".join(update_clauses)
+    merge_sql = '{% macro'
+    merge_sql+=f" {macro_name}() "
+    merge_sql+='%}\n'
+    merge_sql+="    {% set query %}\n"
 
     model_content=f"""
         SELECT {insert_values_str}
@@ -192,50 +198,62 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
     if mapping_sheet:
         join_clauses, join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
         if join_clauses:
-            model_content += "\n" + "\n".join(join_clauses)
+            model_content += "\n\t\t\t" + "\n\t\t\t".join(join_clauses)
 
         # Add WHERE clause if provided
     where_condition = extract_where_condition(mapping_sheet, main_table_alias)
     if where_condition:
-        model_content += f"\nWHERE {where_condition}"
+        model_content += f"\n\t\t\tWHERE {where_condition}"
 
     # Add GROUP BY clause if provided
     group_by = extract_group_by(mapping_sheet, main_table_alias)
     if group_by:
-        model_content += f"\nGROUP BY {group_by}"
+        model_content += f"\n\t\t\tGROUP BY {group_by}"
 
-    # Construct the MERGE SQL statement
-    merge_sql = f"""
-MERGE INTO {target_schema}.{target_table} AS target
-USING (
-    {model_content}
-) AS source
-ON {on_condition}
-WHEN MATCHED THEN
-    UPDATE SET {update_clauses_str}
-WHEN NOT MATCHED THEN
-    INSERT ({insert_columns_str})
-    VALUES ({insert_values_str});
-"""
-    # Create output directory if it doesn't exist
-    output_dir = 'macros'
-    os.makedirs(output_dir, exist_ok=True)
-
-    # Generate file name
-    macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_MERGE"
-    file_name = f"{macro_name}.sql"
-    file_path = os.path.join(output_dir, file_name)
-
-    # Format the SQL statement using sqlparse
-    formatted_merge_sql = sqlparse.format(
-        merge_sql,
+        # Format the SQL statement using sqlparse
+    formatted_model_content = sqlparse.format(
+        model_content,
         reindent_aligned=True,
         indent_tabs=True,
         keyword_case='upper'
     )
 
+    # Construct the MERGE SQL statement
+    final_merge = f"""
+    MERGE INTO {target_schema}.{target_table} AS target
+        USING (
+            {formatted_model_content}
+        ) AS source
+        ON {on_condition}
+        WHEN MATCHED THEN
+            UPDATE SET {update_clauses_str}
+        WHEN NOT MATCHED THEN
+            INSERT ({insert_columns_str})
+            VALUES ({insert_values_str});\n
+"""
+        # Format the SQL statement using sqlparse
+    formatted_final_merge = sqlparse.format(
+        final_merge,
+        reindent_aligned=True,
+        indent_tabs=True,
+        keyword_case='upper'
+    )
+
+    merge_sql += formatted_final_merge
+    merge_sql += "\n\t{% endset %}\n"
+    merge_sql += "  {% set results = run_query(query) %}  \n"
+    merge_sql+="{% endmacro %}"
+    # Create output directory if it doesn't exist
+    output_dir = 'macros'
+    os.makedirs(output_dir, exist_ok=True)
+
+
+    file_name = f"{macro_name}.sql"
+    file_path = os.path.join(output_dir, file_name)
+
+
     # Write model file
     with open(file_path, 'w') as f:
-        f.write(formatted_merge_sql)
+        f.write(merge_sql)
 
     return file_path

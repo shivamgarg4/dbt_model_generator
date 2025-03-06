@@ -119,7 +119,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             target_col = column['Target Column']
             # Skip unwanted columns and excluded columns
             if (target_col in ["List (Y,N)", "Table Type", "ref"] or 
-                target_col in excluded_columns or "NEXTVAL" in column['Logic']):
+                target_col in excluded_columns or "NEXTVAL" in str(column['Logic'])):
                 continue
             
             # Add the column to the update_columns list

@@ -143,6 +143,9 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     target_table = config['Target']['Table Name']
     main_table_alias = 'source'
 
+    # Generate file name
+    macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
+
     # Get target DDL columns if path provided
     target_columns = []
     if target_ddl_path:
@@ -167,37 +170,43 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
 
     insert_columns_str = ", ".join(insert_columns)
     insert_values_str = ", ".join(insert_values)
-
+    model_content = '{% macro'
+    model_content+=f" {macro_name}()"
+    model_content+='%}\n'
+    model_content+="    {% set query %}"
     # Construct the INSERT SQL statement
-    model_content = f"""
-INSERT INTO {target_schema}.{target_table} ({insert_columns_str})
-SELECT {insert_values_str}
-FROM {source_schema}.{source_table}
+    model_content += f"""
+    INSERT INTO {target_schema}.{target_table} ({insert_columns_str})
+    SELECT {insert_values_str}
+    FROM {source_schema}.{source_table} as {main_table_alias}
 """
 
     # Add JOIN clauses if mapping_sheet is provided and contains joins
     if mapping_sheet:
         join_clauses, join_aliases = extract_join_clauses(mapping_sheet, main_table_alias)
         if join_clauses:
-            model_content += "\n" + "\n".join(join_clauses)
+            model_content += "\n\t" + "\n\t".join(join_clauses)
 
         # Add WHERE clause if provided
     where_condition = extract_where_condition(mapping_sheet, main_table_alias)
     if where_condition:
-        model_content += f"\nWHERE {where_condition}"
+        model_content += f"\n\tWHERE {where_condition}"
 
     # Add GROUP BY clause if provided
     group_by = extract_group_by(mapping_sheet, main_table_alias)
     if group_by:
-        model_content += f"\nGROUP BY {group_by}"
+        model_content += f"\n\tGROUP BY {group_by}"
 
-    model_content+=";"
+    model_content+=";\n"
+
+    model_content += "    {% endset %}\n"
+    model_content += "    {% set results = run_query(query) %}  \n"
+    model_content+="{% endmacro %}"
     # Create output directory if it doesn't exist
     output_dir = 'macros'
     os.makedirs(output_dir, exist_ok=True)
 
-    # Generate file name
-    macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
+
     file_name = f"{macro_name}.sql"
     file_path = os.path.join(output_dir, file_name)
 
