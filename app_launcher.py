@@ -122,7 +122,7 @@ def run_application():
         logger.info("Starting DBT Model Generator application...")
         # Create the root window and start the application
         root = ThemedTk()
-        root.set_theme("breeze")
+        # root.set_theme("breeze")
         app = DAGGeneratorApp(root)
         root.mainloop()
         logger.info("Application closed.")
