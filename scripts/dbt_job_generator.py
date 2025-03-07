@@ -2,7 +2,7 @@ import os
 import yaml
 import json
 
-def create_dbt_job_file(config_file, output_dir='jobs', merge_dbt_job_additon_flg=False, merge_macro_file_path=None, insert_dbt_job_additon_flg=False, insert_macro_file_path=None):
+def create_dbt_job_file(config_file,model_dbt_job_additon_flg=False ,output_dir='jobs', merge_dbt_job_additon_flg=False, merge_macro_file_path=None, insert_dbt_job_additon_flg=False, insert_macro_file_path=None):
     """Create a dbt job file from the configuration"""
     try:
         with open(config_file, 'r') as f:
@@ -14,9 +14,10 @@ def create_dbt_job_file(config_file, output_dir='jobs', merge_dbt_job_additon_fl
 
         # Create job name using schema and table name
         job_name = f"{schema_name}_{table_name}"
-
+        job_content=''
         # Create the job file content with schema.model format in build statement
-        job_content = f'''dbt build --select {schema_name}.{table_name}\n'''
+        if model_dbt_job_additon_flg:
+            job_content = f'''dbt build --select {schema_name}.{table_name}\n'''
 
         # Add merge macro file path if merge_dbt_job_additon_flg is True
         if merge_dbt_job_additon_flg:

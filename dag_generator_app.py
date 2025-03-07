@@ -950,9 +950,10 @@ class DAGGeneratorApp:
                 json.dump(model_config, f, indent=2)
                 
             # Generate DBT model
+            model_dbt_job_additon_flg=False
             model_file_path = None
             if self.generate_model_var.get():
-                model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
+                model_dbt_job_additon_flg,model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
             
             # Generate DAG file if requested
             dag_file_path = None
@@ -975,13 +976,13 @@ class DAGGeneratorApp:
             lnd_model_file_path = None
             if self.generate_lnd_model_var.get():
                 print(json_output_path)
-                lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
+                model_dbt_job_additon_flg,lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
 
             # Generate DBT job file
             job_output_path = None
             if self.generate_dbt_job_var.get():
                 job_output_path = 'jobs'
-                job_output_path = create_dbt_job_file(json_output_path, job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
+                job_output_path = create_dbt_job_file(json_output_path,model_dbt_job_additon_flg,job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
 
             # Prepare success message
             success_message = "Files generated successfully!\n\n"

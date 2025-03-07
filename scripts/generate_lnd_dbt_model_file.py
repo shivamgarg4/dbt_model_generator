@@ -138,7 +138,7 @@ def generate_lnd_dbt_model_file(config, file_path):
         with open(file_path, 'w') as f:
             f.write(model_config)
 
-        return file_path
+        return True,file_path
     except Exception as e:
         raise Exception(f"An error occurred while generating the dbt model: {e}")
 

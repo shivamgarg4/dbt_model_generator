@@ -386,7 +386,7 @@ SELECT
     with open(file_path, 'w') as f:
         f.write(model_content)
 
-    return file_path
+    return True,file_path
 
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
     """Extract join clauses from mapping sheet"""
