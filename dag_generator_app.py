@@ -735,7 +735,7 @@ class DAGGeneratorApp:
                 elif cell_value == 'MATERIALIZATION':
                     materialization = mapping_sheet.cell(row=row, column=2).value
                 elif cell_value == 'UNIQUE_KEY':
-                    unique_key = mapping_sheet.cell(row=row, column=2).value
+                    unique_key = [key.strip() for key in mapping_sheet.cell(row=row, column=2).value.split(',')]
                 
                 if target_table and source_table and source_type and source_name and materialization and unique_key:
                     break
@@ -988,30 +988,34 @@ class DAGGeneratorApp:
                 job_output_path = 'jobs'
                 job_output_path = create_dbt_job_file(json_output_path,model_dbt_job_additon_flg,job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
 
-            # Prepare success message
-            success_message = "Files generated successfully!\n\n"
-            if dag_file_path:
-                success_message += f"DAG file: {dag_file_path}\n"
-            if model_file_path:
-                success_message += f"Model file: {model_file_path}\n"
-            if job_output_path:
-                success_message += f"DBT job file: {job_output_path}\n"
-            if merge_macro_file_path:
-                success_message += f"Merge Macro file: {merge_macro_file_path}\n"
-            if insert_macro_file_path:
-                success_message += f"Insert Macro file: {insert_macro_file_path}\n"
-            if lnd_model_file_path:
-                success_message += f"LND Model file: {lnd_model_file_path}\n"
-                
-            # Show success message
-            messagebox.showinfo("Success", success_message)
-            
-            # Add to history
-            self.add_to_history(self.mapping_file_path.get(), self.file_history)
-            self.save_history()
-            
-            # Update status
-            self.set_status("Files generated successfully!")
+            if job_output_path or model_file_path or dag_file_path or merge_macro_file_path or insert_macro_file_path or lnd_model_file_path:
+                # Prepare success message
+                success_message = "Files generated successfully!\n\n"
+                if dag_file_path:
+                    success_message += f"DAG file: {dag_file_path}\n"
+                if model_file_path:
+                    success_message += f"Model file: {model_file_path}\n"
+                if job_output_path:
+                    success_message += f"DBT job file: {job_output_path}\n"
+                if merge_macro_file_path:
+                    success_message += f"Merge Macro file: {merge_macro_file_path}\n"
+                if insert_macro_file_path:
+                    success_message += f"Insert Macro file: {insert_macro_file_path}\n"
+                if lnd_model_file_path:
+                    success_message += f"LND Model file: {lnd_model_file_path}\n"
+
+                # Show success message
+                messagebox.showinfo("Success", success_message)
+                # Add to history
+                self.add_to_history(self.mapping_file_path.get(), self.file_history)
+                self.save_history()
+
+                # Update status
+                self.set_status("Files generated successfully!")
+            else:
+                self.set_status("Error")
+                messagebox.showinfo("Error","Please choose an option")
+
             
         except Exception as e:
             messagebox.showerror("Error", str(e))
