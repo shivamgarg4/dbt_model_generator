@@ -720,6 +720,7 @@ class DAGGeneratorApp:
             source_type = None
             source_name = None
             materialization = None
+            unique_key=None
             
             for row in range(1, mapping_sheet.max_row + 1):
                 cell_value = mapping_sheet.cell(row=row, column=1).value
@@ -733,8 +734,10 @@ class DAGGeneratorApp:
                     source_name = mapping_sheet.cell(row=row, column=2).value
                 elif cell_value == 'MATERIALIZATION':
                     materialization = mapping_sheet.cell(row=row, column=2).value
+                elif cell_value == 'UNIQUE_KEY':
+                    unique_key = mapping_sheet.cell(row=row, column=2).value
                 
-                if target_table and source_table and source_type and source_name and materialization:
+                if target_table and source_table and source_type and source_name and materialization and unique_key:
                     break
             
             if not target_table:
@@ -813,7 +816,8 @@ class DAGGeneratorApp:
                 'Target': {
                     'Schema': target_schema,
                     'Table Name': target_table_name,
-                    'materialization': materialization
+                    'materialization': materialization,
+                    'unique_key': unique_key
                 },
                 'Columns': column_mappings
             }
