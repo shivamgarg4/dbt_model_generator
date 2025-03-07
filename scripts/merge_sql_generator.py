@@ -175,7 +175,7 @@ def merge_sql_generator(config_file,mapping_sheet=None, target_ddl_path=None):
         logic = str(column['Logic'])
 
         # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"]:
+        if target_col in ["List (Y,N)", "Table Type", "ref"] or column['Logic'] == column['Target Column']:
             continue
 
         insert_columns.append(target_col)
