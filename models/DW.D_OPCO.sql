@@ -1,8 +1,11 @@
 {{ config(
-    materialized='incremental',
-    schema='DW',
-    unique_key=["OPCO_CD"],
-    merge_update_columns = ['OPCO_ID', 'DATA_SRC', 'UPDATE_DT', 'UPDATE_BY', 'UPDATE_PGM', 'OPCO_DSC', 'RPT_OPCO_DSC', 'RPT_OPCO_ABBRV', 'TBA_ACTIVE_FLG']
+        schema='DW',
+        tags=['D_OPCO'],
+        alias='D_OPCO',
+        materialized='incremental',
+        transient=false,
+        unique_key=["OPCO_CD"],
+        merge_update_columns = ['OPCO_ID', 'DATA_SRC', 'UPDATE_DT', 'UPDATE_BY', 'UPDATE_PGM', 'OPCO_CD', 'OPCO_DSC', 'RPT_OPCO_DSC', 'RPT_OPCO_ABBRV', 'TBA_ACTIVE_FLG']
 )}}
 
 -- Model: DW.D_OPCO

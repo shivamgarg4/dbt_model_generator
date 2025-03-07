@@ -1,1 +1,3 @@
 dbt build --select DW.D_OPCO
+dbt run-operation MAC_DW_D_OPCO_MERGE
+dbt run-operation MAC_DW_D_OPCO_INSERT

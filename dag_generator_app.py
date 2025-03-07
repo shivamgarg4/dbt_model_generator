@@ -142,6 +142,14 @@ def generate_safe_timestamp():
 class DAGGeneratorApp:
     def __init__(self, root):
         """Initialize the application"""
+        self.primary_keys = None
+        self.unique_keys = None
+        self.status_bar = None
+        self.mapping_tab = None
+        self.main_tab = None
+        self.notebook = None
+        self.ddl_combo = None
+        self.mapping_combo = None
         self.animation_duration = 0.5
         self.animation_steps = 120
         self.root = root
@@ -154,32 +162,32 @@ class DAGGeneratorApp:
         # Lazy load heavy imports
         self.imports_loaded = False
         
-        # Apply theme immediately
-        style = ttk.Style()
-        try:
-            # Try to use a themed style if ttkthemes is available
-            if 'ThemedTk' in globals():
-                available_themes = THEMES
-                if 'breeze' in available_themes:
-                    style.theme_use('breeze')
-                elif 'arc' in available_themes:
-                    style.theme_use('arc')
-                elif 'clam' in available_themes:
-                    style.theme_use('clam')
-                else:
-                    # Use default theme
-                    style.theme_use('clam')
-            else:
-                # Use default ttk theme
-                style.theme_use('clam')
-        except Exception as e:
-            logging.warning(f"Could not set theme: {str(e)}. Using default theme.")
-            # Use a default theme that's available in standard ttk
-            try:
-                style.theme_use('clam')
-            except:
-                pass  # If even this fails, just use the default theme
-        
+        # # Apply theme immediately
+        # style = ttk.Style()
+        # try:
+        #     # Try to use a themed style if ttkthemes is available
+        #     if 'ThemedTk' in globals():
+        #         available_themes = THEMES
+        #         if 'breeze' in available_themes:
+        #             style.theme_use('breeze')
+        #         elif 'arc' in available_themes:
+        #             style.theme_use('arc')
+        #         elif 'clam' in available_themes:
+        #             style.theme_use('clam')
+        #         else:
+        #             # Use default theme
+        #             style.theme_use('clam')
+        #     else:
+        #         # Use default ttk theme
+        #         style.theme_use('clam')
+        # except Exception as e:
+        #     logging.warning(f"Could not set theme: {str(e)}. Using default theme.")
+        #     # Use a default theme that's available in standard ttk
+        #     try:
+        #         style.theme_use('clam')
+        #     except:
+        #         pass  # If even this fails, just use the default theme
+        #
         # Initialize history lists
         self.file_history = []
         self.ddl_file_history = []
@@ -201,12 +209,16 @@ class DAGGeneratorApp:
 
         # Initialize ModelMapper
         self.model_mapper = None
-        
+
         # Initialize UI
         self.init_ui()
-        
+
         # Load history and other resources in background
         self.root.after(100, self.delayed_init)
+        
+
+        
+
 
     def delayed_init(self):
         """Initialize non-critical components in background"""
@@ -247,7 +259,7 @@ class DAGGeneratorApp:
                                         if os.path.exists(path) or find_similar_file(path)]
                     
                     self.ddl_file_history = [path for path in history.get('ddl_files', []) 
-                                            if os.path.exists(path)]
+                                            if os.path.exists(path) or find_similar_file(path)]
                     return True
         except:
             self.file_history = []
@@ -1941,39 +1953,6 @@ class DAGGeneratorApp:
         self.progress.pack_forget()  # Changed from grid_remove to pack_forget
         self.root.after(350, self.root.destroy)  # Close the app within a seconds
 
-    def add_logo(self, frame):
-        """Add Deloitte logo to the frame"""
-        try:
-            # Load Deloitte logo
-            logo_path = "data/DeloitteLogo.png"
-            if os.path.exists(logo_path):
-                logo = Image.open(logo_path)
-                logo = logo.resize((500, 300), Image.LANCZOS)
-                self.logo_img = ImageTk.PhotoImage(logo)
-                
-                # Create and add logo label
-                logo_label = tk.Label(frame, image=self.logo_img)
-                logo_label.grid(row=0, column=0, columnspan=3, pady=5)
-            else:
-                # If logo not found, add a placeholder text
-                placeholder = ttk.Label(
-                    frame, 
-                    text="DAG Generator", 
-                    font=('Arial', 24, 'bold'),
-                    foreground='#86BC25'  # Deloitte green
-                )
-                placeholder.grid(row=0, column=0, columnspan=3, pady=20)
-                
-        except Exception as e:
-            # If there's any error loading the logo, use placeholder text
-            placeholder = ttk.Label(
-                frame, 
-                text="DAG Generator", 
-                font=('Arial', 24, 'bold'),
-                foreground='#86BC25'  # Deloitte green
-            )
-            placeholder.grid(row=0, column=0, columnspan=3, pady=20)
-
     def on_tab_change(self, event):
         """Handle tab change with smooth animation"""
         try:
@@ -2036,9 +2015,9 @@ class DAGGeneratorApp:
             if hasattr(self, 'file_combo'):
                 formatted_values = [self.format_path(path) for path in self.file_history]
                 self.file_combo['values'] = formatted_values
-            if hasattr(self, 'ddl_file_combo'):
+            if hasattr(self, 'ddl_combo'):
                 formatted_values = [self.format_path(path) for path in self.ddl_file_history]
-                self.ddl_file_combo['values'] = formatted_values
+                self.ddl_combo['values'] = formatted_values
             if hasattr(self, 'mapping_combo'):
                 formatted_values = [self.format_path(path) for path in self.file_history]
                 self.mapping_combo['values'] = formatted_values
@@ -2105,19 +2084,19 @@ if __name__ == "__main__":
     try:
         root = ThemedTk()
         
-        # Temporarily restore stdout to print themes to console
-        sys.stdout = original_stdout
-        print("Available themes:", root.get_themes())
-        
-        # Redirect back to logger
-        if logging.getLogger().handlers:
-            sys.stdout = logging.getLogger().handlers[0].stream
-        
-        # Log themes to log file as well
-        logging.info(f"Available themes: {root.get_themes()}")
-        
-        root.set_theme("breeze")
-        logging.info("Using theme: breeze")
+        # # Temporarily restore stdout to print themes to console
+        # sys.stdout = original_stdout
+        # print("Available themes:", root.get_themes())
+        #
+        # # Redirect back to logger
+        # if logging.getLogger().handlers:
+        #     sys.stdout = logging.getLogger().handlers[0].stream
+        #
+        # # Log themes to log file as well
+        # logging.info(f"Available themes: {root.get_themes()}")
+        #
+        # root.set_theme("breeze")
+        # logging.info("Using theme: breeze")
         
         app = DAGGeneratorApp(root)
         root.mainloop()

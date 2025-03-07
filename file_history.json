@@ -1,8 +1,14 @@
 {
     "mapping_files": [
-        "C:/Users/Welcome/Documents/GitHub/dbt_model_generator/mappings/D_OPCO_DDL_mapping.xlsx"
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx",
+        "C:/Users/shivamgarg4/Downloads/DW_BEER.F_RPT_GL_CBBD_DDL_mapping.xlsx",
+        "C:/Users/shivamgarg4/Downloads/DW_BEER.F_RPT_GL_CBBD_DDL_mapping - Copy (1).xlsx",
+        "C:/Users/shivamgarg4/Downloads/DW_BEER.F_RPT_GL_CBBD_DDL_mapping - Copy.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping_20250227_104655.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/DW_F_DEPL_RETAIL_INVOICE_CBUS_mapping.xlsx",
+        "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/mappings/D_OPCO_DDL_mapping.xlsx"
     ],
     "ddl_files": [
-        "C:/Users/Welcome/Documents/GitHub/dbt_model_generator/data/D_OPCO_DDL.sql"
+        "C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql"
     ]
 }

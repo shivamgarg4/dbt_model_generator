@@ -4,24 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e38459be-dcb6-4de1-b705-e1631098ea72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/merge_sql_generator.py" afterDir="false" />
+    <list default="true" id="e38459be-dcb6-4de1-b705-e1631098ea72" name="Changes" comment="Macro command addition v1 to dbt job">
       <change beforePath="$PROJECT_DIR$/.idea/dbt_model_generator.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbt_model_generator.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README_UPDATES.md" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/insert_sql_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.log" beforeDir="false" afterPath="$PROJECT_DIR$/app.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dag_generator_app.py" beforeDir="false" afterPath="$PROJECT_DIR$/dag_generator_app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dags/DW_D_OPCO.py" beforeDir="false" afterPath="$PROJECT_DIR$/dags/DW_D_OPCO.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/model_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/model_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/DBT_Build_Automation_LND.xlsm" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/DW_F_DEPL_RETAIL_INVOICE_CBUS.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/D_OPCO_DDL.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/DeloitteLogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/New Text Document.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_advanced_incremental_model_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_complex_model_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_complex_truncate_model_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_cte_model_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_ddl.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_model_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/test_model_config_incremental.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/file_history.json" beforeDir="false" afterPath="$PROJECT_DIR$/file_history.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/launcher.log" beforeDir="false" afterPath="$PROJECT_DIR$/launcher.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jobs/DW_D_OPCO.dbt" beforeDir="false" afterPath="$PROJECT_DIR$/jobs/DW_D_OPCO.dbt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_091949.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_124053.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/mappings/D_OPCO_DDL_mapping_20250226_124053.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/models/DW.D_OPCO.sql" beforeDir="false" afterPath="$PROJECT_DIR$/models/DW.D_OPCO.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/dbt_model_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/dbt_model_generator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.log" beforeDir="false" afterPath="$PROJECT_DIR$/setup.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/excel_to_json.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/simple_config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/simple_mapping.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/simple_test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_config_custom.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_config_default.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_config_n.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_config_y.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_functionality.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_mapping_custom.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_mapping_default.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_mapping_n.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_mapping_y.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_merge_update.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_data/test_table.ddl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_mapping.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_model.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/fix_file_paths.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/resource_manager.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,10 +62,53 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;shivamgarg4&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/shivamgarg4/dbt_model_generator.git",
+    "accountId": "e9c63c3c-e9d9-48fe-9c13-67b3b00637b9"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/requirements.txt" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="ProblemsViewState">
+    <hideBySeverity>
+      <option value="11" />
+      <option value="12" />
+      <option value="13" />
+      <option value="14" />
+      <option value="15" />
+      <option value="16" />
+      <option value="100" />
+      <option value="300" />
+    </hideBySeverity>
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -49,20 +118,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dag_generator_app.executor&quot;: &quot;Run&quot;,
-    &quot;Python.excel_to_json.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.utils.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Shell Script.setup.sh.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dag_generator_app.py&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.app.executor": "Run",
+    "Python.dag_generator_app.executor": "Debug",
+    "Python.excel_to_json.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.utils.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Shell Script.setup.sh.executor": "Run",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dag_generator_app.py",
+    "settings.editor.selected.configurable": "terminal"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\data" />
@@ -124,7 +194,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-ce3d9afa04ac-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.20224.347" />
+        <option value="bundled-python-sdk-14705d77f0bb-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.25659.43" />
       </set>
     </attachedChunks>
   </component>
@@ -137,6 +207,55 @@
       <option name="presentableId" value="Default" />
       <updated>1740035380939</updated>
     </task>
+    <task id="LOCAL-00001" summary="LND Model Generation Feature v1.0">
+      <option name="closed" value="true" />
+      <created>1740984238003</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1740984238003</updated>
+    </task>
+    <task id="LOCAL-00002" summary="LND Model Generation Feature v2.0">
+      <option name="closed" value="true" />
+      <created>1741008397545</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741008397545</updated>
+    </task>
+    <task id="LOCAL-00003" summary="String Type Conversion Fix v1.0">
+      <option name="closed" value="true" />
+      <created>1741259956081</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741259956081</updated>
+    </task>
+    <task id="LOCAL-00004" summary="String Type Conversion Fix v1.0 &amp; JOINS, GROUP BY, WHERE Clause addittion to macros also">
+      <option name="closed" value="true" />
+      <created>1741264856017</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741264856017</updated>
+    </task>
+    <task id="LOCAL-00005" summary="String Type Conversion Fix v1.0 &amp; JOINS, GROUP BY, WHERE Clause addittion to macros also">
+      <option name="closed" value="true" />
+      <created>1741273195502</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741273195502</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Macro command addition v1 to dbt job">
+      <option name="closed" value="true" />
+      <created>1741274252166</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741274252166</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -149,5 +268,109 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="LND Model Generation Feature v1.0" />
+    <MESSAGE value="LND Model Generation Feature v2.0" />
+    <MESSAGE value="String Type Conversion Fix v1.0" />
+    <MESSAGE value="String Type Conversion Fix v1.0 &amp; JOINS, GROUP BY, WHERE Clause addittion to macros also" />
+    <MESSAGE value="Macro command addition v1 to dbt job" />
+    <option name="LAST_COMMIT_MESSAGE" value="Macro command addition v1 to dbt job" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/scripts/dbt_model_generator.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>142</line>
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>191</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>192</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2101</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2100</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>1989</line>
+          <option name="timeStamp" value="32" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>222</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>228</line>
+          <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2010</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2014</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2016</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2019</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2020</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>2022</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>248</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>260</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dag_generator_app.py</url>
+          <line>257</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

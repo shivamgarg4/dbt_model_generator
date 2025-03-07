@@ -1982,6 +1982,14 @@ Found 3 dependency schemas and 3 dependency objects
 Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
 2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
 2025-02-27 16:06:58,806 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-03 12:16:36,361 - INFO - Available themes: ['xpnative', 'breeze', 'arc', 'vista', 'alt', 'classic', 'scidgrey', 'ubuntu', 'aquativo', 'radiance', 'scidblue', 'blue', 'plastik', 'scidgreen', 'keramik', 'adapta', 'default', 'smog', 'scidsand', 'kroc', 'clam', 'yaru', 'elegance', 'winnative', 'itft1', 'equilux', 'scidpink', 'black', 'winxpblue', 'scidmint', 'clearlooks', 'scidpurple']
+2025-03-03 12:16:36,361 - INFO - Available themes: ['xpnative', 'breeze', 'arc', 'vista', 'alt', 'classic', 'scidgrey', 'ubuntu', 'aquativo', 'radiance', 'scidblue', 'blue', 'plastik', 'scidgreen', 'keramik', 'adapta', 'default', 'smog', 'scidsand', 'kroc', 'clam', 'yaru', 'elegance', 'winnative', 'itft1', 'equilux', 'scidpink', 'black', 'winxpblue', 'scidmint', 'clearlooks', 'scidpurple']
+2025-03-03 12:16:36,601 - INFO - Using theme: breeze
+2025-03-03 12:16:36,601 - INFO - Using theme: breeze
+2025-03-03 12:17:08,777 - INFO - Available themes: ['alt', 'itft1', 'xpnative', 'equilux', 'aquativo', 'scidpink', 'smog', 'plastik', 'clam', 'winnative', 'vista', 'arc', 'radiance', 'default', 'kroc', 'black', 'keramik', 'clearlooks', 'breeze', 'adapta', 'ubuntu', 'yaru', 'scidpurple', 'scidgrey', 'scidblue', 'classic', 'scidgreen', 'elegance', 'blue', 'scidmint', 'winxpblue', 'scidsand']
+2025-03-03 12:17:08,777 - INFO - Available themes: ['alt', 'itft1', 'xpnative', 'equilux', 'aquativo', 'scidpink', 'smog', 'plastik', 'clam', 'winnative', 'vista', 'arc', 'radiance', 'default', 'kroc', 'black', 'keramik', 'clearlooks', 'breeze', 'adapta', 'ubuntu', 'yaru', 'scidpurple', 'scidgrey', 'scidblue', 'classic', 'scidgreen', 'elegance', 'blue', 'scidmint', 'winxpblue', 'scidsand']
+2025-03-03 12:17:09,203 - INFO - Using theme: breeze
+2025-03-03 12:17:09,203 - INFO - Using theme: breeze
 2025-03-01 19:47:07,155 - INFO - Available themes: ['scidgrey', 'alt', 'plastik', 'ubuntu', 'scidpink', 'arc', 'yaru', 'winxpblue', 'clearlooks', 'default', 'breeze', 'aquativo', 'adapta', 'classic', 'itft1', 'elegance', 'xpnative', 'scidblue', 'scidpurple', 'radiance', 'blue', 'winnative', 'black', 'scidsand', 'clam', 'scidgreen', 'smog', 'vista', 'equilux', 'kroc', 'keramik', 'scidmint']
 2025-03-01 19:47:07,155 - INFO - Available themes: ['scidgrey', 'alt', 'plastik', 'ubuntu', 'scidpink', 'arc', 'yaru', 'winxpblue', 'clearlooks', 'default', 'breeze', 'aquativo', 'adapta', 'classic', 'itft1', 'elegance', 'xpnative', 'scidblue', 'scidpurple', 'radiance', 'blue', 'winnative', 'black', 'scidsand', 'clam', 'scidgreen', 'smog', 'vista', 'equilux', 'kroc', 'keramik', 'scidmint']
 2025-03-01 19:47:07,327 - INFO - Using theme: breeze
@@ -2002,3 +2010,1467 @@ Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
 2025-03-03 09:56:14,483 - INFO - Available themes: ['radiance', 'scidgrey', 'clearlooks', 'black', 'clam', 'classic', 'smog', 'itft1', 'xpnative', 'scidsand', 'default', 'plastik', 'adapta', 'yaru', 'scidmint', 'scidblue', 'blue', 'arc', 'aquativo', 'vista', 'equilux', 'alt', 'kroc', 'scidpink', 'scidpurple', 'elegance', 'winxpblue', 'keramik', 'ubuntu', 'scidgreen', 'winnative', 'breeze']
 2025-03-03 09:56:14,669 - INFO - Using theme: breeze
 2025-03-03 09:56:14,669 - INFO - Using theme: breeze
+2025-03-03 12:18:04,597 - INFO - Available themes: ['adapta', 'scidpink', 'radiance', 'smog', 'arc', 'winnative', 'black', 'yaru', 'vista', 'ubuntu', 'blue', 'plastik', 'scidblue', 'elegance', 'scidmint', 'winxpblue', 'clam', 'classic', 'kroc', 'scidgreen', 'keramik', 'breeze', 'scidpurple', 'equilux', 'default', 'aquativo', 'xpnative', 'scidsand', 'clearlooks', 'scidgrey', 'alt', 'itft1']
+2025-03-03 12:18:04,597 - INFO - Available themes: ['adapta', 'scidpink', 'radiance', 'smog', 'arc', 'winnative', 'black', 'yaru', 'vista', 'ubuntu', 'blue', 'plastik', 'scidblue', 'elegance', 'scidmint', 'winxpblue', 'clam', 'classic', 'kroc', 'scidgreen', 'keramik', 'breeze', 'scidpurple', 'equilux', 'default', 'aquativo', 'xpnative', 'scidsand', 'clearlooks', 'scidgrey', 'alt', 'itft1']
+2025-03-03 12:18:04,806 - INFO - Using theme: breeze
+2025-03-03 12:18:04,806 - INFO - Using theme: breeze
+2025-03-03 12:18:18,169 - INFO - Looking for matching DDL file in history...
+2025-03-03 12:18:18,169 - INFO - Looking for matching DDL file in history...
+2025-03-03 12:18:18,170 - INFO - No matching DDL file found in history
+2025-03-03 12:18:18,170 - INFO - No matching DDL file found in history
+2025-03-03 12:18:18,170 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 12:18:18,170 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 12:18:18,170 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 12:18:18,170 - INFO - Adding unique keys to model config: ['OPCO_CD']
+data\model_config.json
+2025-03-03 12:18:18,185 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 12:18:18,185 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 12:18:18,186 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 12:18:18,186 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 12:18:18,186 - INFO - Setting use_openssl_only mode to False
+2025-03-03 12:18:18,186 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+<snowflake.connector.connection.SnowflakeConnection object at 0x00000153EF46AB80>
+2025-03-03 12:18:27,149 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 12:18:27,149 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 12:18:28,823 - INFO - query execution done
+2025-03-03 12:18:28,823 - INFO - query execution done
+2025-03-03 12:18:28,825 - INFO - fetching data done
+2025-03-03 12:18:28,825 - INFO - fetching data done
+2025-03-03 12:18:33,788 - INFO - Looking for matching DDL file in history...
+2025-03-03 12:18:33,788 - INFO - Looking for matching DDL file in history...
+2025-03-03 12:18:33,788 - INFO - No matching DDL file found in history
+2025-03-03 12:18:33,788 - INFO - No matching DDL file found in history
+2025-03-03 12:18:33,788 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 12:18:33,788 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 12:18:33,788 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 12:18:33,788 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+data\model_config.json
+2025-03-03 12:18:33,947 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 12:18:33,947 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 12:18:33,947 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 12:18:33,947 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+<snowflake.connector.connection.SnowflakeConnection object at 0x00000153F1F57F70>
+2025-03-03 12:18:39,923 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 12:18:39,923 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 12:18:41,140 - INFO - query execution done
+2025-03-03 12:18:41,140 - INFO - query execution done
+2025-03-03 12:18:41,140 - INFO - fetching data done
+2025-03-03 12:18:41,140 - INFO - fetching data done
+2025-03-03 12:19:19,544 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-03 12:19:19,544 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/dbt_model_generator/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-03 12:19:19,545 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-03 12:19:19,545 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-03 12:19:19,546 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-03 12:19:19,546 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-03 12:19:19,546 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-03 12:19:19,546 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-03 12:19:19,546 - INFO - Unique keys: ['OPCO_CD']
+2025-03-03 12:19:19,546 - INFO - Unique keys: ['OPCO_CD']
+2025-03-03 12:19:19,546 - INFO - Primary keys: ['OPCO_ID']
+2025-03-03 12:19:19,546 - INFO - Primary keys: ['OPCO_ID']
+2025-03-03 12:20:02,723 - INFO - closed
+2025-03-03 12:20:02,723 - INFO - closed
+2025-03-03 12:20:02,724 - INFO - No async queries seem to be running, deleting session
+2025-03-03 12:20:02,724 - INFO - No async queries seem to be running, deleting session
+2025-03-03 12:20:03,001 - INFO - closed
+2025-03-03 12:20:03,001 - INFO - closed
+2025-03-03 12:20:03,002 - INFO - No async queries seem to be running, deleting session
+2025-03-03 12:20:03,002 - INFO - No async queries seem to be running, deleting session
+2025-03-03 12:50:46,992 - INFO - Available themes: ['alt', 'ubuntu', 'yaru', 'scidpink', 'scidmint', 'scidgrey', 'scidblue', 'scidpurple', 'smog', 'breeze', 'itft1', 'arc', 'classic', 'winxpblue', 'xpnative', 'scidsand', 'equilux', 'kroc', 'clearlooks', 'adapta', 'default', 'scidgreen', 'elegance', 'keramik', 'blue', 'clam', 'plastik', 'vista', 'winnative', 'radiance', 'black', 'aquativo']
+2025-03-03 12:50:46,992 - INFO - Available themes: ['alt', 'ubuntu', 'yaru', 'scidpink', 'scidmint', 'scidgrey', 'scidblue', 'scidpurple', 'smog', 'breeze', 'itft1', 'arc', 'classic', 'winxpblue', 'xpnative', 'scidsand', 'equilux', 'kroc', 'clearlooks', 'adapta', 'default', 'scidgreen', 'elegance', 'keramik', 'blue', 'clam', 'plastik', 'vista', 'winnative', 'radiance', 'black', 'aquativo']
+2025-03-03 12:50:47,191 - INFO - Using theme: breeze
+2025-03-03 12:50:47,191 - INFO - Using theme: breeze
+2025-03-03 15:18:11,311 - INFO - Available themes: ['clam', 'blue', 'scidblue', 'keramik', 'ubuntu', 'kroc', 'breeze', 'scidgrey', 'clearlooks', 'radiance', 'scidmint', 'itft1', 'elegance', 'smog', 'scidpink', 'alt', 'adapta', 'aquativo', 'winnative', 'classic', 'vista', 'equilux', 'scidpurple', 'scidgreen', 'winxpblue', 'arc', 'scidsand', 'black', 'yaru', 'plastik', 'xpnative', 'default']
+2025-03-03 15:18:11,311 - INFO - Available themes: ['clam', 'blue', 'scidblue', 'keramik', 'ubuntu', 'kroc', 'breeze', 'scidgrey', 'clearlooks', 'radiance', 'scidmint', 'itft1', 'elegance', 'smog', 'scidpink', 'alt', 'adapta', 'aquativo', 'winnative', 'classic', 'vista', 'equilux', 'scidpurple', 'scidgreen', 'winxpblue', 'arc', 'scidsand', 'black', 'yaru', 'plastik', 'xpnative', 'default']
+2025-03-03 15:18:11,553 - INFO - Using theme: breeze
+2025-03-03 15:18:11,553 - INFO - Using theme: breeze
+2025-03-03 15:18:26,969 - INFO - Looking for matching DDL file in history...
+2025-03-03 15:18:26,969 - INFO - Looking for matching DDL file in history...
+2025-03-03 15:18:26,980 - INFO - No matching DDL file found in history
+2025-03-03 15:18:26,980 - INFO - No matching DDL file found in history
+2025-03-03 15:18:26,980 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 15:18:26,980 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 15:18:26,980 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 15:18:26,980 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 15:18:27,434 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-03 15:18:27,434 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-03 15:18:27,435 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-03 15:18:27,435 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch1.tab1
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch1.tab1
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch2.tab2
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch2.tab2
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch3.tab3
+2025-03-03 15:18:27,435 - INFO - Found dependency: sch3.tab3
+2025-03-03 15:18:27,435 - INFO - Added 3 dependencies to DAG config
+2025-03-03 15:18:27,435 - INFO - Added 3 dependencies to DAG config
+2025-03-03 15:18:27,435 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 15:18:27,435 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 15:18:27,437 - INFO - DAG type: dataset_dependency
+2025-03-03 15:18:27,437 - INFO - DAG type: dataset_dependency
+2025-03-03 15:18:27,437 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 15:18:27,437 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 15:18:27,437 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 15:18:27,437 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-03-03 15:18:27,440 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-03 15:18:27,440 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+data\model_config.json
+2025-03-03 15:18:27,452 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 15:18:27,452 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 15:18:27,452 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 15:18:27,452 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 15:18:27,452 - INFO - Setting use_openssl_only mode to False
+2025-03-03 15:18:27,452 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+<snowflake.connector.connection.SnowflakeConnection object at 0x000001BCA2F6E8B0>
+2025-03-03 15:18:34,129 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 15:18:34,129 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 15:18:35,823 - INFO - query execution done
+2025-03-03 15:18:35,823 - INFO - query execution done
+2025-03-03 15:18:35,836 - INFO - fetching data done
+2025-03-03 15:18:35,836 - INFO - fetching data done
+2025-03-03 15:25:17,312 - INFO - closed
+2025-03-03 15:25:17,312 - INFO - closed
+2025-03-03 15:25:17,315 - INFO - No async queries seem to be running, deleting session
+2025-03-03 15:25:17,315 - INFO - No async queries seem to be running, deleting session
+2025-03-03 16:26:34,389 - INFO - Available themes: ['radiance', 'scidpink', 'itft1', 'equilux', 'scidsand', 'default', 'smog', 'keramik', 'scidgreen', 'adapta', 'clam', 'winnative', 'scidblue', 'yaru', 'clearlooks', 'blue', 'arc', 'classic', 'vista', 'breeze', 'kroc', 'winxpblue', 'xpnative', 'scidmint', 'alt', 'scidpurple', 'aquativo', 'ubuntu', 'plastik', 'elegance', 'black', 'scidgrey']
+2025-03-03 16:26:34,389 - INFO - Available themes: ['radiance', 'scidpink', 'itft1', 'equilux', 'scidsand', 'default', 'smog', 'keramik', 'scidgreen', 'adapta', 'clam', 'winnative', 'scidblue', 'yaru', 'clearlooks', 'blue', 'arc', 'classic', 'vista', 'breeze', 'kroc', 'winxpblue', 'xpnative', 'scidmint', 'alt', 'scidpurple', 'aquativo', 'ubuntu', 'plastik', 'elegance', 'black', 'scidgrey']
+2025-03-03 16:26:34,700 - INFO - Using theme: breeze
+2025-03-03 16:26:34,700 - INFO - Using theme: breeze
+2025-03-03 16:27:46,963 - INFO - Available themes: ['radiance', 'yaru', 'winnative', 'scidgreen', 'arc', 'scidsand', 'scidpurple', 'aquativo', 'default', 'vista', 'classic', 'scidgrey', 'elegance', 'adapta', 'breeze', 'xpnative', 'black', 'scidblue', 'keramik', 'alt', 'ubuntu', 'clam', 'smog', 'kroc', 'winxpblue', 'scidpink', 'blue', 'equilux', 'clearlooks', 'scidmint', 'itft1', 'plastik']
+2025-03-03 16:27:46,963 - INFO - Available themes: ['radiance', 'yaru', 'winnative', 'scidgreen', 'arc', 'scidsand', 'scidpurple', 'aquativo', 'default', 'vista', 'classic', 'scidgrey', 'elegance', 'adapta', 'breeze', 'xpnative', 'black', 'scidblue', 'keramik', 'alt', 'ubuntu', 'clam', 'smog', 'kroc', 'winxpblue', 'scidpink', 'blue', 'equilux', 'clearlooks', 'scidmint', 'itft1', 'plastik']
+2025-03-03 16:27:47,253 - INFO - Using theme: breeze
+2025-03-03 16:27:47,253 - INFO - Using theme: breeze
+2025-03-03 18:55:39,246 - INFO - Available themes: ['classic', 'scidsand', 'black', 'scidmint', 'scidpink', 'plastik', 'breeze', 'equilux', 'elegance', 'kroc', 'alt', 'blue', 'keramik', 'smog', 'scidgrey', 'adapta', 'default', 'winnative', 'clam', 'winxpblue', 'scidblue', 'yaru', 'xpnative', 'radiance', 'itft1', 'aquativo', 'scidpurple', 'scidgreen', 'ubuntu', 'arc', 'clearlooks', 'vista']
+2025-03-03 18:55:39,246 - INFO - Available themes: ['classic', 'scidsand', 'black', 'scidmint', 'scidpink', 'plastik', 'breeze', 'equilux', 'elegance', 'kroc', 'alt', 'blue', 'keramik', 'smog', 'scidgrey', 'adapta', 'default', 'winnative', 'clam', 'winxpblue', 'scidblue', 'yaru', 'xpnative', 'radiance', 'itft1', 'aquativo', 'scidpurple', 'scidgreen', 'ubuntu', 'arc', 'clearlooks', 'vista']
+2025-03-03 18:55:39,471 - INFO - Using theme: breeze
+2025-03-03 18:55:39,471 - INFO - Using theme: breeze
+2025-03-03 18:55:49,616 - INFO - Looking for matching DDL file in history...
+2025-03-03 18:55:49,616 - INFO - Looking for matching DDL file in history...
+2025-03-03 18:55:49,617 - INFO - No matching DDL file found in history
+2025-03-03 18:55:49,617 - INFO - No matching DDL file found in history
+2025-03-03 18:55:49,617 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 18:55:49,617 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-03 18:55:49,617 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 18:55:49,617 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-03 18:55:50,040 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-03 18:55:50,040 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-03 18:55:50,040 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-03 18:55:50,040 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch1.tab1
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch1.tab1
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch2.tab2
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch2.tab2
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch3.tab3
+2025-03-03 18:55:50,040 - INFO - Found dependency: sch3.tab3
+2025-03-03 18:55:50,040 - INFO - Added 3 dependencies to DAG config
+2025-03-03 18:55:50,040 - INFO - Added 3 dependencies to DAG config
+2025-03-03 18:55:50,040 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 18:55:50,040 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 18:55:50,042 - INFO - DAG type: dataset_dependency
+2025-03-03 18:55:50,042 - INFO - DAG type: dataset_dependency
+2025-03-03 18:55:50,042 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 18:55:50,042 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 18:55:50,042 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-03 18:55:50,042 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-03-03 18:55:50,044 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-03 18:55:50,044 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+data\model_config.json
+2025-03-03 18:55:50,055 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 18:55:50,055 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-03 18:55:50,055 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 18:55:50,055 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-03 18:55:50,055 - INFO - Setting use_openssl_only mode to False
+2025-03-03 18:55:50,055 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+<snowflake.connector.connection.SnowflakeConnection object at 0x000001EFE14DBCA0>
+2025-03-03 18:55:56,470 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 18:55:56,470 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-03 18:55:58,470 - INFO - query execution done
+2025-03-03 18:55:58,470 - INFO - query execution done
+2025-03-03 18:55:58,486 - INFO - fetching data done
+2025-03-03 18:55:58,486 - INFO - fetching data done
+2025-03-03 20:33:47,977 - INFO - closed
+2025-03-03 20:33:47,977 - INFO - closed
+2025-03-03 20:33:47,980 - INFO - No async queries seem to be running, deleting session
+2025-03-03 20:33:47,980 - INFO - No async queries seem to be running, deleting session
+2025-03-03 21:19:13,219 - INFO - Available themes: ['itft1', 'keramik', 'yaru', 'clearlooks', 'clam', 'adapta', 'default', 'scidsand', 'classic', 'smog', 'winnative', 'vista', 'radiance', 'scidpurple', 'xpnative', 'scidblue', 'scidgreen', 'plastik', 'aquativo', 'elegance', 'arc', 'winxpblue', 'scidmint', 'scidpink', 'black', 'blue', 'scidgrey', 'alt', 'breeze', 'equilux', 'ubuntu', 'kroc']
+2025-03-03 21:19:13,219 - INFO - Available themes: ['itft1', 'keramik', 'yaru', 'clearlooks', 'clam', 'adapta', 'default', 'scidsand', 'classic', 'smog', 'winnative', 'vista', 'radiance', 'scidpurple', 'xpnative', 'scidblue', 'scidgreen', 'plastik', 'aquativo', 'elegance', 'arc', 'winxpblue', 'scidmint', 'scidpink', 'black', 'blue', 'scidgrey', 'alt', 'breeze', 'equilux', 'ubuntu', 'kroc']
+2025-03-03 21:19:13,433 - INFO - Using theme: breeze
+2025-03-03 21:19:13,433 - INFO - Using theme: breeze
+2025-03-06 16:29:07,228 - INFO - Available themes: ['scidpink', 'clam', 'scidgreen', 'equilux', 'vista', 'classic', 'elegance', 'aquativo', 'alt', 'default', 'winnative', 'scidpurple', 'keramik', 'smog', 'scidsand', 'scidgrey', 'black', 'xpnative', 'winxpblue', 'radiance', 'plastik', 'scidblue', 'clearlooks', 'kroc', 'yaru', 'breeze', 'scidmint', 'blue', 'adapta', 'arc', 'itft1', 'ubuntu']
+2025-03-06 16:29:07,228 - INFO - Available themes: ['scidpink', 'clam', 'scidgreen', 'equilux', 'vista', 'classic', 'elegance', 'aquativo', 'alt', 'default', 'winnative', 'scidpurple', 'keramik', 'smog', 'scidsand', 'scidgrey', 'black', 'xpnative', 'winxpblue', 'radiance', 'plastik', 'scidblue', 'clearlooks', 'kroc', 'yaru', 'breeze', 'scidmint', 'blue', 'adapta', 'arc', 'itft1', 'ubuntu']
+2025-03-06 16:29:07,468 - INFO - Using theme: breeze
+2025-03-06 16:29:07,468 - INFO - Using theme: breeze
+2025-03-06 16:29:18,411 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:29:18,411 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:29:18,411 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:29:18,411 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:29:18,411 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:29:18,411 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:29:18,412 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:29:18,412 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:29:18,412 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:29:18,412 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:29:18,412 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:29:18,412 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:29:18,414 - INFO - DAG type: dataset_dependency
+2025-03-06 16:29:18,414 - INFO - DAG type: dataset_dependency
+2025-03-06 16:29:18,414 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:29:18,414 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:29:18,414 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:29:18,414 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:29:18,426 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:29:18,426 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:31:30,108 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:31:30,108 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:31:30,108 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:31:30,108 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:31:30,108 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:31:30,108 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:31:30,110 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:31:30,110 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:31:30,110 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:31:30,110 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:31:30,110 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:31:30,110 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:31:30,112 - INFO - DAG type: dataset_dependency
+2025-03-06 16:31:30,112 - INFO - DAG type: dataset_dependency
+2025-03-06 16:31:30,112 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:31:30,112 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:31:30,112 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:31:30,112 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:31:30,115 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:31:30,115 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:33:20,679 - ERROR - Traceback (most recent call last):
+2025-03-06 16:33:20,679 - ERROR - Traceback (most recent call last):
+2025-03-06 16:33:20,679 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:33:20,679 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:33:20,682 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:33:20,682 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:33:20,684 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:33:20,684 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:35:30,446 - INFO - Available themes: ['scidpurple', 'elegance', 'radiance', 'scidpink', 'clearlooks', 'scidsand', 'clam', 'winxpblue', 'itft1', 'classic', 'smog', 'default', 'breeze', 'aquativo', 'scidblue', 'scidgreen', 'arc', 'yaru', 'keramik', 'ubuntu', 'alt', 'adapta', 'vista', 'plastik', 'xpnative', 'equilux', 'scidgrey', 'black', 'scidmint', 'blue', 'winnative', 'kroc']
+2025-03-06 16:35:30,446 - INFO - Available themes: ['scidpurple', 'elegance', 'radiance', 'scidpink', 'clearlooks', 'scidsand', 'clam', 'winxpblue', 'itft1', 'classic', 'smog', 'default', 'breeze', 'aquativo', 'scidblue', 'scidgreen', 'arc', 'yaru', 'keramik', 'ubuntu', 'alt', 'adapta', 'vista', 'plastik', 'xpnative', 'equilux', 'scidgrey', 'black', 'scidmint', 'blue', 'winnative', 'kroc']
+2025-03-06 16:35:30,709 - INFO - Using theme: breeze
+2025-03-06 16:35:30,709 - INFO - Using theme: breeze
+2025-03-06 16:35:39,945 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:35:39,945 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:35:39,946 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:35:39,946 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:35:39,946 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:35:39,946 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:35:39,946 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:35:39,946 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:35:39,946 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:35:39,946 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:35:39,946 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:35:39,946 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:35:39,948 - INFO - DAG type: dataset_dependency
+2025-03-06 16:35:39,948 - INFO - DAG type: dataset_dependency
+2025-03-06 16:35:39,948 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:35:39,948 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:35:39,949 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:35:39,949 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:35:39,953 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:35:39,953 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:36:17,218 - ERROR - Traceback (most recent call last):
+2025-03-06 16:36:17,218 - ERROR - Traceback (most recent call last):
+2025-03-06 16:36:17,218 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:36:17,218 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:36:17,219 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:36:17,219 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:36:17,220 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:36:17,220 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:36:23,277 - INFO - Available themes: ['scidpurple', 'scidgreen', 'scidgrey', 'scidmint', 'alt', 'yaru', 'black', 'keramik', 'ubuntu', 'classic', 'radiance', 'xpnative', 'blue', 'smog', 'breeze', 'arc', 'aquativo', 'adapta', 'scidpink', 'clearlooks', 'winnative', 'vista', 'clam', 'equilux', 'scidsand', 'kroc', 'elegance', 'default', 'plastik', 'itft1', 'winxpblue', 'scidblue']
+2025-03-06 16:36:23,277 - INFO - Available themes: ['scidpurple', 'scidgreen', 'scidgrey', 'scidmint', 'alt', 'yaru', 'black', 'keramik', 'ubuntu', 'classic', 'radiance', 'xpnative', 'blue', 'smog', 'breeze', 'arc', 'aquativo', 'adapta', 'scidpink', 'clearlooks', 'winnative', 'vista', 'clam', 'equilux', 'scidsand', 'kroc', 'elegance', 'default', 'plastik', 'itft1', 'winxpblue', 'scidblue']
+2025-03-06 16:36:23,483 - INFO - Using theme: breeze
+2025-03-06 16:36:23,483 - INFO - Using theme: breeze
+2025-03-06 16:36:34,540 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:36:34,540 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:36:34,540 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:36:34,540 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:36:34,540 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:36:34,540 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:36:34,540 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:36:34,540 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:36:34,540 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:36:34,540 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:36:34,540 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:36:34,540 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:36:34,542 - INFO - DAG type: dataset_dependency
+2025-03-06 16:36:34,542 - INFO - DAG type: dataset_dependency
+2025-03-06 16:36:34,542 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:36:34,542 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:36:34,542 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:36:34,542 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:36:34,545 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:36:34,545 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:37:32,922 - ERROR - Traceback (most recent call last):
+2025-03-06 16:37:32,922 - ERROR - Traceback (most recent call last):
+2025-03-06 16:37:32,922 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:37:32,922 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 16:37:32,923 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:37:32,923 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 16:37:32,924 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:37:32,924 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 16:38:06,303 - INFO - Available themes: ['winxpblue', 'scidgrey', 'ubuntu', 'scidpurple', 'yaru', 'breeze', 'arc', 'scidgreen', 'classic', 'aquativo', 'elegance', 'vista', 'scidmint', 'scidblue', 'alt', 'black', 'itft1', 'clearlooks', 'scidpink', 'equilux', 'xpnative', 'keramik', 'blue', 'adapta', 'scidsand', 'smog', 'kroc', 'plastik', 'default', 'winnative', 'radiance', 'clam']
+2025-03-06 16:38:06,303 - INFO - Available themes: ['winxpblue', 'scidgrey', 'ubuntu', 'scidpurple', 'yaru', 'breeze', 'arc', 'scidgreen', 'classic', 'aquativo', 'elegance', 'vista', 'scidmint', 'scidblue', 'alt', 'black', 'itft1', 'clearlooks', 'scidpink', 'equilux', 'xpnative', 'keramik', 'blue', 'adapta', 'scidsand', 'smog', 'kroc', 'plastik', 'default', 'winnative', 'radiance', 'clam']
+2025-03-06 16:38:06,502 - INFO - Using theme: breeze
+2025-03-06 16:38:06,502 - INFO - Using theme: breeze
+2025-03-06 16:40:48,584 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:48,584 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:48,584 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+    root.mainloop()
+2025-03-06 16:40:48,584 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+    root.mainloop()
+2025-03-06 16:40:48,584 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-06 16:40:48,584 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-06 16:40:48,584 - ERROR - KeyboardInterrupt
+2025-03-06 16:40:48,584 - ERROR - KeyboardInterrupt
+2025-03-06 16:40:58,474 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,474 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,474 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 943, in generate_from_mapping
+2025-03-06 16:40:58,474 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 943, in generate_from_mapping
+2025-03-06 16:40:58,475 - ERROR - model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\dbt_model_generator.py", line 172, in create_dbt_model_from_json
+2025-03-06 16:40:58,475 - ERROR - model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\dbt_model_generator.py", line 172, in create_dbt_model_from_json
+2025-03-06 16:40:58,475 - ERROR - if target_col in ["List (Y,N)", "Table Type", "ref"] or "NEXTVAL" in column['Logic']:TypeError: argument of type 'int' is not iterable
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:58,475 - ERROR - if target_col in ["List (Y,N)", "Table Type", "ref"] or "NEXTVAL" in column['Logic']:TypeError: argument of type 'int' is not iterable
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:58,476 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,476 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,476 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 590, in run_generation
+2025-03-06 16:40:58,476 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 590, in run_generation
+2025-03-06 16:40:58,476 - ERROR - self.generate_from_mapping()  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 999, in generate_from_mapping
+2025-03-06 16:40:58,476 - ERROR - self.generate_from_mapping()  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 999, in generate_from_mapping
+2025-03-06 16:40:58,477 - ERROR - self.set_status(f"Error: {str(e)}")  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 603, in set_status
+2025-03-06 16:40:58,477 - ERROR - self.set_status(f"Error: {str(e)}")  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 603, in set_status
+2025-03-06 16:40:58,478 - ERROR - self.status_label.config(text=message)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1637, in configure
+2025-03-06 16:40:58,478 - ERROR - self.status_label.config(text=message)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1637, in configure
+2025-03-06 16:40:58,479 - ERROR - return self._configure('configure', cnf, kw)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1627, in _configure
+2025-03-06 16:40:58,479 - ERROR - return self._configure('configure', cnf, kw)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1627, in _configure
+2025-03-06 16:40:58,480 - ERROR - self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))RuntimeError: main thread is not in main loop
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:58,480 - ERROR - self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))RuntimeError: main thread is not in main loop
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:58,480 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,480 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:58,480 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 870, in run
+2025-03-06 16:40:58,480 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 870, in run
+2025-03-06 16:40:58,481 - ERROR - self._target(*self._args, **self._kwargs)  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 593, in run_generation
+2025-03-06 16:40:58,481 - ERROR - self._target(*self._args, **self._kwargs)  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 593, in run_generation
+2025-03-06 16:40:58,482 - ERROR - self.root.after(0, self.finish_generation)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 811, in after
+2025-03-06 16:40:58,482 - ERROR - self.root.after(0, self.finish_generation)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 811, in after
+2025-03-06 16:40:58,483 - ERROR - name = self._register(callit)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1519, in _register
+2025-03-06 16:40:58,483 - ERROR - name = self._register(callit)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1519, in _register
+2025-03-06 16:40:58,483 - ERROR - self.tk.createcommand(name, f)RuntimeError: main thread is not in main loop
+2025-03-06 16:40:58,483 - ERROR - self.tk.createcommand(name, f)RuntimeError: main thread is not in main loop
+2025-03-06 16:40:59,680 - ERROR - Exception in thread Thread-6:
+2025-03-06 16:40:59,680 - ERROR - Exception in thread Thread-6:
+2025-03-06 16:40:59,681 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,681 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,681 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 943, in generate_from_mapping
+2025-03-06 16:40:59,681 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 943, in generate_from_mapping
+2025-03-06 16:40:59,682 - ERROR - model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\dbt_model_generator.py", line 172, in create_dbt_model_from_json
+2025-03-06 16:40:59,682 - ERROR - model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\scripts\dbt_model_generator.py", line 172, in create_dbt_model_from_json
+2025-03-06 16:40:59,682 - ERROR - if target_col in ["List (Y,N)", "Table Type", "ref"] or "NEXTVAL" in column['Logic']:TypeError: argument of type 'int' is not iterable
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:59,682 - ERROR - if target_col in ["List (Y,N)", "Table Type", "ref"] or "NEXTVAL" in column['Logic']:TypeError: argument of type 'int' is not iterable
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:59,682 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,682 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,683 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 590, in run_generation
+2025-03-06 16:40:59,683 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 590, in run_generation
+2025-03-06 16:40:59,683 - ERROR - self.generate_from_mapping()  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 999, in generate_from_mapping
+2025-03-06 16:40:59,683 - ERROR - self.generate_from_mapping()  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 999, in generate_from_mapping
+2025-03-06 16:40:59,683 - ERROR - self.set_status(f"Error: {str(e)}")  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 603, in set_status
+2025-03-06 16:40:59,683 - ERROR - self.set_status(f"Error: {str(e)}")  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 603, in set_status
+2025-03-06 16:40:59,685 - ERROR - self.status_label.config(text=message)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1637, in configure
+2025-03-06 16:40:59,685 - ERROR - self.status_label.config(text=message)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1637, in configure
+2025-03-06 16:40:59,685 - ERROR - return self._configure('configure', cnf, kw)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1627, in _configure
+2025-03-06 16:40:59,685 - ERROR - return self._configure('configure', cnf, kw)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1627, in _configure
+2025-03-06 16:40:59,686 - ERROR - self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))RuntimeError: main thread is not in main loop
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:59,686 - ERROR - self.tk.call(_flatten((self._w, cmd)) + self._options(cnf))RuntimeError: main thread is not in main loop
+During handling of the above exception, another exception occurred:
+2025-03-06 16:40:59,686 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,686 - ERROR - Traceback (most recent call last):
+2025-03-06 16:40:59,686 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 932, in _bootstrap_inner
+2025-03-06 16:40:59,686 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 932, in _bootstrap_inner
+2025-03-06 16:40:59,687 - ERROR - self.run()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 870, in run
+2025-03-06 16:40:59,687 - ERROR - self.run()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\threading.py", line 870, in run
+2025-03-06 16:40:59,687 - ERROR - self._target(*self._args, **self._kwargs)  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 593, in run_generation
+2025-03-06 16:40:59,687 - ERROR - self._target(*self._args, **self._kwargs)  File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 593, in run_generation
+2025-03-06 16:40:59,688 - ERROR - self.root.after(0, self.finish_generation)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 811, in after
+2025-03-06 16:40:59,688 - ERROR - self.root.after(0, self.finish_generation)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 811, in after
+2025-03-06 16:40:59,688 - ERROR - name = self._register(callit)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1519, in _register
+2025-03-06 16:40:59,688 - ERROR - name = self._register(callit)  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1519, in _register
+2025-03-06 16:40:59,689 - ERROR - self.tk.createcommand(name, f)RuntimeError: main thread is not in main loop
+2025-03-06 16:40:59,689 - ERROR - self.tk.createcommand(name, f)RuntimeError: main thread is not in main loop
+2025-03-06 16:41:06,341 - INFO - Available themes: ['scidsand', 'alt', 'kroc', 'default', 'elegance', 'scidgrey', 'adapta', 'smog', 'scidpurple', 'classic', 'radiance', 'clam', 'xpnative', 'blue', 'breeze', 'clearlooks', 'itft1', 'scidpink', 'yaru', 'scidgreen', 'winxpblue', 'scidmint', 'keramik', 'aquativo', 'equilux', 'winnative', 'black', 'arc', 'scidblue', 'plastik', 'vista', 'ubuntu']
+2025-03-06 16:41:06,341 - INFO - Available themes: ['scidsand', 'alt', 'kroc', 'default', 'elegance', 'scidgrey', 'adapta', 'smog', 'scidpurple', 'classic', 'radiance', 'clam', 'xpnative', 'blue', 'breeze', 'clearlooks', 'itft1', 'scidpink', 'yaru', 'scidgreen', 'winxpblue', 'scidmint', 'keramik', 'aquativo', 'equilux', 'winnative', 'black', 'arc', 'scidblue', 'plastik', 'vista', 'ubuntu']
+2025-03-06 16:41:06,650 - INFO - Using theme: breeze
+2025-03-06 16:41:06,650 - INFO - Using theme: breeze
+2025-03-06 16:44:44,881 - INFO - Available themes: ['scidmint', 'radiance', 'vista', 'black', 'blue', 'scidpurple', 'scidsand', 'scidgreen', 'winxpblue', 'aquativo', 'itft1', 'elegance', 'yaru', 'breeze', 'clearlooks', 'arc', 'adapta', 'kroc', 'default', 'xpnative', 'smog', 'scidgrey', 'classic', 'clam', 'scidblue', 'scidpink', 'keramik', 'ubuntu', 'equilux', 'alt', 'plastik', 'winnative']
+2025-03-06 16:44:44,881 - INFO - Available themes: ['scidmint', 'radiance', 'vista', 'black', 'blue', 'scidpurple', 'scidsand', 'scidgreen', 'winxpblue', 'aquativo', 'itft1', 'elegance', 'yaru', 'breeze', 'clearlooks', 'arc', 'adapta', 'kroc', 'default', 'xpnative', 'smog', 'scidgrey', 'classic', 'clam', 'scidblue', 'scidpink', 'keramik', 'ubuntu', 'equilux', 'alt', 'plastik', 'winnative']
+2025-03-06 16:44:45,095 - INFO - Using theme: breeze
+2025-03-06 16:44:45,095 - INFO - Using theme: breeze
+2025-03-06 16:45:24,462 - INFO - Available themes: ['clearlooks', 'keramik', 'blue', 'arc', 'black', 'radiance', 'smog', 'clam', 'scidgrey', 'yaru', 'scidgreen', 'scidmint', 'scidpink', 'vista', 'default', 'breeze', 'plastik', 'equilux', 'aquativo', 'xpnative', 'kroc', 'winxpblue', 'ubuntu', 'scidblue', 'classic', 'winnative', 'scidpurple', 'alt', 'scidsand', 'adapta', 'itft1', 'elegance']
+2025-03-06 16:45:24,462 - INFO - Available themes: ['clearlooks', 'keramik', 'blue', 'arc', 'black', 'radiance', 'smog', 'clam', 'scidgrey', 'yaru', 'scidgreen', 'scidmint', 'scidpink', 'vista', 'default', 'breeze', 'plastik', 'equilux', 'aquativo', 'xpnative', 'kroc', 'winxpblue', 'ubuntu', 'scidblue', 'classic', 'winnative', 'scidpurple', 'alt', 'scidsand', 'adapta', 'itft1', 'elegance']
+2025-03-06 16:45:24,719 - INFO - Using theme: breeze
+2025-03-06 16:45:24,719 - INFO - Using theme: breeze
+2025-03-06 16:47:14,119 - INFO - Available themes: ['elegance', 'winnative', 'scidpink', 'alt', 'black', 'keramik', 'radiance', 'aquativo', 'xpnative', 'adapta', 'scidgreen', 'classic', 'equilux', 'blue', 'vista', 'kroc', 'ubuntu', 'scidblue', 'winxpblue', 'scidmint', 'yaru', 'clam', 'default', 'clearlooks', 'breeze', 'arc', 'scidsand', 'plastik', 'smog', 'scidpurple', 'itft1', 'scidgrey']
+2025-03-06 16:47:14,119 - INFO - Available themes: ['elegance', 'winnative', 'scidpink', 'alt', 'black', 'keramik', 'radiance', 'aquativo', 'xpnative', 'adapta', 'scidgreen', 'classic', 'equilux', 'blue', 'vista', 'kroc', 'ubuntu', 'scidblue', 'winxpblue', 'scidmint', 'yaru', 'clam', 'default', 'clearlooks', 'breeze', 'arc', 'scidsand', 'plastik', 'smog', 'scidpurple', 'itft1', 'scidgrey']
+2025-03-06 16:47:14,338 - INFO - Using theme: breeze
+2025-03-06 16:47:14,338 - INFO - Using theme: breeze
+2025-03-06 16:48:13,445 - INFO - Available themes: ['ubuntu', 'black', 'scidgrey', 'classic', 'radiance', 'xpnative', 'keramik', 'scidblue', 'kroc', 'scidsand', 'clearlooks', 'yaru', 'smog', 'aquativo', 'plastik', 'scidpurple', 'clam', 'arc', 'itft1', 'blue', 'default', 'breeze', 'adapta', 'scidpink', 'vista', 'alt', 'winnative', 'scidgreen', 'equilux', 'elegance', 'scidmint', 'winxpblue']
+2025-03-06 16:48:13,445 - INFO - Available themes: ['ubuntu', 'black', 'scidgrey', 'classic', 'radiance', 'xpnative', 'keramik', 'scidblue', 'kroc', 'scidsand', 'clearlooks', 'yaru', 'smog', 'aquativo', 'plastik', 'scidpurple', 'clam', 'arc', 'itft1', 'blue', 'default', 'breeze', 'adapta', 'scidpink', 'vista', 'alt', 'winnative', 'scidgreen', 'equilux', 'elegance', 'scidmint', 'winxpblue']
+2025-03-06 16:48:13,671 - INFO - Using theme: breeze
+2025-03-06 16:48:13,671 - INFO - Using theme: breeze
+2025-03-06 16:48:20,894 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:48:20,894 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 16:48:20,894 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:48:20,894 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 16:48:20,894 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:48:20,894 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 16:48:20,894 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:48:20,894 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 16:48:20,894 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:48:20,894 - INFO - Added 2 dependencies to DAG config
+2025-03-06 16:48:20,894 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:48:20,894 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:48:20,896 - INFO - DAG type: dataset_dependency
+2025-03-06 16:48:20,896 - INFO - DAG type: dataset_dependency
+2025-03-06 16:48:20,896 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:48:20,896 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:48:20,896 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 16:48:20,896 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:48:20,900 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 16:48:20,900 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 17:47:16,895 - INFO - Available themes: ['equilux', 'scidpink', 'clearlooks', 'elegance', 'itft1', 'scidgreen', 'breeze', 'adapta', 'vista', 'ubuntu', 'scidpurple', 'scidmint', 'radiance', 'xpnative', 'smog', 'keramik', 'classic', 'default', 'scidblue', 'blue', 'winnative', 'scidsand', 'clam', 'black', 'yaru', 'plastik', 'aquativo', 'alt', 'scidgrey', 'arc', 'winxpblue', 'kroc']
+2025-03-06 17:47:16,895 - INFO - Available themes: ['equilux', 'scidpink', 'clearlooks', 'elegance', 'itft1', 'scidgreen', 'breeze', 'adapta', 'vista', 'ubuntu', 'scidpurple', 'scidmint', 'radiance', 'xpnative', 'smog', 'keramik', 'classic', 'default', 'scidblue', 'blue', 'winnative', 'scidsand', 'clam', 'black', 'yaru', 'plastik', 'aquativo', 'alt', 'scidgrey', 'arc', 'winxpblue', 'kroc']
+2025-03-06 17:47:17,183 - INFO - Using theme: breeze
+2025-03-06 17:47:17,183 - INFO - Using theme: breeze
+2025-03-06 17:51:36,487 - INFO - Available themes: ['adapta', 'classic', 'keramik', 'equilux', 'clam', 'scidpink', 'winnative', 'clearlooks', 'black', 'breeze', 'alt', 'smog', 'scidgrey', 'elegance', 'scidpurple', 'xpnative', 'default', 'radiance', 'aquativo', 'ubuntu', 'scidmint', 'scidblue', 'kroc', 'winxpblue', 'plastik', 'scidsand', 'yaru', 'scidgreen', 'itft1', 'blue', 'arc', 'vista']
+2025-03-06 17:51:36,487 - INFO - Available themes: ['adapta', 'classic', 'keramik', 'equilux', 'clam', 'scidpink', 'winnative', 'clearlooks', 'black', 'breeze', 'alt', 'smog', 'scidgrey', 'elegance', 'scidpurple', 'xpnative', 'default', 'radiance', 'aquativo', 'ubuntu', 'scidmint', 'scidblue', 'kroc', 'winxpblue', 'plastik', 'scidsand', 'yaru', 'scidgreen', 'itft1', 'blue', 'arc', 'vista']
+2025-03-06 17:51:36,736 - INFO - Using theme: breeze
+2025-03-06 17:51:36,736 - INFO - Using theme: breeze
+2025-03-06 17:52:15,412 - ERROR - Traceback (most recent call last):
+2025-03-06 17:52:15,412 - ERROR - Traceback (most recent call last):
+2025-03-06 17:52:15,412 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:52:15,412 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:52:15,414 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:52:15,414 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:52:15,416 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:52:15,416 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:52:21,437 - INFO - Available themes: ['xpnative', 'scidgreen', 'adapta', 'vista', 'arc', 'black', 'alt', 'clearlooks', 'scidgrey', 'winxpblue', 'breeze', 'elegance', 'radiance', 'scidmint', 'yaru', 'scidsand', 'equilux', 'default', 'smog', 'clam', 'scidpurple', 'kroc', 'classic', 'itft1', 'scidpink', 'plastik', 'aquativo', 'scidblue', 'ubuntu', 'winnative', 'blue', 'keramik']
+2025-03-06 17:52:21,437 - INFO - Available themes: ['xpnative', 'scidgreen', 'adapta', 'vista', 'arc', 'black', 'alt', 'clearlooks', 'scidgrey', 'winxpblue', 'breeze', 'elegance', 'radiance', 'scidmint', 'yaru', 'scidsand', 'equilux', 'default', 'smog', 'clam', 'scidpurple', 'kroc', 'classic', 'itft1', 'scidpink', 'plastik', 'aquativo', 'scidblue', 'ubuntu', 'winnative', 'blue', 'keramik']
+2025-03-06 17:52:21,653 - INFO - Using theme: breeze
+2025-03-06 17:52:21,653 - INFO - Using theme: breeze
+2025-03-06 17:53:37,204 - ERROR - Traceback (most recent call last):
+2025-03-06 17:53:37,204 - ERROR - Traceback (most recent call last):
+2025-03-06 17:53:37,204 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:53:37,204 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:53:37,206 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:53:37,206 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:53:37,207 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:53:37,207 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:54:43,500 - INFO - Available themes: ['plastik', 'yaru', 'itft1', 'classic', 'radiance', 'xpnative', 'keramik', 'clearlooks', 'blue', 'scidpink', 'black', 'adapta', 'alt', 'scidmint', 'scidgrey', 'arc', 'ubuntu', 'default', 'scidpurple', 'winxpblue', 'kroc', 'scidgreen', 'winnative', 'smog', 'equilux', 'scidblue', 'vista', 'scidsand', 'elegance', 'aquativo', 'breeze', 'clam']
+2025-03-06 17:54:43,500 - INFO - Available themes: ['plastik', 'yaru', 'itft1', 'classic', 'radiance', 'xpnative', 'keramik', 'clearlooks', 'blue', 'scidpink', 'black', 'adapta', 'alt', 'scidmint', 'scidgrey', 'arc', 'ubuntu', 'default', 'scidpurple', 'winxpblue', 'kroc', 'scidgreen', 'winnative', 'smog', 'equilux', 'scidblue', 'vista', 'scidsand', 'elegance', 'aquativo', 'breeze', 'clam']
+2025-03-06 17:54:43,703 - INFO - Using theme: breeze
+2025-03-06 17:54:43,703 - INFO - Using theme: breeze
+2025-03-06 17:56:45,095 - INFO - Available themes: ['smog', 'keramik', 'elegance', 'blue', 'breeze', 'radiance', 'adapta', 'scidgrey', 'equilux', 'winxpblue', 'black', 'itft1', 'aquativo', 'xpnative', 'ubuntu', 'winnative', 'clearlooks', 'vista', 'classic', 'arc', 'scidpurple', 'default', 'kroc', 'scidsand', 'scidmint', 'scidpink', 'alt', 'clam', 'plastik', 'scidgreen', 'scidblue', 'yaru']
+2025-03-06 17:56:45,095 - INFO - Available themes: ['smog', 'keramik', 'elegance', 'blue', 'breeze', 'radiance', 'adapta', 'scidgrey', 'equilux', 'winxpblue', 'black', 'itft1', 'aquativo', 'xpnative', 'ubuntu', 'winnative', 'clearlooks', 'vista', 'classic', 'arc', 'scidpurple', 'default', 'kroc', 'scidsand', 'scidmint', 'scidpink', 'alt', 'clam', 'plastik', 'scidgreen', 'scidblue', 'yaru']
+2025-03-06 17:56:45,294 - INFO - Using theme: breeze
+2025-03-06 17:56:45,294 - INFO - Using theme: breeze
+2025-03-06 17:56:54,462 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 17:56:54,462 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 17:56:54,462 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 17:56:54,462 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 17:56:54,462 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 17:56:54,462 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 17:56:54,462 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 17:56:54,462 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 17:56:54,462 - INFO - Added 2 dependencies to DAG config
+2025-03-06 17:56:54,462 - INFO - Added 2 dependencies to DAG config
+2025-03-06 17:56:54,462 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 17:56:54,462 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 17:56:54,464 - INFO - DAG type: dataset_dependency
+2025-03-06 17:56:54,464 - INFO - DAG type: dataset_dependency
+2025-03-06 17:56:54,464 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 17:56:54,464 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 17:56:54,464 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 17:56:54,464 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 17:56:54,478 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 17:56:54,478 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 17:57:24,767 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:57:24,767 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:57:24,769 - INFO - No matching DDL file found in history
+2025-03-06 17:57:24,769 - INFO - No matching DDL file found in history
+2025-03-06 17:57:24,769 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:57:24,769 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:57:24,769 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 17:57:24,769 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+2025-03-06 17:57:34,805 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:57:34,805 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:57:34,807 - INFO - No matching DDL file found in history
+2025-03-06 17:57:34,807 - INFO - No matching DDL file found in history
+2025-03-06 17:57:34,807 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:57:34,807 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:57:34,807 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 17:57:34,807 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 17:58:37,280 - ERROR - Traceback (most recent call last):
+2025-03-06 17:58:37,280 - ERROR - Traceback (most recent call last):
+2025-03-06 17:58:37,280 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:58:37,280 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:58:37,283 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:58:37,283 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:58:37,284 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:58:37,284 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:58:43,541 - INFO - Available themes: ['scidgreen', 'equilux', 'black', 'scidpurple', 'ubuntu', 'winnative', 'keramik', 'scidgrey', 'classic', 'kroc', 'xpnative', 'itft1', 'smog', 'plastik', 'alt', 'radiance', 'elegance', 'clam', 'scidpink', 'default', 'aquativo', 'breeze', 'scidsand', 'adapta', 'scidblue', 'winxpblue', 'vista', 'blue', 'arc', 'yaru', 'scidmint', 'clearlooks']
+2025-03-06 17:58:43,541 - INFO - Available themes: ['scidgreen', 'equilux', 'black', 'scidpurple', 'ubuntu', 'winnative', 'keramik', 'scidgrey', 'classic', 'kroc', 'xpnative', 'itft1', 'smog', 'plastik', 'alt', 'radiance', 'elegance', 'clam', 'scidpink', 'default', 'aquativo', 'breeze', 'scidsand', 'adapta', 'scidblue', 'winxpblue', 'vista', 'blue', 'arc', 'yaru', 'scidmint', 'clearlooks']
+2025-03-06 17:58:43,742 - INFO - Using theme: breeze
+2025-03-06 17:58:43,742 - INFO - Using theme: breeze
+2025-03-06 17:58:50,358 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:58:50,358 - INFO - Looking for matching DDL file in history...
+2025-03-06 17:58:50,359 - INFO - No matching DDL file found in history
+2025-03-06 17:58:50,359 - INFO - No matching DDL file found in history
+2025-03-06 17:58:50,359 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:58:50,359 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 17:58:50,359 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 17:58:50,359 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 17:59:56,608 - ERROR - Traceback (most recent call last):
+2025-03-06 17:59:56,608 - ERROR - Traceback (most recent call last):
+2025-03-06 17:59:56,608 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:59:56,608 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 17:59:56,611 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:59:56,611 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 17:59:56,612 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 17:59:56,612 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 18:00:03,396 - INFO - Available themes: ['blue', 'scidpurple', 'plastik', 'elegance', 'smog', 'scidsand', 'xpnative', 'yaru', 'ubuntu', 'kroc', 'itft1', 'adapta', 'black', 'winnative', 'default', 'equilux', 'scidgreen', 'scidmint', 'radiance', 'breeze', 'scidblue', 'alt', 'scidgrey', 'keramik', 'clam', 'vista', 'scidpink', 'arc', 'aquativo', 'winxpblue', 'clearlooks', 'classic']
+2025-03-06 18:00:03,396 - INFO - Available themes: ['blue', 'scidpurple', 'plastik', 'elegance', 'smog', 'scidsand', 'xpnative', 'yaru', 'ubuntu', 'kroc', 'itft1', 'adapta', 'black', 'winnative', 'default', 'equilux', 'scidgreen', 'scidmint', 'radiance', 'breeze', 'scidblue', 'alt', 'scidgrey', 'keramik', 'clam', 'vista', 'scidpink', 'arc', 'aquativo', 'winxpblue', 'clearlooks', 'classic']
+2025-03-06 18:00:03,601 - INFO - Using theme: breeze
+2025-03-06 18:00:03,601 - INFO - Using theme: breeze
+2025-03-06 18:00:28,625 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:00:28,625 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:00:28,626 - INFO - No matching DDL file found in history
+2025-03-06 18:00:28,626 - INFO - No matching DDL file found in history
+2025-03-06 18:00:28,626 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:00:28,626 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:00:28,626 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:00:28,626 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:01:03,855 - ERROR - Traceback (most recent call last):
+2025-03-06 18:01:03,855 - ERROR - Traceback (most recent call last):
+2025-03-06 18:01:03,855 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 18:01:03,855 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 18:01:03,857 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 18:01:03,857 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 18:01:03,858 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 18:01:03,858 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 18:05:50,526 - INFO - Available themes: ['classic', 'clearlooks', 'adapta', 'arc', 'xpnative', 'radiance', 'keramik', 'blue', 'smog', 'ubuntu', 'winnative', 'scidgreen', 'vista', 'equilux', 'default', 'scidgrey', 'scidpink', 'scidblue', 'scidsand', 'breeze', 'alt', 'elegance', 'winxpblue', 'clam', 'kroc', 'plastik', 'aquativo', 'black', 'scidpurple', 'scidmint', 'yaru', 'itft1']
+2025-03-06 18:05:50,526 - INFO - Available themes: ['classic', 'clearlooks', 'adapta', 'arc', 'xpnative', 'radiance', 'keramik', 'blue', 'smog', 'ubuntu', 'winnative', 'scidgreen', 'vista', 'equilux', 'default', 'scidgrey', 'scidpink', 'scidblue', 'scidsand', 'breeze', 'alt', 'elegance', 'winxpblue', 'clam', 'kroc', 'plastik', 'aquativo', 'black', 'scidpurple', 'scidmint', 'yaru', 'itft1']
+2025-03-06 18:05:50,927 - INFO - Using theme: breeze
+2025-03-06 18:05:50,927 - INFO - Using theme: breeze
+2025-03-06 18:06:16,178 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:06:16,178 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:06:16,180 - INFO - No matching DDL file found in history
+2025-03-06 18:06:16,180 - INFO - No matching DDL file found in history
+2025-03-06 18:06:16,180 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:06:16,180 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:06:16,180 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:06:16,180 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:06:53,774 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:06:53,774 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:06:53,777 - INFO - No matching DDL file found in history
+2025-03-06 18:06:53,777 - INFO - No matching DDL file found in history
+2025-03-06 18:06:53,777 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:06:53,777 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:06:53,777 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:06:53,777 - INFO - Adding unique keys to model config: ['ITEM_ID']
+data\model_config.json
+2025-03-06 18:06:54,097 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-06 18:06:54,097 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-06 18:06:54,103 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-06 18:06:54,103 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-06 18:06:54,103 - INFO - Setting use_openssl_only mode to False
+2025-03-06 18:06:54,103 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-03-06 18:07:27,254 - INFO - Available themes: ['ubuntu', 'alt', 'default', 'clearlooks', 'scidgreen', 'keramik', 'radiance', 'scidblue', 'scidgrey', 'scidsand', 'winxpblue', 'blue', 'plastik', 'aquativo', 'adapta', 'yaru', 'arc', 'kroc', 'winnative', 'scidpink', 'breeze', 'itft1', 'elegance', 'vista', 'classic', 'smog', 'scidpurple', 'equilux', 'xpnative', 'scidmint', 'clam', 'black']
+2025-03-06 18:07:27,254 - INFO - Available themes: ['ubuntu', 'alt', 'default', 'clearlooks', 'scidgreen', 'keramik', 'radiance', 'scidblue', 'scidgrey', 'scidsand', 'winxpblue', 'blue', 'plastik', 'aquativo', 'adapta', 'yaru', 'arc', 'kroc', 'winnative', 'scidpink', 'breeze', 'itft1', 'elegance', 'vista', 'classic', 'smog', 'scidpurple', 'equilux', 'xpnative', 'scidmint', 'clam', 'black']
+2025-03-06 18:07:27,462 - INFO - Using theme: breeze
+2025-03-06 18:07:27,462 - INFO - Using theme: breeze
+2025-03-06 18:07:38,956 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:07:38,956 - INFO - Looking for matching DDL file in history...
+2025-03-06 18:07:38,957 - INFO - No matching DDL file found in history
+2025-03-06 18:07:38,957 - INFO - No matching DDL file found in history
+2025-03-06 18:07:38,957 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:07:38,957 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 18:07:38,957 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:07:38,957 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 18:10:04,234 - ERROR - Traceback (most recent call last):
+2025-03-06 18:10:04,234 - ERROR - Traceback (most recent call last):
+2025-03-06 18:10:04,234 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 18:10:04,234 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 18:10:04,234 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 18:10:04,234 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 18:10:04,238 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 18:10:04,238 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:04:47,867 - INFO - Available themes: ['scidpurple', 'elegance', 'breeze', 'adapta', 'kroc', 'alt', 'scidsand', 'itft1', 'plastik', 'keramik', 'scidblue', 'winxpblue', 'winnative', 'scidgrey', 'scidmint', 'clearlooks', 'scidgreen', 'yaru', 'default', 'ubuntu', 'equilux', 'clam', 'blue', 'classic', 'vista', 'smog', 'aquativo', 'radiance', 'arc', 'black', 'scidpink', 'xpnative']
+2025-03-06 20:04:47,867 - INFO - Available themes: ['scidpurple', 'elegance', 'breeze', 'adapta', 'kroc', 'alt', 'scidsand', 'itft1', 'plastik', 'keramik', 'scidblue', 'winxpblue', 'winnative', 'scidgrey', 'scidmint', 'clearlooks', 'scidgreen', 'yaru', 'default', 'ubuntu', 'equilux', 'clam', 'blue', 'classic', 'vista', 'smog', 'aquativo', 'radiance', 'arc', 'black', 'scidpink', 'xpnative']
+2025-03-06 20:04:48,080 - INFO - Using theme: breeze
+2025-03-06 20:04:48,080 - INFO - Using theme: breeze
+2025-03-06 20:04:53,476 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:04:53,476 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:04:53,477 - INFO - No matching DDL file found in history
+2025-03-06 20:04:53,477 - INFO - No matching DDL file found in history
+2025-03-06 20:04:53,477 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:04:53,477 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:04:53,477 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:04:53,477 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+2025-03-06 20:05:03,450 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:05:03,450 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:05:03,452 - INFO - No matching DDL file found in history
+2025-03-06 20:05:03,452 - INFO - No matching DDL file found in history
+2025-03-06 20:05:03,452 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:05:03,452 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:05:03,452 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:05:03,452 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:05:58,973 - ERROR - Traceback (most recent call last):
+2025-03-06 20:05:58,973 - ERROR - Traceback (most recent call last):
+2025-03-06 20:05:58,973 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:05:58,973 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:05:58,975 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:05:58,975 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:05:58,977 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:05:58,977 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:06:06,297 - INFO - Available themes: ['breeze', 'yaru', 'ubuntu', 'plastik', 'clam', 'clearlooks', 'scidpurple', 'keramik', 'xpnative', 'vista', 'kroc', 'radiance', 'smog', 'aquativo', 'adapta', 'blue', 'elegance', 'scidgrey', 'scidsand', 'winnative', 'default', 'scidgreen', 'classic', 'scidmint', 'winxpblue', 'alt', 'scidblue', 'black', 'scidpink', 'arc', 'itft1', 'equilux']
+2025-03-06 20:06:06,297 - INFO - Available themes: ['breeze', 'yaru', 'ubuntu', 'plastik', 'clam', 'clearlooks', 'scidpurple', 'keramik', 'xpnative', 'vista', 'kroc', 'radiance', 'smog', 'aquativo', 'adapta', 'blue', 'elegance', 'scidgrey', 'scidsand', 'winnative', 'default', 'scidgreen', 'classic', 'scidmint', 'winxpblue', 'alt', 'scidblue', 'black', 'scidpink', 'arc', 'itft1', 'equilux']
+2025-03-06 20:06:06,495 - INFO - Using theme: breeze
+2025-03-06 20:06:06,495 - INFO - Using theme: breeze
+2025-03-06 20:06:15,737 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:06:15,737 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:06:15,738 - INFO - No matching DDL file found in history
+2025-03-06 20:06:15,738 - INFO - No matching DDL file found in history
+2025-03-06 20:06:15,738 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:06:15,738 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:06:15,738 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:06:15,738 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:10:46,567 - INFO - Available themes: ['vista', 'black', 'xpnative', 'adapta', 'arc', 'scidgrey', 'breeze', 'yaru', 'alt', 'winnative', 'itft1', 'kroc', 'blue', 'elegance', 'radiance', 'ubuntu', 'clearlooks', 'classic', 'scidpink', 'plastik', 'smog', 'clam', 'equilux', 'scidblue', 'default', 'scidmint', 'scidgreen', 'scidsand', 'winxpblue', 'aquativo', 'keramik', 'scidpurple']
+2025-03-06 20:10:46,567 - INFO - Available themes: ['vista', 'black', 'xpnative', 'adapta', 'arc', 'scidgrey', 'breeze', 'yaru', 'alt', 'winnative', 'itft1', 'kroc', 'blue', 'elegance', 'radiance', 'ubuntu', 'clearlooks', 'classic', 'scidpink', 'plastik', 'smog', 'clam', 'equilux', 'scidblue', 'default', 'scidmint', 'scidgreen', 'scidsand', 'winxpblue', 'aquativo', 'keramik', 'scidpurple']
+2025-03-06 20:10:46,782 - INFO - Using theme: breeze
+2025-03-06 20:10:46,782 - INFO - Using theme: breeze
+2025-03-06 20:10:57,645 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:10:57,645 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:10:57,646 - INFO - No matching DDL file found in history
+2025-03-06 20:10:57,646 - INFO - No matching DDL file found in history
+2025-03-06 20:10:57,647 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:10:57,647 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:10:57,647 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:10:57,647 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:12:14,870 - ERROR - Traceback (most recent call last):
+2025-03-06 20:12:14,870 - ERROR - Traceback (most recent call last):
+2025-03-06 20:12:14,870 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:12:14,870 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:12:14,873 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:12:14,873 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:12:14,875 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:12:14,875 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:12:21,073 - INFO - Available themes: ['scidblue', 'itft1', 'aquativo', 'breeze', 'xpnative', 'kroc', 'radiance', 'winnative', 'scidpurple', 'arc', 'yaru', 'scidmint', 'classic', 'alt', 'keramik', 'scidpink', 'plastik', 'scidgreen', 'vista', 'default', 'equilux', 'elegance', 'clearlooks', 'clam', 'winxpblue', 'blue', 'black', 'scidgrey', 'scidsand', 'adapta', 'smog', 'ubuntu']
+2025-03-06 20:12:21,073 - INFO - Available themes: ['scidblue', 'itft1', 'aquativo', 'breeze', 'xpnative', 'kroc', 'radiance', 'winnative', 'scidpurple', 'arc', 'yaru', 'scidmint', 'classic', 'alt', 'keramik', 'scidpink', 'plastik', 'scidgreen', 'vista', 'default', 'equilux', 'elegance', 'clearlooks', 'clam', 'winxpblue', 'blue', 'black', 'scidgrey', 'scidsand', 'adapta', 'smog', 'ubuntu']
+2025-03-06 20:12:21,261 - INFO - Using theme: breeze
+2025-03-06 20:12:21,261 - INFO - Using theme: breeze
+2025-03-06 20:12:28,870 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:12:28,870 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:12:28,871 - INFO - No matching DDL file found in history
+2025-03-06 20:12:28,871 - INFO - No matching DDL file found in history
+2025-03-06 20:12:28,871 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:12:28,871 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:12:28,871 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:12:28,871 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:13:34,585 - ERROR - Traceback (most recent call last):
+2025-03-06 20:13:34,585 - ERROR - Traceback (most recent call last):
+2025-03-06 20:13:34,585 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:13:34,585 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:13:34,586 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:13:34,586 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:13:34,587 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:13:34,587 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:13:41,025 - INFO - Available themes: ['adapta', 'vista', 'keramik', 'ubuntu', 'clearlooks', 'arc', 'radiance', 'scidsand', 'winxpblue', 'clam', 'scidmint', 'scidblue', 'scidgreen', 'kroc', 'breeze', 'xpnative', 'blue', 'scidpurple', 'scidgrey', 'default', 'equilux', 'itft1', 'classic', 'winnative', 'aquativo', 'black', 'alt', 'yaru', 'smog', 'scidpink', 'plastik', 'elegance']
+2025-03-06 20:13:41,025 - INFO - Available themes: ['adapta', 'vista', 'keramik', 'ubuntu', 'clearlooks', 'arc', 'radiance', 'scidsand', 'winxpblue', 'clam', 'scidmint', 'scidblue', 'scidgreen', 'kroc', 'breeze', 'xpnative', 'blue', 'scidpurple', 'scidgrey', 'default', 'equilux', 'itft1', 'classic', 'winnative', 'aquativo', 'black', 'alt', 'yaru', 'smog', 'scidpink', 'plastik', 'elegance']
+2025-03-06 20:13:41,228 - INFO - Using theme: breeze
+2025-03-06 20:13:41,228 - INFO - Using theme: breeze
+2025-03-06 20:13:49,062 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:13:49,062 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:13:49,063 - INFO - No matching DDL file found in history
+2025-03-06 20:13:49,063 - INFO - No matching DDL file found in history
+2025-03-06 20:13:49,063 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:13:49,063 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:13:49,063 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:13:49,063 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:15:20,276 - ERROR - Traceback (most recent call last):
+2025-03-06 20:15:20,276 - ERROR - Traceback (most recent call last):
+2025-03-06 20:15:20,276 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:15:20,276 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:15:20,278 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:15:20,278 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:15:20,278 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:15:20,278 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:15:25,662 - INFO - Available themes: ['blue', 'xpnative', 'equilux', 'scidgrey', 'aquativo', 'yaru', 'scidmint', 'classic', 'winnative', 'elegance', 'alt', 'breeze', 'keramik', 'clam', 'scidpink', 'adapta', 'vista', 'default', 'arc', 'kroc', 'plastik', 'scidgreen', 'winxpblue', 'scidblue', 'itft1', 'smog', 'scidsand', 'ubuntu', 'clearlooks', 'scidpurple', 'radiance', 'black']
+2025-03-06 20:15:25,662 - INFO - Available themes: ['blue', 'xpnative', 'equilux', 'scidgrey', 'aquativo', 'yaru', 'scidmint', 'classic', 'winnative', 'elegance', 'alt', 'breeze', 'keramik', 'clam', 'scidpink', 'adapta', 'vista', 'default', 'arc', 'kroc', 'plastik', 'scidgreen', 'winxpblue', 'scidblue', 'itft1', 'smog', 'scidsand', 'ubuntu', 'clearlooks', 'scidpurple', 'radiance', 'black']
+2025-03-06 20:15:25,862 - INFO - Using theme: breeze
+2025-03-06 20:15:25,862 - INFO - Using theme: breeze
+2025-03-06 20:15:34,455 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:15:34,455 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:15:34,455 - INFO - No matching DDL file found in history
+2025-03-06 20:15:34,455 - INFO - No matching DDL file found in history
+2025-03-06 20:15:34,455 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:15:34,455 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:15:34,457 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:15:34,457 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:16:18,483 - ERROR - Traceback (most recent call last):
+2025-03-06 20:16:18,483 - ERROR - Traceback (most recent call last):
+2025-03-06 20:16:18,483 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:16:18,483 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:16:18,484 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:16:18,484 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:16:18,485 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:16:18,485 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:16:24,845 - INFO - Available themes: ['equilux', 'scidpink', 'kroc', 'winxpblue', 'winnative', 'classic', 'adapta', 'vista', 'ubuntu', 'scidpurple', 'breeze', 'scidgreen', 'smog', 'keramik', 'scidmint', 'itft1', 'scidsand', 'black', 'alt', 'scidblue', 'default', 'blue', 'radiance', 'elegance', 'arc', 'xpnative', 'scidgrey', 'aquativo', 'clearlooks', 'yaru', 'clam', 'plastik']
+2025-03-06 20:16:24,845 - INFO - Available themes: ['equilux', 'scidpink', 'kroc', 'winxpblue', 'winnative', 'classic', 'adapta', 'vista', 'ubuntu', 'scidpurple', 'breeze', 'scidgreen', 'smog', 'keramik', 'scidmint', 'itft1', 'scidsand', 'black', 'alt', 'scidblue', 'default', 'blue', 'radiance', 'elegance', 'arc', 'xpnative', 'scidgrey', 'aquativo', 'clearlooks', 'yaru', 'clam', 'plastik']
+2025-03-06 20:16:25,034 - INFO - Using theme: breeze
+2025-03-06 20:16:25,034 - INFO - Using theme: breeze
+2025-03-06 20:16:40,784 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:16:40,784 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:16:40,785 - INFO - No matching DDL file found in history
+2025-03-06 20:16:40,785 - INFO - No matching DDL file found in history
+2025-03-06 20:16:40,785 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:16:40,785 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:16:40,785 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:16:40,785 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:17:53,762 - ERROR - Traceback (most recent call last):
+2025-03-06 20:17:53,762 - ERROR - Traceback (most recent call last):
+2025-03-06 20:17:53,762 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:17:53,762 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:17:53,765 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:17:53,765 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:17:53,766 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:17:53,766 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:18:00,233 - INFO - Available themes: ['kroc', 'radiance', 'itft1', 'clearlooks', 'alt', 'smog', 'plastik', 'scidmint', 'default', 'vista', 'clam', 'classic', 'aquativo', 'scidgreen', 'elegance', 'adapta', 'winnative', 'yaru', 'scidpink', 'scidgrey', 'black', 'breeze', 'winxpblue', 'scidsand', 'scidblue', 'scidpurple', 'xpnative', 'keramik', 'arc', 'blue', 'ubuntu', 'equilux']
+2025-03-06 20:18:00,233 - INFO - Available themes: ['kroc', 'radiance', 'itft1', 'clearlooks', 'alt', 'smog', 'plastik', 'scidmint', 'default', 'vista', 'clam', 'classic', 'aquativo', 'scidgreen', 'elegance', 'adapta', 'winnative', 'yaru', 'scidpink', 'scidgrey', 'black', 'breeze', 'winxpblue', 'scidsand', 'scidblue', 'scidpurple', 'xpnative', 'keramik', 'arc', 'blue', 'ubuntu', 'equilux']
+2025-03-06 20:18:00,438 - INFO - Using theme: breeze
+2025-03-06 20:18:00,438 - INFO - Using theme: breeze
+2025-03-06 20:18:10,934 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:18:10,934 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:18:10,934 - INFO - No matching DDL file found in history
+2025-03-06 20:18:10,934 - INFO - No matching DDL file found in history
+2025-03-06 20:18:10,935 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:18:10,935 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:18:10,935 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:18:10,935 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:21:30,656 - ERROR - Traceback (most recent call last):
+2025-03-06 20:21:30,656 - ERROR - Traceback (most recent call last):
+2025-03-06 20:21:30,656 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:21:30,656 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:21:30,657 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:21:30,657 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:21:30,658 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:21:30,658 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:21:36,311 - INFO - Available themes: ['scidpink', 'scidgreen', 'winnative', 'plastik', 'keramik', 'scidgrey', 'elegance', 'equilux', 'black', 'smog', 'itft1', 'classic', 'alt', 'ubuntu', 'kroc', 'yaru', 'vista', 'clearlooks', 'winxpblue', 'scidblue', 'blue', 'scidpurple', 'default', 'xpnative', 'clam', 'arc', 'aquativo', 'breeze', 'adapta', 'scidsand', 'radiance', 'scidmint']
+2025-03-06 20:21:36,311 - INFO - Available themes: ['scidpink', 'scidgreen', 'winnative', 'plastik', 'keramik', 'scidgrey', 'elegance', 'equilux', 'black', 'smog', 'itft1', 'classic', 'alt', 'ubuntu', 'kroc', 'yaru', 'vista', 'clearlooks', 'winxpblue', 'scidblue', 'blue', 'scidpurple', 'default', 'xpnative', 'clam', 'arc', 'aquativo', 'breeze', 'adapta', 'scidsand', 'radiance', 'scidmint']
+2025-03-06 20:21:36,500 - INFO - Using theme: breeze
+2025-03-06 20:21:36,500 - INFO - Using theme: breeze
+2025-03-06 20:21:44,565 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:21:44,565 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:21:44,566 - INFO - No matching DDL file found in history
+2025-03-06 20:21:44,566 - INFO - No matching DDL file found in history
+2025-03-06 20:21:44,566 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:21:44,566 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:21:44,567 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:21:44,567 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:23:00,607 - ERROR - Traceback (most recent call last):
+2025-03-06 20:23:00,607 - ERROR - Traceback (most recent call last):
+2025-03-06 20:23:00,607 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:23:00,607 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:23:00,609 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:23:00,609 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:23:00,610 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:23:00,610 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:23:06,021 - INFO - Available themes: ['kroc', 'blue', 'keramik', 'equilux', 'scidblue', 'black', 'alt', 'itft1', 'yaru', 'scidpink', 'scidsand', 'scidgrey', 'aquativo', 'default', 'clam', 'scidmint', 'vista', 'xpnative', 'winnative', 'radiance', 'elegance', 'adapta', 'ubuntu', 'arc', 'winxpblue', 'breeze', 'clearlooks', 'plastik', 'scidpurple', 'scidgreen', 'classic', 'smog']
+2025-03-06 20:23:06,021 - INFO - Available themes: ['kroc', 'blue', 'keramik', 'equilux', 'scidblue', 'black', 'alt', 'itft1', 'yaru', 'scidpink', 'scidsand', 'scidgrey', 'aquativo', 'default', 'clam', 'scidmint', 'vista', 'xpnative', 'winnative', 'radiance', 'elegance', 'adapta', 'ubuntu', 'arc', 'winxpblue', 'breeze', 'clearlooks', 'plastik', 'scidpurple', 'scidgreen', 'classic', 'smog']
+2025-03-06 20:23:06,227 - INFO - Using theme: breeze
+2025-03-06 20:23:06,227 - INFO - Using theme: breeze
+2025-03-06 20:23:14,666 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:23:14,666 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:23:14,667 - INFO - No matching DDL file found in history
+2025-03-06 20:23:14,667 - INFO - No matching DDL file found in history
+2025-03-06 20:23:14,667 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:23:14,667 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:23:14,667 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:23:14,667 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:25:10,847 - ERROR - Traceback (most recent call last):
+2025-03-06 20:25:10,847 - ERROR - Traceback (most recent call last):
+2025-03-06 20:25:10,847 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:25:10,847 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:25:10,848 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:25:10,848 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:25:10,851 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:25:10,851 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:25:16,699 - INFO - Available themes: ['clearlooks', 'radiance', 'winxpblue', 'blue', 'scidsand', 'black', 'aquativo', 'clam', 'smog', 'kroc', 'scidgreen', 'scidblue', 'scidgrey', 'arc', 'vista', 'scidpurple', 'keramik', 'xpnative', 'adapta', 'ubuntu', 'scidpink', 'plastik', 'itft1', 'default', 'alt', 'classic', 'breeze', 'elegance', 'winnative', 'scidmint', 'equilux', 'yaru']
+2025-03-06 20:25:16,699 - INFO - Available themes: ['clearlooks', 'radiance', 'winxpblue', 'blue', 'scidsand', 'black', 'aquativo', 'clam', 'smog', 'kroc', 'scidgreen', 'scidblue', 'scidgrey', 'arc', 'vista', 'scidpurple', 'keramik', 'xpnative', 'adapta', 'ubuntu', 'scidpink', 'plastik', 'itft1', 'default', 'alt', 'classic', 'breeze', 'elegance', 'winnative', 'scidmint', 'equilux', 'yaru']
+2025-03-06 20:25:16,935 - INFO - Using theme: breeze
+2025-03-06 20:25:16,935 - INFO - Using theme: breeze
+2025-03-06 20:25:25,948 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:25:25,948 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:25:25,949 - INFO - No matching DDL file found in history
+2025-03-06 20:25:25,949 - INFO - No matching DDL file found in history
+2025-03-06 20:25:25,949 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:25:25,949 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:25:25,949 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:25:25,949 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:26:35,067 - ERROR - Traceback (most recent call last):
+2025-03-06 20:26:35,067 - ERROR - Traceback (most recent call last):
+2025-03-06 20:26:35,067 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:26:35,067 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:26:35,068 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:26:35,068 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:26:35,069 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:26:35,069 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:26:40,486 - INFO - Available themes: ['keramik', 'scidpink', 'smog', 'winnative', 'breeze', 'aquativo', 'scidgreen', 'blue', 'elegance', 'clam', 'radiance', 'scidpurple', 'kroc', 'scidgrey', 'scidmint', 'xpnative', 'black', 'plastik', 'winxpblue', 'equilux', 'alt', 'adapta', 'scidsand', 'ubuntu', 'itft1', 'vista', 'clearlooks', 'classic', 'scidblue', 'default', 'arc', 'yaru']
+2025-03-06 20:26:40,486 - INFO - Available themes: ['keramik', 'scidpink', 'smog', 'winnative', 'breeze', 'aquativo', 'scidgreen', 'blue', 'elegance', 'clam', 'radiance', 'scidpurple', 'kroc', 'scidgrey', 'scidmint', 'xpnative', 'black', 'plastik', 'winxpblue', 'equilux', 'alt', 'adapta', 'scidsand', 'ubuntu', 'itft1', 'vista', 'clearlooks', 'classic', 'scidblue', 'default', 'arc', 'yaru']
+2025-03-06 20:26:40,671 - INFO - Using theme: breeze
+2025-03-06 20:26:40,671 - INFO - Using theme: breeze
+2025-03-06 20:26:48,561 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:26:48,561 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:26:48,562 - INFO - No matching DDL file found in history
+2025-03-06 20:26:48,562 - INFO - No matching DDL file found in history
+2025-03-06 20:26:48,562 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:26:48,562 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:26:48,562 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:26:48,562 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:28:34,131 - ERROR - Traceback (most recent call last):
+2025-03-06 20:28:34,131 - ERROR - Traceback (most recent call last):
+2025-03-06 20:28:34,132 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:28:34,132 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:28:34,132 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:28:34,132 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:28:34,134 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:28:34,134 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:28:39,710 - INFO - Available themes: ['arc', 'ubuntu', 'scidgreen', 'winxpblue', 'clam', 'vista', 'blue', 'smog', 'itft1', 'equilux', 'default', 'plastik', 'classic', 'scidpurple', 'adapta', 'alt', 'scidblue', 'kroc', 'winnative', 'clearlooks', 'black', 'scidmint', 'breeze', 'xpnative', 'aquativo', 'elegance', 'scidsand', 'yaru', 'scidgrey', 'scidpink', 'radiance', 'keramik']
+2025-03-06 20:28:39,710 - INFO - Available themes: ['arc', 'ubuntu', 'scidgreen', 'winxpblue', 'clam', 'vista', 'blue', 'smog', 'itft1', 'equilux', 'default', 'plastik', 'classic', 'scidpurple', 'adapta', 'alt', 'scidblue', 'kroc', 'winnative', 'clearlooks', 'black', 'scidmint', 'breeze', 'xpnative', 'aquativo', 'elegance', 'scidsand', 'yaru', 'scidgrey', 'scidpink', 'radiance', 'keramik']
+2025-03-06 20:28:39,896 - INFO - Using theme: breeze
+2025-03-06 20:28:39,896 - INFO - Using theme: breeze
+2025-03-06 20:28:46,731 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:28:46,731 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:28:46,732 - INFO - No matching DDL file found in history
+2025-03-06 20:28:46,732 - INFO - No matching DDL file found in history
+2025-03-06 20:28:46,732 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:28:46,732 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:28:46,734 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:28:46,734 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:28:47,720 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:28:47,720 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:28:47,720 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:28:47,720 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:28:47,720 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:28:47,720 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:28:47,720 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:28:47,720 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:28:47,720 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:28:47,720 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:28:47,720 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:28:47,720 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:28:47,722 - INFO - DAG type: dataset_dependency
+2025-03-06 20:28:47,722 - INFO - DAG type: dataset_dependency
+2025-03-06 20:28:47,722 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:28:47,722 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:28:47,722 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:28:47,722 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:28:47,726 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:28:47,726 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:29:42,297 - ERROR - Traceback (most recent call last):
+2025-03-06 20:29:42,297 - ERROR - Traceback (most recent call last):
+2025-03-06 20:29:42,298 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:29:42,298 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2121, in <module>
+2025-03-06 20:29:42,300 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:29:42,300 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:29:42,301 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:29:42,301 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:41:35,083 - INFO - Available themes: ['scidpurple', 'radiance', 'scidmint', 'classic', 'equilux', 'vista', 'scidblue', 'blue', 'xpnative', 'aquativo', 'smog', 'plastik', 'scidgreen', 'itft1', 'alt', 'ubuntu', 'black', 'elegance', 'default', 'clam', 'clearlooks', 'keramik', 'scidsand', 'winxpblue', 'adapta', 'breeze', 'scidgrey', 'kroc', 'yaru', 'arc', 'winnative', 'scidpink']
+2025-03-06 20:41:35,083 - INFO - Available themes: ['scidpurple', 'radiance', 'scidmint', 'classic', 'equilux', 'vista', 'scidblue', 'blue', 'xpnative', 'aquativo', 'smog', 'plastik', 'scidgreen', 'itft1', 'alt', 'ubuntu', 'black', 'elegance', 'default', 'clam', 'clearlooks', 'keramik', 'scidsand', 'winxpblue', 'adapta', 'breeze', 'scidgrey', 'kroc', 'yaru', 'arc', 'winnative', 'scidpink']
+2025-03-06 20:41:35,272 - INFO - Using theme: breeze
+2025-03-06 20:41:35,272 - INFO - Using theme: breeze
+2025-03-06 20:42:03,796 - INFO - Available themes: ['xpnative', 'breeze', 'itft1', 'scidpink', 'smog', 'black', 'scidpurple', 'scidblue', 'aquativo', 'arc', 'scidgreen', 'blue', 'default', 'winxpblue', 'alt', 'kroc', 'clam', 'radiance', 'scidsand', 'classic', 'keramik', 'equilux', 'scidmint', 'scidgrey', 'clearlooks', 'yaru', 'elegance', 'plastik', 'winnative', 'adapta', 'vista', 'ubuntu']
+2025-03-06 20:42:03,796 - INFO - Available themes: ['xpnative', 'breeze', 'itft1', 'scidpink', 'smog', 'black', 'scidpurple', 'scidblue', 'aquativo', 'arc', 'scidgreen', 'blue', 'default', 'winxpblue', 'alt', 'kroc', 'clam', 'radiance', 'scidsand', 'classic', 'keramik', 'equilux', 'scidmint', 'scidgrey', 'clearlooks', 'yaru', 'elegance', 'plastik', 'winnative', 'adapta', 'vista', 'ubuntu']
+2025-03-06 20:42:04,007 - INFO - Using theme: breeze
+2025-03-06 20:42:04,007 - INFO - Using theme: breeze
+2025-03-06 20:42:13,165 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:42:13,165 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:42:13,166 - INFO - No matching DDL file found in history
+2025-03-06 20:42:13,166 - INFO - No matching DDL file found in history
+2025-03-06 20:42:13,166 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:42:13,166 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:42:13,166 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:42:13,166 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:42:14,112 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:42:14,112 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:42:14,112 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:42:14,112 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:42:14,112 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:42:14,112 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:42:14,112 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:42:14,112 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:42:14,112 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:42:14,112 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:42:14,112 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:42:14,112 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:42:14,115 - INFO - DAG type: dataset_dependency
+2025-03-06 20:42:14,115 - INFO - DAG type: dataset_dependency
+2025-03-06 20:42:14,115 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:42:14,115 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:42:14,115 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:42:14,115 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:42:14,117 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:42:14,117 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:43:11,684 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:43:11,684 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:43:11,685 - INFO - No matching DDL file found in history
+2025-03-06 20:43:11,685 - INFO - No matching DDL file found in history
+2025-03-06 20:43:11,685 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:43:11,685 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:43:11,686 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:43:11,686 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:43:11,819 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:43:11,819 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:43:11,819 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:43:11,819 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:43:11,819 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:43:11,819 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:43:11,819 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:43:11,819 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:43:11,819 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:43:11,819 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:43:11,820 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:43:11,820 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:43:11,822 - INFO - DAG type: dataset_dependency
+2025-03-06 20:43:11,822 - INFO - DAG type: dataset_dependency
+2025-03-06 20:43:11,822 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:43:11,822 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:43:11,823 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:43:11,823 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:43:11,826 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:43:11,826 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:03,213 - ERROR - Traceback (most recent call last):
+2025-03-06 20:45:03,213 - ERROR - Traceback (most recent call last):
+2025-03-06 20:45:03,214 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:45:03,214 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:45:03,214 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:45:03,214 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:45:03,216 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:45:03,216 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:45:10,319 - INFO - Available themes: ['plastik', 'yaru', 'adapta', 'xpnative', 'ubuntu', 'aquativo', 'scidblue', 'clearlooks', 'vista', 'alt', 'clam', 'default', 'scidpink', 'scidmint', 'radiance', 'keramik', 'equilux', 'scidsand', 'blue', 'arc', 'itft1', 'breeze', 'scidgrey', 'smog', 'winnative', 'winxpblue', 'classic', 'black', 'scidgreen', 'scidpurple', 'kroc', 'elegance']
+2025-03-06 20:45:10,319 - INFO - Available themes: ['plastik', 'yaru', 'adapta', 'xpnative', 'ubuntu', 'aquativo', 'scidblue', 'clearlooks', 'vista', 'alt', 'clam', 'default', 'scidpink', 'scidmint', 'radiance', 'keramik', 'equilux', 'scidsand', 'blue', 'arc', 'itft1', 'breeze', 'scidgrey', 'smog', 'winnative', 'winxpblue', 'classic', 'black', 'scidgreen', 'scidpurple', 'kroc', 'elegance']
+2025-03-06 20:45:10,551 - INFO - Using theme: breeze
+2025-03-06 20:45:10,551 - INFO - Using theme: breeze
+2025-03-06 20:45:17,603 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:45:17,603 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:45:17,604 - INFO - No matching DDL file found in history
+2025-03-06 20:45:17,604 - INFO - No matching DDL file found in history
+2025-03-06 20:45:17,606 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:45:17,606 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:45:17,606 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:45:17,606 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:45:18,661 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:45:18,661 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:45:18,662 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:45:18,662 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:45:18,662 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:45:18,662 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:45:18,662 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:45:18,662 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:45:18,662 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:45:18,662 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:45:18,662 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:18,662 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:18,665 - INFO - DAG type: dataset_dependency
+2025-03-06 20:45:18,665 - INFO - DAG type: dataset_dependency
+2025-03-06 20:45:18,665 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:18,665 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:18,665 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:18,665 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:18,668 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:18,668 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:37,679 - ERROR - Traceback (most recent call last):
+2025-03-06 20:45:37,679 - ERROR - Traceback (most recent call last):
+2025-03-06 20:45:37,680 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:45:37,680 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:45:37,681 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:45:37,681 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:45:37,682 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:45:37,682 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:45:43,221 - INFO - Available themes: ['scidpink', 'smog', 'radiance', 'yaru', 'blue', 'ubuntu', 'elegance', 'plastik', 'clam', 'default', 'breeze', 'kroc', 'scidmint', 'scidblue', 'keramik', 'classic', 'winnative', 'clearlooks', 'scidgreen', 'itft1', 'scidgrey', 'adapta', 'vista', 'aquativo', 'scidpurple', 'arc', 'xpnative', 'winxpblue', 'scidsand', 'equilux', 'alt', 'black']
+2025-03-06 20:45:43,221 - INFO - Available themes: ['scidpink', 'smog', 'radiance', 'yaru', 'blue', 'ubuntu', 'elegance', 'plastik', 'clam', 'default', 'breeze', 'kroc', 'scidmint', 'scidblue', 'keramik', 'classic', 'winnative', 'clearlooks', 'scidgreen', 'itft1', 'scidgrey', 'adapta', 'vista', 'aquativo', 'scidpurple', 'arc', 'xpnative', 'winxpblue', 'scidsand', 'equilux', 'alt', 'black']
+2025-03-06 20:45:43,432 - INFO - Using theme: breeze
+2025-03-06 20:45:43,432 - INFO - Using theme: breeze
+2025-03-06 20:45:49,208 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:45:49,208 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:45:49,209 - INFO - No matching DDL file found in history
+2025-03-06 20:45:49,209 - INFO - No matching DDL file found in history
+2025-03-06 20:45:49,209 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:45:49,209 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:45:49,209 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:45:49,209 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:45:50,158 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:45:50,158 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:45:50,158 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:45:50,158 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:45:50,158 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:45:50,158 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:45:50,158 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:45:50,158 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:45:50,158 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:45:50,158 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:45:50,158 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:50,158 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:50,160 - INFO - DAG type: dataset_dependency
+2025-03-06 20:45:50,160 - INFO - DAG type: dataset_dependency
+2025-03-06 20:45:50,160 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:50,160 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:50,160 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:45:50,160 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:50,163 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:45:50,163 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:46:05,718 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:46:05,718 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:46:05,719 - INFO - No matching DDL file found in history
+2025-03-06 20:46:05,719 - INFO - No matching DDL file found in history
+2025-03-06 20:46:05,719 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:46:05,719 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:46:05,719 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:46:05,719 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:46:06,614 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:46:06,614 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:46:06,614 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:46:06,614 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:46:06,614 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:46:06,614 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:46:06,614 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:46:06,614 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:46:06,614 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:46:06,614 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:46:06,614 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:46:06,614 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:46:06,616 - INFO - DAG type: dataset_dependency
+2025-03-06 20:46:06,616 - INFO - DAG type: dataset_dependency
+2025-03-06 20:46:06,616 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:46:06,616 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:46:06,616 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:46:06,616 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:46:06,619 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:46:06,619 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:46:12,379 - ERROR - Traceback (most recent call last):
+2025-03-06 20:46:12,379 - ERROR - Traceback (most recent call last):
+2025-03-06 20:46:12,379 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:46:12,379 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-06 20:46:12,380 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:46:12,380 - ERROR - root.mainloop()  File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+2025-03-06 20:46:12,382 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:46:12,382 - ERROR - self.tk.mainloop(n)KeyboardInterrupt
+2025-03-06 20:48:38,805 - INFO - Available themes: ['scidgreen', 'scidblue', 'alt', 'scidgrey', 'blue', 'itft1', 'elegance', 'winxpblue', 'classic', 'ubuntu', 'radiance', 'aquativo', 'equilux', 'keramik', 'default', 'scidmint', 'scidpurple', 'breeze', 'arc', 'winnative', 'adapta', 'smog', 'kroc', 'yaru', 'scidsand', 'xpnative', 'vista', 'scidpink', 'plastik', 'black', 'clam', 'clearlooks']
+2025-03-06 20:48:38,805 - INFO - Available themes: ['scidgreen', 'scidblue', 'alt', 'scidgrey', 'blue', 'itft1', 'elegance', 'winxpblue', 'classic', 'ubuntu', 'radiance', 'aquativo', 'equilux', 'keramik', 'default', 'scidmint', 'scidpurple', 'breeze', 'arc', 'winnative', 'adapta', 'smog', 'kroc', 'yaru', 'scidsand', 'xpnative', 'vista', 'scidpink', 'plastik', 'black', 'clam', 'clearlooks']
+2025-03-06 20:48:38,994 - INFO - Using theme: breeze
+2025-03-06 20:48:38,994 - INFO - Using theme: breeze
+2025-03-06 20:48:46,201 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:48:46,201 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:48:46,203 - INFO - No matching DDL file found in history
+2025-03-06 20:48:46,203 - INFO - No matching DDL file found in history
+2025-03-06 20:48:46,203 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:48:46,203 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:48:46,203 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:48:46,203 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:48:46,349 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:48:46,349 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:48:46,349 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:48:46,349 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:48:46,349 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:48:46,349 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:48:46,349 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:48:46,349 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:48:46,349 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:48:46,349 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:48:46,349 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:46,349 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:46,351 - INFO - DAG type: dataset_dependency
+2025-03-06 20:48:46,351 - INFO - DAG type: dataset_dependency
+2025-03-06 20:48:46,351 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:46,351 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:46,351 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:46,351 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:48:46,354 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:48:46,354 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:48:52,795 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:48:52,795 - INFO - Looking for matching DDL file in history...
+2025-03-06 20:48:52,797 - INFO - No matching DDL file found in history
+2025-03-06 20:48:52,797 - INFO - No matching DDL file found in history
+2025-03-06 20:48:52,797 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:48:52,797 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-06 20:48:52,797 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-06 20:48:52,797 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-06 20:48:52,933 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:48:52,933 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-06 20:48:52,933 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:48:52,933 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-06 20:48:52,933 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:48:52,933 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-06 20:48:52,933 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:48:52,933 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-06 20:48:52,933 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:48:52,933 - INFO - Added 2 dependencies to DAG config
+2025-03-06 20:48:52,934 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:52,934 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:52,935 - INFO - DAG type: dataset_dependency
+2025-03-06 20:48:52,935 - INFO - DAG type: dataset_dependency
+2025-03-06 20:48:52,936 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:52,936 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:52,936 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-06 20:48:52,936 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:48:52,938 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-06 20:48:52,938 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-07 10:08:10,066 - INFO - Available themes: ['default', 'breeze', 'equilux', 'adapta', 'classic', 'alt', 'elegance', 'smog', 'clearlooks', 'scidsand', 'arc', 'aquativo', 'black', 'plastik', 'scidgrey', 'winnative', 'blue', 'itft1', 'scidgreen', 'keramik', 'xpnative', 'winxpblue', 'scidblue', 'scidpurple', 'vista', 'kroc', 'radiance', 'clam', 'yaru', 'ubuntu', 'scidpink', 'scidmint']
+2025-03-07 10:08:10,066 - INFO - Available themes: ['default', 'breeze', 'equilux', 'adapta', 'classic', 'alt', 'elegance', 'smog', 'clearlooks', 'scidsand', 'arc', 'aquativo', 'black', 'plastik', 'scidgrey', 'winnative', 'blue', 'itft1', 'scidgreen', 'keramik', 'xpnative', 'winxpblue', 'scidblue', 'scidpurple', 'vista', 'kroc', 'radiance', 'clam', 'yaru', 'ubuntu', 'scidpink', 'scidmint']
+2025-03-07 10:08:10,280 - INFO - Using theme: breeze
+2025-03-07 10:08:10,280 - INFO - Using theme: breeze
+2025-03-07 10:08:18,289 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:08:18,289 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:08:18,289 - INFO - No matching DDL file found in history
+2025-03-07 10:08:18,289 - INFO - No matching DDL file found in history
+2025-03-07 10:08:18,289 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-07 10:08:18,289 - INFO - Found unique keys in mapping sheet: ['ITEM_ID']
+2025-03-07 10:08:18,290 - INFO - Adding unique keys to model config: ['ITEM_ID']
+2025-03-07 10:08:18,290 - INFO - Adding unique keys to model config: ['ITEM_ID']
+Added unique key to model config: ['ITEM_ID']
+Added merge_update_columns to model config: ["'DATA_SRC'", "'UPDATE_BY'", "'UPDATE_PGM'", "'TRXN_ID'", "'DATE_ID'", "'CAL_DATE_DAY'", "'ENTITY_ID'", "'ITEM_ID'", "'NET_SALES_AMT'", "'EBIT_AMT'", "'BILL_EQV_QTY'", "'DEPL_EQV_QTY'"]
+2025-03-07 10:08:18,941 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:08:18,941 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:08:18,941 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:08:18,941 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:08:18,941 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-07 10:08:18,941 - INFO - Found dependency: LND_BPC.F_DP_FPA_GL_ACTUAL_BEER
+2025-03-07 10:08:18,941 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-07 10:08:18,941 - INFO - Found dependency: LND_BPC.F_DP_FPA_PLAN_CBBD
+2025-03-07 10:08:18,941 - INFO - Added 2 dependencies to DAG config
+2025-03-07 10:08:18,941 - INFO - Added 2 dependencies to DAG config
+2025-03-07 10:08:18,941 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-07 10:08:18,941 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-07 10:08:18,943 - INFO - DAG type: dataset_dependency
+2025-03-07 10:08:18,943 - INFO - DAG type: dataset_dependency
+2025-03-07 10:08:18,944 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-07 10:08:18,944 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-07 10:08:18,944 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+2025-03-07 10:08:18,944 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['LND_BPC', 'LND_BPC'], 'Dependency Object': ['F_DP_FPA_GL_ACTUAL_BEER', 'F_DP_FPA_PLAN_CBBD']}
+Found 2 dependency schemas and 2 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-07 10:08:18,945 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-07 10:08:18,945 - INFO - DAG file generated: dags\DW_BEER_F_RPT_GL_CBBD_dag.py
+2025-03-07 10:09:48,264 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:09:48,264 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:09:48,265 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-07 10:09:48,265 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-07 10:09:48,266 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-07 10:09:48,266 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-07 10:09:48,266 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-07 10:09:48,266 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-07 10:09:48,266 - INFO - Unique keys: ['OPCO_CD']
+2025-03-07 10:09:48,266 - INFO - Unique keys: ['OPCO_CD']
+2025-03-07 10:09:48,266 - INFO - Primary keys: ['OPCO_ID']
+2025-03-07 10:09:48,266 - INFO - Primary keys: ['OPCO_ID']
+2025-03-07 10:09:57,337 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-07 10:09:57,337 - INFO - Snowflake Connector for Python Version: 2.3.7, Python Version: 3.8.0, Platform: Windows-10-10.0.22621-SP0
+2025-03-07 10:09:57,337 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-07 10:09:57,337 - INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+2025-03-07 10:09:57,337 - INFO - Setting use_openssl_only mode to False
+2025-03-07 10:09:57,337 - INFO - Setting use_openssl_only mode to False
+Initiating login request with your identity provider. A browser window should have opened for you to complete the login. If you can't see it, check existing browser windows, or your OS settings. Press CTRL+C to abort and try again...
+2025-03-07 10:10:40,377 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-07 10:10:40,377 - INFO - query: [SELECT COLUMN_NAME FROM EBI_DEV_DB.INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA...]
+2025-03-07 10:10:42,344 - INFO - query execution done
+2025-03-07 10:10:42,344 - INFO - query execution done
+2025-03-07 10:10:42,366 - INFO - fetching data done
+2025-03-07 10:10:42,366 - INFO - fetching data done
+2025-03-07 10:10:42,368 - INFO - closed
+2025-03-07 10:10:42,368 - INFO - closed
+2025-03-07 10:10:42,637 - INFO - No async queries seem to be running, deleting session
+2025-03-07 10:10:42,637 - INFO - No async queries seem to be running, deleting session
+2025-03-07 10:10:56,044 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,044 - INFO - Using explicitly specified DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,045 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,045 - INFO - DDL file exists: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,047 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,047 - INFO - Parsing DDL file: C:/Users/shivamgarg4/Documents/Python Work/Backup/dbt model generator advanced v1.0/dbt_model_generator/data/D_OPCO_DDL.sql
+2025-03-07 10:10:56,048 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-07 10:10:56,048 - INFO - Found PRIMARY KEY: ['OPCO_ID']
+2025-03-07 10:10:56,049 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Found standalone UNIQUE constraint: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-07 10:10:56,049 - INFO - Parsed DDL file: Found 11 columns, 1 unique keys, and 1 primary keys
+2025-03-07 10:10:56,049 - INFO - Unique keys: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Unique keys: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Primary keys: ['OPCO_ID']
+2025-03-07 10:10:56,049 - INFO - Primary keys: ['OPCO_ID']
+2025-03-07 10:10:56,049 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Using unique keys from DDL: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-03-07 10:10:56,049 - INFO - Found primary keys in DDL: ['OPCO_ID']
+2025-03-07 10:10:56,049 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-07 10:10:56,049 - INFO - Adding unique keys to model config: ['OPCO_CD']
+Added unique key to model config: ['OPCO_CD']
+Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]
+Ordered columns based on target DDL: ['OPCO_ID', 'DATA_SRC', 'RPT_OPCO_DSC', 'RPT_OPCO_ABBRV', 'TBA_ACTIVE_FLG', 'CREATE_DT', 'CREATE_BY', 'CREATE_PGM', 'UPDATE_DT', 'UPDATE_BY', 'UPDATE_PGM', 'OPCO_CD', 'OPCO_DSC']
+2025-03-07 10:10:56,530 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:10:56,530 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:10:56,530 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:10:56,530 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:10:56,530 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:10:56,530 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:10:56,531 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:10:56,531 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:10:56,531 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:10:56,531 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:10:56,531 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:10:56,531 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:10:56,531 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:10:56,531 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:10:56,533 - INFO - DAG type: dataset_dependency
+2025-03-07 10:10:56,533 - INFO - DAG type: dataset_dependency
+2025-03-07 10:10:56,533 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:10:56,533 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:10:56,533 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:10:56,533 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+Found 3 dependency schemas and 3 dependency objects
+Dataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-03-07 10:10:56,535 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:10:56,535 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:12:21,543 - INFO - Available themes: ['default', 'equilux', 'scidmint', 'clearlooks', 'kroc', 'alt', 'adapta', 'black', 'plastik', 'arc', 'vista', 'xpnative', 'radiance', 'scidblue', 'scidsand', 'clam', 'blue', 'scidgrey', 'winnative', 'scidpink', 'smog', 'scidpurple', 'ubuntu', 'itft1', 'yaru', 'winxpblue', 'elegance', 'breeze', 'scidgreen', 'classic', 'keramik', 'aquativo']
+2025-03-07 10:12:21,543 - INFO - Available themes: ['default', 'equilux', 'scidmint', 'clearlooks', 'kroc', 'alt', 'adapta', 'black', 'plastik', 'arc', 'vista', 'xpnative', 'radiance', 'scidblue', 'scidsand', 'clam', 'blue', 'scidgrey', 'winnative', 'scidpink', 'smog', 'scidpurple', 'ubuntu', 'itft1', 'yaru', 'winxpblue', 'elegance', 'breeze', 'scidgreen', 'classic', 'keramik', 'aquativo']
+2025-03-07 10:12:21,760 - INFO - Using theme: breeze
+2025-03-07 10:12:21,760 - INFO - Using theme: breeze
+2025-03-07 10:14:12,478 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:14:12,478 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:14:12,479 - INFO - No matching DDL file found in history
+2025-03-07 10:14:12,479 - INFO - No matching DDL file found in history
+2025-03-07 10:14:12,479 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-07 10:14:12,479 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-07 10:14:12,479 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-07 10:14:12,479 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-07 10:14:12,512 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:14:12,512 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:14:12,512 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:14:12,512 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:14:12,512 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:14:12,512 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:14:12,512 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:14:12,512 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:14:12,513 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:14:12,513 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:14:12,513 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:14:12,513 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:14:12,514 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,514 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,515 - INFO - DAG type: dataset_dependency
+2025-03-07 10:14:12,515 - INFO - DAG type: dataset_dependency
+2025-03-07 10:14:12,516 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,516 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,516 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,516 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:12,518 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:14:12,518 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:14:16,480 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:14:16,480 - INFO - Looking for matching DDL file in history...
+2025-03-07 10:14:16,480 - INFO - No matching DDL file found in history
+2025-03-07 10:14:16,480 - INFO - No matching DDL file found in history
+2025-03-07 10:14:16,481 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-07 10:14:16,481 - INFO - Using _CD columns as unique keys: ['OPCO_CD']
+2025-03-07 10:14:16,481 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-07 10:14:16,481 - INFO - Adding unique keys to model config: ['OPCO_CD']
+2025-03-07 10:14:16,507 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:14:16,507 - INFO - Found DAG Type in mapping: DATASET DEPENDENCY (normalized to dataset_dependency)
+2025-03-07 10:14:16,507 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:14:16,507 - INFO - Found Schedule Interval in mapping: 0 */4 * * *
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch1.tab1
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch2.tab2
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:14:16,507 - INFO - Found dependency: sch3.tab3
+2025-03-07 10:14:16,507 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:14:16,507 - INFO - Added 3 dependencies to DAG config
+2025-03-07 10:14:16,507 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,507 - INFO - DAG config from mapping: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,510 - INFO - DAG type: dataset_dependency
+2025-03-07 10:14:16,510 - INFO - DAG type: dataset_dependency
+2025-03-07 10:14:16,510 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,510 - INFO - DAG config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,511 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,511 - INFO - Generating dataset_dependency DAG with config: {'Type': 'dataset_dependency', 'Schedule': '0 */4 * * *', 'Dependency Schema': ['sch1', 'sch2', 'sch3'], 'Dependency Object': ['tab1', 'tab2', 'tab3']}
+2025-03-07 10:14:16,513 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:14:16,513 - INFO - DAG file generated: dags\DW_D_OPCO_dag.py
+2025-03-07 10:15:09,438 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyAdded unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-03-07 10:15:09,438 - INFO - Added unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.pyAdded unique key to model config: ['OPCO_CD']Added merge_update_columns to model config: ["'OPCO_ID'", "'DATA_SRC'", "'UPDATE_DT'", "'UPDATE_BY'", "'UPDATE_PGM'", "'OPCO_CD'", "'OPCO_DSC'", "'RPT_OPCO_DSC'", "'RPT_OPCO_ABBRV'", "'TBA_ACTIVE_FLG'"]Found 3 dependency schemas and 3 dependency objectsDataset Dependency DAG has been saved to dags\DW_D_OPCO_dag.py
+2025-03-07 10:21:34,711 - INFO - Available themes: ['keramik', 'plastik', 'alt', 'yaru', 'classic', 'clam', 'xpnative', 'clearlooks', 'scidpurple', 'scidblue', 'winxpblue', 'scidmint', 'kroc', 'ubuntu', 'adapta', 'winnative', 'radiance', 'vista', 'breeze', 'scidgreen', 'arc', 'default', 'equilux', 'black', 'blue', 'itft1', 'scidgrey', 'scidsand', 'scidpink', 'elegance', 'smog', 'aquativo']
+2025-03-07 10:21:34,711 - INFO - Available themes: ['keramik', 'plastik', 'alt', 'yaru', 'classic', 'clam', 'xpnative', 'clearlooks', 'scidpurple', 'scidblue', 'winxpblue', 'scidmint', 'kroc', 'ubuntu', 'adapta', 'winnative', 'radiance', 'vista', 'breeze', 'scidgreen', 'arc', 'default', 'equilux', 'black', 'blue', 'itft1', 'scidgrey', 'scidsand', 'scidpink', 'elegance', 'smog', 'aquativo']
+2025-03-07 10:21:34,910 - INFO - Using theme: breeze
+2025-03-07 10:21:34,910 - INFO - Using theme: breeze
+2025-03-07 10:27:04,959 - ERROR - Traceback (most recent call last):
+2025-03-07 10:27:04,959 - ERROR - Traceback (most recent call last):
+2025-03-07 10:27:04,960 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-07 10:27:04,960 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2123, in <module>
+2025-03-07 10:27:04,960 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-07 10:27:04,960 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-07 10:27:04,960 - ERROR - KeyboardInterrupt
+2025-03-07 10:27:04,960 - ERROR - KeyboardInterrupt
+2025-03-07 10:31:51,183 - ERROR - Traceback (most recent call last):
+2025-03-07 10:31:51,183 - ERROR - Traceback (most recent call last):
+2025-03-07 10:31:51,184 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2090, in <module>
+    root.mainloop()
+2025-03-07 10:31:51,184 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2090, in <module>
+    root.mainloop()
+2025-03-07 10:31:51,184 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-07 10:31:51,184 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1420, in mainloop
+    self.tk.mainloop(n)
+2025-03-07 10:31:51,184 - ERROR - KeyboardInterrupt
+2025-03-07 10:31:51,184 - ERROR - KeyboardInterrupt
+2025-03-07 10:34:55,802 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-03-07 10:34:55,802 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 804, in callit
+    func(*args)
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 804, in callit
+    func(*args)
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2009, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2009, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2009, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:34:55,802 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2009, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1187, in _pydevd_bundle.pydevd_cython_win32_38_64.SafeCallWrapper.__call__
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1187, in _pydevd_bundle.pydevd_cython_win32_38_64.SafeCallWrapper.__call__
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 627, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 627, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1103, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1103, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1065, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1065, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 585, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.do_wait_suspend
+2025-03-07 10:34:55,803 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 585, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.do_wait_suspend
+2025-03-07 10:34:55,803 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+2025-03-07 10:34:55,803 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+2025-03-07 10:34:55,803 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+2025-03-07 10:34:55,803 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+2025-03-07 10:34:55,804 - ERROR - KeyboardInterrupt
+2025-03-07 10:34:55,804 - ERROR - KeyboardInterrupt
+2025-03-07 10:45:03,700 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-03-07 10:45:03,700 - ERROR - Exception in Tkinter callbackTraceback (most recent call last):
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 1883, in __call__
+    return self.func(*args)
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 804, in callit
+    func(*args)
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\AppData\Local\Programs\Python\Python38\lib\tkinter\__init__.py", line 804, in callit
+    func(*args)
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2021, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2021, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2021, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:45:03,701 - ERROR -   File "C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\dag_generator_app.py", line 2021, in update_ui_with_resources
+    if hasattr(self, 'mapping_combo'):
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1187, in _pydevd_bundle.pydevd_cython_win32_38_64.SafeCallWrapper.__call__
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1187, in _pydevd_bundle.pydevd_cython_win32_38_64.SafeCallWrapper.__call__
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 627, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 627, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1103, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,701 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1103, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,702 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1065, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,702 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 1065, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.trace_dispatch
+2025-03-07 10:45:03,702 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 585, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.do_wait_suspend
+2025-03-07 10:45:03,702 - ERROR -   File "_pydevd_bundle\\pydevd_cython_win32_38_64.pyx", line 585, in _pydevd_bundle.pydevd_cython_win32_38_64.PyDBFrame.do_wait_suspend
+2025-03-07 10:45:03,702 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+2025-03-07 10:45:03,702 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1220, in do_wait_suspend
+    self._do_wait_suspend(thread, frame, event, arg, suspend_type, from_this_thread)
+2025-03-07 10:45:03,702 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+2025-03-07 10:45:03,702 - ERROR -   File "C:/Program Files/JetBrains/PyCharm Community Edition 2024.2/plugins/python-ce/helpers/pydev/pydevd.py", line 1235, in _do_wait_suspend
+    time.sleep(0.01)
+2025-03-07 10:45:03,702 - ERROR - KeyboardInterrupt
+2025-03-07 10:45:03,702 - ERROR - KeyboardInterrupt
