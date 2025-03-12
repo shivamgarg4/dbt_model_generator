@@ -735,7 +735,7 @@ class DAGGeneratorApp:
                 elif cell_value == 'MATERIALIZATION':
                     materialization = mapping_sheet.cell(row=row, column=2).value
                 elif cell_value == 'UNIQUE_KEY':
-                    unique_key = [key.strip() for key in mapping_sheet.cell(row=row, column=2).value.split(',')]
+                   unique_key = [key.strip() for key in (mapping_sheet.cell(row=row, column=2).value or "").split(',')]
                 
                 if target_table and source_table and source_type and source_name and materialization and unique_key:
                     break
