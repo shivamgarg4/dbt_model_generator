@@ -815,7 +815,7 @@ class DAGGeneratorApp:
                 column_mappings.append({
                     'Target Column': target_column,
                     'Source Table': source_table_col,
-                    'Logic': logic or target_column # Use target column as default logic
+                    'Logic': logic if logic is not None else "''"
                 })
             
             # Create model configuration
