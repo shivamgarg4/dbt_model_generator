@@ -15,7 +15,7 @@ from tkinter import filedialog, messagebox, ttk
 
 from openpyxl import load_workbook, Workbook
 from openpyxl.styles import Font
-from ttkthemes import ThemedTk, THEMES
+from ttkthemes import ThemedTk
 
 from scripts.dag_generators import (
     create_dataset_dependency_dag,
@@ -26,7 +26,7 @@ from scripts.dbt_job_generator import create_dbt_job_file
 from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
-from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file
+from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file
 
 
 # Configure logging
@@ -153,7 +153,7 @@ class DAGGeneratorApp:
         self.animation_duration = 0.5
         self.animation_steps = 120
         self.root = root
-        self.root.title("DBT Model Generator")
+        self.root.title("Dataflow Pipeline Generator")
         self.root.geometry("1366x768")
         
         # Initialize thread pool
@@ -206,6 +206,7 @@ class DAGGeneratorApp:
         self.generate_merge_macro_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_insert_macro_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_lnd_model_var = tk.BooleanVar(value=False)  # Default to False
+        self.generate_dp_model_var = tk.BooleanVar(value=False)  # Default to False
 
         # Initialize ModelMapper
         self.model_mapper = None
@@ -215,10 +216,6 @@ class DAGGeneratorApp:
 
         # Load history and other resources in background
         self.root.after(100, self.delayed_init)
-        
-
-        
-
 
     def delayed_init(self):
         """Initialize non-critical components in background"""
@@ -433,6 +430,13 @@ class DAGGeneratorApp:
             variable=self.generate_lnd_model_var
         ).pack(side='left', padx=(0, 10))
 
+        # Generate lnd_model checkbox
+        ttk.Checkbutton(
+            options_frame,
+            text="Generate DP View file",
+            variable=self.generate_dp_model_var
+        ).pack(side='left', padx=(0, 10))
+
         # Generate button
         self.generate_button = ttk.Button(
             generate_frame,
@@ -445,7 +449,7 @@ class DAGGeneratorApp:
         # DAG Directory section
         dir_frame = ttk.LabelFrame(
             self.main_tab, 
-            text="DAG Directory",
+            text="Utilities",
             padding=15
         )
         dir_frame.pack(fill='x', pady=(0, 20))
@@ -455,7 +459,13 @@ class DAGGeneratorApp:
             text="Open DAG Directory",
             command=self.open_dag_directory
         ).pack(fill='x')
-        
+
+        ttk.Button(
+            dir_frame,
+            text="Create Sample Mapping File",
+            command=self.create_sample_mapping_template
+        ).pack(fill='x')
+
         # Help section
         help_frame = ttk.LabelFrame(
             self.main_tab,
@@ -463,14 +473,18 @@ class DAGGeneratorApp:
             padding=15
         )
         help_frame.pack(fill='x')
-        
-        help_text = (
-            "1. Select a mapping Excel file using the Browse button or dropdown\n"
-            "2. Click 'Generate Files' to create DBT model, job, and DAG files\n"
-            "3. Use 'Open DAG Directory' to view the generated DAG files\n\n"
-            "For more help, see the README.md file."
-        )
-        
+
+        help_text = """
+        📋 DAG Generator App Guide
+
+        Main Features:
+        -------------
+        • Generate DBT Models, DAGs, and Jobs from mapping files
+        • Create mapping templates from DDL files
+        • Support for multiple mapping formats
+        • Batch processing capabilities
+        """
+
         ttk.Label(
             help_frame,
             text=help_text,
@@ -801,7 +815,7 @@ class DAGGeneratorApp:
                 column_mappings.append({
                     'Target Column': target_column,
                     'Source Table': source_table_col,
-                    'Logic': logic or target_column # Use target column as default logic
+                    'Logic': logic if logic is not None else "''"
                 })
             
             # Create model configuration
@@ -983,6 +997,12 @@ class DAGGeneratorApp:
                 model_dbt_job_additon_flg,lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
 
             # Generate DBT job file
+            dp_output_path = None
+            if self.generate_dp_model_var.get():
+                dp_output_path = 'views'
+                dp_output_path = create_dp_view_file(json_output_path, self.mapping_file_path.get())
+
+            # Generate DBT job file
             job_output_path = None
             if self.generate_dbt_job_var.get():
                 job_output_path = 'jobs'
@@ -1003,6 +1023,8 @@ class DAGGeneratorApp:
                     success_message += f"Insert Macro file: {insert_macro_file_path}\n"
                 if lnd_model_file_path:
                     success_message += f"LND Model file: {lnd_model_file_path}\n"
+                if dp_output_path:
+                    success_message += f"DP View file: {dp_output_path}\n"
 
                 # Show success message
                 messagebox.showinfo("Success", success_message)
@@ -2058,30 +2080,38 @@ class DAGGeneratorApp:
         except:
             return path
 
-    def create_mapping_template(self, file_path):
+    def create_sample_mapping_template(self):
         """Create a mapping template Excel file"""
-        wb = Workbook()
-        ws = wb.active
-        ws.title = "Mapping"
+        # Create mappings directory if it doesn't exist
+        # Use a more reliable path - create mappings in the current workspace
+        mappings_dir = os.path.join(os.getcwd(), "mappings")
+        os.makedirs(mappings_dir, exist_ok=True)
 
-        # Add headers and formatting
-        headers = [
-            ("TARGET_TABLE", ""),
-            ("SOURCE_TABLE", ""),
-            ("SOURCE_TYPE", "source"),
-            ("SOURCE_NAME", ""),
-            ("MATERIALIZATION", "incremental"),
-            ("UNIQUE_KEY", ""),
-            ("MINUS_LOGIC_REQUIRED", "N"),
-            ("MERGE_UPDATE_EXCLUDE_COLUMNS", "CREATE_DT,CREATE_BY"),
-            ("", "")
-        ]
+        # Generate default Excel file path
+        ddl_name = os.path.splitext(os.path.basename("data/sample_table_ddl.sql"))[0]
+        default_excel_path = os.path.join(mappings_dir, f"{ddl_name}_mapping.xlsx")
+        self.mapping_file_path.set(default_excel_path)
 
-        # Apply headers
-        for i, (header, default) in enumerate(headers, 1):
-            ws.cell(row=i, column=1, value=header)
-            ws.cell(row=i, column=2, value=default)
-            ws.cell(row=i, column=1).font = Font(bold=True)
+        """Run the mapping generation in a separate thread"""
+        try:
+            self.ddl_file_path.set("data/sample_table_ddl.sql")
+            # Parse DDL file to extract columns
+            columns, unique_keys = self.parse_ddl_file(self.ddl_file_path.get())
+
+            # Store unique keys for later use
+            self.unique_keys = unique_keys
+
+            # Update the mapping sheet with columns
+            self.update_mapping_sheet((columns, unique_keys))
+
+            # Update status
+            self.set_status("Mapping file created successfully!")
+            self.hide_progress()
+
+        except Exception as e:
+            self.set_status(f"Error: {str(e)}")
+            self.hide_progress()
+            messagebox.showerror("Error", str(e))
 
 if __name__ == "__main__":
     # Initialize logging first
