@@ -109,13 +109,15 @@ def generate_lnd_dbt_model_file(config, file_path):
         replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema, target_table_name)
         model_config = f"""
         {{
-            config(
-                schema = '{target_schema}',
-                alias = '{target_table_name}',
-                tags = '{target_table_name}',
-                materialized='table',
-                transient = false
-            )
+            {{
+                config(
+                    schema = '{target_schema}',
+                    tags=['{target_table_name}'],
+                    alias='{target_table_name}',
+                    materialized='table',
+                    transient = false
+                )
+            }}
         }}
         -- Model: {target_schema}.{target_table_name}
         -- Source: {source_db}.{source_schema}.{source_table_name}
@@ -280,4 +282,56 @@ def create_dp_view_file(config, file_path):
         return True, file_path
     except Exception as e:
         raise Exception(f"An error occurred while generating the dbt model: {e}")
+
+def create_test_model_file(json_file, file_path,test_model_output_path):
+    """Generate the dbt test model file."""
+    try:
+        with open(json_file) as f:
+            config = json.load(f)
+
+        # Load the mapping sheet
+        workbook = load_workbook(file_path)
+        mapping_sheet = workbook['Mapping']
+
+        # Extract target and source table information from mapping sheet
+        target_table = None
+        source_table = None
+
+        for row in range(1, mapping_sheet.max_row + 1):
+            cell_value = mapping_sheet.cell(row=row, column=1).value
+            if cell_value == 'TARGET_TABLE':
+                target_table = mapping_sheet.cell(row=row, column=2).value
+            elif cell_value == 'SOURCE_TABLE':
+                source_table = mapping_sheet.cell(row=row, column=2).value
+            if target_table and source_table:
+                break
+
+        if not source_table:
+            raise ValueError("Source table not found in mapping sheet")
+
+        # Split the target table into schema and name
+        target_parts = target_table.split('.')
+        target_schema = target_parts[0] if len(target_parts) > 1 else None
+        target_table_name = target_parts[-1]
+
+        # Create output directory if it doesn't exist
+        output_dir = test_model_output_path
+        os.makedirs(output_dir, exist_ok=True)
+
+        # Generate file name
+        model_name = f"{target_schema}.{target_table_name}"
+        file_name = f"{model_name}_test.sql"
+        file_path = os.path.join(output_dir, file_name)
+
+        # Write test model file
+        with open(file_path, 'w') as f:
+            f.write(f"SELECT * FROM {target_schema}.{target_table_name} WHERE 1=0;")
+            f.write(f"\n\nSELECT * FROM {target_schema}.{target_table_name} EXCEPT SELECT * FROM {source_table};")
+            f.write(f"\n\nSELECT COUNT(*) FROM {target_schema}.{target_table_name} ;")
+            f.write(f"\n\nSELECT COUNT(*) FROM {source_table} WHERE 1=0 ;")
+
+        return True, file_path
+    except Exception as e:
+        raise Exception(f"An error occurred while generating the dbt test model: {e}")
+
 

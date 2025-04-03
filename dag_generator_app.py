@@ -26,7 +26,7 @@ from scripts.dbt_job_generator import create_dbt_job_file
 from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
-from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file
+from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file,create_test_model_file
 
 
 # Configure logging
@@ -161,33 +161,15 @@ class DAGGeneratorApp:
         
         # Lazy load heavy imports
         self.imports_loaded = False
-        
-        # # Apply theme immediately
-        # style = ttk.Style()
-        # try:
-        #     # Try to use a themed style if ttkthemes is available
-        #     if 'ThemedTk' in globals():
-        #         available_themes = THEMES
-        #         if 'breeze' in available_themes:
-        #             style.theme_use('breeze')
-        #         elif 'arc' in available_themes:
-        #             style.theme_use('arc')
-        #         elif 'clam' in available_themes:
-        #             style.theme_use('clam')
-        #         else:
-        #             # Use default theme
-        #             style.theme_use('clam')
-        #     else:
-        #         # Use default ttk theme
-        #         style.theme_use('clam')
-        # except Exception as e:
-        #     logging.warning(f"Could not set theme: {str(e)}. Using default theme.")
-        #     # Use a default theme that's available in standard ttk
-        #     try:
-        #         style.theme_use('clam')
-        #     except:
-        #         pass  # If even this fails, just use the default theme
-        #
+
+        # Apply theme immediately
+        style = ttk.Style()
+        try:
+            # Use the 'clam' theme as it provides clean and modern visuals suitable for the UI
+            style.theme_use('clam')
+        except Exception as e:
+            logging.warning(f"Could not set theme: {str(e)}. Using default theme.")
+
         # Initialize history lists
         self.file_history = []
         self.ddl_file_history = []
@@ -207,6 +189,7 @@ class DAGGeneratorApp:
         self.generate_insert_macro_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_lnd_model_var = tk.BooleanVar(value=False)  # Default to False
         self.generate_dp_model_var = tk.BooleanVar(value=False)  # Default to False
+        self.generate_test_model_var = tk.BooleanVar(value=False)  # Default to False
 
         # Initialize ModelMapper
         self.model_mapper = None
@@ -272,15 +255,17 @@ class DAGGeneratorApp:
         # Create header
         ttk.Label(
             main_container,
-            text="DAG Generator",
+            text="Dataflow Pipeline Generator",
             style='Header.TLabel'
-        ).pack(anchor='w', pady=(0, 5))
+        ).pack(anchor='center', pady=(10, 10))
 
         ttk.Label(
             main_container,
-            text="Generate DBT models, jobs and Airflow DAGs",
-            style='Subheader.TLabel'
-        ).pack(anchor='w', pady=(0, 20))
+            text="Effortlessly generate DBT Models, Airflow DAGs, DBT Jobs, Macros, and Testing Scripts",
+            style='Subheader.TLabel',
+            wraplength=800,
+            justify='center'
+        ).pack(anchor='center', pady=(0, 30))
 
         # Create notebook and tabs
         self.notebook = ttk.Notebook(main_container)
@@ -316,33 +301,33 @@ class DAGGeneratorApp:
     def apply_custom_styles(self):
         """Apply custom styles to the UI elements"""
         style = ttk.Style()
-        
+
         # Header style
-        style.configure('Header.TLabel', font=('Segoe UI', 16, 'bold'))
-        
+        style.configure('Header.TLabel', font=('San Francisco', 16, 'bold'), foreground='#2C3E50')
+
         # Subheader style
-        style.configure('Subheader.TLabel', font=('Segoe UI', 10))
-        
+        style.configure('Subheader.TLabel', font=('San Francisco', 12, 'italic'), foreground='#34495E')
+
         # Accent button style
-        style.configure('Accent.TButton', font=('Segoe UI', 10, 'bold'))
-        
+        style.configure('Accent.TButton', font=('San Francisco', 10))
+
         # Normal button style
-        style.configure('TButton', font=('Segoe UI', 10))
-        
+        style.configure('TButton', font=('San Francisco', 10))
+
         # Label style
-        style.configure('TLabel', font=('Segoe UI', 10))
-        
+        style.configure('TLabel', font=('San Francisco', 10))
+
         # Entry style
-        style.configure('TEntry', font=('Segoe UI', 10))
-        
+        style.configure('TEntry', font=('San Francisco', 10))
+
         # Combobox style
-        style.configure('TCombobox', font=('Segoe UI', 10))
+        style.configure('TCombobox', font=('San Francisco', 10))
 
     def init_main_tab(self):
         """Initialize DAG Generator tab"""
         # Create sections
         generate_frame = ttk.LabelFrame(
-            self.main_tab, 
+            self.main_tab,
             text="Generate from Mapping",
             padding=15
         )
@@ -351,17 +336,17 @@ class DAGGeneratorApp:
         # File selection frame with Combobox
         file_frame = ttk.Frame(generate_frame)
         file_frame.pack(fill='x', pady=(0, 15))
-        
+
         ttk.Label(
-            file_frame, 
+            file_frame,
             text="Upload Excel File:",
             width=15  # Fixed width for label
         ).pack(side='left', padx=(0, 10))
-        
+
         # Container frame for combobox and button
         input_frame = ttk.Frame(file_frame)
         input_frame.pack(side='left', fill='x', expand=True)
-        
+
         # Combobox with adjusted width
         self.file_combo = ttk.Combobox(
             input_frame,
@@ -370,10 +355,10 @@ class DAGGeneratorApp:
             width=50  # Adjusted width
         )
         self.file_combo.pack(side='left', fill='x', expand=True, padx=(0, 10))
-        
+
         # Browse button with fixed width
         ttk.Button(
-            input_frame, 
+            input_frame,
             text="Browse",
             command=self.browse_file,
             width=10  # Fixed width for button
@@ -387,68 +372,43 @@ class DAGGeneratorApp:
         # Options frame
         options_frame = ttk.Frame(generate_frame)
         options_frame.pack(fill='x', pady=(5, 10))
-        
-        # Generate DAG checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate DAG file",
-            variable=self.generate_dag_var
-        ).pack(side='left', padx=(0, 10))
+        checkboxes = [
 
-        # Generate Model checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate Model file",
-            variable=self.generate_model_var
-        ).pack(side='left', padx=(0, 10))
+            ("Generate Airflow DAG File", self.generate_dag_var),
+            ("Generate DBT Model File", self.generate_model_var),
+            ("Generate DBT Job File", self.generate_dbt_job_var),
+            ("Generate Insert Macro File", self.generate_insert_macro_var),
+            ("Generate Merge Macro File", self.generate_merge_macro_var),
+            ("Generate LND Model File", self.generate_lnd_model_var),
+            ("Generate Data Product View File", self.generate_dp_model_var),
+            ("Generate Testing Scripts File", self.generate_test_model_var)
+        ]
 
-        # Generate dbt job checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate dbt job file",
-            variable=self.generate_dbt_job_var
-        ).pack(side='left', padx=(0, 10))
-
-        # Generate insert macro checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate insert macro file",
-            variable=self.generate_insert_macro_var
-        ).pack(side='left', padx=(0, 10))
-
-        # Generate merge_macro checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate merge macro file",
-            variable=self.generate_merge_macro_var
-        ).pack(side='left', padx=(0, 10))
-
-        # Generate lnd_model checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate LND Model file",
-            variable=self.generate_lnd_model_var
-        ).pack(side='left', padx=(0, 10))
-
-        # Generate lnd_model checkbox
-        ttk.Checkbutton(
-            options_frame,
-            text="Generate DP View file",
-            variable=self.generate_dp_model_var
-        ).pack(side='left', padx=(0, 10))
+        row = 0
+        col = 0
+        options_frame.grid_columnconfigure(tuple(range(4)), weight=1, uniform="columns")  # Evenly spaced columns
+        for text, variable in checkboxes:
+            ttk.Checkbutton(options_frame, text=text, variable=variable).grid(
+                row=row, column=col, padx=10, pady=5, sticky='w'
+            )
+            col += 1
+            if col >= 4:  # Move to the next row after 4 columns
+                col = 0
+                row += 1
 
         # Generate button
         self.generate_button = ttk.Button(
             generate_frame,
-            text="Generate Files",
+            text="⚙️ Generate Files",  # Added an icon for better UI
             command=self.start_generation,
-            style='Accent.TButton'
+            style='Accent.TButton',
+            padding=(10, 5)  # Added padding for a better clickable area
         )
-        self.generate_button.pack(fill='x', pady=(10, 0))
+        self.generate_button.pack(fill='x', pady=(10, 0), padx=(15, 15))  # Added horizontal padding for alignment
 
         # DAG Directory section
         dir_frame = ttk.LabelFrame(
-            self.main_tab, 
+            self.main_tab,
             text="Utilities",
             padding=15
         )
@@ -456,15 +416,17 @@ class DAGGeneratorApp:
 
         ttk.Button(
             dir_frame,
-            text="Open DAG Directory",
-            command=self.open_dag_directory
-        ).pack(fill='x')
+            text="  📂 Open DAG Directory",  # Added extra spaces for alignment
+            command=self.open_dag_directory,
+            style='Accent.TButton'
+        ).pack(fill='x', pady=(5, 5))
 
         ttk.Button(
             dir_frame,
-            text="Create Sample Mapping File",
-            command=self.create_sample_mapping_template
-        ).pack(fill='x')
+            text="  📋 Create Sample Mapping File",  # Added extra spaces for alignment
+            command=self.create_sample_mapping_template,
+            style='Accent.TButton'
+        ).pack(fill='x', pady=(5, 5))
 
         # Help section
         help_frame = ttk.LabelFrame(
@@ -472,7 +434,7 @@ class DAGGeneratorApp:
             text="Help",
             padding=15
         )
-        help_frame.pack(fill='x')
+        help_frame.pack(fill='both', expand=True)  # Ensure it resizes with the window
 
         help_text = """
         📋 DAG Generator App Guide
@@ -485,18 +447,19 @@ class DAGGeneratorApp:
         • Batch processing capabilities
         """
 
-        ttk.Label(
+        help_label = ttk.Label(
             help_frame,
             text=help_text,
             wraplength=700,
             justify='left'
-        ).pack(fill='x')
+        )
+        help_label.pack(fill='both', expand=True)  # Ensure the label resizes with the frame
 
     def init_mapping_tab(self):
         """Initialize Mapping Tools tab"""
         # DDL Section
         ddl_frame = ttk.LabelFrame(
-            self.mapping_tab, 
+            self.mapping_tab,
             text="Generate Mapping from DDL",
             padding=15
         )
@@ -505,17 +468,17 @@ class DAGGeneratorApp:
         # DDL File selection
         ddl_file_frame = ttk.Frame(ddl_frame)
         ddl_file_frame.pack(fill='x', pady=(0, 10))
-        
+
         ttk.Label(
-            ddl_file_frame, 
+            ddl_file_frame,
             text="Select DDL File:",
             width=15
         ).pack(side='left', padx=(0, 10))
-        
+
         # Container for combobox and button
         input_frame = ttk.Frame(ddl_file_frame)
         input_frame.pack(side='left', fill='x', expand=True)
-        
+
         self.ddl_combo = ttk.Combobox(
             input_frame,
             textvariable=self.ddl_file_path,
@@ -523,9 +486,9 @@ class DAGGeneratorApp:
             width=50
         )
         self.ddl_combo.pack(side='left', fill='x', expand=True, padx=(0, 10))
-        
+
         ttk.Button(
-            input_frame, 
+            input_frame,
             text="Browse",
             command=self.browse_ddl_file,
             width=10
@@ -541,7 +504,7 @@ class DAGGeneratorApp:
             style='Accent.TButton'
         )
         self.generate_mapping_button.pack(fill='x', pady=(10, 0))
-        
+
         # Help text for DDL section
         ttk.Label(
             ddl_frame,
@@ -552,7 +515,7 @@ class DAGGeneratorApp:
 
         # Model Mapping Section
         mapping_frame = ttk.LabelFrame(
-            self.mapping_tab, 
+            self.mapping_tab,
             text="Fill Model Mapping",
             padding=15
         )
@@ -561,12 +524,12 @@ class DAGGeneratorApp:
         # Mapping file selection with Combobox
         mapping_file_frame = ttk.Frame(mapping_frame)
         mapping_file_frame.pack(fill='x', pady=(0, 10))
-        
+
         ttk.Label(
-            mapping_file_frame, 
+            mapping_file_frame,
             text="Select Mapping File:"
         ).pack(side='left')
-        
+
         # Replace Entry with Combobox
         self.mapping_combo = ttk.Combobox(
             mapping_file_frame,
@@ -575,13 +538,13 @@ class DAGGeneratorApp:
             width=50
         )
         self.mapping_combo.pack(side='left', expand=True, fill='x', padx=10)
-        
+
         ttk.Button(
-            mapping_file_frame, 
+            mapping_file_frame,
             text="Browse",
             command=self.browse_file
         ).pack(side='right')
-        
+
         self.create_enhanced_tooltip(self.mapping_combo, "Select a mapping file that has SOURCE_TABLE filled in")
 
         # Fill Model Mapping Button
@@ -592,7 +555,7 @@ class DAGGeneratorApp:
             style='Accent.TButton'
         )
         self.fill_mapping_button.pack(fill='x', pady=(10, 0))
-        
+
         # Help text for Model Mapping section
         ttk.Label(
             mapping_frame,
@@ -1008,7 +971,12 @@ class DAGGeneratorApp:
                 job_output_path = 'jobs'
                 job_output_path = create_dbt_job_file(json_output_path,model_dbt_job_additon_flg,job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
 
-            if job_output_path or model_file_path or dag_file_path or merge_macro_file_path or insert_macro_file_path or lnd_model_file_path:
+            test_model_output_path = None
+            if self.generate_test_model_var.get():
+                test_model_output_path = 'tests'
+                test_model_output_path = create_test_model_file(json_output_path, self.mapping_file_path.get(),test_model_output_path)
+
+            if job_output_path or model_file_path or dag_file_path or merge_macro_file_path or insert_macro_file_path or lnd_model_file_path or test_model_output_path:
                 # Prepare success message
                 success_message = "Files generated successfully!\n\n"
                 if dag_file_path:
@@ -1025,6 +993,8 @@ class DAGGeneratorApp:
                     success_message += f"LND Model file: {lnd_model_file_path}\n"
                 if dp_output_path:
                     success_message += f"DP View file: {dp_output_path}\n"
+                if test_model_output_path:
+                    success_message += f"Test Model file: {test_model_output_path}\n"
 
                 # Show success message
                 messagebox.showinfo("Success", success_message)
