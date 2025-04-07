@@ -27,7 +27,7 @@ from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
 from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file,create_test_model_file
-
+from scripts.utils.json_creator import json_creator
 
 # Configure logging
 def setup_logging():
@@ -142,6 +142,17 @@ def generate_safe_timestamp():
 class DAGGeneratorApp:
     def __init__(self, root):
         """Initialize the application"""
+        self.row_frame = None
+        self.generate_json_button = None
+        self.dag_file_names_4 = None
+        self.dag_file_names_3 = None
+        self.dag_file_names_2 = None
+        self.dag_file_names_1 = None
+        self.base_dir_sql = None
+        self.base_dir_dbt = None
+        self.base_dir_dags = None
+        self.json_file_history = None
+        self.deployment_tab = None
         self.primary_keys = None
         self.unique_keys = None
         self.status_bar = None
@@ -155,6 +166,22 @@ class DAGGeneratorApp:
         self.root = root
         self.root.title("Dataflow Pipeline Generator")
         self.root.geometry("1366x768")
+        self.base_dir_dags_combo = None
+        self.base_dir_dbt_combo = None
+        self.base_dir_sql_combo = None
+        self.dag_file_names_1_combo = None
+        self.dag_file_names_2_combo = None
+        self.dag_file_names_3_combo = None
+        self.dag_file_names_4_combo = None
+
+        self.status_bar = ttk.Frame(self.root)
+        self.status_bar.pack(fill='x', side='bottom')
+
+        self.status_label = ttk.Label(self.status_bar, text="Ready", anchor='w')
+        self.status_label.pack(side='left', padx=10)
+
+        self.progress = ttk.Progressbar(self.status_bar, mode='indeterminate', length=100)
+        self.progress.pack(side='right', padx=10, pady=5)
         
         # Initialize thread pool
         self.executor = ThreadPoolExecutor(max_workers=3)
@@ -173,6 +200,7 @@ class DAGGeneratorApp:
         # Initialize history lists
         self.file_history = []
         self.ddl_file_history = []
+        self.json_file_history = []
         
         # Variables with history
         self.mapping_file_path = tk.StringVar()
@@ -240,10 +268,12 @@ class DAGGeneratorApp:
                     
                     self.ddl_file_history = [path for path in history.get('ddl_files', []) 
                                             if os.path.exists(path) or find_similar_file(path)]
+                    self.json_file_history= [path for path in history.get('json_files', [])]
                     return True
         except:
             self.file_history = []
             self.ddl_file_history = []
+            self.json_file_history = []
         return False
 
     def init_ui(self):
@@ -274,23 +304,18 @@ class DAGGeneratorApp:
         # Create basic tab frames
         self.main_tab = ttk.Frame(self.notebook, padding=20)
         self.mapping_tab = ttk.Frame(self.notebook, padding=20)
+        self.deployment_tab = ttk.Frame(self.notebook, padding=20)
 
         self.notebook.add(self.main_tab, text='DAG Generator')
         self.notebook.add(self.mapping_tab, text='Mapping Tools')
+        self.notebook.add(self.deployment_tab, text='Deployment Tools')
 
         # Initialize basic tab content
         self.init_main_tab()
         self.init_mapping_tab()
+        self.init_json_generator_tab()
         
-        # Create status bar
-        self.status_bar = ttk.Frame(self.root)
-        self.status_bar.pack(fill='x', side='bottom')
-        
-        self.status_label = ttk.Label(self.status_bar, text="Ready", anchor='w')
-        self.status_label.pack(side='left', padx=10)
-        
-        self.progress = ttk.Progressbar(self.status_bar, mode='indeterminate', length=100)
-        self.progress.pack(side='right', padx=10, pady=5)
+        # # Create status bar
         
         # Hide progress bar initially
         self.progress.pack_forget()
@@ -360,7 +385,7 @@ class DAGGeneratorApp:
         ttk.Button(
             input_frame,
             text="Browse",
-            command=self.browse_file,
+            command = lambda: self.browse_file(target_var=self.mapping_file_path, is_path=False),
             width=10  # Fixed width for button
         ).pack(side='right')
 
@@ -564,6 +589,118 @@ class DAGGeneratorApp:
             justify='left'
         ).pack(fill='x', pady=(10, 0))
 
+    def _create_json_input_row(self, parent_frame, label_text, var_name, is_path):
+        # Create frame for each row
+        row_frame = ttk.Frame(parent_frame)
+        row_frame.pack(fill='x', pady=(5, 10))
+
+        # Add label with fixed width for alignment
+        ttk.Label(
+            row_frame,
+            text=label_text,
+            width=20
+        ).pack(side='left', padx=(0, 10))
+
+        # Create input frame to contain entry/combobox and button
+        input_frame = ttk.Frame(row_frame)
+        input_frame.pack(side='left', fill='x', expand=True)
+
+        # Create StringVar with a unique name
+        string_var = tk.StringVar()
+        setattr(self, var_name, string_var)
+
+        # Create a unique Combobox with a specific attribute name
+        unique_combo_name = f'{var_name}_combo'
+        self.unique_combo_name = ttk.Combobox(
+            input_frame,
+            textvariable=string_var,
+            values=self.json_file_history,
+            width=50
+        )
+        self.unique_combo_name.pack(side='left', fill='x', expand=True, padx=(0, 10))
+
+        # Add browse button
+        browse_button = ttk.Button(
+            input_frame,
+            text="Browse",
+            command=lambda: self.browse_file(target_var=var_name, is_path=is_path),
+            width=10
+        )
+        browse_button.pack(side='right')
+
+        # Store the combo as an attribute with a unique name
+        setattr(self, unique_combo_name, self.unique_combo_name)
+
+        return row_frame
+
+    def init_json_generator_tab(self):
+        """Initialize JSON Generator tab"""
+        # Create JSON generator frame
+        json_frame = ttk.LabelFrame(self.deployment_tab, text="JSON Generator", padding=15)
+        json_frame.pack(fill='x', pady=(0, 20))
+
+        # Define fields with their details
+        fields = [
+            ("Airflow Path :", "base_dir_dags", True),
+            ("Job Path:", "base_dir_dbt", True),
+            ("Snowflake Path:", "base_dir_sql", True),
+            ("DAG File Names:", "dag_file_names_1", False),
+            ("DBT File Names:", "dbt_file_names_2", False),
+            ("DDL File Names:", "ddl_file_names_3", False),
+            ("DML File Names:", "dml_file_names_4", False),
+        ]
+
+        # Use list comprehension to create UI elements for each field
+        for label, var_name, is_path in fields:
+            self.row_frame = self._create_json_input_row(json_frame, label, var_name, is_path)
+
+        # Generate JSON button
+        self.generate_json_button = ttk.Button(
+            json_frame,
+            text="Generate JSON",
+            command=self.generate_json_with_progress,
+            style='Accent.TButton'
+        )
+        self.generate_json_button.pack(fill='x', pady=(10, 0))
+
+        # Add help text
+        ttk.Label(
+            json_frame,
+            text="This will generate a JSON configuration file based on the selected directories and files.",
+            wraplength=700,
+            justify='left'
+        ).pack(fill='x', pady=(10, 0))
+
+    def generate_json_with_progress(self):
+        """Handle JSON generation with progress indication"""
+        try:
+            # Show progress and disable button
+            self.set_status("Generating JSON configuration...")
+            self.show_progress()
+            self.progress.update_idletasks()  # Force UI update for progress bar
+            self.generate_json_button.configure(state='disabled')
+
+            # Call JSON creator with values from combo boxes
+            json_creator(
+                self.base_dir_dags_combo.get(),
+                self.base_dir_dbt_combo.get(),
+                self.base_dir_sql_combo.get(),
+                self.dag_file_names_1_combo.get(),
+                self.dbt_file_names_2_combo.get(),
+                self.ddl_file_names_3_combo.get(),
+                self.dml_file_names_4_combo.get()
+            )
+            # Update status on success
+            self.set_status("JSON configuration generated successfully!")
+
+        except Exception as e:
+            # Handle any errors
+            self.set_status(f"Error generating JSON: {str(e)}")
+        finally:
+            # Always hide progress and re-enable button
+            self.hide_progress()
+            self.generate_json_button.configure(state='normal')
+
     def start_generation(self):
         """Start the generation process with progress indicator"""
         self.set_status("Generating files...")
@@ -589,7 +726,7 @@ class DAGGeneratorApp:
 
     def set_status(self, message):
         """Update status bar message"""
-        self.status_label.config(text=message)
+        self.status_label["text"] = message
         
     def show_progress(self):
         """Show progress bar"""
@@ -649,23 +786,120 @@ class DAGGeneratorApp:
         widget.bind('<Leave>', hide_tooltip)
         widget._tooltip = tooltip  # Store reference to prevent garbage collection
 
-    def browse_file(self):
-        """Browse for Excel file"""
-        # Ensure mappings directory exists
-        initial_dir = os.path.join(os.getcwd(), "mappings")
-        os.makedirs(initial_dir, exist_ok=True)
-        
-        file_path = filedialog.askopenfilename(
-            title="Select Mapping File",
-            filetypes=[("Excel files", "*.xlsx")],
-            initialdir=initial_dir
-        )
-        if file_path:
-            self.mapping_file_path.set(file_path)
-            self.add_to_history(file_path, self.file_history)
-            self.file_combo['values'] = self.file_history
-            if hasattr(self, 'mapping_combo'):
-                self.mapping_combo['values'] = self.file_history
+    def browse_file(self, target_var=None, is_path=False):
+        """
+        Handle file/directory browsing and update the corresponding variable
+        Args:
+            target_var (str): Name of the StringVar to update
+            is_path (bool): True if selecting directory, False if selecting file(s)
+        """
+        # Determine the selection method based on is_path
+        if is_path:
+            # Open directory selection dialog
+            selected = filedialog.askdirectory(
+                title="Select Directory",
+                initialdir="."  # Start from current directory
+            )
+            # If directory selected, categorize based on checkbox states
+            if selected:
+                selected_files = {
+                    'py_files': [],
+                    'sql_files': [],
+                    'yaml_files': [],
+                    'excel_files': [],
+                    'all_files': [selected]  # Entire directory
+                }
+
+                # Recursively walk through directory and categorize files
+                for root, dirs, files in os.walk(selected):
+                    for file in files:
+                        full_path = os.path.join(root, file)
+                        file_ext = os.path.splitext(file)[1].lower()
+
+                        if file_ext == '.py':
+                            selected_files['py_files'].append(full_path)
+                        elif file_ext in ['.sql']:
+                            selected_files['sql_files'].append(full_path)
+                        elif file_ext in ['.yml', '.yaml']:
+                            selected_files['yaml_files'].append(full_path)
+                        elif file_ext in ['.xlsx', '.xls']:
+                            selected_files['excel_files'].append(full_path)
+
+                        # Always add to all_files
+                        selected_files['all_files'].append(full_path)
+
+        else:
+            # Open file selection dialog with multiple selection
+            selected = filedialog.askopenfilenames(
+                title="Select File(s) or Directory",
+                initialdir=".",  # Start from current directory
+                filetypes=[
+                    ("All Files", "*.*"),
+                    ("Python Files", "*.py"),
+                    ("SQL Files", "*.sql"),
+                    ("YAML Files", "*.yml;*.yaml"),
+                    ("Excel files", "*.xlsx")
+                ]
+            )
+
+        # Normalize selected to a list
+        selected_files = selected if isinstance(selected, tuple) else [selected]
+
+        # Clean and process each selected file
+        processed_files = [
+            file_path.strip('{}\"\'')
+            for file_path in selected_files
+            if file_path  # Ensure non-empty paths
+        ]
+
+        if not processed_files:
+            return
+
+        # Primary file (first in the list)
+        primary_file = processed_files[0]
+
+        # Update mapping file path
+        self.mapping_file_path.set(primary_file)
+
+        # Updated history mappings with specific combo names
+        history_mappings = [
+            ('file_combo', self.file_history),
+            ('mapping_combo', self.file_history),
+            ('dag_file_names_1_combo', self.json_file_history),
+            ('dbt_file_names_2_combo', self.json_file_history),
+            ('ddl_file_names_3_combo', self.json_file_history),
+            ('dml_file_names_4_combo', self.json_file_history),
+            ('base_dir_dags_combo', self.json_file_history),
+            ('base_dir_dbt_combo', self.json_file_history),
+            ('base_dir_sql_combo', self.json_file_history)
+        ]
+
+        for combo_name, history_attr in history_mappings:
+            if hasattr(self, combo_name):
+                # Add each processed file to the respective history
+                for file_path in processed_files:
+                    self.add_to_history(file_path, history_attr)
+
+                # Update combo values
+                combo = getattr(self, combo_name)
+                combo['values'] = history_attr
+
+        # Save history
+        self.save_history()
+
+        # Update target variable if specified
+        if target_var and hasattr(self, target_var):
+            target_stringvar = getattr(self, target_var)
+
+            # If multiple files, join paths; otherwise use primary file
+            if len(processed_files) > 1:
+                target_stringvar.set(';'.join(processed_files))
+            else:
+                target_stringvar.set(primary_file)
+
+        # Optionally store full paths for multiple file selections
+        if len(processed_files) > 1 and target_var:
+            setattr(self, f"_{target_var}_full_paths", tuple(processed_files))
 
     def generate_from_mapping(self):
         """Generate DBT model and DAG from mapping file"""
@@ -1366,7 +1600,7 @@ class DAGGeneratorApp:
         try:
             with open(ddl_path, 'r') as file:
                 ddl_content = file.read()
-            
+
             logging.info(f"Parsing DDL file: {ddl_path}")
 
             # Find the create table statement
@@ -2001,7 +2235,8 @@ class DAGGeneratorApp:
         try:
             history = {
                 'mapping_files': self.file_history[-10:],  # Keep last 10 files
-                'ddl_files': self.ddl_file_history[-10:]   # Keep last 10 files
+                'ddl_files': self.ddl_file_history[-10:],   # Keep last 10 files
+                'json_files': self.json_file_history[-10:]  # Keep last 10 files
             }
             history_file = os.path.join(os.getcwd(), 'file_history.json')
             with open(history_file, 'w') as f:
@@ -2022,8 +2257,27 @@ class DAGGeneratorApp:
             if hasattr(self, 'mapping_combo'):
                 formatted_values = [self.format_path(path) for path in self.file_history]
                 self.mapping_combo['values'] = formatted_values
+            # if hasattr(self, 'json_combo'):
+            #     formatted_values = [self.format_path(path) for path in self.json_file_history]
+            #     self.json_combo['values'] = formatted_values
+
+            # Define fields with their details
+            fields = [
+                ("Base Directory for DAGs:", "base_dir_dags", True),
+                ("Base Directory for DBT Files:", "base_dir_dbt", True),
+                ("Base Directory for SQL Files:", "base_dir_sql", True),
+                ("DAG File Names:", "dag_file_names_1", False),
+                ("DBT File Names:", "dbt_file_names_2", False),
+                ("DDL File Names:", "ddl_file_names_3", False),
+                ("DML File Names:", "dml_file_names_4", False),
+            ]
+
+            for field, var_name, is_dir in fields:
+                combo = getattr(self, f"{var_name}_combo")
+                combo['values'] = [self.format_path(path) for path in self.json_file_history[-10:]]
             
             self.root.update_idletasks()
+
         except Exception as e:
             logging.error(f"Error updating UI: {str(e)}")
 

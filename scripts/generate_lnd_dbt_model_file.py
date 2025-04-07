@@ -1,4 +1,5 @@
 import json
+import sqlparse
 from openpyxl import load_workbook
 import snowflake.connector
 import openpyxl.worksheet.datavalidation
@@ -284,54 +285,210 @@ def create_dp_view_file(config, file_path):
         raise Exception(f"An error occurred while generating the dbt model: {e}")
 
 def create_test_model_file(json_file, file_path,test_model_output_path):
-    """Generate the dbt test model file."""
+    """
+    Generate a comprehensive dbt test model file based on JSON configuration.
+
+    Args:
+        json_file (str): Path to the JSON configuration file
+        test_model_output_path (str): Directory to save the test model file
+
+    Returns:
+        tuple: (success_status, file_path)
+    """
     try:
-        with open(json_file) as f:
+        # Load configuration from JSON file
+        with open(json_file, 'r') as f:
             config = json.load(f)
 
-        # Load the mapping sheet
-        workbook = load_workbook(file_path)
-        mapping_sheet = workbook['Mapping']
+        # Extract configuration details
+        source_config = config.get('Source', {})
+        target_config = config.get('Target', {})
+        columns_config = config.get('Columns', [])
 
-        # Extract target and source table information from mapping sheet
-        target_table = None
-        source_table = None
+        # Construct source and target table fully qualified names
+        source_database = source_config.get('Database', '')
+        source_schema = source_config.get('Schema', '')
+        source_table_name = source_config.get('Table Name', '')
+        full_source_table = f"{source_database}.{source_schema}.{source_table_name}"
 
-        for row in range(1, mapping_sheet.max_row + 1):
-            cell_value = mapping_sheet.cell(row=row, column=1).value
-            if cell_value == 'TARGET_TABLE':
-                target_table = mapping_sheet.cell(row=row, column=2).value
-            elif cell_value == 'SOURCE_TABLE':
-                source_table = mapping_sheet.cell(row=row, column=2).value
-            if target_table and source_table:
-                break
+        target_schema = target_config.get('Schema', '')
+        target_table_name = target_config.get('Table Name', '')
+        full_target_table = f"{target_schema}.{target_table_name}"
 
-        if not source_table:
-            raise ValueError("Source table not found in mapping sheet")
+        # Identify key columns and audit columns
+        key_columns = target_config.get('unique_key', [])
+        audit_columns = [
+            'DATA_SRC', 'CREATE_DT', 'CREATE_BY', 'CREATE_PGM',
+            'UPDATE_DT', 'UPDATE_BY', 'UPDATE_PGM'
+        ]
 
-        # Split the target table into schema and name
-        target_parts = target_table.split('.')
-        target_schema = target_parts[0] if len(target_parts) > 1 else None
-        target_table_name = target_parts[-1]
+        # Process column mappings
+        column_mappings = {}
+        source_columns = []
+        constant_columns = []
 
-        # Create output directory if it doesn't exist
-        output_dir = test_model_output_path
-        os.makedirs(output_dir, exist_ok=True)
+        for col in columns_config:
+            target_col = col.get('Target Column', '')
+            source_table = col.get('Source Table', '')
+            logic = col.get('Logic', '')
+
+            # Skip audit columns
+            if target_col in audit_columns:
+                continue
+
+            # Categorize columns
+            if source_table:
+                source_columns.append(target_col)
+                column_mappings[target_col] = {
+                    'source_table': source_table,
+                    'source_column': logic or target_col
+                }
+            elif logic:
+                constant_columns.append(target_col)
+                column_mappings[target_col] = {
+                    'source_table': None,
+                    'constant_value': logic
+                }
+
+        # Create output directory
+        os.makedirs(test_model_output_path, exist_ok=True)
 
         # Generate file name
-        model_name = f"{target_schema}.{target_table_name}"
-        file_name = f"{model_name}_test.sql"
-        file_path = os.path.join(output_dir, file_name)
+        file_name = f"{full_target_table}_test.sql"
+        file_path = os.path.join(test_model_output_path, file_name)
 
-        # Write test model file
+        # Define test queries
+        queries = {
+            "Record Count Comparison": f"""
+WITH 
+    target_count AS (
+        SELECT COUNT(*) AS target_count 
+        FROM {full_target_table}
+    ), 
+    source_count AS (
+        SELECT COUNT(*) AS source_count 
+        FROM {full_source_table}
+    )
+SELECT 
+    'Record Count' AS comparison, 
+    target_count, 
+    source_count, 
+    (target_count - source_count) AS count_difference
+FROM 
+    target_count, 
+    source_count;
+""",
+            "Mapped Columns Validation": f"""
+WITH target_data AS (
+    SELECT 
+        {', '.join([
+                f"{col} AS {col}_target"
+                for col in source_columns
+            ])}
+    FROM {full_target_table}
+),
+source_data AS (
+    SELECT 
+        {', '.join([
+                f"{column_mappings[col]['source_column']} AS {col}_source"
+                for col in source_columns
+            ])}
+    FROM {full_source_table}
+)
+SELECT 
+    'Mapped Columns Validation' AS validation_type,
+    {', '.join([
+                f"{col}_target, {col}_source"
+                for col in source_columns
+            ])}
+FROM 
+    target_data
+FULL OUTER JOIN 
+    source_data
+ON 
+    1=1;
+""",
+            "Constant Value Columns": f"""
+SELECT 
+    'Constant Value Columns' AS validation_type,
+    {', '.join([
+                f"{column_mappings[col]['constant_value']} AS {col}_value"
+                for col in constant_columns
+            ])}
+FROM 
+    {full_target_table};
+""",
+"MINUS Validation": f"""
+        WITH 
+            target_data AS (
+                SELECT 
+                    {', '.join([
+                f"{col}"
+                for col in source_columns
+            ])}
+                FROM {full_target_table}
+            ),
+            source_data AS (
+                SELECT 
+                    {', '.join([
+                f"{column_mappings[col]['source_column']} AS {col}"
+                for col in source_columns
+            ])}
+                FROM {full_source_table}
+            ),
+            target_minus_source AS (
+                SELECT * FROM target_data
+                MINUS
+                SELECT * FROM source_data
+            ),
+            source_minus_target AS (
+                SELECT * FROM source_data
+                MINUS
+                SELECT * FROM target_data
+            )
+        SELECT 
+            'Target Minus Source' AS diff_type,
+            * 
+        FROM 
+            target_minus_source
+
+        UNION ALL
+
+        SELECT 
+            'Source Minus Target' AS diff_type,
+            * 
+        FROM 
+            source_minus_target;
+        """,
+"Duplicate Records": f"""
+WITH 
+    duplicate_check AS (
+        SELECT 
+            {', '.join(key_columns)},
+            COUNT(*) AS record_count
+        FROM 
+            {full_target_table}
+        GROUP BY 
+            {', '.join(key_columns)}
+        HAVING 
+            COUNT(*) > 1
+    )
+SELECT 
+    'Duplicates in Target' AS status,
+    *
+FROM 
+    duplicate_check;
+"""
+        }
+
+        # Write SQL to file
         with open(file_path, 'w') as f:
-            f.write(f"SELECT * FROM {target_schema}.{target_table_name} WHERE 1=0;")
-            f.write(f"\n\nSELECT * FROM {target_schema}.{target_table_name} EXCEPT SELECT * FROM {source_table};")
-            f.write(f"\n\nSELECT COUNT(*) FROM {target_schema}.{target_table_name} ;")
-            f.write(f"\n\nSELECT COUNT(*) FROM {source_table} WHERE 1=0 ;")
+            for section, query in queries.items():
+                f.write(f"-- {section}\n")
+                f.write(query + "\n\n")
 
         return True, file_path
-    except Exception as e:
-        raise Exception(f"An error occurred while generating the dbt test model: {e}")
 
+    except Exception as e:
+        return False, f"An error occurred: {str(e)}"
 
