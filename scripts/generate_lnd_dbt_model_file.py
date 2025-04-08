@@ -5,6 +5,8 @@ import snowflake.connector
 import openpyxl.worksheet.datavalidation
 import os
 from   .model_mapper  import ModelMapper
+from .dbt_model_generator import extract_join_clauses, extract_where_condition
+
 def format_columns(columns):
     """Format columns for the dbt model."""
     try:
@@ -284,12 +286,13 @@ def create_dp_view_file(config, file_path):
     except Exception as e:
         raise Exception(f"An error occurred while generating the dbt model: {e}")
 
-def create_test_model_file(json_file, file_path,test_model_output_path):
+def create_test_model_file(json_file, mapping_sheet_path, test_model_output_path):
     """
-    Generate a comprehensive dbt test model file based on JSON configuration.
+    Generate a comprehensive dbt test model file based on JSON configuration and mapping sheet.
 
     Args:
         json_file (str): Path to the JSON configuration file
+        mapping_sheet_path (str): Path to the Excel mapping sheet
         test_model_output_path (str): Directory to save the test model file
 
     Returns:
@@ -300,10 +303,17 @@ def create_test_model_file(json_file, file_path,test_model_output_path):
         with open(json_file, 'r') as f:
             config = json.load(f)
 
+        # Load mapping sheet
+        mapping_sheet = openpyxl.load_workbook(mapping_sheet_path).active
+
         # Extract configuration details
         source_config = config.get('Source', {})
         target_config = config.get('Target', {})
         columns_config = config.get('Columns', [])
+
+        # Extract joins and where conditions
+        join_clauses, join_aliases = extract_join_clauses(mapping_sheet)
+        where_condition = extract_where_condition(mapping_sheet)
 
         # Construct source and target table fully qualified names
         source_database = source_config.get('Database', '')
@@ -314,6 +324,19 @@ def create_test_model_file(json_file, file_path,test_model_output_path):
         target_schema = target_config.get('Schema', '')
         target_table_name = target_config.get('Table Name', '')
         full_target_table = f"{target_schema}.{target_table_name}"
+
+        # Construct source CTE with joins and where condition
+        source_cte = f"(SELECT * FROM {full_source_table}"
+
+        # Add joins
+        for join_clause in join_clauses:
+            source_cte += f" {join_clause}"
+
+        # Add where condition
+        if where_condition:
+            source_cte += f" WHERE {where_condition}"
+
+        source_cte += ")"
 
         # Identify key columns and audit columns
         key_columns = target_config.get('unique_key', [])
@@ -367,7 +390,7 @@ WITH
     ), 
     source_count AS (
         SELECT COUNT(*) AS source_count 
-        FROM {full_source_table}
+        FROM {source_cte}
     )
 SELECT 
     'Record Count' AS comparison, 
@@ -393,7 +416,7 @@ source_data AS (
                 f"{column_mappings[col]['source_column']} AS {col}_source"
                 for col in source_columns
             ])}
-    FROM {full_source_table}
+    FROM {source_cte}
 )
 SELECT 
     'Mapped Columns Validation' AS validation_type,
@@ -418,7 +441,7 @@ SELECT
 FROM 
     {full_target_table};
 """,
-"MINUS Validation": f"""
+            "MINUS Validation": f"""
         WITH 
             target_data AS (
                 SELECT 
@@ -434,7 +457,7 @@ FROM
                 f"{column_mappings[col]['source_column']} AS {col}"
                 for col in source_columns
             ])}
-                FROM {full_source_table}
+                FROM {source_cte}
             ),
             target_minus_source AS (
                 SELECT * FROM target_data
@@ -451,16 +474,14 @@ FROM
             * 
         FROM 
             target_minus_source
-
         UNION ALL
-
         SELECT 
             'Source Minus Target' AS diff_type,
             * 
         FROM 
             source_minus_target;
         """,
-"Duplicate Records": f"""
+            "Duplicate Records": f"""
 WITH 
     duplicate_check AS (
         SELECT 
@@ -487,8 +508,7 @@ FROM
                 f.write(f"-- {section}\n")
                 f.write(query + "\n\n")
 
-        return True, file_path
+        return file_path
 
     except Exception as e:
         return False, f"An error occurred: {str(e)}"
-
