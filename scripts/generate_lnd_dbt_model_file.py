@@ -286,7 +286,85 @@ def create_dp_view_file(config, file_path):
     except Exception as e:
         raise Exception(f"An error occurred while generating the dbt model: {e}")
 
-def create_test_model_file(json_file, mapping_sheet_path, test_model_output_path):
+def get_columns_from_lnd_table(config,file_path):
+    """Get columns from the LND table in the specified file."""
+    try:
+        with open(config) as f:
+            config = json.load(f)
+
+        workbook = load_workbook(file_path)
+        mapping_sheet, config_sheet = workbook['Mapping'], workbook['Config']
+
+        """Extract target and source table information from mapping sheet"""
+        target_table = None
+        source_table = None
+
+        for row in range(1, mapping_sheet.max_row + 1):
+            cell_value = mapping_sheet.cell(row=row, column=1).value
+            if cell_value == 'TARGET_TABLE':
+                target_table = mapping_sheet.cell(row=row, column=2).value
+            elif cell_value == 'SOURCE_TABLE':
+                source_table = mapping_sheet.cell(row=row, column=2).value
+            if target_table and source_table:
+                break
+
+        if not source_table:
+            raise ValueError("Source table not found in mapping sheet")
+
+        source_db, source_schema, source_table_name = source_table.split('.')
+        target_parts = target_table.split('.')
+        target_schema = target_parts[0] if len(target_parts) > 1 else None
+        target_table_name = target_parts[-1]
+
+        """Extract Snowflake configuration from Config sheet"""
+        snowflake_config = {}
+        in_snowflake_section = False
+
+        for row in range(2, config_sheet.max_row + 1):
+            param = config_sheet.cell(row=row, column=1).value
+            if not param:
+                continue
+            if param == 'Snowflake Configuration':
+                in_snowflake_section = True
+                continue
+            if in_snowflake_section and param in ['ROLE', 'WAREHOUSE', 'DATABASE', 'ACCOUNT', 'USER', 'AUTHENTICATOR']:
+                value = config_sheet.cell(row=row, column=2).value
+                if value:
+                    snowflake_config[param] = value
+
+        """Get column information from Snowflake"""
+        conn = None
+        cursor = None
+        conn = snowflake.connector.connect(
+            account=snowflake_config['ACCOUNT'],
+            user=snowflake_config['USER'],
+            authenticator=snowflake_config['AUTHENTICATOR'],
+            warehouse=snowflake_config['WAREHOUSE'],
+            role=snowflake_config['ROLE'],
+            database=source_db,
+            schema=source_schema
+        )
+
+        print(conn)
+
+        cursor = conn.cursor()
+        cursor.execute(f"""
+               SELECT COLUMN_NAME
+               FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_SCHEMA = '{source_schema}'
+               AND TABLE_NAME = '{source_table_name}'
+               ORDER BY ORDINAL_POSITION
+           """)
+
+        columns = cursor.fetchall()
+        column_names = [col[0] for col in columns]
+
+        return column_names
+    except Exception as e:
+        raise Exception(f"An error occurred while getting columns from LND table: {e}")
+
+
+def create_test_model_file(json_file,file_path ,mapping_sheet, test_model_output_path):
     """
     Generate a comprehensive dbt test model file based on JSON configuration and mapping sheet.
 
@@ -302,9 +380,6 @@ def create_test_model_file(json_file, mapping_sheet_path, test_model_output_path
         # Load configuration from JSON file
         with open(json_file, 'r') as f:
             config = json.load(f)
-
-        # Load mapping sheet
-        mapping_sheet = openpyxl.load_workbook(mapping_sheet_path).active
 
         # Extract configuration details
         source_config = config.get('Source', {})
@@ -350,6 +425,20 @@ def create_test_model_file(json_file, mapping_sheet_path, test_model_output_path
         source_columns = []
         constant_columns = []
 
+        if not columns_config:
+            source_columns_lnd = get_columns_from_lnd_table(json_file,file_path)
+            for col in source_columns_lnd:
+                # Skip audit columns
+                if col in audit_columns:
+                    continue
+
+                column_mappings[col] = {
+                    'source_table': source_table_name,
+                    'source_column': col
+                }
+                source_columns.append(col)
+
+
         for col in columns_config:
             target_col = col.get('Target Column', '')
             source_table = col.get('Source Table', '')
@@ -372,6 +461,7 @@ def create_test_model_file(json_file, mapping_sheet_path, test_model_output_path
                     'source_table': None,
                     'constant_value': logic
                 }
+
 
         # Create output directory
         os.makedirs(test_model_output_path, exist_ok=True)
