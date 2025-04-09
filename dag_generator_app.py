@@ -1208,7 +1208,7 @@ class DAGGeneratorApp:
             test_model_output_path = None
             if self.generate_test_model_var.get():
                 test_model_output_path = 'tests'
-                test_model_output_path = create_test_model_file(json_output_path, self.mapping_file_path.get(),test_model_output_path)
+                test_model_output_path = create_test_model_file(json_output_path,self.mapping_file_path.get(),mapping_sheet,test_model_output_path)
 
             if job_output_path or model_file_path or dag_file_path or merge_macro_file_path or insert_macro_file_path or lnd_model_file_path or test_model_output_path:
                 # Prepare success message
