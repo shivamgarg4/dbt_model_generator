@@ -12,6 +12,7 @@ import openpyxl
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from tkinter import filedialog, messagebox, ttk
+import scripts.pipeline_generator.init_pipeline_generator  as init_pipeline_generator
 
 from openpyxl import load_workbook, Workbook
 from openpyxl.styles import Font
@@ -27,6 +28,7 @@ from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
 from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file,create_test_model_file
+from scripts.utils import parse_ddl_file
 from scripts.utils.json_creator import json_creator
 
 # Configure logging
@@ -142,6 +144,9 @@ def generate_safe_timestamp():
 class DAGGeneratorApp:
     def __init__(self, root):
         """Initialize the application"""
+        self.fill_pipeline_sheet_button = None
+        self.generate_mapping_sheet_button = None
+        self.generate_pipeline_button = None
         self.row_frame = None
         self.generate_json_button = None
         self.dag_file_names_4 = None
@@ -173,6 +178,8 @@ class DAGGeneratorApp:
         self.dag_file_names_2_combo = None
         self.dag_file_names_3_combo = None
         self.dag_file_names_4_combo = None
+        self.pipeline_mapping_combo = None
+        self.DW_DDL_file_combo = None
 
         self.status_bar = ttk.Frame(self.root)
         self.status_bar.pack(fill='x', side='bottom')
@@ -305,15 +312,19 @@ class DAGGeneratorApp:
         self.main_tab = ttk.Frame(self.notebook, padding=20)
         self.mapping_tab = ttk.Frame(self.notebook, padding=20)
         self.deployment_tab = ttk.Frame(self.notebook, padding=20)
+        self.pipeline_tab = ttk.Frame(self.notebook, padding=20)
 
         self.notebook.add(self.main_tab, text='DAG Generator')
         self.notebook.add(self.mapping_tab, text='Mapping Tools')
         self.notebook.add(self.deployment_tab, text='Deployment Tools')
+        self.notebook.add(self.pipeline_tab, text='Pipeline Tools')
+
 
         # Initialize basic tab content
         self.init_main_tab()
         self.init_mapping_tab()
         self.init_json_generator_tab()
+        self.init_pipeline_generator_tab()
         
         # # Create status bar
         
@@ -633,6 +644,150 @@ class DAGGeneratorApp:
 
         return row_frame
 
+    def init_pipeline_generator_tab(self):
+        """Initialize Pipeline Generator tab"""
+        # Create pipeline generator frame
+        pipeline_frame = ttk.LabelFrame(self.pipeline_tab, text="Pipeline Generator", padding=15)
+        pipeline_frame.pack(fill='x', pady=(0, 20))
+
+        # Define fields with their details
+        fields = [
+            ("Pipeline Mapping Sheet:", "pipeline_mapping", False),
+            ("Target DDL Files:", "DW_DDL_file", False)
+        ]
+
+        # Use list comprehension to create UI elements for each field
+        for label, var_name, is_path in fields:
+            self.row_frame = self._create_json_input_row(pipeline_frame, label, var_name, is_path)
+
+        # Generate Pipeline button
+        self.generate_mapping_sheet_button = ttk.Button(
+            pipeline_frame,
+            text="Generate Mappings Sheets",
+            command=self.generate_multiple_mapping_with_progress,
+            style='Accent.TButton'
+        )
+        self.generate_mapping_sheet_button.pack(fill='x', pady=(10, 0))
+
+        # Generate Pipeline button
+        self.fill_pipeline_sheet_button = ttk.Button(
+            pipeline_frame,
+            text="Fill Mapping Sheets",
+            command=self.fill_pipeline_sheets_with_progress,
+            style='Accent.TButton'
+        )
+        self.fill_pipeline_sheet_button.pack(fill='x', pady=(10, 0))
+
+        # Generate Pipeline button
+        self.generate_pipeline_button = ttk.Button(
+            pipeline_frame,
+            text="Generate Pipeline Objects",
+            command=self.generate_pipeline_with_progress,
+            style='Accent.TButton'
+        )
+        self.generate_pipeline_button.pack(fill='x', pady=(10, 0))
+
+        # Add help text
+        ttk.Label(
+            pipeline_frame,
+            text="This will generate pipeline configuration files based on the selected directories and input files.",
+            wraplength=700,
+            justify='left'
+        ).pack(fill='x', pady=(10, 0))
+
+    def generate_multiple_mapping_with_progress(self):
+        """
+        Handle mapping generation with progress indication and error handling
+        """
+        try:
+            # Show progress and disable button
+            self.set_status("Generating Pipeline configuration...")
+            self.show_progress()
+            self.progress.update_idletasks()  # Force UI update for progress bar
+            self.generate_pipeline_button.configure(state='disabled')
+
+            mapping_file_path = self.pipeline_mapping_combo.get()
+            DW_DDL_file_path=self.DW_DDL_file_combo.get()
+
+            # Call pipeline generator with values from combo boxes
+            init_pipeline_generator.process_pipeline_sheet(mapping_file_path,DW_DDL_file_path)
+            # Update status on success
+            self.set_status("Pipeline configuration generated successfully!")
+
+        except Exception as e:
+            # Handle any errors
+            self.set_status(f"Error generating Pipeline: {str(e)}")
+            # Optional: Log the error if logging is set up
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Pipeline generation error: {str(e)}")
+
+        finally:
+            # Always hide progress and re-enable button
+            self.hide_progress()
+            self.generate_pipeline_button.configure(state='normal')
+
+    def fill_pipeline_sheets_with_progress(self):
+        """
+                Handle pipeline sheets source column mapping from snowflake with progress indication and error handling
+        """
+        try:
+            # Show progress and disable button
+            self.set_status("Generating Pipeline Objects from mappings...")
+            self.show_progress()
+            self.progress.update_idletasks()  # Force UI update for progress bar
+            self.generate_pipeline_button.configure(state='disabled')
+
+            mapping_file_path = self.pipeline_mapping_combo.get()
+            DW_DDL_file_path = self.DW_DDL_file_combo.get()
+
+            # Call pipeline generator with values from combo boxes
+            init_pipeline_generator.process_filled_sheet(mapping_file_path)
+            # Update status on success
+            self.set_status("Pipeline Objects generated successfully!")
+
+        except Exception as e:
+            # Handle any errors
+            self.set_status(f"Error generating Pipeline: {str(e)}")
+            # Optional: Log the error if logging is set up
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Pipeline generation error: {str(e)}")
+
+        finally:
+            # Always hide progress and re-enable button
+            self.hide_progress()
+            self.generate_pipeline_button.configure(state='normal')
+
+    def generate_pipeline_with_progress(self):
+        """
+                Handle pipeline generation from mappings with progress indication and error handling
+        """
+        try:
+            # Show progress and disable button
+            self.set_status("Generating Pipeline Objects from mappings...")
+            self.show_progress()
+            self.progress.update_idletasks()  # Force UI update for progress bar
+            self.generate_pipeline_button.configure(state='disabled')
+
+            mapping_file_path = self.pipeline_mapping_combo.get()
+            DW_DDL_file_path = self.DW_DDL_file_combo.get()
+
+            # Call pipeline generator with values from combo boxes
+            init_pipeline_generator.generate_dbt_models(mapping_file_path,"models/","config/mappings/",DW_DDL_file_path)
+            # Update status on success
+            self.set_status("Pipeline Objects generated successfully!")
+
+        except Exception as e:
+            # Handle any errors
+            self.set_status(f"Error generating Pipeline: {str(e)}")
+            # Optional: Log the error if logging is set up
+            if hasattr(self, 'logger'):
+                self.logger.error(f"Pipeline generation error: {str(e)}")
+
+        finally:
+            # Always hide progress and re-enable button
+            self.hide_progress()
+            self.generate_pipeline_button.configure(state='normal')
+
     def init_json_generator_tab(self):
         """Initialize JSON Generator tab"""
         # Create JSON generator frame
@@ -871,7 +1026,9 @@ class DAGGeneratorApp:
             ('dml_file_names_4_combo', self.json_file_history),
             ('base_dir_dags_combo', self.json_file_history),
             ('base_dir_dbt_combo', self.json_file_history),
-            ('base_dir_sql_combo', self.json_file_history)
+            ('base_dir_sql_combo', self.json_file_history),
+            ('pipeline_mapping_combo', self.file_history),
+            ('DW_DDL_file_combo', self.ddl_file_history)
         ]
 
         for combo_name, history_attr in history_mappings:
@@ -1766,6 +1923,8 @@ class DAGGeneratorApp:
                         workbook.remove(workbook['Mapping'])
                     if 'Config' in workbook.sheetnames:
                         workbook.remove(workbook['Config'])
+                    if 'Pipeline Config' in workbook.sheetnames:
+                        workbook.remove(workbook['Pipeline Config'])
                 except Exception:
                     workbook = openpyxl.Workbook()
                     # Remove default sheet
@@ -1773,11 +1932,12 @@ class DAGGeneratorApp:
                     workbook.remove(default_sheet)
             
             # Create Mapping and Config sheets
+            pipeline_config_sheet = workbook.create_sheet('Pipeline Config')
             mapping_sheet = workbook.create_sheet('Mapping')
             config_sheet = workbook.create_sheet('Config')
             workbook.active = mapping_sheet
 
-            # Update sheets
+            init_pipeline_generator.write_pipeline_details(pipeline_config_sheet)
             self.update_mapping_content(mapping_sheet, columns[0] if isinstance(columns, tuple) else columns)
             self.update_config_sheet(config_sheet)
 
@@ -2270,6 +2430,8 @@ class DAGGeneratorApp:
                 ("DBT File Names:", "dbt_file_names_2", False),
                 ("DDL File Names:", "ddl_file_names_3", False),
                 ("DML File Names:", "dml_file_names_4", False),
+                ("Pipeline File Names:","pipeline_mapping", False),
+                ("DW DDL File Names:", "DW_DDL_file", False)
             ]
 
             for field, var_name, is_dir in fields:
