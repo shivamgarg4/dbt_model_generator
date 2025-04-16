@@ -245,18 +245,18 @@ SELECT
                 unique_key_columns.append(column)
                 continue
 
-            # More generic approach to identify columns that should be excluded from MINUS:
-            # 1. Columns with empty source (target-only columns)
-            # 2. Columns with literals/constants (containing quotes)
-            # 3. Columns with functions (containing parentheses)
-            # 4. Columns with complex expressions (containing operators)
-            # 5. Columns with CASE statements
-            if (not source_col or  # No source column
-                any(char in logic for char in ["'", "(", " ", "+", "-", "*", "/", "||"]) or  # Contains operators
-                "CASE" in logic.upper()):  # Not starting with join alias
+            # Skip unwanted columns
+            if source_col in ["List (Y,N)", "Table Type", "ref"]:
+                continue
 
+            if source_col in audit_columns:
+                computed_columns.append(column)
+                continue
+
+            if should_exclude_from_minus(logic):
                 computed_columns.append(column)
                 print(f"Excluding column from MINUS: {target_col} (Logic: {logic})")
+
 
         # Add all computed columns and audit columns to the outer query in target DDL order
         outer_columns = []
@@ -511,3 +511,17 @@ def get_materialization(mapping_sheet):
         if mapping_sheet.cell(row=row, column=1).value == 'MATERIALIZATION':
             return mapping_sheet.cell(row=row, column=2).value
     return 'incremental'  # Default to incremental if not specified
+
+
+def should_exclude_from_minus(logic):
+    """Helper function to determine if a column should be excluded from MINUS"""
+
+    # Exclude if it's a literal string or number
+    if (logic.startswith("'") and logic.endswith("'")) or logic.replace('.', '').strip().isdigit():
+        return True
+
+    # Exclude if it contains NEXTVAL
+    if 'NEXTVAL' in logic.upper():
+        return True
+
+    return False
