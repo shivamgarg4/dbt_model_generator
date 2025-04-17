@@ -1,13 +1,12 @@
 import os
 import logging
 import openpyxl
+import json
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.comments import Comment
 from openpyxl.utils import get_column_letter
-
 from ..dbt_model_generator import create_dbt_model_from_json
-from ..generate_lnd_dbt_model_file import generate_lnd_dbt_model_file
 from ..insert_sql_generator import insert_sql_generator
 from ..merge_sql_generator import merge_sql_generator, generate_merge_sql_for_pipelines
 from ..utils import parse_ddl_file as parse_ddl_file
@@ -15,8 +14,9 @@ from ..excel_to_json import _extract_config_from_sheet, _extract_mappings_from_s
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 from openpyxl import load_workbook
-import json
 from .source_column_mapper import update_source_mappings as update_source_mappings
+from .DAGs.dag_generators import create_cron_dag, create_dataset_dag, create_sns_dag
+from .model_generator_pipelines import generate_lnd_dbt_model_file, create_dp_view_file
 
 
 def read_pipeline_sheet(pipeline_details_sheet):
@@ -419,6 +419,8 @@ def create_config_sheet(config_sheet):
 
 def process_pipeline_sheet(workbook_path, ddl_path):
     # Load the workbook and get the pipeline details sheet
+
+    process_filled_workbook_to_json(workbook_path)
     workbook = load_workbook(workbook_path)
     pipeline_details_sheet = workbook['Pipeline Details']
 
@@ -618,7 +620,7 @@ def _load_workbook(file_path, generated_mapping_sheet):
     return worksheets
 
 
-def generate_dbt_models(workbook_path, output_dir, json_config_dir,target_ddl_path):
+def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_path):
     """
     Controller function to generate different types of DBT models
 
@@ -626,7 +628,9 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir,target_ddl_pa
         workbook_path (str): Path to the Excel workbook
         output_dir (str): Directory to save generated models
         json_config_dir (str): Directory with JSON configuration files
+        target_ddl_path (str): Path to the target DDL file
     """
+    global target_model
     try:
         # Validate input paths
         if not os.path.exists(workbook_path):
@@ -659,9 +663,9 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir,target_ddl_pa
 
                 # Find corresponding JSON config
                 config_filename = f"{mapping_sheet_name}.json"
-                config_file = os.path.join(json_config_dir, config_filename)
+                config_file_path = os.path.join(json_config_dir, config_filename)
 
-                if not os.path.exists(config_file):
+                if not os.path.exists(config_file_path) and not any(mt in model_type for mt in ["LND Load", "DP Load"]):
                     logging.warning(f"No config file found for {target_model}")
                     continue
 
@@ -672,27 +676,35 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir,target_ddl_pa
 
                 if "DW Load" in model_type:
                     model_content = create_dbt_model_from_json(
-                        config_file=config_file,
+                        config_file=config_file_path,
                         mapping_sheet=mapping_sheet,
                         target_ddl_path=target_ddl_path
                     )
+                    generate_dag_file("DW",config_file_path, "dags/")
 
                 elif "Merge Macro" in model_type:
                     model_content = generate_merge_sql_for_pipelines(
-                        config_file=config_file
+                        config_file=config_file_path
                     )
 
                 elif "Insert Macro" in model_type:
                     model_content = insert_sql_generator(
-                        config_file=config_file,
+                        config_file=config_file_path,
                         mapping_sheet=mapping_sheet
                     )
 
                 elif "LND Load" in model_type:
                     model_content = generate_lnd_dbt_model_file(
-                        config=config_file,
-                        file_path=mapping_sheet
+                        mapping_file_path=workbook_path
                     )
+                    generate_dag_file("LND", None, "dags/", workbook_path)
+
+                elif "DP Load" in model_type:
+                    model_content = create_dp_view_file(
+                        file_path=workbook_path
+                    )
+                    generate_dag_file("DP", None, "dags/", workbook_path)
+
 
                 else:
                     logging.warning(f"Unsupported model type: {model_type}")
@@ -702,8 +714,258 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir,target_ddl_pa
                 logging.error(f"Error processing {target_model}: {e}")
                 continue
 
+        generate_dbt_jobs(workbook_path,"config/mappings/","jobs/")
+
         logging.info("DBT model generation completed")
 
     except Exception as e:
         logging.error(f"Fatal error in model generation: {e}")
+        raise
+
+
+def generate_dag_file(type_of_model, json_output_path, dag_output_path, workbook_path=None):
+    """Generate the appropriate DAG file based on configuration
+    Args:
+        type_of_model (str): Type of model (LND, DP, or DW)
+        json_output_path (str): Path to JSON config file
+        dag_output_path (str): Output directory for DAG files
+        workbook_path (str): Path to the Excel workbook
+    """
+    try:
+        dag_type = None
+        schedule_interval = None
+        dependencies = []
+        schema_name = None
+        table_name = None
+        source_name = None
+
+        if json_output_path is None and workbook_path:
+            # For LND and DP models without config
+            workbook = load_workbook(workbook_path)
+            pipeline_sheet = workbook['Pipeline Details']
+
+            # Find the header row and column indices
+            header_row = 1
+            source_model_col = None
+            target_model_col = None
+            model_type_col = None
+
+            for col in range(1, pipeline_sheet.max_column + 1):
+                header_value = pipeline_sheet.cell(row=header_row, column=col).value
+                if header_value == 'Source Model':
+                    source_model_col = col
+                elif header_value == 'Target Model':
+                    target_model_col = col
+                elif header_value == 'Model Type':
+                    model_type_col = col
+
+            if not all([source_model_col, target_model_col, model_type_col]):
+                raise ValueError("Required columns not found in Pipeline Details sheet")
+
+            # Find the row with matching model type and target model
+            target_row = None
+            for row in range(2, pipeline_sheet.max_row + 1):
+                model_type_value = pipeline_sheet.cell(row=row, column=model_type_col).value
+                target_model_value = pipeline_sheet.cell(row=row, column=target_model_col).value
+
+                if ((type_of_model == "LND" and "LND Load" in str(model_type_value)) or
+                    (type_of_model == "DP" and "DP Load" in str(model_type_value))) and \
+                        target_model_value == target_model:
+                    target_row = row
+                    break
+
+            if not target_row:
+                raise ValueError(f"No matching row found for {type_of_model} and target model {target_model}")
+
+            # Extract source and target information
+            source_table = pipeline_sheet.cell(row=target_row, column=source_model_col).value
+            target_table = pipeline_sheet.cell(row=target_row, column=target_model_col).value
+
+            if not source_table or not target_table:
+                raise ValueError("Source or target table not found")
+
+            logging.debug(f"Processing source table: {source_table} and target table: {target_table}")
+
+            # Parse source table components
+            source_parts = source_table.split('.')
+            source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
+            source_name = source_table_name
+
+            # Parse target table components
+            target_parts = target_table.split('.')
+            if len(target_parts) < 2:
+                raise ValueError(f"Invalid target table format: {target_table}. Expected format: schema.table")
+
+            schema_name = target_parts[0]
+            target_table_name = target_parts[-1]
+            table_name = target_table_name.lower()
+
+            if type_of_model in ["LND"]:
+                dag_type = "sns"
+                schedule_interval = "0 */4 * * *"
+                dependencies = []
+                schema_name = schema_name
+                table_name = target_table_name
+                source_name = source_name
+
+            if type_of_model in ["DP"]:
+                dag_type = "cron"
+                schedule_interval = "0 */4 * * *"
+                dependencies = []
+                schema_name = schema_name
+                table_name = target_table_name
+                source_name = source_name
+
+        else:
+            # For models with config file
+            with open(json_output_path, 'r') as json_file:
+                config = json.load(json_file)
+                dag_config = config.get('dag_configuration', {})
+                if not dag_config:
+                    dag_config = {
+                        "DAG Type": "DATASET DEPENDENCY",
+                        "Schedule Interval": "0 */4 * * *",
+                        "dependencies": []
+                    }
+
+                if type_of_model == "DW":
+                    dag_type = dag_config.get("DAG Type", "DATASET DEPENDENCY").lower()
+                    schedule_interval = dag_config.get("Schedule Interval", "0 */4 * * *")
+                    dependencies = dag_config.get("dependencies", [])
+                    schema_name = config['Target']['Schema']
+                    table_name = config['Target']['Table Name']
+                    source_name = config.get('Source', {}).get('Table Name')
+
+        if not table_name:
+            raise ValueError("Could not determine table name")
+        if not schema_name:
+            raise ValueError("Could not determine schema name")
+
+        logging.info(f"DAG type: {dag_type}")
+        logging.info(f"Schedule interval: {schedule_interval}")
+        logging.info(f"Dependencies: {dependencies}")
+        logging.info(f"Source name: {source_name}")
+        logging.info(f"Schema name: {schema_name}")
+        logging.info(f"Table name: {table_name}")
+
+        # Map generator functions to the normalized DAG types
+        dag_generators = {
+            "dataset dependency": create_dataset_dag,
+            "cron": create_cron_dag,
+            "sns": create_sns_dag
+        }
+
+        # Get the appropriate generator function
+        generator = dag_generators.get(dag_type.lower())
+        if not generator:
+            raise ValueError(f"Unsupported DAG Type: {dag_type}")
+
+        # Create DAG filename
+        dag_filename = f"{schema_name}_{table_name}_dag.py"
+        dag_file_path = os.path.join(dag_output_path, dag_filename)
+
+        # Create the DAG using the selected generator
+        generator_config = {
+            'json_path': json_output_path,
+            'dag_file_path': dag_file_path,
+            'schedule_interval': schedule_interval,
+            'dependencies': dependencies,
+            'schema_name': schema_name,
+            'table_name': table_name
+        }
+
+        generator(**generator_config)
+        logging.info(f"DAG file generated: {dag_file_path}")
+
+        return dag_file_path
+
+    except Exception as e:
+        logging.error(f"Error generating DAG file: {e}")
+        raise
+
+
+def generate_dbt_jobs(workbook_path, json_config_dir, output_dir='jobs'):
+    """
+    Generate DBT job files by grouping pipelines based on their target model.
+
+    Args:
+        workbook_path (str): Path to the Excel workbook containing pipeline details
+        json_config_dir (str): Directory containing JSON configuration files
+        output_dir (str): Directory to save generated job files (default: 'jobs')
+    """
+    try:
+        if not os.path.exists(workbook_path):
+            raise FileNotFoundError(f"Workbook not found: {workbook_path}")
+        if not os.path.exists(json_config_dir):
+            raise FileNotFoundError(f"JSON config directory not found: {json_config_dir}")
+
+        os.makedirs(output_dir, exist_ok=True)
+
+        workbook = load_workbook(workbook_path, data_only=True)
+        pipeline_details_sheet = workbook['Pipeline Details']
+        pipelines = read_pipeline_sheet(pipeline_details_sheet)
+
+        # Group pipelines by Target Model
+        pipeline_groups = {}
+        for pipeline in pipelines:
+            target_model = pipeline.get("Target Model", "Unknown")
+            if target_model not in pipeline_groups:
+                pipeline_groups[target_model] = []
+            pipeline_groups[target_model].append(pipeline)
+
+        # Process each target model group
+        for target_model, group_pipelines in pipeline_groups.items():
+            try:
+                sorted_pipelines = sorted(group_pipelines,
+                                          key=lambda x: int(x.get("Execution Order", 999))
+                                          if x.get("Execution Order") else 999)
+
+                job_content = ""
+                schema_table = target_model.split(".")
+
+                if len(schema_table) != 2:
+                    logging.warning(f"Invalid target model format: {target_model}")
+                    continue
+
+                target_schema, target_table = schema_table
+
+                # Process pipelines based on Model Type
+                for pipeline in sorted_pipelines:
+                    model_type = pipeline.get("Model Type", "")
+
+                    if model_type == "LND Load":
+                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+
+                    elif model_type == "DW Load":
+                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+
+                        # Add any merge and insert operations that follow
+                        for subsequent_pipeline in sorted_pipelines:
+                            subsequent_type = subsequent_pipeline.get("Model Type", "")
+                            if subsequent_type == "Merge Macro":
+                                macro_name = f"MAC_{target_schema}_{target_table}_MERGE"
+                                job_content += f"dbt run-operation {macro_name}\n"
+                            elif subsequent_type == "Insert Macro":
+                                macro_name = f"MAC_{target_schema}_{target_table}_INSERT"
+                                job_content += f"dbt run-operation {macro_name}\n"
+
+                    elif model_type == "DP Load":
+                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+
+                # Write job file if we have content
+                if job_content:
+                    job_name = f"{target_schema}_{target_table}"
+                    job_file_path = os.path.join(output_dir, f"{job_name}.dbt")
+                    with open(job_file_path, 'w') as f:
+                        f.write(job_content)
+                    logging.info(f"Created DBT job file for {target_model}: {job_file_path}")
+
+            except Exception as e:
+                logging.error(f"Error processing target model group {target_model}: {e}")
+                continue
+
+        logging.info("DBT job generation completed")
+
+    except Exception as e:
+        logging.error(f"Fatal error in job generation: {e}")
         raise

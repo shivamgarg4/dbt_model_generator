@@ -353,15 +353,23 @@ def generate_merge_sql_for_pipelines(config_file):
     output_dir = 'macros'
     os.makedirs(output_dir, exist_ok=True)
 
-    # Filename generation
     file_name = f"MAC_{target_schema}_{target_table}_MERGE.sql"
     file_path = os.path.join(output_dir, file_name)
+
+    # Ensure unique file name if file already exists
+    if os.path.exists(file_path):
+        base_name, ext = os.path.splitext(file_name)
+        counter = 1
+        while os.path.exists(file_path):
+            file_name = f"{base_name}_{counter}{ext}"
+            file_path = os.path.join(output_dir, file_name)
+            counter += 1
 
     # Write to file
     with open(file_path, 'w') as f:
         f.write(merge_sql)
 
-    return True, file_path
+    return True,file_path
 
 # Usage
 # result, file_path = generate_merge_sql('path/to/your/config.json')
