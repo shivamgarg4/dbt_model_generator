@@ -1818,10 +1818,6 @@ class DAGGeneratorApp:
                 # Skip other constraints
                 if re.match(r'^\s*CONSTRAINT|CHECK|INDEX|FOREIGN', definition, re.IGNORECASE):
                     continue
-                    
-                # Skip default timestamp values or other non-column entries
-                if 'CAST(CURRENT_TIMESTAMP' in definition.upper() or not definition.strip():
-                    continue
                 
                 # Extract column name and rest of definition
                 # The column name is the first word before any whitespace
