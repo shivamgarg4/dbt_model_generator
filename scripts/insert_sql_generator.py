@@ -1,8 +1,7 @@
 import json
 import os
 import sqlparse
-
-from scripts.utils import parse_ddl_file
+from scripts.utils import parse_ddl_file,format_sql_content
 
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
     """Extract join clauses from mapping sheet"""
@@ -211,9 +210,7 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     file_path = os.path.join(output_dir, file_name)
 
     # Format the SQL statement using sqlparse
-    formatted_insert_sql = sqlparse.format(
-        model_content
-    )
+    formatted_insert_sql = format_sql_content(model_content)
 
     # Write model file
     with open(file_path, 'w') as f:

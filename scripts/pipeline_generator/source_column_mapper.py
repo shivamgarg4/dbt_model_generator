@@ -5,6 +5,8 @@ from typing import Dict, List, Tuple
 from openpyxl import load_workbook
 import snowflake.connector
 
+from scripts.utils.snowflake_utils import DatabaseConnection
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -12,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 class SourceColumnMapper:
     def __init__(self):
-        self._snowflake_connection = None
+        self._db_connection = None
         self.audit_columns = {
             "DATA_SRC": lambda s, t: f"'{s}.{t}'",
             "CREATE_DT": lambda *_: "CURRENT_TIMESTAMP()",
@@ -22,6 +24,7 @@ class SourceColumnMapper:
             "UPDATE_BY": lambda *_: "CAST(CURRENT_USER() AS VARCHAR(200))",
             "UPDATE_PGM": lambda s, t: f"'{s}.{t}'"
         }
+
 
     def update_source_mapping(self, workbook_path: str, mappings_dir: str, config_path: str) -> None:
         """
@@ -197,13 +200,14 @@ class SourceColumnMapper:
                 raise FileNotFoundError(f"Config file not found: {config_path}")
             with open(config_path, 'r') as f:
                 config = json.load(f)
+                # Keep the keys in uppercase to match the expected format
                 return {
-                    'user': config.get('USER'),
-                    'authenticator': config.get('AUTHENTICATOR'),
-                    'account': config.get('ACCOUNT'),
-                    'warehouse': config.get('WAREHOUSE'),
-                    'database': config.get('DATABASE'),
-                    'role': config.get('ROLE')
+                    'USER': config.get('USER'),
+                    'AUTHENTICATOR': config.get('AUTHENTICATOR'),
+                    'ACCOUNT': config.get('ACCOUNT'),
+                    'WAREHOUSE': config.get('WAREHOUSE'),
+                    'DATABASE': config.get('DATABASE'),
+                    'ROLE': config.get('ROLE')
                 }
         except Exception as e:
             logger.error(f"Error loading Snowflake config: {str(e)}")
@@ -226,69 +230,48 @@ class SourceColumnMapper:
             logger.error(f"Error extracting source info: {str(e)}")
             return {'schema': '', 'table': ''}
 
-    def _get_snowflake_connection(self, snowflake_config: Dict) -> snowflake.connector.SnowflakeConnection:
-        """Get or create Snowflake connection"""
-        if self._snowflake_connection is None or self._snowflake_connection.is_closed():
-            self._snowflake_connection = snowflake.connector.connect(
-                user=snowflake_config['user'],
-                authenticator=snowflake_config['authenticator'],
-                account=snowflake_config['account'],
-                warehouse=snowflake_config['warehouse'],
-                database=snowflake_config['database'],
-                role=snowflake_config['role']
-            )
-            logger.info("Created new Snowflake connection")
-        return self._snowflake_connection
+    def _get_snowflake_connection(self, snowflake_config: Dict):
+        """Get or create Snowflake connection using DatabaseConnection class"""
+        if self._db_connection is None:
+            self._db_connection = DatabaseConnection(config=snowflake_config)
+        return self._db_connection.get_connection()
 
     def _get_snowflake_columns(self, snowflake_config: Dict, source_info: Dict) -> List[Dict]:
         """Retrieves column information from Snowflake"""
         if not source_info['schema'] or not source_info['table']:
             logger.error(f"Invalid source info: schema={source_info['schema']}, table={source_info['table']}")
             return []
-
         try:
-            conn = self._get_snowflake_connection(snowflake_config)
-            cursor = conn.cursor()
-
-            # Use parameterized query to prevent SQL injection
-            query = """
-                SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE 
-                FROM INFORMATION_SCHEMA.COLUMNS 
-                WHERE TABLE_SCHEMA = %s
-                AND TABLE_NAME = %s
-                ORDER BY ORDINAL_POSITION
-            """
-            logger.info(f"Executing Snowflake query for {source_info['schema']}.{source_info['table']}")
-            cursor.execute(query, (source_info['schema'], source_info['table']))
-
-            columns = [
-                {
-                    'name': row[0],
-                    'data_type': row[1],
-                    'is_nullable': row[2]
-                }
-                for row in cursor.fetchall()
-            ]
-
-            logger.info(f"Retrieved {len(columns)} columns from Snowflake")
-            cursor.close()
-            # Don't close the connection, just the cursor
-            return columns
-        except snowflake.connector.errors.ProgrammingError as e:
-            logger.error(f"Snowflake query error: {str(e)}")
-            raise
+            db_connection = DatabaseConnection(config=snowflake_config)
+            with db_connection.get_cursor() as cursor:
+                query = """
+                    SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE 
+                    FROM INFORMATION_SCHEMA.COLUMNS 
+                    WHERE TABLE_SCHEMA = %s
+                    AND TABLE_NAME = %s
+                    ORDER BY ORDINAL_POSITION
+                """
+                logger.info(f"Executing Snowflake query for {source_info['schema']}.{source_info['table']}")
+                cursor.execute(query, (source_info['schema'], source_info['table']))
+                columns = [
+                    {
+                        'name': row[0],
+                        'data_type': row[1],
+                        'is_nullable': row[2]
+                    }
+                    for row in cursor.fetchall()
+                ]
+                logger.info(f"Retrieved {len(columns)} columns from Snowflake")
+                return columns
         except Exception as e:
             logger.error(f"Error getting Snowflake columns: {str(e)}")
-            if self._snowflake_connection:
-                self._snowflake_connection.close()
-                self._snowflake_connection = None
             raise
 
     def close_connection(self):
         """Close Snowflake connection when done"""
-        if self._snowflake_connection:
-            self._snowflake_connection.close()
-            self._snowflake_connection = None
+        if self._db_connection:
+            self._db_connection.disconnect()
+            self._db_connection = None
 
     def _update_mapping_json(self, mapping_config: Dict, snowflake_columns: List[Dict], json_file: str) -> None:
         """Updates the mapping JSON file with source column information"""

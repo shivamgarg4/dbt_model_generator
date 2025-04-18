@@ -1,7 +1,8 @@
 import json
 import os
 import sqlparse
-from scripts.utils import parse_ddl_file
+from .utils import parse_ddl_file, format_sql_content
+
 
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
     """Extract join clauses from mapping sheet"""
@@ -80,6 +81,7 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
 
     return join_clauses, join_aliases
 
+
 def extract_where_condition(mapping_sheet, main_table_alias='source'):
     """Extract WHERE condition from mapping sheet"""
     # Find the WHERE_CONDITIONS section
@@ -102,6 +104,7 @@ def extract_where_condition(mapping_sheet, main_table_alias='source'):
 
     return None
 
+
 def extract_group_by(mapping_sheet, main_table_alias='source'):
     """Extract GROUP BY clause from mapping sheet"""
     # Find the GROUP BY section
@@ -123,6 +126,7 @@ def extract_group_by(mapping_sheet, main_table_alias='source'):
         return group_by
 
     return None
+
 
 def merge_sql_generator(config_file, mapping_sheet=None, target_ddl_path=None):
     """Generate a MERGE SQL statement from JSON configuration"""
@@ -244,12 +248,13 @@ def merge_sql_generator(config_file, mapping_sheet=None, target_ddl_path=None):
     file_name = f"{macro_name}.sql"
     file_path = os.path.join(output_dir, file_name)
 
+    formatted_model_content = format_sql_content(merge_sql)
+
     # Write model file
     with open(file_path, 'w') as f:
-        f.write(merge_sql)
+        f.write(formatted_model_content)
 
     return True, file_path
-
 
 
 def _generate_where_conditions(config):
@@ -266,10 +271,6 @@ def _generate_group_by(config):
     if group_by:
         return "GROUP BY " + ", ".join(group_by)
     return ""
-
-
-import json
-import os
 
 
 def generate_merge_sql_for_pipelines(config_file):
@@ -369,7 +370,7 @@ def generate_merge_sql_for_pipelines(config_file):
     with open(file_path, 'w') as f:
         f.write(merge_sql)
 
-    return True,file_path
+    return True, file_path
 
 # Usage
 # result, file_path = generate_merge_sql('path/to/your/config.json')

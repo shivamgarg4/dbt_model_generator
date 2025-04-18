@@ -31,12 +31,10 @@ def read_pipeline_sheet(pipeline_details_sheet):
 
     # Define headers with their expected positions
     headers = {
-        1: "Pipeline Name",
-        2: "Model Type",
-        3: "Source Model",
-        4: "Target Model",
-        5: "Execution Order",
-        6: "Generated Mapping Sheet"
+        1: "Model Type",
+        2: "Source Model",
+        3: "Target Model",
+        4: "Generated Mapping Sheet"
     }
 
     for row in range(2, pipeline_details_sheet.max_row + 1):
@@ -67,7 +65,7 @@ def write_pipeline_details(pipeline_config_sheet):
 
     # Write the header row with simplified columns
     headers = [
-        "Pipeline Name", "Model Type", "Source Model", "Target Model", "Execution Order", "Generated Mapping Sheet"
+        "Model Type", "Source Model", "Target Model", "Generated Mapping Sheet"
     ]
 
     # Write headers and apply formatting
@@ -80,11 +78,14 @@ def write_pipeline_details(pipeline_config_sheet):
     # Model Type Validation
     model_type_dv = DataValidation(
         type="list",
-        formula1='"LND Load, DW Load, DP Load, Merge Macro, Insert Macro"',
+        formula1='"LND Load, DW Load, DP/BI View, Merge Macro, Insert Macro"',
         allow_blank=True
     )
     pipeline_config_sheet.add_data_validation(model_type_dv)
-    model_type_dv.add(pipeline_config_sheet.cell(row=3, column=2))
+
+    # Apply validation to the entire column (starting from row 2)
+    for row in range(2, 25):
+        model_type_dv.add(pipeline_config_sheet.cell(row=row, column=1))
 
     # Adjust column widths for better readability
     for col_num in range(1, len(headers) + 1):
@@ -95,6 +96,7 @@ def write_pipeline_details(pipeline_config_sheet):
 def create_mapping_sheet(sheet, pipeline, columns):
     # Extract table name from pipeline
     table_name = pipeline.get('Target Model', 'Unknown')
+    model_type = pipeline.get('Model Type', 'Unknown')
 
     # Add table name + "Mapping" as header (only once)
     sheet.merge_cells('A1:D1')
@@ -153,78 +155,79 @@ def create_mapping_sheet(sheet, pipeline, columns):
     # Add blank row for separation
     current_row += 1
 
-    # Add DAG Configuration section
-    sheet.cell(row=current_row, column=1, value='DAG Configuration').font = Font(bold=True)
-    current_row += 1
-
-    # DAG config options
-    dag_options = [
-        {
-            'param': 'DAG Type',
-            'value': '',
-            'options': ['DATASET DEPENDENCY', 'CRON', 'SNS'],
-            'description': 'Select the type of DAG to generate'
-        },
-        {
-            'param': 'Schedule Interval',
-            'value': '0 */4 * * *',
-            'description': 'Cron expression for scheduling (e.g., 0 */4 * * * for every 4 hours)'
-        }
-    ]
-
-    # Add DAG config rows
-    for config in dag_options:
-        # Parameter name with yellow background
-        param_cell = sheet.cell(row=current_row, column=1, value=config['param'])
-        param_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-
-        # Value cell
-        value_cell = sheet.cell(row=current_row, column=2)
-        value_cell.value = config['value']
-
-        # Description
-        desc_cell = sheet.cell(row=current_row, column=3, value=config['description'])
-
-        # If it's DAG Type, create a data validation dropdown
-        if config['param'] == 'DAG Type':
-            dv = DataValidation(
-                type="list",
-                formula1=f'"{",".join(config["options"])}"',
-                allow_blank=True
-            )
-            sheet.add_data_validation(dv)
-            dv.add(value_cell)
-
+    if model_type == 'DW Load':
+        # Add DAG Configuration section
+        sheet.cell(row=current_row, column=1, value='DAG Configuration').font = Font(bold=True)
         current_row += 1
 
-    # Add blank row for separation
-    current_row += 1
+        # DAG config options
+        dag_options = [
+            {
+                'param': 'DAG Type',
+                'value': '',
+                'options': ['DATASET DEPENDENCY', 'CRON', 'SNS'],
+                'description': 'Select the type of DAG to generate'
+            },
+            {
+                'param': 'Schedule Interval',
+                'value': '0 */4 * * *',
+                'description': 'Cron expression for scheduling (e.g., 0 */4 * * * for every 4 hours)'
+            }
+        ]
 
-    # Add Dependencies section
-    dep_header = sheet.cell(row=current_row, column=1, value='Dependencies')
-    dep_header.font = Font(bold=True)
-    dep_header.fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
-    current_row += 1
+        # Add DAG config rows
+        for config in dag_options:
+            # Parameter name with yellow background
+            param_cell = sheet.cell(row=current_row, column=1, value=config['param'])
+            param_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-    # Add dependency column headers
-    headers = ['#', 'Dependency Schema', 'Dependency Table']
-    for col, header in enumerate(headers, start=1):
-        cell = sheet.cell(row=current_row, column=col, value=header)
-        cell.font = Font(bold=True, color='FFFFFF')
-        cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+            # Value cell
+            value_cell = sheet.cell(row=current_row, column=2)
+            value_cell.value = config['value']
 
-    # Add 5 empty rows for dependencies
-    for i in range(5):
+            # Description
+            desc_cell = sheet.cell(row=current_row, column=3, value=config['description'])
+
+            # If it's DAG Type, create a data validation dropdown
+            if config['param'] == 'DAG Type':
+                dv = DataValidation(
+                    type="list",
+                    formula1=f'"{",".join(config["options"])}"',
+                    allow_blank=True
+                )
+                sheet.add_data_validation(dv)
+                dv.add(value_cell)
+
+            current_row += 1
+
+        # Add blank row for separation
         current_row += 1
-        row_num = sheet.cell(row=current_row, column=1, value=i + 1)
-        row_num.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-        # Add example values for the first row
-        if i == 0:
-            sheet.cell(row=current_row, column=2, value="DW")
-            sheet.cell(row=current_row, column=3, value="D_CUSTOMER")
-            comment = Comment('Enter the schema and table name of the dependency', 'System')
-            sheet.cell(row=current_row, column=2).comment = comment
+        # Add Dependencies section
+        dep_header = sheet.cell(row=current_row, column=1, value='Dependencies')
+        dep_header.font = Font(bold=True)
+        dep_header.fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
+        current_row += 1
+
+        # Add dependency column headers
+        headers = ['#', 'Dependency Schema', 'Dependency Table']
+        for col, header in enumerate(headers, start=1):
+            cell = sheet.cell(row=current_row, column=col, value=header)
+            cell.font = Font(bold=True, color='FFFFFF')
+            cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+
+        # Add 5 empty rows for dependencies
+        for i in range(5):
+            current_row += 1
+            row_num = sheet.cell(row=current_row, column=1, value=i + 1)
+            row_num.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+
+            # Add example values for the first row
+            if i == 0:
+                sheet.cell(row=current_row, column=2, value="DW")
+                sheet.cell(row=current_row, column=3, value="D_CUSTOMER")
+                comment = Comment('Enter the schema and table name of the dependency', 'System')
+                sheet.cell(row=current_row, column=2).comment = comment
 
     # Add blank row for separation
     current_row += 2
@@ -471,7 +474,7 @@ def process_pipeline_sheet(workbook_path, ddl_path):
             create_mapping_sheet(mapping_sheet, pipeline, columns[0] if isinstance(columns, tuple) else columns)
 
             # Update the pipeline details sheet with the mapping sheet name directly using pipeline_index
-            pipeline_details_sheet.cell(row=pipeline_index, column=6, value=sheet_name)
+            pipeline_details_sheet.cell(row=pipeline_index, column=4, value=sheet_name)
 
     workbook.save(workbook_path)
     return workbook
@@ -648,6 +651,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
 
         # Read pipeline configurations
         pipelines = read_pipeline_sheet(pipeline_details_sheet)
+        process_filled_workbook_to_json(workbook_path)
 
         # Process each pipeline
         for pipeline in pipelines:
@@ -665,7 +669,8 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 config_filename = f"{mapping_sheet_name}.json"
                 config_file_path = os.path.join(json_config_dir, config_filename)
 
-                if not os.path.exists(config_file_path) and not any(mt in model_type for mt in ["LND Load", "DP Load"]):
+                if not os.path.exists(config_file_path) and not any(
+                        mt in model_type for mt in ["LND Load", "DP/BI View"]):
                     logging.warning(f"No config file found for {target_model}")
                     continue
 
@@ -680,7 +685,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                         mapping_sheet=mapping_sheet,
                         target_ddl_path=target_ddl_path
                     )
-                    generate_dag_file("DW",config_file_path, "dags/")
+                    generate_dag_file("DW", config_file_path, "dags/")
 
                 elif "Merge Macro" in model_type:
                     model_content = generate_merge_sql_for_pipelines(
@@ -699,7 +704,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                     )
                     generate_dag_file("LND", None, "dags/", workbook_path)
 
-                elif "DP Load" in model_type:
+                elif "DP/BI View" in model_type:
                     model_content = create_dp_view_file(
                         file_path=workbook_path
                     )
@@ -714,9 +719,26 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 logging.error(f"Error processing {target_model}: {e}")
                 continue
 
-        generate_dbt_jobs(workbook_path,"config/mappings/","jobs/")
+        generate_dbt_jobs(workbook_path, "config/mappings/", "jobs/")
 
         logging.info("DBT model generation completed")
+        # Clean up existing JSON files before generation
+        try:
+            # Clean up config directory
+            config_dir = "config/"
+            for root, dirs, files in os.walk(config_dir):
+                for file in files:
+                    if file.endswith('.json'):
+                        file_path = os.path.join(root, file)
+                        try:
+                            os.remove(file_path)
+                            logging.info(f"Deleted existing JSON file: {file_path}")
+                        except OSError as e:
+                            logging.error(f"Error deleting file {file_path}: {str(e)}")
+
+            logging.info("Cleanup of existing JSON files completed")
+        except Exception as e:
+            logging.error(f"Error during cleanup process: {str(e)}")
 
     except Exception as e:
         logging.error(f"Fatal error in model generation: {e}")
@@ -769,7 +791,7 @@ def generate_dag_file(type_of_model, json_output_path, dag_output_path, workbook
                 target_model_value = pipeline_sheet.cell(row=row, column=target_model_col).value
 
                 if ((type_of_model == "LND" and "LND Load" in str(model_type_value)) or
-                    (type_of_model == "DP" and "DP Load" in str(model_type_value))) and \
+                    (type_of_model == "DP" and "DP/BI View" in str(model_type_value))) and \
                         target_model_value == target_model:
                     target_row = row
                     break

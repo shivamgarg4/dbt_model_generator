@@ -1275,43 +1275,6 @@ class DAGGeneratorApp:
                     except Exception as e:
                         logging.error(f"Error checking for unique keys in mapping sheet: {str(e)}")
                 
-                # Only if we didn't find unique keys in DDL or mapping sheet, try pattern-based detection
-                if not unique_keys and not ddl_unique_keys_found:
-                    # First, check for columns with _CD suffix (common for unique business keys)
-                    cd_columns = []
-                    for column in column_mappings:
-                        target_col = column['Target Column']
-                        if target_col.endswith('_CD'):
-                            cd_columns.append(target_col)
-                    
-                    if cd_columns:
-                        unique_keys = cd_columns
-                        logging.info(f"Using _CD columns as unique keys: {unique_keys}")
-                    else:
-                        # Look for ID columns or primary key candidates
-                        id_columns = []
-                        for column in column_mappings:
-                            target_col = column['Target Column']
-                            # Check for common ID column patterns
-                            if (target_col.endswith('_ID') or 
-                                target_col.endswith('_KEY') or 
-                                target_col == 'ID' or 
-                                target_col == 'KEY'):
-                                id_columns.append(target_col)
-                        
-                        if id_columns:
-                            unique_keys = id_columns
-                            logging.info(f"Using ID columns as unique keys: {unique_keys}")
-                        elif primary_keys:
-                            # Use primary keys if no other unique keys found
-                            unique_keys = primary_keys
-                            logging.info(f"Using primary keys as unique keys: {unique_keys}")
-                        else:
-                            # If no ID columns found, use the first column as a fallback
-                            if column_mappings:
-                                unique_keys = [column_mappings[0]['Target Column']]
-                                logging.info(f"Using first column as unique key: {unique_keys}")
-                
                 # Add unique keys to the model config if we have any
                 if unique_keys:
                     logging.info(f"Adding unique keys to model config: {unique_keys}")

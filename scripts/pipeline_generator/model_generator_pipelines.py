@@ -3,6 +3,8 @@ import snowflake.connector
 import os
 import logging
 
+from scripts.utils.snowflake_utils import get_snowflake_connection, get_cursor
+
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
@@ -72,33 +74,27 @@ def generate_lnd_dbt_model_file(mapping_file_path):
         logger.info("Extracting Snowflake configuration")
         snowflake_config = read_snowflake_config(mapping_file_path)
 
-        logger.info("Connecting to Snowflake")
-        conn = snowflake.connector.connect(
-            account=snowflake_config['ACCOUNT'],
-            user=snowflake_config['USER'],
-            authenticator=snowflake_config['AUTHENTICATOR'],
-            warehouse=snowflake_config['WAREHOUSE'],
-            role=snowflake_config['ROLE'],
-            database=source_db,
-            schema=source_schema
-        )
+        logger.info("Getting Snowflake connection")
+        # Get or create singleton connection
+        connection = get_snowflake_connection(snowflake_config)
 
-        cursor = conn.cursor()
-        logger.debug(f"Executing query to get columns for {source_table_name}")
-        cursor.execute(f"""
-            SELECT COLUMN_NAME
-            FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_SCHEMA = '{source_schema}'
-            AND TABLE_NAME = '{source_table_name}'
-            ORDER BY ORDINAL_POSITION
-        """)
+        with get_cursor(connection) as cursor:
+            logger.debug(f"Executing query to get columns for {source_table_name}")
+            cursor.execute(f"""
+                        SELECT COLUMN_NAME
+                        FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+                        WHERE TABLE_SCHEMA = '{source_schema}'
+                        AND TABLE_NAME = '{source_table_name}'
+                        ORDER BY ORDINAL_POSITION
+                    """)
 
-        columns = cursor.fetchall()
-        logger.debug(f"Retrieved {len(columns)} columns")
+            columns = cursor.fetchall()
+            logger.debug(f"Retrieved {len(columns)} columns")
 
-        formatted_columns = format_columns(columns)
-        replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema,
-                                                 target_table_name)
+            formatted_columns = format_columns(columns)
+            replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema,
+                                                     target_table_name)
+
 
         logger.info("Generating model configuration")
         model_config = f"""
@@ -137,10 +133,6 @@ def generate_lnd_dbt_model_file(mapping_file_path):
     except Exception as e:
         logger.error(f"Error generating dbt model: {str(e)}", exc_info=True)
         raise Exception(f"An error occurred while generating the dbt model: {e}")
-    finally:
-        if 'conn' in locals() and conn:
-            logger.debug("Closing Snowflake connection")
-            conn.close()
 
 
 def create_dp_view_file(file_path):
@@ -178,7 +170,7 @@ def create_dp_view_file(file_path):
 
         for row in range(2, pipeline_sheet.max_row + 1):
             model_type = pipeline_sheet.cell(row=row, column=model_type_col).value
-            if model_type == 'DP Load':
+            if model_type == 'DP/BI View':
                 source_table = pipeline_sheet.cell(row=row, column=source_model_col).value
                 target_table = pipeline_sheet.cell(row=row, column=target_model_col).value
                 break
@@ -198,39 +190,31 @@ def create_dp_view_file(file_path):
         logger.info("Extracting Snowflake configuration")
         snowflake_config = read_snowflake_config(file_path)
 
-        logger.info("Connecting to Snowflake")
-        conn = snowflake.connector.connect(
-            account=snowflake_config['ACCOUNT'],
-            user=snowflake_config['USER'],
-            authenticator=snowflake_config['AUTHENTICATOR'],
-            warehouse=snowflake_config['WAREHOUSE'],
-            role=snowflake_config['ROLE'],
-            database=source_db,
-            schema=source_schema
-        )
+        logger.info("Getting Snowflake connection")
+        # Get or create singleton connection
+        connection = get_snowflake_connection(snowflake_config)
 
-        cursor = conn.cursor()
+        with get_cursor(connection) as cursor:
+            # Get source columns
+            logger.debug(f"Fetching source columns for {source_table_name}")
+            cursor.execute(f"""
+                SELECT COLUMN_NAME
+                FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+                WHERE TABLE_SCHEMA = '{source_schema}'
+                AND TABLE_NAME = '{source_table_name}'
+                ORDER BY ORDINAL_POSITION
+            """)
+            source_columns = cursor.fetchall()
 
-        # Get source columns
-        logger.debug(f"Fetching source columns for {source_table_name}")
-        cursor.execute(f"""
-            SELECT COLUMN_NAME
-            FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
-            WHERE TABLE_SCHEMA = '{source_schema}'
-            AND TABLE_NAME = '{source_table_name}'
-            ORDER BY ORDINAL_POSITION
-        """)
-        source_columns = cursor.fetchall()
+            # Rest of your existing code remains the same
+            target_columns = source_columns
 
-        target_columns = source_columns
+            # Process columns
+            logger.debug("Processing source and target columns")
+            source_formatted_columns = format_columns(source_columns)
+            source_replaced_columns = source_formatted_columns
+            target_formatted_columns = format_columns(target_columns)
 
-        # Process columns
-        logger.debug("Processing source and target columns")
-        source_formatted_columns = format_columns(source_columns)
-        # source_replaced_columns = replace_audit_columns(source_formatted_columns, source_schema, source_table_name,
-        #                                                 target_schema, target_table_name)
-        source_replaced_columns =source_formatted_columns
-        target_formatted_columns = format_columns(target_columns)
 
         # Generate model configuration
         logger.info("Generating view SQL")
@@ -263,10 +247,6 @@ def create_dp_view_file(file_path):
     except Exception as e:
         logger.error(f"Error creating DP view file: {str(e)}", exc_info=True)
         raise Exception(f"An error occurred while creating the DP view file: {e}")
-    finally:
-        if 'conn' in locals() and conn:
-            logger.debug("Closing Snowflake connection")
-            conn.close()
 
 
 def format_columns(columns):

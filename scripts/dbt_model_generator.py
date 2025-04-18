@@ -2,6 +2,54 @@ import os
 import json
 from scripts.utils import parse_ddl_file
 import re
+import sqlfluff
+import tempfile
+
+
+def format_sql_content(sql_content):
+    """
+    Format SQL content using SQLFluff with dbt templating support
+
+    Args:
+        sql_content (str): The SQL content to format
+
+    Returns:
+        str: Formatted SQL content
+    """
+    try:
+        # Create temporary file for SQLFluff to process
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.sql', delete=False) as temp_file:
+            temp_file.write(sql_content)
+            temp_file.flush()
+
+        # Configure SQLFluff
+        config = sqlfluff.config.FluffConfig(
+            configs={
+                "dialect": "snowflake",
+                "templater": "dbt",
+                "exclude_rules": "L031,L034",
+                "max_line_length": 120,
+                "indent_unit": "space",
+                "tab_space_size": 4,
+            }
+        )
+
+        # Format the SQL content
+        result = sqlfluff.fix(
+            temp_file.name,
+            config=config
+        )
+
+        return result
+
+    except Exception as e:
+        print(f"Warning: SQL formatting failed: {str(e)}")
+        return sql_content  # Return original content if formatting fails
+    finally:
+        # Clean up temporary file
+        import os
+        if os.path.exists(temp_file.name):
+            os.unlink(temp_file.name)
 
 
 def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=None):
@@ -245,16 +293,24 @@ SELECT
                 unique_key_columns.append(column)
                 continue
 
-            # More generic approach to identify columns that should be excluded from MINUS:
-            # 1. Columns with empty source (target-only columns)
-            # 2. Columns with literals/constants (containing quotes)
-            # 3. Columns with functions (containing parentheses)
-            # 4. Columns with complex expressions (containing operators)
-            # 5. Columns with CASE statements
-            if (not source_col or  # No source column
-                any(char in logic for char in ["'", "(", " ", "+", "-", "*", "/", "||"]) or  # Contains operators
-                "CASE" in logic.upper()):  # Not starting with join alias
+            # Skip columns already identified as primary keys
+            # if column in primary_key_columns:
+            #     continue
 
+            # Check if this is a unique key column
+            if target_col in unique_keys:
+                unique_key_columns.append(column)
+                continue
+
+            # Skip unwanted columns
+            if source_col in ["List (Y,N)", "Table Type", "ref"]:
+                continue
+
+            if source_col in audit_columns:
+                computed_columns.append(column)
+                continue
+
+            if should_exclude_from_minus(logic):
                 computed_columns.append(column)
                 print(f"Excluding column from MINUS: {target_col} (Logic: {logic})")
 
@@ -319,7 +375,8 @@ SELECT
         final_model_content += "SELECT\n"
         for quoted_target, logic in minus_columns:
             # If logic contains an alias (pattern: alias.column), remove the alias
-            if '.' in logic or any(char in logic for char in ["'", "(", " ", "+", "-", "*", "/", "||"]) or "CASE" in logic.upper():
+            if '.' in logic or any(
+                    char in logic for char in ["'", "(", " ", "+", "-", "*", "/", "||"]) or "CASE" in logic.upper():
                 final_model_content += f"    {logic} AS {quoted_target},\n"
             else:
                 final_model_content += f"    source.{logic} AS {quoted_target},\n"
@@ -365,6 +422,8 @@ SELECT
         # Replace the original model content with the new one
         model_content = final_model_content
 
+    formatted_content = format_sql_content(model_content)
+
     # Create output directory if it doesn't exist
     output_dir = 'models'
     os.makedirs(output_dir, exist_ok=True)
@@ -376,7 +435,7 @@ SELECT
 
     # Write model file
     with open(file_path, 'w') as f:
-        f.write(model_content)
+        f.write(formatted_content)
 
     return True, file_path
 
@@ -511,3 +570,17 @@ def get_materialization(mapping_sheet):
         if mapping_sheet.cell(row=row, column=1).value == 'MATERIALIZATION':
             return mapping_sheet.cell(row=row, column=2).value
     return 'incremental'  # Default to incremental if not specified
+
+
+def should_exclude_from_minus(logic):
+    """Helper function to determine if a column should be excluded from MINUS"""
+
+    # Exclude if it's a literal string or number
+    if (logic.startswith("'") and logic.endswith("'")) or logic.replace('.', '').strip().isdigit():
+        return True
+
+    # Exclude if it contains NEXTVAL
+    if 'NEXTVAL' in logic.upper():
+        return True
+
+    return False
