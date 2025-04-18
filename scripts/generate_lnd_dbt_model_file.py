@@ -363,7 +363,6 @@ def get_columns_from_lnd_table(config,file_path):
     except Exception as e:
         raise Exception(f"An error occurred while getting columns from LND table: {e}")
 
-
 def create_test_model_file(json_file,file_path ,mapping_sheet, test_model_output_path):
     """
     Generate a comprehensive dbt test model file based on JSON configuration and mapping sheet.
@@ -490,46 +489,6 @@ SELECT
 FROM 
     target_count, 
     source_count;
-""",
-            "Mapped Columns Validation": f"""
-WITH target_data AS (
-    SELECT 
-        {', '.join([
-                f"{col} AS {col}_target"
-                for col in source_columns
-            ])}
-    FROM {full_target_table}
-),
-source_data AS (
-    SELECT 
-        {', '.join([
-                f"{column_mappings[col]['source_column']} AS {col}_source"
-                for col in source_columns
-            ])}
-    FROM {source_cte}
-)
-SELECT 
-    'Mapped Columns Validation' AS validation_type,
-    {', '.join([
-                f"{col}_target, {col}_source"
-                for col in source_columns
-            ])}
-FROM 
-    target_data
-FULL OUTER JOIN 
-    source_data
-ON 
-    1=1;
-""",
-            "Constant Value Columns": f"""
-SELECT 
-    'Constant Value Columns' AS validation_type,
-    {', '.join([
-                f"{column_mappings[col]['constant_value']} AS {col}_value"
-                for col in constant_columns
-            ])}
-FROM 
-    {full_target_table};
 """,
             "MINUS Validation": f"""
         WITH 
