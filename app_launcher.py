@@ -45,33 +45,22 @@ def check_python_version():
 def install_required_packages():
     """Install required packages from requirements.txt"""
     logger.info("Checking installed packages...")
-    
+
     try:
         # Check if requirements.txt exists
         if not os.path.exists('requirements.txt'):
             logger.error("requirements.txt not found")
             return False
-            
-        # Read requirements
-        with open('requirements.txt', 'r') as f:
-            requirements = [line.strip() for line in f if line.strip() and not line.startswith('#')]
-            
-        # Check if packages are installed
-        missing_packages = []
-        for package in requirements:
-            package_name = package.split('==')[0].split('>=')[0].strip()
-            if not importlib.util.find_spec(package_name):
-                missing_packages.append(package)
-                
-        # Install missing packages
-        if missing_packages:
-            logger.info(f"Installing missing packages: {', '.join(missing_packages)}")
-            subprocess.check_call([sys.executable, '-m', 'pip', 'install'] + missing_packages)
+
+        # Install all requirements at once to handle dependencies properly
+        try:
+            subprocess.check_call([sys.executable, '-m', 'pip', 'install', '-r', 'requirements.txt'])
             logger.info("Package installation completed")
-        else:
-            logger.info("All required packages are installed")
-            
-        return True
+            return True
+        except subprocess.CalledProcessError as e:
+            logger.error(f"Error installing packages: {str(e)}")
+            return False
+
     except Exception as e:
         logger.error(f"Error installing packages: {str(e)}")
         return False

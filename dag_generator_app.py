@@ -144,6 +144,7 @@ def generate_safe_timestamp():
 class DAGGeneratorApp:
     def __init__(self, root):
         """Initialize the application"""
+        self.generate_sample_pipeline_mapping_button = None
         self.fill_pipeline_sheet_button = None
         self.generate_mapping_sheet_button = None
         self.generate_pipeline_button = None
@@ -686,6 +687,15 @@ class DAGGeneratorApp:
             style='Accent.TButton'
         )
         self.generate_pipeline_button.pack(fill='x', pady=(10, 0))
+
+        # Generate Pipeline button
+        self.generate_sample_pipeline_mapping_button = ttk.Button(
+            pipeline_frame,
+            text="📋 Create Sample Pipeline Mapping File",
+            command=self.create_sample_pipeline_mapping_template,
+            style='Accent.TButton'
+        )
+        self.generate_sample_pipeline_mapping_button.pack(fill='x', pady=(10, 0))
 
         # Add help text
         ttk.Label(
@@ -1882,8 +1892,6 @@ class DAGGeneratorApp:
                         workbook.remove(workbook['Mapping'])
                     if 'Config' in workbook.sheetnames:
                         workbook.remove(workbook['Config'])
-                    if 'Pipeline Config' in workbook.sheetnames:
-                        workbook.remove(workbook['Pipeline Config'])
                 except Exception:
                     workbook = openpyxl.Workbook()
                     # Remove default sheet
@@ -1891,12 +1899,9 @@ class DAGGeneratorApp:
                     workbook.remove(default_sheet)
             
             # Create Mapping and Config sheets
-            pipeline_config_sheet = workbook.create_sheet('Pipeline Config')
             mapping_sheet = workbook.create_sheet('Mapping')
             config_sheet = workbook.create_sheet('Config')
             workbook.active = mapping_sheet
-
-            init_pipeline_generator.write_pipeline_details(pipeline_config_sheet)
             self.update_mapping_content(mapping_sheet, columns[0] if isinstance(columns, tuple) else columns)
             self.update_config_sheet(config_sheet)
 
@@ -2451,6 +2456,45 @@ class DAGGeneratorApp:
 
             # Update status
             self.set_status("Mapping file created successfully!")
+            self.hide_progress()
+
+        except Exception as e:
+            self.set_status(f"Error: {str(e)}")
+            self.hide_progress()
+            messagebox.showerror("Error", str(e))
+
+    def create_sample_pipeline_mapping_template(self):
+        """Create a mapping template Excel file"""
+        # Create mappings directory if it doesn't exist
+        # Use a more reliable path - create mappings in the current workspace
+        global workbook
+        mappings_dir = os.path.join(os.getcwd(), "mappings")
+        os.makedirs(mappings_dir, exist_ok=True)
+
+        # Generate default Excel file path
+        ddl_name = os.path.splitext(os.path.basename("data/sample_table_ddl.sql"))[0]
+        default_excel_path = os.path.join(mappings_dir, f"{ddl_name}_pipeline_mapping.xlsx")
+        self.mapping_file_path.set(default_excel_path)
+
+        """Run the mapping generation in a separate thread"""
+        try:
+            # Create or load workbook
+            if not os.path.exists(self.mapping_file_path.get()):
+                workbook = openpyxl.Workbook()
+                # Remove default sheet
+                default_sheet = workbook['Sheet']
+                workbook.remove(default_sheet)
+
+            pipeline_config_sheet=workbook.create_sheet("Pipeline Mapping", 0)
+            init_pipeline_generator.write_pipeline_details(pipeline_config_sheet)
+            # Update status
+            self.set_status("Sample pipeline file created successfully!")
+
+            try:
+                workbook.save(self.mapping_file_path.get())
+                messagebox.showinfo("Success", f"Mapping file created:\n{self.mapping_file_path.get()}")
+            except PermissionError:
+                raise Exception("Cannot save Excel file. Please close it if it's open.")
             self.hide_progress()
 
         except Exception as e:
