@@ -20,7 +20,7 @@
 - [X] YAML file generation
 - [X] Test configuration support
 
-#### 5. Code Structure and Testing
+#### 4. Code Structure and Testing
 - [ ] Unit test implementation
 - [ ] Input validation
 - [ ] Error handling
