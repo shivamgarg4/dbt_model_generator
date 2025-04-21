@@ -3,7 +3,7 @@ Scripts package for DBT Model Generator.
 Contains utility scripts for generating models, jobs, and DAGs.
 """
 
-from .excel_to_json import _extract_config_from_sheet, _extract_mappings_from_sheet
+from .excel_to_json import _extract_config_from_sheet, _extract_mappings_from_sheet, create_dbt_yml_from_config
 from .dbt_job_generator import create_dbt_job_file
 from .dbt_model_generator import (
     create_dbt_model_from_json,
@@ -43,6 +43,7 @@ __all__ = [
     # Excel to JSON converters
     '_extract_mappings_from_sheet',
     '_extract_config_from_sheet',
+    'create_dbt_yml_from_config',
 
     # DBT related functions
     'extract_join_clauses',

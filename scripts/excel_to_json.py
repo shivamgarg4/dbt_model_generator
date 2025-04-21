@@ -1,5 +1,23 @@
 import json
+import os
 import openpyxl
+import yaml
+
+
+def load_json_file(file_path):
+    """Load JSON file from path or parse JSON string"""
+    if isinstance(file_path, str):
+        try:
+            # Try to load from file
+            with open(file_path, 'r') as f:
+                return json.load(f)
+        except FileNotFoundError:
+            # If not a file, try parsing as JSON string
+            return json.loads(file_path)
+    elif isinstance(file_path, dict):
+        return file_path
+    else:
+        raise ValueError("Invalid input: must be file path, JSON string, or dictionary")
 
 
 def _extract_config_from_sheet(sheet):
@@ -26,7 +44,7 @@ def _extract_config_from_sheet(sheet):
 
 
 def _extract_mappings_from_sheet(mapping_sheet):
-    # Initialize the model configuration dictionary
+    # Initialize the comprehensive model configuration dictionary
     model_config = {
         "Source": {
             "Type": "",
@@ -54,152 +72,231 @@ def _extract_mappings_from_sheet(mapping_sheet):
         "join_tables": []
     }
 
-    # Extract table information
+    # Helper function to safely get cell value
+    def get_cell_value(row, col, default=''):
+        cell = mapping_sheet.cell(row=row, column=col)
+        return str(cell.value).strip() if cell.value is not None else default
+
+    # Extract table and configuration information
     for row in range(1, mapping_sheet.max_row + 1):
-        cell_value = mapping_sheet.cell(row=row, column=1).value
+        key = get_cell_value(row, 1)
+        value = get_cell_value(row, 2)
 
-        if cell_value == 'TARGET_TABLE':
-            target_table = mapping_sheet.cell(row=row, column=2).value
-            if target_table:
-                target_parts = target_table.split('.')
-                if len(target_parts) < 2:
-                    raise ValueError("Target table should be in format: SCHEMA.TABLE")
-                model_config['Target']['Schema'] = target_parts[0]
-                model_config['Target']['Table Name'] = target_parts[1]
+        # Table Configuration Parsing
+        if key == 'TARGET_TABLE':
+            target_parts = value.split('.')
+            if len(target_parts) < 2:
+                raise ValueError(f"Invalid target table format: {value}. Expected SCHEMA.TABLE")
+            model_config['Target']['Schema'] = target_parts[0]
+            model_config['Target']['Table Name'] = target_parts[1]
 
-        elif cell_value == 'SOURCE_TABLE':
-            source_table = mapping_sheet.cell(row=row, column=2).value
-            if source_table:
-                source_parts = source_table.split('.')
-                if len(source_parts) < 3:
-                    raise ValueError("Source table should be in format: DATABASE.SCHEMA.TABLE")
-                model_config['Source']['Database'] = source_parts[0]
-                model_config['Source']['Schema'] = source_parts[1]
-                model_config['Source']['Table Name'] = source_parts[2]
+        elif key == 'SOURCE_TABLE':
+            source_parts = value.split('.')
+            if len(source_parts) < 3:
+                raise ValueError(f"Invalid source table format: {value}. Expected DATABASE.SCHEMA.TABLE")
+            model_config['Source']['Database'] = source_parts[0]
+            model_config['Source']['Schema'] = source_parts[1]
+            model_config['Source']['Table Name'] = source_parts[2]
 
-        elif cell_value == 'SOURCE_TYPE':
-            model_config['Source']['Type'] = mapping_sheet.cell(row=row, column=2).value or 'source'
+        elif key == 'SOURCE_TYPE':
+            model_config['Source']['Type'] = value or 'source'
 
-        elif cell_value == 'SOURCE_NAME':
-            source_name = mapping_sheet.cell(row=row, column=2).value
-            if not source_name:
-                source_name = model_config['Source']['Schema'] or 'default_source'
-            model_config['Source']['Name'] = source_name
+        elif key == 'SOURCE_NAME':
+            model_config['Source']['Name'] = value or model_config['Source']['Schema'] or 'default_source'
 
-        elif cell_value == 'MATERIALIZATION':
-            model_config['Target']['materialization'] = mapping_sheet.cell(row=row, column=2).value or 'incremental'
+        elif key == 'MATERIALIZATION':
+            model_config['Target']['materialization'] = value or 'incremental'
 
-        elif cell_value == 'UNIQUE_KEY':
-            unique_key_str = mapping_sheet.cell(row=row, column=2).value or ""
-            model_config['Target']['unique_key'] = unique_key_str
+        elif key == 'UNIQUE_KEY':
+            model_config['Target']['unique_key'] = value
 
-        # DAG Configuration - Table Details
-        elif cell_value == 'DAG Type':
-            key = mapping_sheet.cell(row=row, column=1).value
-            value = mapping_sheet.cell(row=row, column=2).value
-            if key and value:
-                model_config['dag_configuration']['DAG Type'] = value
+        elif key == 'PRE_HOOK':
+            model_config['Target']['pre_hook'] = value
 
-        # DAG Configuration - Table Details
-        elif cell_value == 'Schedule Interval':
-            key = mapping_sheet.cell(row=row, column=1).value
-            value = mapping_sheet.cell(row=row, column=2).value
-            if key and value:
-                model_config['dag_configuration']['Schedule Interval'] = value
+        elif key == 'POST_HOOK':
+            model_config['Target']['post_hook'] = value
 
-        elif cell_value == 'PRE_HOOK':
-            pre_hook = mapping_sheet.cell(row=row, column=2).value
-            if pre_hook:
-                model_config['Target']['pre_hook'] = pre_hook
+        # Column Mapping Section
+        elif key == 'S.NO':
+            # This indicates the start of column mapping
+            column_header_row = row
+            for mapping_row in range(column_header_row + 1, mapping_sheet.max_row + 1):
+                target_column = get_cell_value(mapping_row, 2)
 
-        elif cell_value == 'POST_HOOK':
-            post_hook = mapping_sheet.cell(row=row, column=2).value
-            if post_hook:
-                model_config['Target']['post_hook'] = post_hook
-
-        # DAG Configuration - DAG Details
-        elif cell_value == 'Dependencies':
-            for dep_row in range(row + 1, mapping_sheet.max_row + 1):
-                dep_number = mapping_sheet.cell(row=dep_row, column=1).value
-                dep_schema = mapping_sheet.cell(row=dep_row, column=2).value
-                dep_table = mapping_sheet.cell(row=dep_row, column=3).value
-
-                if dep_number == '#':
-                    continue
-
-                if not dep_number or not dep_schema or not dep_table:
-                    # Stop processing if a row is empty
+                # Stop if no target column
+                if not target_column:
                     break
 
-                dependency = {
-                    'Schema': dep_schema,
-                    'Table': dep_table
+                column_mapping = {
+                    'Target Column': target_column,
+                    'Source Table': get_cell_value(mapping_row, 3),
+                    'Logic': get_cell_value(mapping_row, 4) or "''",
+                    'Description': get_cell_value(mapping_row, 5),
+                    'Test': get_cell_value(mapping_row, 6)
                 }
-                model_config['dag_configuration']['dependencies'].append(dependency)
+                model_config['Columns'].append(column_mapping)
 
+        # Join Tables Section
+        elif key == 'JOIN_TABLES':
+            join_row = row + 1
+            while join_row < mapping_sheet.max_row + 1:
+                join_type = get_cell_value(join_row, 1)
+                join_table = get_cell_value(join_row, 4)
+                join_condition = get_cell_value(join_row, 5)
 
-        # WHERE Conditions
-        elif cell_value == 'WHERE_CONDITIONS':
-            condition = mapping_sheet.cell(row=row, column=2).value
-            if condition:
-                model_config['where_conditions'].append(condition)
+                if not join_table or not join_condition:
+                    break
 
-        # GROUP BY Conditions
-        elif cell_value == 'GROUP_BY':
-            group_by_col = mapping_sheet.cell(row=row, column=2).value
-            if group_by_col:
-                model_config['group_by'].append(group_by_col)
-
-        # JOIN Tables
-        elif cell_value == 'JOIN_TABLES':
-            join_table = mapping_sheet.cell(row=row, column=2).value
-            join_condition = mapping_sheet.cell(row=row, column=3).value
-            join_type = mapping_sheet.cell(row=row, column=4).value
-            if join_table and join_condition:
                 join_info = {
+                    'type': join_type,
                     'table': join_table,
                     'condition': join_condition
                 }
-                if join_type:
-                    join_info['type'] = join_type
                 model_config['join_tables'].append(join_info)
+                join_row += 1
 
-    # Find column mapping header row
-    header_row = None
-    for row in range(1, mapping_sheet.max_row + 1):
-        if mapping_sheet.cell(row=row, column=1).value == 'S.NO':
-            header_row = row
-            break
+        # Where Conditions
+        elif key == 'WHERE_CONDITIONS':
+            condition = get_cell_value(row, 2)
+            if condition:
+                model_config['where_conditions'].append(condition)
 
-    if not header_row:
-        raise ValueError("Column mapping header not found in mapping file")
+        # Group By Conditions
+        elif key == 'GROUP_BY':
+            group_by_col = get_cell_value(row, 2)
+            if group_by_col:
+                model_config['group_by'].append(group_by_col)
 
-    # Extract column mappings
-    for row in range(header_row + 1, mapping_sheet.max_row + 1):
-        target_column = mapping_sheet.cell(row=row, column=2).value
+    # Validate required configurations
+    required_source_fields = ['Database', 'Schema', 'Table Name']
+    required_target_fields = ['Schema', 'Table Name']
 
-        if not target_column:
-            # Stop when we reach an empty row
-            break
+    for field in required_source_fields:
+        if not model_config['Source'][field]:
+            raise ValueError(f"Missing required source configuration: {field}")
 
-        source_table_col = mapping_sheet.cell(row=row, column=3).value
-        logic = mapping_sheet.cell(row=row, column=4).value
-
-        column_mapping = {
-            'Target Column': target_column,
-            'Source Table': source_table_col,
-            'Logic': logic if logic is not None else "''"
-        }
-
-        model_config['Columns'].append(column_mapping)
-
-    # Validate required fields
-    if not model_config['Target']['Schema'] or not model_config['Target']['Table Name']:
-        raise ValueError("Target table information is incomplete")
-
-    if not model_config['Source']['Database'] or not model_config['Source']['Schema'] or not model_config['Source'][
-        'Table Name']:
-        raise ValueError("Source table information is incomplete")
+    for field in required_target_fields:
+        if not model_config['Target'][field]:
+            raise ValueError(f"Missing required target configuration: {field}")
 
     return model_config
+
+
+def create_dbt_yml_from_config(model_config, output_path):
+    """
+    Generate a dbt YAML configuration with exact structural requirements
+    """
+    try:
+        # Ensure model_config is a dictionary
+        if isinstance(model_config, str):
+            model_config = load_json_file(model_config)
+
+        # Extract key components
+        schema = model_config.get('Target', {}).get('Schema', 'unknown_schema')
+        table_name = model_config.get('Target', {}).get('Table Name', 'unknown_table')
+
+        # Create a more standard model name
+        model_name = f"{schema}.{table_name}"
+
+        # Initialize dbt YAML structure
+        dbt_yml = {
+            'version': 2,
+            'models': []
+        }
+
+        # Prepare model entry
+        model_entry = {
+            'name': model_name
+        }
+
+        # Collect columns with unique combination test
+        unique_combination_columns = []
+
+        # Prepare columns list
+        columns = []
+        for column in model_config.get('Columns', []):
+            column_entry = {
+                'name': column.get('Target Column', ''),
+                'description': column.get('Description', '')
+            }
+
+            # Add tests if present
+            column_tests = []
+            test = column.get('Test', '')
+            if test:
+                if test == 'not_null':
+                    column_tests.append('not_null')
+                elif test == 'unique':
+                    column_tests.append('unique')
+                elif test == 'unique_combination':
+                    unique_combination_columns.append(column['Target Column'])
+
+            if column_tests:
+                column_entry['tests'] = column_tests
+
+            columns.append(column_entry)
+
+        # Add columns if not empty
+        if columns:
+            model_entry['columns'] = columns
+
+        # Add unique combination test if applicable
+        if len(unique_combination_columns) > 1:
+            model_entry['tests'] = [{
+                'dbt_utils.unique_combination_of_columns': {
+                    'combination_of_columns': unique_combination_columns
+                }
+            }]
+
+        # Add model to models list
+        dbt_yml['models'].append(model_entry)
+
+        # Ensure output directory exists
+        os.makedirs(output_path, exist_ok=True)
+
+        # Generate file path
+        yml_file_path = os.path.join(output_path, f"{schema}_{table_name}.yml")
+
+        # Write YAML file with custom formatting
+        with open(yml_file_path, 'w') as f:
+            # Write version first
+            f.write('version: 2\n\n')
+            f.write('models:\n\n')
+
+            # Write models with proper indentation
+            for model in dbt_yml['models']:
+                f.write(f'  - name: {model["name"]}\n')
+
+                # Write tests if present
+                if 'tests' in model:
+                    f.write('    tests:\n')
+                    for test in model['tests']:
+                        f.write('      - dbt_utils.unique_combination_of_columns:\n')
+                        f.write('          combination_of_columns:\n')
+                        for column in test['dbt_utils.unique_combination_of_columns']['combination_of_columns']:
+                            f.write(f'            - {column}\n')
+
+                # Write columns if present
+                if 'columns' in model:
+                    f.write('    columns:\n')
+                    for column in model['columns']:
+                        # Write column name
+                        f.write(f'      - name: {column["name"]}\n')
+
+                        # Always write description with quotes
+                        f.write(f'        description: "{column.get("description", "")}"\n')
+
+                        # Write tests if present
+                        if 'tests' in column:
+                            f.write('        tests:\n')
+                            for test in column['tests']:
+                                f.write(f'          - {test}\n')
+
+        return dbt_yml
+
+    except Exception as e:
+        print(f"Error creating dbt YAML configuration: {e}")
+        return None
+
+
 

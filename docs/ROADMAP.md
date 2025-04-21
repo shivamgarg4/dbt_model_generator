@@ -17,9 +17,8 @@
 - [x] Additional column support in LND
 
 #### 3. YAML Configuration
-- [ ] YAML file generation
-- [ ] Test configuration support
-- [ ] Source and target test implementation
+- [X] YAML file generation
+- [X] Test configuration support
 
 #### 5. Code Structure and Testing
 - [ ] Unit test implementation

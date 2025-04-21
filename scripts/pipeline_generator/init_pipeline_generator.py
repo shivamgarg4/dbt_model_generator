@@ -10,7 +10,7 @@ from ..dbt_model_generator import create_dbt_model_from_json
 from ..insert_sql_generator import insert_sql_generator
 from ..merge_sql_generator import generate_merge_sql_for_pipelines
 from ..utils import parse_ddl_file as parse_ddl_file
-from ..excel_to_json import _extract_config_from_sheet, _extract_mappings_from_sheet
+from ..excel_to_json import _extract_config_from_sheet, _extract_mappings_from_sheet,create_dbt_yml_from_config
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 from openpyxl import load_workbook
@@ -246,13 +246,23 @@ def create_mapping_sheet(sheet, pipeline, columns):
     columns_mapping_header.fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
     current_row += 1
 
-    # Add column mapping section
-    headers = ['S.NO', 'TargetColumn', 'Source Table', 'Logic/Mapping/Constant Value']
-    for col, header in enumerate(headers, start=1):
-        cell = sheet.cell(row=current_row, column=col, value=header)
-        cell.font = Font(bold=True, color='FFFFFF')
-        cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
-    header_row = current_row
+    # Updated headers to include Column Description
+    headers = [
+        'S.NO',
+        'TargetColumn',
+        'Source Table',
+        'Logic/Mapping/Constant Value',
+        'Column Description',  # New column for description
+        'Test Types'
+    ]
+
+    # Define available test types
+    test_types = [
+        'unique_combination',  # Unique combination of specified columns
+        'not_null',  # Ensures column doesn't contain null values
+        'unique'  # Ensures column values are unique
+    ]
+
 
     # Modify column processing for LND Load
     valid_columns = []
@@ -269,12 +279,62 @@ def create_mapping_sheet(sheet, pipeline, columns):
                     column_name.strip()):
                 valid_columns.append((column_name, definition))
 
-    # Now add the valid columns to the sheet
+    # Add column mapping section with new description column
+    for col, header in enumerate(headers, start=1):
+        cell = sheet.cell(row=current_row, column=col, value=header)
+        cell.font = Font(bold=True, color='FFFFFF')
+        cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
+    header_row = current_row
+
+    # Test Types Dropdown
+    test_type_dv = DataValidation(
+        type="list",
+        formula1=f'"{",".join(test_types)}"',
+        allow_blank=True
+    )
+
+    # Now add the valid columns to the sheet with test configuration
     for i, (column_name, _) in enumerate(valid_columns, start=1):
         row = header_row + i
         sheet.cell(row=row, column=1, value=i)  # S.NO
         sheet.cell(row=row, column=2, value=column_name)  # TargetColumn
+
+        # Description Cell (New)
+        description_cell = sheet.cell(row=row, column=5)
+        description_cell.comment = Comment(
+            'Enter a clear, concise description of the column.\n'
+            'What does this column represent?\n'
+            'Example: "Unique identifier for customer accounts"',
+            'Column Description Guide'
+        )
+
+        # Test Types Cell
+        test_type_cell = sheet.cell(row=row, column=6)  # Shifted due to new description column
+        test_type_dv.add(test_type_cell)
+        sheet.add_data_validation(test_type_dv)
+
+        test_type_cell.comment = Comment(
+            'Data Validation Options:\n'
+            '- unique_combination: System-wide unique constraint\n'
+            '- not_null: Prevents empty values\n'
+            '- unique: No duplicate values allowed',
+            'Test Configuration'
+        )
+
         current_row = row
+
+    # Adjust column widths for readability
+    column_widths = {
+        'A': 10,  # S.NO
+        'B': 30,  # TargetColumn
+        'C': 30,  # Source Table
+        'D': 40,  # Logic/Mapping/Constant Value
+        'E': 50,  # Column Description (New)
+        'F': 30,  # Test Types
+    }
+
+    for col, width in column_widths.items():
+        sheet.column_dimensions[col].width = width
 
     # Calculate the last row of column mappings
     last_column_row = header_row + len(valid_columns)
@@ -768,13 +828,14 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 output_filename = f"{target_model.lower().replace('.', '_')}.sql"
                 output_path = os.path.join(output_dir, output_filename)
 
-                if "DW Load" in model_type or "LND Load" in model_type:
+                if "DW Load" in model_type :
                     model_content = create_dbt_model_from_json(
                         config_file=config_file_path,
                         mapping_sheet=mapping_sheet,
                         target_ddl_path=target_ddl_path
                     )
                     generate_dag_file("DW", config_file_path, "dags/")
+                    create_dbt_yml_from_config(config_file_path, "yml/")
 
                 elif "Merge Macro" in model_type:
                     model_content = generate_merge_sql_for_pipelines(
@@ -787,22 +848,27 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                         mapping_sheet=mapping_sheet
                     )
 
-                # elif "LND Load" in model_type:
-                #     model_content = generate_lnd_dbt_model_file(
-                #         mapping_file_path=workbook_path
-                #     )
-                #     generate_dag_file("LND", None, "dags/", workbook_path)
+                elif "LND Load" in model_type:
+                    model_content = create_dbt_model_from_json(
+                        config_file=config_file_path,
+                        mapping_sheet=mapping_sheet,
+                        target_ddl_path=target_ddl_path
+                    )
+                    generate_dag_file("LND", None, "dags/", workbook_path)
+                    create_dbt_yml_from_config(config_file_path, "yml/")
 
                 elif "DP/BI View" in model_type:
                     model_content = create_dp_view_file(
                         file_path=workbook_path
                     )
                     generate_dag_file("DP", None, "dags/", workbook_path)
+                    create_dbt_yml_from_config(config_file_path, "yml/")
 
 
                 else:
                     logging.warning(f"Unsupported model type: {model_type}")
                     continue
+
 
             except Exception as e:
                 logging.error(f"Error processing {target_model}: {e}")

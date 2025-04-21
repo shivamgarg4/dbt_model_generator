@@ -12,14 +12,6 @@ def ensure_directory_exists(directory_path):
         logging.info(f"Created directory: {directory_path}")
     return directory_path
 
-def load_json_file(file_path):
-    """Load and parse a JSON file"""
-    try:
-        with open(file_path, 'r') as f:
-            return json.load(f)
-    except Exception as e:
-        logging.error(f"Error loading JSON file {file_path}: {str(e)}")
-        return None
 
 def save_json_file(data, file_path):
     """Save data to a JSON file"""
