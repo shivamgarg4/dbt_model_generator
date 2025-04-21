@@ -2,7 +2,6 @@ import json
 import os
 import logging
 from typing import List, Tuple
-#Shivam
 
 def create_cron_dag(json_path, dag_file_path, schedule_interval, dependencies, schema_name, table_name):
     """

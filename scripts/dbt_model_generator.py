@@ -64,6 +64,8 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     source_table = config['Source']['Table Name']
     source_name = config['Source']['Name']
     target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
+    pre_hook = config['Target']['pre_hook']
+    post_hook = config['Target']['post_hook']
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -86,7 +88,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
         from_clause = f"{{{{ ref('{ref_path}') }}}} AS {main_table_alias}"
 
     # Get materialization type
-    materialization = config['Target']['materialization']
+    materialization = 'table' if config['Target']['materialization'] == 'lnd_load' else config['Target']['materialization']
 
     # Check if minus logic is required
     minus_logic_required = False
@@ -114,10 +116,14 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
         materialized='{materialization}',
         transient={(lambda: 'true' if transient_logic_required else 'false')()}"""
 
-    if materialization == 'lnd_load':
-        model_config = model_config.replace(f"""materialized='{materialization}',
-        transient={(lambda: 'true' if transient_logic_required else 'false')()}""",
-                                            f"""transient={(lambda: 'true' if transient_logic_required else 'false')()}""")
+    if pre_hook:
+        model_config += f""",
+        pre_hook=['{pre_hook}']"""
+
+    if post_hook:
+        model_config += f""",
+        post_hook=['{post_hook}']"""
+
 
     # Add pre-hook for truncate_load
     if materialization == 'truncate_load':

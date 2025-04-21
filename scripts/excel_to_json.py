@@ -39,7 +39,9 @@ def _extract_mappings_from_sheet(mapping_sheet):
             "Schema": "",
             "Table Name": "",
             "materialization": "",
-            "unique_key": ""
+            "unique_key": "",
+            "pre_hook": "",
+            "post_hook": ""
         },
         "Columns": [],
         "dag_configuration": {
@@ -104,6 +106,16 @@ def _extract_mappings_from_sheet(mapping_sheet):
             value = mapping_sheet.cell(row=row, column=2).value
             if key and value:
                 model_config['dag_configuration']['Schedule Interval'] = value
+
+        elif cell_value == 'PRE_HOOK':
+            pre_hook = mapping_sheet.cell(row=row, column=2).value
+            if pre_hook:
+                model_config['Target']['pre_hook'] = pre_hook
+
+        elif cell_value == 'POST_HOOK':
+            post_hook = mapping_sheet.cell(row=row, column=2).value
+            if post_hook:
+                model_config['Target']['post_hook'] = post_hook
 
         # DAG Configuration - DAG Details
         elif cell_value == 'Dependencies':

@@ -38,40 +38,39 @@ class SourceColumnMapper:
             sheets_updated = False  # Track if any changes were made
 
             # Process each mapping sheet
-            for sheet_name in workbook.sheetnames:
-                if sheet_name.endswith('_Map'):
-                    logger.info(f"Processing sheet: {sheet_name}")
-                    mapping_sheet = workbook[sheet_name]
-                    json_file = self._find_mapping_file(sheet_name, mappings_dir)
+            for sheet_name in workbook.sheetnames :
+                logger.info(f"Processing sheet: {sheet_name}")
+                mapping_sheet = workbook[sheet_name]
+                json_file = self._find_mapping_file(sheet_name, mappings_dir)
 
-                    if json_file:
-                        # Load mapping configuration
-                        mapping_config = self._load_mapping_json(json_file)
-                        source_info = self._get_source_info(mapping_config)
+                if json_file:
+                    # Load mapping configuration
+                    mapping_config = self._load_mapping_json(json_file)
+                    source_info = self._get_source_info(mapping_config)
 
-                        # Get Snowflake columns
-                        if source_info['schema'] and source_info['table']:
-                            columns = self._get_snowflake_columns(snowflake_config, source_info)
+                    # Get Snowflake columns
+                    if source_info['schema'] and source_info['table']:
+                        columns = self._get_snowflake_columns(snowflake_config, source_info)
 
-                            # Update both Excel and JSON
-                            mapped_count, total_count = self._update_mapping_sheet(
-                                mapping_sheet, mapping_config, columns, source_info
-                            )
+                        # Update both Excel and JSON
+                        mapped_count, total_count = self._update_mapping_sheet(
+                            mapping_sheet, mapping_config, columns, source_info
+                        )
 
-                            if mapped_count > 0:
-                                sheets_updated = True
-                                logger.info(f"Updated {sheet_name}: Mapped {mapped_count} out of {total_count} columns")
+                        if mapped_count > 0:
+                            sheets_updated = True
+                            logger.info(f"Updated {sheet_name}: Mapped {mapped_count} out of {total_count} columns")
 
-                            # Update JSON file
-                            self._update_mapping_json(mapping_config, columns, json_file)
+                        # Update JSON file
+                        self._update_mapping_json(mapping_config, columns, json_file)
 
-                            # Try to save after each sheet update
-                            try:
-                                workbook.save(workbook_path)
-                                logger.info(f"Successfully saved updates for sheet: {sheet_name}")
-                            except Exception as save_error:
-                                logger.error(f"Error saving workbook after updating {sheet_name}: {str(save_error)}")
-                                raise
+                        # Try to save after each sheet update
+                        try:
+                            workbook.save(workbook_path)
+                            logger.info(f"Successfully saved updates for sheet: {sheet_name}")
+                        except Exception as save_error:
+                            logger.error(f"Error saving workbook after updating {sheet_name}: {str(save_error)}")
+                            raise
 
             if sheets_updated:
                 # Final save attempt
@@ -108,9 +107,11 @@ class SourceColumnMapper:
         # Define audit column transformations
         audit_mappings = {
             'DATA_SRC': lambda: f"'{target_table}'",
+            'CREATE_DT': lambda: "CURRENT_TIMESTAMP()",
             'CREATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
             'CREATE_PGM': lambda: f"'{target_table}'",
             'UPDATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
+            'UPDATE_DT': lambda: "CURRENT_TIMESTAMP()",
             'UPDATE_PGM': lambda: f"'{target_table}'"
         }
 
@@ -173,14 +174,44 @@ class SourceColumnMapper:
             raise
 
     def _find_mapping_file(self, sheet_name: str, mappings_dir: str) -> str:
-        """Finds corresponding JSON mapping file for the sheet"""
-        base_name = sheet_name.replace('_Map', '')
-        json_file = os.path.join(mappings_dir, f"{base_name}_Map.json")
-        if not os.path.exists(json_file):
-            logger.error(f"Mapping file not found: {json_file}")
+        """
+        Finds corresponding JSON mapping file for the sheet
+
+        Args:
+            sheet_name: Name of the Excel sheet
+            mappings_dir: Directory containing mapping JSON files
+
+        Returns:
+            str: Path to the JSON mapping file if found, None otherwise
+        """
+        try:
+            # First try direct match with sheet name
+            json_file = os.path.join(mappings_dir, f"{sheet_name}.json")
+            if os.path.exists(json_file):
+                logger.info(f"Found mapping file using direct match: {json_file}")
+                return json_file
+
+            # Try with _Map suffix if not already present
+            if not sheet_name.endswith('_Map'):
+                json_file = os.path.join(mappings_dir, f"{sheet_name}_Map.json")
+                if os.path.exists(json_file):
+                    logger.info(f"Found mapping file with _Map suffix: {json_file}")
+                    return json_file
+
+            # Try without _Map suffix if present
+            if sheet_name.endswith('_Map'):
+                base_name = sheet_name.replace('_Map', '')
+                json_file = os.path.join(mappings_dir, f"{base_name}_Map.json")
+                if os.path.exists(json_file):
+                    logger.info(f"Found mapping file using base name: {json_file}")
+                    return json_file
+
+            logger.error(f"No mapping file found for sheet: {sheet_name}")
             return None
-        logger.info(f"Found mapping file: {json_file}")
-        return json_file
+
+        except Exception as e:
+            logger.error(f"Error finding mapping file for {sheet_name}: {str(e)}")
+            return None
 
     def _load_mapping_json(self, json_file: str) -> Dict:
         """Loads and returns the mapping configuration from JSON file"""
@@ -230,6 +261,23 @@ class SourceColumnMapper:
             logger.error(f"Error extracting source info: {str(e)}")
             return {'schema': '', 'table': ''}
 
+    def _get_target_info(self, mapping_config: Dict) -> Dict:
+        """Extracts source table information from mapping configuration"""
+        try:
+            source = mapping_config.get('Target', {})
+            schema = source.get('Schema', '')
+            table = source.get('Table Name', '')
+            if schema and table:
+                return {
+                    'schema': schema,
+                    'table': table
+                }
+            logger.warning(f"Invalid source configuration: {source}")
+            return {'schema': '', 'table': ''}
+        except Exception as e:
+            logger.error(f"Error extracting source info: {str(e)}")
+            return {'schema': '', 'table': ''}
+
     def _get_snowflake_connection(self, snowflake_config: Dict):
         """Get or create Snowflake connection using DatabaseConnection class"""
         if self._db_connection is None:
@@ -241,8 +289,11 @@ class SourceColumnMapper:
         if not source_info['schema'] or not source_info['table']:
             logger.error(f"Invalid source info: schema={source_info['schema']}, table={source_info['table']}")
             return []
+
         try:
             db_connection = DatabaseConnection(config=snowflake_config)
+
+            # Use a context manager to ensure proper cursor handling
             with db_connection.get_cursor() as cursor:
                 query = """
                     SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE 
@@ -263,6 +314,7 @@ class SourceColumnMapper:
                 ]
                 logger.info(f"Retrieved {len(columns)} columns from Snowflake")
                 return columns
+
         except Exception as e:
             logger.error(f"Error getting Snowflake columns: {str(e)}")
             raise
@@ -288,9 +340,11 @@ class SourceColumnMapper:
             # Define audit column transformations
             audit_mappings = {
                 'DATA_SRC': f"'{target_table}'",
+                "CREATE_DT": "CURRENT_TIMESTAMP()",
                 'CREATE_BY': "CAST(CURRENT_USER() AS VARCHAR(200))",
                 'CREATE_PGM': f"'{target_table}'",
                 'UPDATE_BY': "CAST(CURRENT_USER() AS VARCHAR(200))",
+                "UPDATE_DT": "CURRENT_TIMESTAMP()",
                 'UPDATE_PGM': f"'{target_table}'"
             }
 
@@ -355,9 +409,6 @@ def update_source_mappings(workbook_path: str, mappings_dir: str, config_path: s
     except Exception as e:
         logger.error(f"Error in update_source_mappings: {str(e)}")
         raise
-    
-
-
 
 if __name__ == "__main__":
     # Example usage

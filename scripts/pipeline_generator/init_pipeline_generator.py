@@ -2,21 +2,22 @@ import os
 import logging
 import openpyxl
 import json
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.comments import Comment
 from openpyxl.utils import get_column_letter
 from ..dbt_model_generator import create_dbt_model_from_json
 from ..insert_sql_generator import insert_sql_generator
-from ..merge_sql_generator import merge_sql_generator, generate_merge_sql_for_pipelines
+from ..merge_sql_generator import generate_merge_sql_for_pipelines
 from ..utils import parse_ddl_file as parse_ddl_file
 from ..excel_to_json import _extract_config_from_sheet, _extract_mappings_from_sheet
 from pathlib import Path
 from typing import Dict, List, Tuple, Optional
 from openpyxl import load_workbook
-from .source_column_mapper import update_source_mappings as update_source_mappings
-from .DAGs.dag_generators import create_cron_dag, create_dataset_dag, create_sns_dag
+from scripts.pipeline_generator.dag_generators import create_cron_dag, create_dataset_dag, create_sns_dag
 from .model_generator_pipelines import generate_lnd_dbt_model_file, create_dp_view_file
+from ..utils.snowflake_utils import get_snowflake_connection, get_cursor
+from .source_column_mapper import update_source_mappings
 
 
 def read_pipeline_sheet(pipeline_details_sheet):
@@ -61,6 +62,7 @@ def write_pipeline_details(pipeline_config_sheet):
 
     :param pipeline_config_sheet: Excel worksheet for pipeline configuration
     """
+
     pipeline_config_sheet.title = 'Pipeline Details'
 
     # Write the header row with simplified columns
@@ -120,7 +122,9 @@ def create_mapping_sheet(sheet, pipeline, columns):
         ('MATERIALIZATION', ''),  # Empty for dropdown
         ('UNIQUE_KEY', ''),
         ('MINUS_LOGIC_REQUIRED', 'N'),
-        ('TRANSIENT_TABLE', 'N')
+        ('TRANSIENT_TABLE', 'N'),
+        ('PRE_HOOK', ''),
+        ('POST_HOOK', '')
     ]
 
     for item in config_items:
@@ -149,6 +153,10 @@ def create_mapping_sheet(sheet, pipeline, columns):
             value_cell.comment = Comment('Set to Y to exclude audit columns and unique key combination', 'System')
         elif item[0] == 'TRANSIENT_TABLE':
             value_cell.comment = Comment('Set to Y to set true tag for transient model property', 'System')
+        elif item[0] == 'PRE_HOOK':
+            value_cell.comment = Comment('Pre-hook SQL command', 'System')
+        elif item[0] == 'POST_HOOK':
+            value_cell.comment = Comment('Post-hook SQL command', 'System')
 
         current_row += 1
 
@@ -245,17 +253,21 @@ def create_mapping_sheet(sheet, pipeline, columns):
         cell.font = Font(bold=True, color='FFFFFF')
         cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
     header_row = current_row
-    # Add the data - Filter out any non-column entries like constraints
-    valid_columns = []
-    for column_name, definition in columns:
-        # Skip if column_name is "UNIQUE", "PRIMARY", "CONSTRAINT", or any other non-column entry
-        if (column_name.upper() in ["UNIQUE", "PRIMARY", "CONSTRAINT"] or
-                column_name.isdigit() or  # Skip numeric entries
-                column_name.endswith(')') or  # Skip entries ending with )
-                not column_name.strip()):  # Skip empty entries
-            continue
 
-        valid_columns.append((column_name, definition))
+    # Modify column processing for LND Load
+    valid_columns = []
+    if model_type == 'LND Load':
+        # For LND Load, use the columns as-is from the source table
+        valid_columns = [(col['COLUMN_NAME'], '') for col in columns]
+    else:
+        # For other model types, filter out non-column entries
+        valid_columns = []
+        for column_name, definition in columns:
+            if (column_name.upper() not in ["UNIQUE", "PRIMARY", "CONSTRAINT"] and
+                    not column_name.isdigit() and
+                    not column_name.endswith(')') and
+                    column_name.strip()):
+                valid_columns.append((column_name, definition))
 
     # Now add the valid columns to the sheet
     for i, (column_name, _) in enumerate(valid_columns, start=1):
@@ -422,15 +434,13 @@ def create_config_sheet(config_sheet):
 
 def process_pipeline_sheet(workbook_path, ddl_path):
     # Load the workbook and get the pipeline details sheet
-
     process_filled_workbook_to_json(workbook_path)
     workbook = load_workbook(workbook_path)
     pipeline_details_sheet = workbook['Pipeline Details']
+    config_sheet = workbook['config']
 
     # Read pipeline configurations
     pipelines = read_pipeline_sheet(pipeline_details_sheet)
-    config_sheet = workbook.create_sheet(title=f"config")
-    create_config_sheet(config_sheet)
 
     # Dictionary to keep track of count for each table
     table_counter = {}
@@ -439,45 +449,110 @@ def process_pipeline_sheet(workbook_path, ddl_path):
     type_abbrev = {
         'Merge': 'M',
         'Insert': 'I',
-        'DW': 'D'
+        'DW': 'D',
+        'LND': 'L'
     }
 
     # Create mapping sheets for each pipeline
     for pipeline_index, pipeline in enumerate(pipelines, start=2):  # start=2 because row 1 is header
+        source_model_name = pipeline.get('Source Model')
         target_model = pipeline.get("Target Model", "Unknown")
         model_type = pipeline.get("Model Type", "Unknown")
-        model_type_split = pipeline.get("Model Type", "Unknown").split()[0]
-        target_model_split = target_model.split('.')[1]
+        generated_mapping_sheet_name = pipeline.get("Generated Mapping Sheet", "Unknown")
 
-        # Create mapping sheet only for specific model types
-        if model_type in ['DW Load', 'Merge Macro', 'Insert Macro']:
-            # Get abbreviated model type
-            type_short = type_abbrev.get(model_type_split, model_type_split[0])
+        # If no mapping sheet name exists, generate one
+        if not generated_mapping_sheet_name or generated_mapping_sheet_name == "Unknown":
+            model_type_split = pipeline.get("Model Type", "Unknown").split()[0]
+            target_model_split = target_model.split('.')[1]
 
-            # Generate unique key for the table
-            table_key = f"{type_short}_{target_model_split}"
+            # Create mapping sheet for all Load models
+            if model_type in ['DW Load', 'Merge Macro', 'Insert Macro', 'LND Load']:
+                # Get abbreviated model type
+                type_short = type_abbrev.get(model_type_split, model_type_split[0])
 
-            # Initialize or increment counter for this table
-            if table_key not in table_counter:
-                table_counter[table_key] = 1
+                # Generate unique key for the table
+                table_key = f"{type_short}_{target_model_split}"
+
+                # Initialize or increment counter for this table
+                if table_key not in table_counter:
+                    table_counter[table_key] = 1
+                else:
+                    table_counter[table_key] += 1
+
+                # Shorten target model name if it's too long (take first 15 chars)
+                short_target = target_model_split[:15]
+
+                # Create sheet name with counter (padded with zero)
+                generated_mapping_sheet_name = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}_Map"
+
+        # Create mapping sheet using either the existing or newly generated name
+        if generated_mapping_sheet_name and generated_mapping_sheet_name != "Unknown":
+            mapping_sheet = workbook.create_sheet(title=generated_mapping_sheet_name)
+            workbook.save(workbook_path)
+            process_filled_workbook_to_json(workbook_path)
+
+            # Modify column retrieval logic
+            if model_type == 'LND Load':
+                # For LND Load, get columns from source table
+                columns = read_source_table_columns(source_model_name)
             else:
-                table_counter[table_key] += 1
+                # For other models, parse DDL file
+                columns = parse_ddl_file(ddl_path)
 
-            # Shorten target model name if it's too long (take first 15 chars)
-            short_target = target_model_split[:15]
+            # Ensure columns is a list of tuples or a list of dictionaries
+            if isinstance(columns, tuple):
+                columns = columns[0]
 
-            # Create sheet name with counter (padded with zero)
-            sheet_name = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}_Map"
+            create_mapping_sheet(mapping_sheet, pipeline, columns)
 
-            mapping_sheet = workbook.create_sheet(title=sheet_name)
-            columns = parse_ddl_file(ddl_path)
-            create_mapping_sheet(mapping_sheet, pipeline, columns[0] if isinstance(columns, tuple) else columns)
-
-            # Update the pipeline details sheet with the mapping sheet name directly using pipeline_index
-            pipeline_details_sheet.cell(row=pipeline_index, column=4, value=sheet_name)
+            # Update the pipeline details sheet with the mapping sheet name
+            pipeline_details_sheet.cell(row=pipeline_index, column=4, value=generated_mapping_sheet_name)
 
     workbook.save(workbook_path)
     return workbook
+
+def read_source_table_columns(source_model):
+    source_parts = source_model.split('.')
+    source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
+    config_path_src = Path("config/config.json")
+
+    logging.info("Extracting Snowflake configuration")
+    with open(config_path_src, 'r') as f:
+        config = json.load(f)
+        # Keep the keys in uppercase to match the expected format
+        snowflake_config = {
+            'USER': config.get('USER'),
+            'AUTHENTICATOR': config.get('AUTHENTICATOR'),
+            'ACCOUNT': config.get('ACCOUNT'),
+            'WAREHOUSE': config.get('WAREHOUSE'),
+            'DATABASE': config.get('DATABASE'),
+            'ROLE': config.get('ROLE')
+        }
+
+    logging.info("Getting Snowflake connection")
+    # Get or create singleton connection
+    connection = get_snowflake_connection(snowflake_config)
+
+    with get_cursor(connection) as cursor:
+        # Get source columns
+        logging.debug(f"Fetching source columns for {source_table_name}")
+        cursor.execute(f"""
+             SELECT 
+                 COLUMN_NAME
+             FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = '{source_schema}'
+             AND TABLE_NAME = '{source_table_name}'
+             ORDER BY ORDINAL_POSITION
+         """)
+        source_columns = cursor.fetchall()
+
+        # Convert to a list of dictionaries with name and definition
+        source_columns = [
+            {
+                'COLUMN_NAME': col[0]
+            } for col in source_columns
+        ]
+        return source_columns
 
 
 def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict], Optional[List[Dict]]]:
@@ -493,12 +568,14 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
         pipeline_details_sheet = workbook['Pipeline Details']
         config_data = None
         all_mapping_data = []
+        table_counter = {}  # Added to track table counts
 
         # Add type abbreviation mapping
         type_abbrev = {
             'Merge': 'M',
             'Insert': 'I',
-            'DW': 'D'
+            'DW': 'D',
+            'LND': 'L'
         }
 
         # Read pipeline configurations
@@ -516,42 +593,54 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
             print(f"Error writing config file: {e}")
 
         # Create mapping sheets for each pipeline
-        for pipeline in pipelines:
+        for pipeline_index, pipeline in enumerate(pipelines, start=2):
             try:
+                target_model = pipeline.get("Target Model", "Unknown")
+                model_type = pipeline.get("Model Type", "Unknown")
                 target_sheet = pipeline.get("Generated Mapping Sheet")
+
+                # Generate mapping sheet name if not present
                 if not target_sheet:
-                    print(f"Warning: Missing mapping sheet name for pipeline")
-                    continue
+                    model_type_split = model_type.split()[0]
+                    target_model_split = target_model.split('.')[-1]
+
+                    if model_type in ['DW Load', 'Merge Macro', 'Insert Macro', 'LND Load']:
+                        type_short = type_abbrev.get(model_type_split, model_type_split[0])
+                        table_key = f"{type_short}_{target_model_split}"
+
+                        # Initialize or increment counter for this table
+                        if table_key not in table_counter:
+                            table_counter[table_key] = 1
+                        else:
+                            table_counter[table_key] += 1
+
+                        short_target = target_model_split[:15]
+                        target_sheet = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}_Map"
+
+                        # Update the pipeline details sheet with the new mapping sheet name
+                        pipeline_details_sheet.cell(row=pipeline_index, column=4, value=target_sheet)
+                    else:
+                        print(f"Warning: Unsupported model type for pipeline: {model_type}")
+                        continue
 
                 target_workbook = _load_workbook(workbook_path, target_sheet)
-                target_model = pipeline.get("Target Model", "Unknown")
-                model_type = pipeline.get("Model Type", "Unknown").split()[0]
                 mapping_data = _extract_mappings_from_sheet(target_workbook)
                 all_mapping_data.append(mapping_data)
-
-                # Generate file name using the same convention as mapping sheet names
-                target_model_split = target_model.split('.')[-1]
-                type_short = type_abbrev.get(model_type, model_type[0])
-                short_target = target_model_split[:15]  # Limit target name to 15 chars
-
-                # Extract the counter number from the mapping sheet name
-                counter = int(target_sheet.split('_')[0][1:3])  # Extract "XX" from "MXX_..."
-
-                # Create file name with same pattern as sheet name
-                file_name = f"{type_short}{str(counter).zfill(2)}_{short_target}_Map"
 
                 # Write the extracted mappings to a JSON file
                 output_directory = Path("config/mappings")
                 output_directory.mkdir(parents=True, exist_ok=True)
-                file_path = output_directory / f"{file_name}.json"
+                file_path = output_directory / f"{target_sheet}.json"
 
                 with open(file_path, 'w') as f:
                     json.dump(mapping_data, f, indent=2)
 
             except Exception as e:
-                print(f"Error processing pipeline {target_sheet}: {e}")
+                print(f"Error processing pipeline {target_sheet if target_sheet else 'unknown'}: {e}")
                 continue
 
+        # Save the workbook with updated mapping sheet names
+        workbook.save(workbook_path)
         return config_data, all_mapping_data
 
     except Exception as e:
@@ -670,7 +759,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 config_file_path = os.path.join(json_config_dir, config_filename)
 
                 if not os.path.exists(config_file_path) and not any(
-                        mt in model_type for mt in ["LND Load", "DP/BI View"]):
+                        mt in model_type for mt in ["DP/BI View"]):
                     logging.warning(f"No config file found for {target_model}")
                     continue
 
@@ -679,7 +768,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 output_filename = f"{target_model.lower().replace('.', '_')}.sql"
                 output_path = os.path.join(output_dir, output_filename)
 
-                if "DW Load" in model_type:
+                if "DW Load" in model_type or "LND Load" in model_type:
                     model_content = create_dbt_model_from_json(
                         config_file=config_file_path,
                         mapping_sheet=mapping_sheet,
@@ -698,11 +787,11 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                         mapping_sheet=mapping_sheet
                     )
 
-                elif "LND Load" in model_type:
-                    model_content = generate_lnd_dbt_model_file(
-                        mapping_file_path=workbook_path
-                    )
-                    generate_dag_file("LND", None, "dags/", workbook_path)
+                # elif "LND Load" in model_type:
+                #     model_content = generate_lnd_dbt_model_file(
+                #         mapping_file_path=workbook_path
+                #     )
+                #     generate_dag_file("LND", None, "dags/", workbook_path)
 
                 elif "DP/BI View" in model_type:
                     model_content = create_dp_view_file(

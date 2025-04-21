@@ -291,6 +291,9 @@ def generate_merge_sql_for_pipelines(config_file):
 
     unique_key = config['Target']['unique_key']
 
+    pre_hook = config['Target']['pre_hook']
+    post_hook = config['Target']['post_hook']
+
     # Column transformation function
     def transform_column_logic(column):
         logic = column['Logic']
@@ -328,6 +331,7 @@ def generate_merge_sql_for_pipelines(config_file):
     merge_sql = fr'''
     {{% macro MAC_{target_schema}_{target_table}_MERGE() %}}
         {{% set query %}}
+        {pre_hook}
         MERGE INTO {target_schema}.{target_table} AS target
         USING (
             SELECT 
@@ -345,6 +349,7 @@ def generate_merge_sql_for_pipelines(config_file):
             VALUES (
                 {', '.join(insert_values)}
             );
+        {post_hook}
         {{% endset %}}
 
         {{% do run_query(query) %}}

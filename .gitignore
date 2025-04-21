@@ -42,7 +42,6 @@ logs/
 
 # Project specific
 models/
-dags/
 jobs/
 *.xlsx
 *.json

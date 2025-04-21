@@ -1,3 +1,4 @@
+# Standard library imports
 import datetime
 import json
 import logging
@@ -8,16 +9,16 @@ import sys
 import threading
 import tkinter as tk
 import traceback
-import openpyxl
 from concurrent.futures import ThreadPoolExecutor
 from functools import lru_cache
 from tkinter import filedialog, messagebox, ttk
-import scripts.pipeline_generator.init_pipeline_generator  as init_pipeline_generator
 
+# Third-party imports
 from openpyxl import load_workbook, Workbook
-from openpyxl.styles import Font
 from ttkthemes import ThemedTk
 
+# Local application imports
+from scripts.pipeline_generator import init_pipeline_generator
 from scripts.dag_generators import (
     create_dataset_dependency_dag,
     create_cron_dag,
@@ -27,30 +28,34 @@ from scripts.dbt_job_generator import create_dbt_job_file
 from scripts.dbt_model_generator import create_dbt_model_from_json
 from scripts.insert_sql_generator import insert_sql_generator
 from scripts.merge_sql_generator import merge_sql_generator
-from scripts.generate_lnd_dbt_model_file import generate_lnd_dbt_model_file,create_dp_view_file,create_test_model_file
-from scripts.utils import parse_ddl_file
+from scripts.generate_lnd_dbt_model_file import (
+    generate_lnd_dbt_model_file,
+    create_dp_view_file,
+    create_test_model_file
+)
 from scripts.utils.json_creator import json_creator
+
 
 # Configure logging
 def setup_logging():
     """Set up logging to file"""
     log_file = os.path.join(os.getcwd(), 'app.log')
-    
+
     # Create a logger
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
-    
+
     # Create handlers
     file_handler = logging.FileHandler(log_file, mode='a')
     file_handler.setLevel(logging.INFO)
-    
+
     # Create formatters
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
-    
+
     # Add handlers to the logger
     logger.addHandler(file_handler)
-    
+
     # Redirect stdout and stderr to the log file
     class LoggerWriter:
         def __init__(self, level):
@@ -69,15 +74,17 @@ def setup_logging():
             if self.buffer:
                 logger.log(self.level, self.buffer)
                 self.buffer = ''
-    
+
     # Redirect stdout and stderr to the logger
     sys.stdout = LoggerWriter(logging.INFO)
     sys.stderr = LoggerWriter(logging.ERROR)
-    
+
     return logger
+
 
 # Initialize logging
 logger = setup_logging()
+
 
 # Lazy imports - only import when needed
 def lazy_import():
@@ -90,18 +97,18 @@ def find_similar_file(target_path):
     # Extract directory and filename pattern
     directory = os.path.dirname(target_path)
     filename = os.path.basename(target_path)
-    
+
     # Extract base name and timestamp
     match = re.match(r'(.+)_(\d{8}_\d{6})\.(.+)', filename)
     if not match:
         return None
-    
+
     base_name, timestamp, extension = match.groups()
-    
+
     # Check if directory exists
     if not os.path.exists(directory):
         return None
-    
+
     # List files in directory
     try:
         files = os.listdir(directory)
@@ -110,21 +117,23 @@ def find_similar_file(target_path):
                 return os.path.join(directory, file)
     except Exception:
         pass
-    
+
     return None
+
 
 # Helper function to ensure file exists or find alternative
 def ensure_file_exists(file_path):
     """Check if file exists and try to find alternative if not"""
     if os.path.exists(file_path):
         return file_path
-    
+
     # Try to find a similar file
     similar_file = find_similar_file(file_path)
     if similar_file:
         return similar_file
-    
+
     return file_path  # Return original path if no alternative found
+
 
 # Helper function to generate a timestamp that's safe for filenames
 def generate_safe_timestamp():
@@ -140,6 +149,7 @@ def generate_safe_timestamp():
     except Exception:
         # Fallback to a basic timestamp if there's any issue
         return "20230101_000000"
+
 
 class DAGGeneratorApp:
     def __init__(self, root):
@@ -190,10 +200,10 @@ class DAGGeneratorApp:
 
         self.progress = ttk.Progressbar(self.status_bar, mode='indeterminate', length=100)
         self.progress.pack(side='right', padx=10, pady=5)
-        
+
         # Initialize thread pool
         self.executor = ThreadPoolExecutor(max_workers=3)
-        
+
         # Lazy load heavy imports
         self.imports_loaded = False
 
@@ -209,14 +219,14 @@ class DAGGeneratorApp:
         self.file_history = []
         self.ddl_file_history = []
         self.json_file_history = []
-        
+
         # Variables with history
         self.mapping_file_path = tk.StringVar()
         self.json_output_path = tk.StringVar()
         self.model_output_path = tk.StringVar()
         self.dag_output_path = tk.StringVar()
         self.ddl_file_path = tk.StringVar()
-        
+
         # Control variables
         self.generate_dag_var = tk.BooleanVar(value=True)  # Default to True
         self.generate_model_var = tk.BooleanVar(value=True)  # Default to True
@@ -248,14 +258,14 @@ class DAGGeneratorApp:
             # Load imports
             lazy_import()
             self.imports_loaded = True
-            
+
             # Initialize ModelMapper after imports are loaded
             from scripts.model_mapper import ModelMapper
             self.model_mapper = ModelMapper()
-            
+
             # Load history
             self.load_history()
-            
+
             # Update UI with loaded resources
             self.root.after(0, self.update_ui_with_resources)
         except Exception as e:
@@ -269,14 +279,15 @@ class DAGGeneratorApp:
             if os.path.exists(history_file):
                 with open(history_file, 'r') as f:
                     history = json.load(f)
-                    
+
                     # Validate file paths in history
-                    self.file_history = [path for path in history.get('mapping_files', []) 
-                                        if os.path.exists(path) or find_similar_file(path)]
-                    
-                    self.ddl_file_history = [path for path in history.get('ddl_files', []) 
-                                            if os.path.exists(path) or find_similar_file(path)]
-                    self.json_file_history= [path for path in history.get('json_files', [])]
+                    self.file_history = [path for path in history.get('mapping_files', [])
+                                         if os.path.exists(path) or find_similar_file(path)]
+
+                    self.ddl_file_history = [path for path in history.get('ddl_files', [])
+                                             if os.path.exists(path) or find_similar_file(path)]
+                    self.json_file_history = [path for path in history.get('json_files', [])
+                                              if os.path.exists(path) or find_similar_file(path)]
                     return True
         except:
             self.file_history = []
@@ -320,18 +331,17 @@ class DAGGeneratorApp:
         self.notebook.add(self.deployment_tab, text='Deployment Tools')
         self.notebook.add(self.pipeline_tab, text='Pipeline Tools')
 
-
         # Initialize basic tab content
         self.init_main_tab()
         self.init_mapping_tab()
         self.init_json_generator_tab()
         self.init_pipeline_generator_tab()
-        
+
         # # Create status bar
-        
+
         # Hide progress bar initially
         self.progress.pack_forget()
-        
+
         # Apply custom styles
         self.apply_custom_styles()
 
@@ -397,7 +407,7 @@ class DAGGeneratorApp:
         ttk.Button(
             input_frame,
             text="Browse",
-            command = lambda: self.browse_file(target_var=self.mapping_file_path, is_path=False),
+            command=lambda: self.browse_file(target_var=self.mapping_file_path, is_path=False),
             width=10  # Fixed width for button
         ).pack(side='right')
 
@@ -647,57 +657,52 @@ class DAGGeneratorApp:
 
     def init_pipeline_generator_tab(self):
         """Initialize Pipeline Generator tab"""
-        # Create pipeline generator frame
         pipeline_frame = ttk.LabelFrame(self.pipeline_tab, text="Pipeline Generator", padding=15)
         pipeline_frame.pack(fill='x', pady=(0, 20))
 
-        # Define fields with their details
+        # Fields setup remains the same...
         fields = [
             ("Pipeline Mapping Sheet:", "pipeline_mapping", False),
             ("Target DDL Files:", "DW_DDL_file", False)
         ]
 
-        # Use list comprehension to create UI elements for each field
         for label, var_name, is_path in fields:
             self.row_frame = self._create_json_input_row(pipeline_frame, label, var_name, is_path)
 
-        # Generate Pipeline button
-        self.generate_mapping_sheet_button = ttk.Button(
-            pipeline_frame,
-            text="Generate Mappings Sheets",
-            command=self.generate_multiple_mapping_with_progress,
-            style='Accent.TButton'
-        )
-        self.generate_mapping_sheet_button.pack(fill='x', pady=(10, 0))
+        # Bind events
+        self.pipeline_mapping_combo.bind('<<ComboboxSelected>>', self.on_combo_select)
+        self.DW_DDL_file_combo.bind('<<ComboboxSelected>>', self.on_combo_select)
 
-        # Generate Pipeline button
-        self.fill_pipeline_sheet_button = ttk.Button(
+        # Create buttons with proper thread handling
+        self.generate_mapping_sheet_button = self._create_threaded_button(
             pipeline_frame,
-            text="Fill Mapping Sheets",
-            command=self.fill_pipeline_sheets_with_progress,
-            style='Accent.TButton'
+            "Generate Mappings Sheets",
+            self.generate_multiple_mapping_with_progress,
+            "Generating mapping sheets..."
         )
-        self.fill_pipeline_sheet_button.pack(fill='x', pady=(10, 0))
 
-        # Generate Pipeline button
-        self.generate_pipeline_button = ttk.Button(
+        self.fill_pipeline_sheet_button = self._create_threaded_button(
             pipeline_frame,
-            text="Generate Pipeline Objects",
-            command=self.generate_pipeline_with_progress,
-            style='Accent.TButton'
+            "Fill Mapping Sheets",
+            self.fill_pipeline_sheets_with_progress,
+            "Filling mapping sheets..."
         )
-        self.generate_pipeline_button.pack(fill='x', pady=(10, 0))
 
-        # Generate Pipeline button
-        self.generate_sample_pipeline_mapping_button = ttk.Button(
+        self.generate_pipeline_button = self._create_threaded_button(
             pipeline_frame,
-            text="📋 Create Sample Pipeline Mapping File",
-            command=self.create_sample_pipeline_mapping_template,
-            style='Accent.TButton'
+            "Generate Pipeline Objects",
+            self.generate_pipeline_with_progress,
+            "Generating pipeline objects..."
         )
-        self.generate_sample_pipeline_mapping_button.pack(fill='x', pady=(10, 0))
 
-        # Add help text
+        self.generate_sample_pipeline_mapping_button = self._create_threaded_button(
+            pipeline_frame,
+            "📋 Create Sample Pipeline Mapping File",
+            self.create_sample_pipeline_mapping_template,
+            "Creating sample mapping file..."
+        )
+
+        # Help text remains the same...
         ttk.Label(
             pipeline_frame,
             text="This will generate pipeline configuration files based on the selected directories and input files.",
@@ -705,22 +710,55 @@ class DAGGeneratorApp:
             justify='left'
         ).pack(fill='x', pady=(10, 0))
 
+    def _create_threaded_button(self, parent, text, command_func, status_message):
+        """Create a button with proper thread handling"""
+        button = ttk.Button(
+            parent,
+            text=text,
+            command=lambda: self._run_in_thread(command_func, status_message, button),
+            style='Accent.TButton'
+        )
+        button.pack(fill='x', pady=(10, 0))
+        return button
+
+    def _run_in_thread(self, func, status_message, button):
+        """Execute the given function in a separate thread with proper UI handling"""
+
+        def thread_func():
+            try:
+                # Disable the button in the main thread
+                self.root.after(0, lambda: button.configure(state='disabled'))
+                # Update status in the main thread
+                self.root.after(0, lambda: self.status_label.configure(text=status_message))
+                self.show_progress()
+                # Execute the actual function
+                func()
+                # Update completion status in the main thread
+                self.root.after(0, lambda: self.status_label.configure(text="Operation completed successfully!"))
+                self.hide_progress()
+            except Exception as e:
+                # Handle errors in the main thread
+                self.root.after(0, lambda: self.status_label.configure(text=f"Error: {str(e)}"))
+                self.root.after(0, lambda: messagebox.showerror("Error", str(e)))
+            finally:
+                # Re-enable the button in the main thread
+                self.root.after(0, lambda: button.configure(state='normal'))
+
+        # Start the thread
+        thread = threading.Thread(target=thread_func, daemon=True)
+        thread.start()
+
     def generate_multiple_mapping_with_progress(self):
         """
         Handle mapping generation with progress indication and error handling
         """
         try:
-            # Show progress and disable button
-            self.set_status("Generating Pipeline configuration...")
-            self.show_progress()
-            self.progress.update_idletasks()  # Force UI update for progress bar
-            self.generate_pipeline_button.configure(state='disabled')
 
             mapping_file_path = self.pipeline_mapping_combo.get()
-            DW_DDL_file_path=self.DW_DDL_file_combo.get()
+            DW_DDL_file_path = self.DW_DDL_file_combo.get()
 
             # Call pipeline generator with values from combo boxes
-            init_pipeline_generator.process_pipeline_sheet(mapping_file_path,DW_DDL_file_path)
+            init_pipeline_generator.process_pipeline_sheet(mapping_file_path, DW_DDL_file_path)
             # Update status on success
             self.set_status("Pipeline configuration generated successfully!")
 
@@ -742,11 +780,6 @@ class DAGGeneratorApp:
         """
         try:
             # Show progress and disable button
-            self.set_status("Generating Pipeline Objects from mappings...")
-            self.show_progress()
-            self.progress.update_idletasks()  # Force UI update for progress bar
-            self.generate_pipeline_button.configure(state='disabled')
-
             mapping_file_path = self.pipeline_mapping_combo.get()
             DW_DDL_file_path = self.DW_DDL_file_combo.get()
 
@@ -772,17 +805,12 @@ class DAGGeneratorApp:
                 Handle pipeline generation from mappings with progress indication and error handling
         """
         try:
-            # Show progress and disable button
-            self.set_status("Generating Pipeline Objects from mappings...")
-            self.show_progress()
-            self.progress.update_idletasks()  # Force UI update for progress bar
-            self.generate_pipeline_button.configure(state='disabled')
-
             mapping_file_path = self.pipeline_mapping_combo.get()
             DW_DDL_file_path = self.DW_DDL_file_combo.get()
 
             # Call pipeline generator with values from combo boxes
-            init_pipeline_generator.generate_dbt_models(mapping_file_path,"models/","config/mappings/",DW_DDL_file_path)
+            init_pipeline_generator.generate_dbt_models(mapping_file_path, "models/", "config/mappings/",
+                                                        DW_DDL_file_path)
             # Update status on success
             self.set_status("Pipeline Objects generated successfully!")
 
@@ -871,10 +899,10 @@ class DAGGeneratorApp:
         self.set_status("Generating files...")
         self.show_progress()
         self.generate_button.configure(state='disabled')
-        
+
         # Run in a separate thread to keep UI responsive
         threading.Thread(target=self.run_generation).start()
-    
+
     def run_generation(self):
         """Run the generation process in a separate thread"""
         try:
@@ -882,7 +910,7 @@ class DAGGeneratorApp:
         finally:
             # Re-enable button and hide progress
             self.root.after(0, self.finish_generation)
-    
+
     def finish_generation(self):
         """Clean up after generation process completes"""
         self.generate_button.configure(state='normal')
@@ -892,12 +920,12 @@ class DAGGeneratorApp:
     def set_status(self, message):
         """Update status bar message"""
         self.status_label["text"] = message
-        
+
     def show_progress(self):
         """Show progress bar"""
         self.progress.pack(side='right', padx=10, pady=5)
         self.progress.start(10)
-        
+
     def hide_progress(self):
         """Hide progress bar"""
         self.progress.stop()
@@ -915,13 +943,13 @@ class DAGGeneratorApp:
             padx=5,
             pady=3
         )
-        
+
         def show_tooltip(event):
             # Get the full path from the actual storage, not the display value
             full_path = self.mapping_file_path.get()
             if not full_path and hasattr(widget, 'get'):
                 full_path = widget.get()
-            
+
             # Use custom tooltip text if provided
             if tooltip_text and not full_path:
                 tooltip.config(text=tooltip_text)
@@ -929,24 +957,24 @@ class DAGGeneratorApp:
                 tooltip.config(text=full_path)
             else:
                 return  # No tooltip to show
-                
+
             tooltip.lift()
-            
+
             # Position tooltip below the widget
             x = widget.winfo_rootx()
             y = widget.winfo_rooty() + widget.winfo_height() + 5
-            
+
             # Ensure tooltip doesn't go off screen
             tooltip_width = len(tooltip.cget('text')) * 7  # Approximate width calculation
             screen_width = widget.winfo_screenwidth()
             if x + tooltip_width > screen_width:
                 x = screen_width - tooltip_width - 10
-            
+
             tooltip.place(x=x, y=y)
-        
+
         def hide_tooltip(event):
             tooltip.place_forget()
-        
+
         widget.bind('<Enter>', show_tooltip)
         widget.bind('<Leave>', hide_tooltip)
         widget._tooltip = tooltip  # Store reference to prevent garbage collection
@@ -1046,6 +1074,7 @@ class DAGGeneratorApp:
                 # Add each processed file to the respective history
                 for file_path in processed_files:
                     self.add_to_history(file_path, history_attr)
+                    self.save_history()
 
                 # Update combo values
                 combo = getattr(self, combo_name)
@@ -1074,32 +1103,32 @@ class DAGGeneratorApp:
             # Validate inputs
             if not self.mapping_file_path.get():
                 raise ValueError("Please select a mapping file")
-                
+
             if not os.path.exists(self.mapping_file_path.get()):
                 raise ValueError(f"Mapping file not found: {self.mapping_file_path.get()}")
-                
+
             # Get output paths
             json_output_path = self.json_output_path.get() or os.path.join('data', 'model_config.json')
             model_output_path = self.model_output_path.get() or 'models'
             dag_output_path = self.dag_output_path.get() or 'dags'
-            
+
             # Ensure directories exist
             os.makedirs(os.path.dirname(json_output_path), exist_ok=True)
             os.makedirs(model_output_path, exist_ok=True)
             os.makedirs(dag_output_path, exist_ok=True)
-            
+
             # Load mapping file
             workbook = load_workbook(self.mapping_file_path.get())
             mapping_sheet = workbook['Mapping']
-            
+
             # Extract table information
             target_table = None
             source_table = None
             source_type = None
             source_name = None
             materialization = None
-            unique_key=None
-            
+            unique_key = None
+
             for row in range(1, mapping_sheet.max_row + 1):
                 cell_value = mapping_sheet.cell(row=row, column=1).value
                 if cell_value == 'TARGET_TABLE':
@@ -1113,11 +1142,11 @@ class DAGGeneratorApp:
                 elif cell_value == 'MATERIALIZATION':
                     materialization = mapping_sheet.cell(row=row, column=2).value
                 elif cell_value == 'UNIQUE_KEY':
-                   unique_key = [key.strip() for key in (mapping_sheet.cell(row=row, column=2).value or "").split(',')]
-                
+                    unique_key = [key.strip() for key in (mapping_sheet.cell(row=row, column=2).value or "").split(',')]
+
                 if target_table and source_table and source_type and source_name and materialization and unique_key:
                     break
-            
+
             if not target_table:
                 raise ValueError("Target table not found in mapping file")
             if not source_table:
@@ -1133,55 +1162,55 @@ class DAGGeneratorApp:
                     source_name = 'default_source'
             if not materialization:
                 materialization = 'incremental'  # Default to incremental
-                
+
             # Parse table names
             source_parts = source_table.split('.')
             if len(source_parts) < 3:
                 raise ValueError("Source table should be in format: DATABASE.SCHEMA.TABLE")
-                
+
             source_db = source_parts[0]
             source_schema = source_parts[1]
             source_table_name = source_parts[2]
-            
+
             target_parts = target_table.split('.')
             if len(target_parts) < 2:
                 raise ValueError("Target table should be in format: SCHEMA.TABLE")
-                
+
             target_schema = target_parts[0]
             target_table_name = target_parts[1]
-            
+
             # Extract column mappings
             column_mappings = []
             header_row = None
-            
+
             # Find the header row
             for row in range(1, mapping_sheet.max_row + 1):
                 if mapping_sheet.cell(row=row, column=1).value == 'S.NO':
                     header_row = row
                     break
-                    
+
             if not header_row:
                 raise ValueError("Column mapping header not found in mapping file")
-                
+
             # Extract column mappings
             for row in range(header_row + 1, mapping_sheet.max_row + 1):
                 target_column = mapping_sheet.cell(row=row, column=2).value
                 source_table_col = mapping_sheet.cell(row=row, column=3).value
                 logic = mapping_sheet.cell(row=row, column=4).value
-                
+
                 if not target_column:
                     # Stop when we reach an empty row or the JOIN_TABLES section
-                    next_row_value = mapping_sheet.cell(row=row+1, column=1).value
+                    next_row_value = mapping_sheet.cell(row=row + 1, column=1).value
                     if next_row_value and next_row_value == 'JOIN_TABLES':
                         break
                     continue
-                    
+
                 column_mappings.append({
                     'Target Column': target_column,
                     'Source Table': source_table_col,
                     'Logic': logic if logic is not None else "''"
                 })
-            
+
             # Create model configuration
             model_config = {
                 'Source': {
@@ -1199,14 +1228,14 @@ class DAGGeneratorApp:
                 },
                 'Columns': column_mappings
             }
-            
+
             # Check if we need to add unique keys for incremental models
             if materialization == 'incremental':
                 # Try to get unique keys from the DDL file if we have it
                 unique_keys = []
                 primary_keys = []
                 ddl_unique_keys_found = False
-                
+
                 # First check if we have a DDL file path directly specified
                 ddl_path = None
                 if hasattr(self, 'ddl_file_path') and self.ddl_file_path.get():
@@ -1217,7 +1246,7 @@ class DAGGeneratorApp:
                     logging.info("Looking for matching DDL file in history...")
                     # Extract table name from target table
                     target_table_name = target_table_name.upper()
-                    
+
                     # Look through DDL file history for a matching file
                     for history_ddl_path in self.ddl_file_history:
                         if os.path.exists(history_ddl_path):
@@ -1227,13 +1256,13 @@ class DAGGeneratorApp:
                                     ddl_content = f.read()
                                     # Simple check if the table name appears in the DDL
                                     if f"CREATE TABLE {target_schema}.{target_table_name}" in ddl_content.upper() or \
-                                       f"CREATE TABLE \"{target_schema}\".\"{target_table_name}\"" in ddl_content.upper():
+                                            f"CREATE TABLE \"{target_schema}\".\"{target_table_name}\"" in ddl_content.upper():
                                         ddl_path = history_ddl_path
                                         logging.info(f"Found matching DDL file in history: {ddl_path}")
                                         break
                             except Exception as e:
                                 logging.error(f"Error checking DDL file {history_ddl_path}: {str(e)}")
-                
+
                 if ddl_path and os.path.exists(ddl_path):
                     logging.info(f"DDL file exists: {ddl_path}")
                     try:
@@ -1241,32 +1270,32 @@ class DAGGeneratorApp:
                         with open(ddl_path, 'r') as f:
                             ddl_content = f.read(500)  # Read first 500 chars
                             logging.debug(f"DDL file content (first 500 chars):\n{ddl_content}")
-                        
+
                         _, unique_keys = self.parse_ddl_file(ddl_path)
                         if hasattr(self, 'primary_keys'):
                             primary_keys = self.primary_keys
-                        
+
                         # If we found unique keys in the DDL, mark that we should use these directly
                         if unique_keys:
                             ddl_unique_keys_found = True
                             logging.info(f"Using unique keys from DDL: {unique_keys}")
                         else:
                             logging.info("No unique keys found in DDL")
-                            
+
                         if primary_keys:
                             logging.info(f"Found primary keys in DDL: {primary_keys}")
                     except Exception as e:
                         logging.error(f"Error extracting keys from DDL: {str(e)}")
                 else:
                     logging.info("No matching DDL file found in history")
-                
+
                 # If we have unique keys stored from previous parsing, use those
                 if not unique_keys and hasattr(self, 'unique_keys') and self.unique_keys:
                     unique_keys = self.unique_keys
                     if unique_keys:
                         ddl_unique_keys_found = True
                         logging.info(f"Using stored unique keys from DDL: {unique_keys}")
-                
+
                 # Check if unique keys are specified in the mapping sheet
                 if not ddl_unique_keys_found:
                     try:
@@ -1284,22 +1313,23 @@ class DAGGeneratorApp:
                                 break
                     except Exception as e:
                         logging.error(f"Error checking for unique keys in mapping sheet: {str(e)}")
-                
+
                 # Add unique keys to the model config if we have any
                 if unique_keys:
                     logging.info(f"Adding unique keys to model config: {unique_keys}")
                     model_config['Target']['unique_key'] = unique_keys
-            
+
             # Save model configuration to JSON
             with open(json_output_path, 'w') as f:
                 json.dump(model_config, f, indent=2)
-                
+
             # Generate DBT model
-            model_dbt_job_additon_flg=False
+            model_dbt_job_additon_flg = False
             model_file_path = None
             if self.generate_model_var.get():
-                model_dbt_job_additon_flg,model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet, self.ddl_file_path.get())
-            
+                model_dbt_job_additon_flg, model_file_path = create_dbt_model_from_json(json_output_path, mapping_sheet,
+                                                                                        self.ddl_file_path.get())
+
             # Generate DAG file if requested
             dag_file_path = None
             if self.generate_dag_var.get():
@@ -1307,21 +1337,25 @@ class DAGGeneratorApp:
 
             # Generate merge_macro file if requested
             merge_macro_file_path = None
-            merge_dbt_job_additon_flg=False
+            merge_dbt_job_additon_flg = False
             if self.generate_merge_macro_var.get():
-                merge_dbt_job_additon_flg,merge_macro_file_path = merge_sql_generator(json_output_path,mapping_sheet, merge_macro_file_path)
+                merge_dbt_job_additon_flg, merge_macro_file_path = merge_sql_generator(json_output_path, mapping_sheet,
+                                                                                       merge_macro_file_path)
 
             # Generate insert_macro file if requested
             insert_macro_file_path = None
             insert_dbt_job_additon_flg = False
             if self.generate_insert_macro_var.get():
-                insert_dbt_job_additon_flg,insert_macro_file_path = insert_sql_generator(json_output_path,mapping_sheet, insert_macro_file_path)
+                insert_dbt_job_additon_flg, insert_macro_file_path = insert_sql_generator(json_output_path,
+                                                                                          mapping_sheet,
+                                                                                          insert_macro_file_path)
 
             # Generate lnd_model file if requested
             lnd_model_file_path = None
             if self.generate_lnd_model_var.get():
                 print(json_output_path)
-                model_dbt_job_additon_flg,lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path, self.mapping_file_path.get())
+                model_dbt_job_additon_flg, lnd_model_file_path = generate_lnd_dbt_model_file(json_output_path,
+                                                                                             self.mapping_file_path.get())
 
             # Generate DBT job file
             dp_output_path = None
@@ -1333,12 +1367,15 @@ class DAGGeneratorApp:
             job_output_path = None
             if self.generate_dbt_job_var.get():
                 job_output_path = 'jobs'
-                job_output_path = create_dbt_job_file(json_output_path,model_dbt_job_additon_flg,job_output_path, merge_dbt_job_additon_flg, merge_macro_file_path, insert_dbt_job_additon_flg, insert_macro_file_path)
+                job_output_path = create_dbt_job_file(json_output_path, model_dbt_job_additon_flg, job_output_path,
+                                                      merge_dbt_job_additon_flg, merge_macro_file_path,
+                                                      insert_dbt_job_additon_flg, insert_macro_file_path)
 
             test_model_output_path = None
             if self.generate_test_model_var.get():
                 test_model_output_path = 'tests'
-                test_model_output_path = create_test_model_file(json_output_path,self.mapping_file_path.get(),mapping_sheet,test_model_output_path)
+                test_model_output_path = create_test_model_file(json_output_path, self.mapping_file_path.get(),
+                                                                mapping_sheet, test_model_output_path)
 
             if job_output_path or model_file_path or dag_file_path or merge_macro_file_path or insert_macro_file_path or lnd_model_file_path or test_model_output_path:
                 # Prepare success message
@@ -1370,9 +1407,9 @@ class DAGGeneratorApp:
                 self.set_status("Files generated successfully!")
             else:
                 self.set_status("Error")
-                messagebox.showinfo("Error","Please choose an option")
+                messagebox.showinfo("Error", "Please choose an option")
 
-            
+
         except Exception as e:
             messagebox.showerror("Error", str(e))
             self.set_status(f"Error: {str(e)}")
@@ -1382,33 +1419,33 @@ class DAGGeneratorApp:
         try:
             with open(json_output_path, 'r') as json_file:
                 config = json.load(json_file)
-                
+
             # Check if DAG key exists, if not, use default values
             if 'DAG' not in config:
                 # Try to read DAG configuration from the Config sheet in the mapping file
                 dag_config = self.get_dag_config_from_mapping()
                 logging.info(f"DAG config from mapping: {dag_config}")
-                
+
                 # If we couldn't get DAG config from mapping, use default
                 if not dag_config:
                     dag_config = {
                         "Type": "dataset_dependency",  # Default to dataset_dependency
-                        "Schedule": "0 */4 * * *"      # Default schedule
+                        "Schedule": "0 */4 * * *"  # Default schedule
                     }
                     logging.info(f"Using default DAG config: {dag_config}")
-                
+
                 # Add DAG config to the model config
                 config['DAG'] = dag_config
-                
+
                 # Save the updated config back to the file
                 with open(json_output_path, 'w') as f:
                     json.dump(config, f, indent=2)
-            
+
             # Get DAG type from config (with default)
             dag_type = config['DAG'].get("Type", "dataset_dependency").lower()
             logging.info(f"DAG type: {dag_type}")
             logging.info(f"DAG config: {config['DAG']}")
-            
+
             # Map generator functions to the normalized DAG types
             dag_generators = {
                 "dataset_dependency": create_dataset_dependency_dag,
@@ -1416,29 +1453,29 @@ class DAGGeneratorApp:
                 "cron": create_cron_dag,
                 "sns": create_sns_dag
             }
-            
+
             # Get the appropriate generator function
             generator = dag_generators.get(dag_type)
             if not generator:
                 raise ValueError(f"Unsupported DAG Type: {dag_type}")
-            
+
             # Create a proper output file path
             # Extract table name from config
             schema_name = config['Target']['Schema']
             table_name = config['Target']['Table Name']
-            
+
             # Create DAG filename
             dag_filename = f"{schema_name}_{table_name}_dag.py"
             dag_file_path = os.path.join(dag_output_path, dag_filename)
-            
+
             # Create the DAG using the selected generator
             logging.info(f"Generating {dag_type} DAG with config: {config['DAG']}")
             generator(json_output_path, dag_file_path)
             logging.info(f"DAG file generated: {dag_file_path}")
-            
+
             # Return the path to the generated DAG file
             return dag_file_path
-            
+
         except Exception as e:
             error_msg = f"An error occurred while generating the {dag_type.upper()} DAG: {str(e)}"
             messagebox.showerror("DAG Generation Error", error_msg)
@@ -1452,21 +1489,21 @@ class DAGGeneratorApp:
             if not self.mapping_file_path.get() or not os.path.exists(self.mapping_file_path.get()):
                 logging.warning("Mapping file path is empty or file does not exist")
                 return None
-                
+
             workbook = load_workbook(self.mapping_file_path.get())
             if 'Config' not in workbook.sheetnames:
                 logging.warning("Config sheet not found in mapping file")
                 return None
-                
+
             config_sheet = workbook['Config']
             dag_config = {}
-            
+
             # Look for DAG Type and Schedule Interval
             for row in range(3, 10):  # Check first few rows
                 param = config_sheet.cell(row=row, column=1).value
                 if not param:
                     continue
-                    
+
                 if param == 'DAG Type':
                     dag_type = config_sheet.cell(row=row, column=2).value
                     if dag_type:
@@ -1487,13 +1524,13 @@ class DAGGeneratorApp:
                     if schedule:
                         dag_config['Schedule'] = schedule.strip()
                         logging.info(f"Found Schedule Interval in mapping: {schedule}")
-            
+
             # If we found a DAG type but no schedule, set a default schedule based on the type
             if 'Type' in dag_config and 'Schedule' not in dag_config:
                 if dag_config['Type'] == 'cron':
                     dag_config['Schedule'] = '0 */4 * * *'  # Default cron schedule
                     logging.info(f"Setting default schedule for cron DAG: {dag_config['Schedule']}")
-            
+
             # Look for dependencies if this is a dataset_dependency DAG
             if dag_config.get('Type') == 'dataset_dependency':
                 # Find the Dependencies section
@@ -1502,28 +1539,28 @@ class DAGGeneratorApp:
                     if config_sheet.cell(row=row, column=1).value == 'Dependencies':
                         dependency_row = row + 2  # Skip the header row
                         break
-                
+
                 if dependency_row:
                     dependency_schemas = []
                     dependency_objects = []
-                    
+
                     # Read up to 5 rows of dependencies
                     for row in range(dependency_row, dependency_row + 5):
                         schema = config_sheet.cell(row=row, column=2).value
                         table = config_sheet.cell(row=row, column=3).value
-                        
+
                         if schema and table:
                             dependency_schemas.append(schema)
                             dependency_objects.append(table)
                             logging.info(f"Found dependency: {schema}.{table}")
-                    
+
                     if dependency_schemas and dependency_objects:
                         dag_config['Dependency Schema'] = dependency_schemas
                         dag_config['Dependency Object'] = dependency_objects
                         logging.info(f"Added {len(dependency_schemas)} dependencies to DAG config")
                     else:
                         logging.warning("No dependencies found for dataset_dependency DAG")
-            
+
             return dag_config
         except Exception as e:
             logging.error(f"Error extracting DAG config from mapping: {str(e)}")
@@ -1551,16 +1588,16 @@ class DAGGeneratorApp:
             self.ddl_file_path.set(file_path)
             self.add_to_history(file_path, self.ddl_file_history)
             self.ddl_combo['values'] = self.ddl_file_history
-            
+
             # Create mappings directory if it doesn't exist
             # Use a more reliable path - create mappings in the current workspace
             mappings_dir = os.path.join(os.getcwd(), "mappings")
             os.makedirs(mappings_dir, exist_ok=True)
-            
+
             # Generate default Excel file path
             ddl_name = os.path.splitext(os.path.basename(file_path))[0]
             default_excel_path = os.path.join(mappings_dir, f"{ddl_name}_mapping.xlsx")
-            
+
             if os.path.exists(default_excel_path):
                 # Ask user what to do with existing file
                 response = messagebox.askyesnocancel(
@@ -1570,7 +1607,7 @@ class DAGGeneratorApp:
                     "No: Create new file with timestamp\n"
                     "Cancel: Keep existing file"
                 )
-                
+
                 if response is None:  # Cancel
                     self.mapping_file_path.set(default_excel_path)
                 elif response:  # Yes - Replace
@@ -1587,7 +1624,7 @@ class DAGGeneratorApp:
         if not self.ddl_file_path.get():
             messagebox.showerror("Error", "Please select a DDL file")
             return
-            
+
         if not os.path.exists(self.ddl_file_path.get()):
             messagebox.showerror("Error", "DDL file does not exist")
             return
@@ -1596,26 +1633,26 @@ class DAGGeneratorApp:
         self.set_status("Generating mapping template...")
         self.show_progress()
         self.generate_mapping_button.configure(state='normal')
-        
+
         # Run in a separate thread
         threading.Thread(target=self.run_mapping_generation).start()
-    
+
     def run_mapping_generation(self):
         """Run the mapping generation in a separate thread"""
         try:
             # Parse DDL file to extract columns
             columns, unique_keys = self.parse_ddl_file(self.ddl_file_path.get())
-            
+
             # Store unique keys for later use
             self.unique_keys = unique_keys
-            
+
             # Update the mapping sheet with columns
             self.update_mapping_sheet((columns, unique_keys))
-            
+
             # Update status
             self.set_status("Mapping file created successfully!")
             self.hide_progress()
-            
+
         except Exception as e:
             self.set_status(f"Error: {str(e)}")
             self.hide_progress()
@@ -1632,75 +1669,78 @@ class DAGGeneratorApp:
         if not self.mapping_file_path.get():
             messagebox.showerror("Error", "Please select Excel file")
             return
-            
+
         # Show progress
         self.set_status("Connecting to Snowflake and updating mapping...")
         self.show_progress()
         self.fill_mapping_button.configure(state='disabled')
-        
+
         # Run in a separate thread
         threading.Thread(target=self.run_model_mapping).start()
-    
+
     def run_model_mapping(self):
         """Run the model mapping in a separate thread"""
         try:
             # Ensure the file path exists
             file_path = self.mapping_file_path.get()
-            
+
             # Use the helper function to find an existing file if the exact path doesn't exist
             file_path = ensure_file_exists(file_path)
-            
+
             directory = os.path.dirname(file_path)
-            
+
             # Create directory if it doesn't exist
             if not os.path.exists(directory):
                 os.makedirs(directory, exist_ok=True)
-                
+
             # Check if the file exists
             if not os.path.exists(file_path):
                 self.root.after(0, lambda: messagebox.showerror("Error", f"Mapping file not found: {file_path}"))
                 return
-            
+
             # Validate the Excel file has the required sheets and fields
             try:
                 workbook = load_workbook(file_path)
                 if 'Mapping' not in workbook.sheetnames or 'Config' not in workbook.sheetnames:
-                    self.root.after(0, lambda: messagebox.showerror("Error", "Required sheets (Mapping and Config) not found in Excel"))
+                    self.root.after(0, lambda: messagebox.showerror("Error",
+                                                                    "Required sheets (Mapping and Config) not found in Excel"))
                     return
-                
+
                 mapping_sheet = workbook['Mapping']
-                
+
                 # Check for SOURCE_TABLE
                 source_table = None
                 for row in range(1, 6):
                     if mapping_sheet.cell(row=row, column=1).value == 'SOURCE_TABLE':
                         source_table = mapping_sheet.cell(row=row, column=2).value
                         break
-                
+
                 if not source_table:
-                    self.root.after(0, lambda: messagebox.showerror("Error", "SOURCE_TABLE is missing in the mapping sheet. Please fill it in before generating the model mapping."))
+                    self.root.after(0, lambda: messagebox.showerror("Error",
+                                                                    "SOURCE_TABLE is missing in the mapping sheet. Please fill it in before generating the model mapping."))
                     return
-                
+
                 # Validate SOURCE_TABLE format
                 try:
                     parts = source_table.split('.')
                     if len(parts) != 3:
-                        self.root.after(0, lambda: messagebox.showerror("Error", "SOURCE_TABLE should be in format: DATABASE.SCHEMA.TABLE"))
+                        self.root.after(0, lambda: messagebox.showerror("Error",
+                                                                        "SOURCE_TABLE should be in format: DATABASE.SCHEMA.TABLE"))
                         return
                 except:
                     self.root.after(0, lambda: messagebox.showerror("Error", "Invalid SOURCE_TABLE format"))
                     return
-                
+
             except Exception as e:
                 self.root.after(0, lambda: messagebox.showerror("Error", f"Error validating Excel file: {str(e)}"))
                 return
-            
+
             # Call the model mapper to fill in the model details
             try:
                 mapped_count, total_count = self.model_mapper.generate_model_mapping(file_path)
-                
+
                 self.root.after(0, lambda: messagebox.showinfo(
-                    "Success", 
+                    "Success",
                     f"Model mapping updated successfully!\n"
                     f"Mapped {mapped_count} out of {total_count} columns."
                 ))
@@ -1709,7 +1749,7 @@ class DAGGeneratorApp:
                 logging.error(f"Error in model_mapper.generate_model_mapping: {str(e)}")
                 import traceback
                 logging.error(traceback.format_exc())
-                
+
         except Exception as e:
             self.root.after(0, lambda: messagebox.showerror("Error", f"An error occurred: {str(e)}"))
             logging.error(f"Error in run_model_mapping: {str(e)}")
@@ -1718,7 +1758,7 @@ class DAGGeneratorApp:
         finally:
             # Re-enable button and hide progress
             self.root.after(0, self.finish_model_mapping)
-    
+
     def finish_model_mapping(self):
         """Clean up after model mapping completes"""
         self.fill_mapping_button.configure(state='normal')
@@ -1736,16 +1776,16 @@ class DAGGeneratorApp:
             # Find the create table statement
             create_table_pattern = r'CREATE\s+TABLE\s+.*?\((.*?)\)[^)]*$'
             match = re.search(create_table_pattern, ddl_content, re.DOTALL | re.IGNORECASE)
-            
+
             if not match:
                 raise Exception("Could not find CREATE TABLE statement in DDL file")
-            
+
             columns_text = match.group(1)
             # Split by commas, but be careful with commas inside parentheses (for functions, etc.)
             column_definitions = []
             current_def = ""
             paren_level = 0
-            
+
             for char in columns_text:
                 if char == '(':
                     paren_level += 1
@@ -1758,11 +1798,11 @@ class DAGGeneratorApp:
                     current_def = ""
                 else:
                     current_def += char
-                    
+
             # Add the last definition if it exists
             if current_def.strip():
                 column_definitions.append(current_def.strip())
-                
+
             columns = []
             unique_keys = []
             primary_keys = []
@@ -1772,25 +1812,25 @@ class DAGGeneratorApp:
             for definition in column_definitions:
                 if not definition:
                     continue
-                    
+
                 # Skip constraints for now
                 if re.match(r'^\s*(PRIMARY|FOREIGN|CONSTRAINT|UNIQUE|CHECK|INDEX)', definition, re.IGNORECASE):
                     continue
-                
+
                 # Extract column name - the first word before any whitespace
                 match = re.match(r'^\s*([^\s\(]+)', definition)
                 if match:
                     column_name = match.group(1).strip('"').strip('`')
                     all_column_names.append(column_name)
-            
+
             # Second pass: process columns and constraints
             for definition in column_definitions:
                 if not definition:
                     continue
-                
+
                 # Log the definition for debugging
                 logging.debug(f"Processing definition: {definition}")
-                    
+
                 # Handle primary key constraints
                 if re.match(r'^\s*PRIMARY\s+KEY', definition, re.IGNORECASE):
                     # Extract primary key columns
@@ -1802,7 +1842,7 @@ class DAGGeneratorApp:
                         primary_keys.extend(pk_columns)
                         logging.info(f"Found PRIMARY KEY: {pk_columns}")
                     continue
-                
+
                 # Handle standalone UNIQUE constraints (not attached to a column)
                 if re.match(r'^\s*UNIQUE', definition, re.IGNORECASE):
                     # Extract unique key columns
@@ -1813,7 +1853,7 @@ class DAGGeneratorApp:
                         unique_keys.extend(key_columns)
                         logging.info(f"Found standalone UNIQUE constraint: {key_columns}")
                     continue
-                    
+
                 # Handle unique constraints with CONSTRAINT keyword
                 if re.match(r'^\s*CONSTRAINT', definition, re.IGNORECASE) and 'UNIQUE' in definition.upper():
                     # Extract unique key columns
@@ -1824,51 +1864,52 @@ class DAGGeneratorApp:
                         unique_keys.extend(key_columns)
                         logging.info(f"Found CONSTRAINT UNIQUE: {key_columns}")
                     continue
-                
+
                 # Skip other constraints
                 if re.match(r'^\s*CONSTRAINT|CHECK|INDEX|FOREIGN', definition, re.IGNORECASE):
                     continue
-                
+
                 # Extract column name and rest of definition
                 # The column name is the first word before any whitespace
                 match = re.match(r'^\s*([^\s\(]+)(.*)', definition)
                 if match:
                     column_name = match.group(1).strip('"').strip('`')
                     full_definition = match.group(2).strip()
-                    
+
                     # Check if this column has a UNIQUE constraint
                     if ' UNIQUE' in full_definition.upper():
                         unique_keys.append(column_name)
                         logging.info(f"Found column with UNIQUE constraint: {column_name}")
                         # Remove the UNIQUE keyword from the definition to avoid confusion
                         full_definition = full_definition.replace(' UNIQUE', '').replace(' unique', '')
-                    
+
                     # Add to columns list
                     columns.append((column_name, full_definition))
-            
+
             # Look for unique index definitions outside the CREATE TABLE statement
             unique_index_pattern = r'CREATE\s+UNIQUE\s+INDEX\s+\w+\s+ON\s+\w+\s*\(([^)]+)\)'
             for unique_index_match in re.finditer(unique_index_pattern, ddl_content, re.IGNORECASE):
                 index_columns = [col.strip().strip('"').strip('`') for col in unique_index_match.group(1).split(',')]
                 unique_keys.extend(index_columns)
                 logging.info(f"Found UNIQUE INDEX: {index_columns}")
-            
+
             # Remove duplicates from unique keys and primary keys
             unique_keys = list(dict.fromkeys(unique_keys))
             primary_keys = list(dict.fromkeys(primary_keys))
-            
+
             # Verify that all keys are valid column names
             valid_unique_keys = [key for key in unique_keys if key in all_column_names]
             valid_primary_keys = [key for key in primary_keys if key in all_column_names]
-            
+
             # Store both unique and primary keys for later use
             self.unique_keys = valid_unique_keys
             self.primary_keys = valid_primary_keys
-            
-            logging.info(f"Parsed DDL file: Found {len(columns)} columns, {len(valid_unique_keys)} unique keys, and {len(valid_primary_keys)} primary keys")
+
+            logging.info(
+                f"Parsed DDL file: Found {len(columns)} columns, {len(valid_unique_keys)} unique keys, and {len(valid_primary_keys)} primary keys")
             logging.info(f"Unique keys: {valid_unique_keys}")
             logging.info(f"Primary keys: {valid_primary_keys}")
-            
+
             return columns, valid_unique_keys
 
         except Exception as e:
@@ -1897,7 +1938,7 @@ class DAGGeneratorApp:
                     # Remove default sheet
                     default_sheet = workbook['Sheet']
                     workbook.remove(default_sheet)
-            
+
             # Create Mapping and Config sheets
             mapping_sheet = workbook.create_sheet('Mapping')
             config_sheet = workbook.create_sheet('Config')
@@ -1912,7 +1953,7 @@ class DAGGeneratorApp:
                 messagebox.showinfo("Success", f"Mapping file created:\n{self.mapping_file_path.get()}")
             except PermissionError:
                 raise Exception("Cannot save Excel file. Please close it if it's open.")
-            
+
         except Exception as e:
             raise Exception(f"Error updating Excel file: {str(e)}")
 
@@ -1920,7 +1961,7 @@ class DAGGeneratorApp:
         """Update the content of mapping sheet"""
         # Extract table name from DDL
         table_name = self.extract_table_name(self.ddl_file_path.get())
-        
+
         # Add table name + "Mapping" as header
         mapping_sheet.merge_cells('A1:D1')  # Changed back to D1 (4 columns)
         header_cell = mapping_sheet.cell(row=1, column=1, value=f"{table_name} Mapping")
@@ -1932,15 +1973,16 @@ class DAGGeneratorApp:
         target_label = mapping_sheet.cell(row=2, column=1, value='TARGET_TABLE')
         target_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         target_value = mapping_sheet.cell(row=2, column=2, value=table_name)
-        
+
         source_label = mapping_sheet.cell(row=3, column=1, value='SOURCE_TABLE')
         source_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
         # Add Source Type row
         source_type_label = mapping_sheet.cell(row=4, column=1, value='SOURCE_TYPE')
-        source_type_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        source_type_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",
+                                                             fill_type="solid")
         source_type_cell = mapping_sheet.cell(row=4, column=2)
-        
+
         # Add data validation for Source Type
         dv = openpyxl.worksheet.datavalidation.DataValidation(
             type="list",
@@ -1952,13 +1994,15 @@ class DAGGeneratorApp:
 
         # Add Source Name row
         source_name_label = mapping_sheet.cell(row=5, column=1, value='SOURCE_NAME')
-        source_name_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-        
+        source_name_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",
+                                                             fill_type="solid")
+
         # Add Materialization row
         materialization_label = mapping_sheet.cell(row=6, column=1, value='MATERIALIZATION')
-        materialization_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        materialization_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",
+                                                                 fill_type="solid")
         materialization_cell = mapping_sheet.cell(row=6, column=2)
-        
+
         # Add data validation for Materialization
         mat_dv = openpyxl.worksheet.datavalidation.DataValidation(
             type="list",
@@ -1967,18 +2011,20 @@ class DAGGeneratorApp:
         )
         mapping_sheet.add_data_validation(mat_dv)
         mat_dv.add(materialization_cell)
-        
+
         # Add UNIQUE_KEY row for incremental models
         unique_key_label = mapping_sheet.cell(row=7, column=1, value='UNIQUE_KEY')
         unique_key_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
         unique_key_cell = mapping_sheet.cell(row=7, column=2)
         # Add a comment to explain the format
-        comment = openpyxl.comments.Comment('For incremental models, specify comma-separated column names to use as unique keys', 'System')
+        comment = openpyxl.comments.Comment(
+            'For incremental models, specify comma-separated column names to use as unique keys', 'System')
         unique_key_cell.comment = comment
-        
+
         # Add MINUS_LOGIC_REQUIRED row
         minus_logic_label = mapping_sheet.cell(row=8, column=1, value='MINUS_LOGIC_REQUIRED')
-        minus_logic_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+        minus_logic_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",
+                                                             fill_type="solid")
         minus_logic_cell = mapping_sheet.cell(row=8, column=2)
         # Add data validation for Y/N
         minus_logic_dv = openpyxl.worksheet.datavalidation.DataValidation(
@@ -1991,10 +2037,12 @@ class DAGGeneratorApp:
         # Default to N
         minus_logic_cell.value = "N"
         # Add a comment to explain the format
-        minus_comment = openpyxl.comments.Comment('Set to Y to exclude audit columns and unique key combination in the minus logic', 'System')
+        minus_comment = openpyxl.comments.Comment(
+            'Set to Y to exclude audit columns and unique key combination in the minus logic', 'System')
         minus_logic_cell.comment = minus_comment
         transient_cell_label = mapping_sheet.cell(row=9, column=1, value='TRANSIENT_TABLE')
-        transient_cell_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",fill_type="solid")
+        transient_cell_label.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00",
+                                                                fill_type="solid")
         transient_cell = mapping_sheet.cell(row=9, column=2)
         # Add data validation for Y/N
         transient_cell_dv = openpyxl.worksheet.datavalidation.DataValidation(
@@ -2013,7 +2061,8 @@ class DAGGeneratorApp:
         mapping_sheet.append([])
 
         # Add column headers (start from row 10 now to account for the MINUS_LOGIC_REQUIRED row)
-        headers = ['S.NO', 'TargetColumn', 'Source Table', 'Logic/Mapping/Constant Value']  # Removed Source Type and Source Name
+        headers = ['S.NO', 'TargetColumn', 'Source Table',
+                   'Logic/Mapping/Constant Value']  # Removed Source Type and Source Name
         header_row = 11
         for col, header in enumerate(headers, start=1):
             cell = mapping_sheet.cell(row=header_row, column=col, value=header)
@@ -2024,14 +2073,14 @@ class DAGGeneratorApp:
         valid_columns = []
         for column_name, definition in columns:
             # Skip if column_name is "UNIQUE", "PRIMARY", "CONSTRAINT", or any other non-column entry
-            if (column_name.upper() in ["UNIQUE", "PRIMARY", "CONSTRAINT"] or 
-                column_name.isdigit() or  # Skip numeric entries
-                column_name.endswith(')') or  # Skip entries ending with )
-                not column_name.strip()):  # Skip empty entries
+            if (column_name.upper() in ["UNIQUE", "PRIMARY", "CONSTRAINT"] or
+                    column_name.isdigit() or  # Skip numeric entries
+                    column_name.endswith(')') or  # Skip entries ending with )
+                    not column_name.strip()):  # Skip empty entries
                 continue
-                
+
             valid_columns.append((column_name, definition))
-        
+
         # Now add the valid columns to the sheet
         for i, (column_name, _) in enumerate(valid_columns, start=1):
             row = header_row + i
@@ -2040,15 +2089,15 @@ class DAGGeneratorApp:
 
         # Calculate the last row of column mappings
         last_column_row = header_row + len(valid_columns)
-        
+
         # Add a blank row after column mappings
         last_column_row += 2
-        
+
         # Add JOIN_TABLES section
         join_header_row = last_column_row
         join_cell = mapping_sheet.cell(row=join_header_row, column=1, value='JOIN_TABLES')
         join_cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-        
+
         # Add join table headers
         join_headers = ['Join Type', 'Table Type', 'Source Name', 'Table Name', 'Alias', 'Join Condition']
         join_header_row += 1
@@ -2056,15 +2105,15 @@ class DAGGeneratorApp:
             cell = mapping_sheet.cell(row=join_header_row, column=col, value=header)
             cell.font = openpyxl.styles.Font(bold=True, color='FFFFFF')
             cell.fill = openpyxl.styles.PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
-        
+
         # Add 5 empty rows for joins
         for i in range(5):
             join_header_row += 1
             row = join_header_row
-            
+
             # Add default value for Join Type (LEFT)
             join_type_cell = mapping_sheet.cell(row=row, column=1, value='LEFT')
-            
+
             # Add data validation for Join Type
             join_type_dv = openpyxl.worksheet.datavalidation.DataValidation(
                 type="list",
@@ -2073,7 +2122,7 @@ class DAGGeneratorApp:
             )
             mapping_sheet.add_data_validation(join_type_dv)
             join_type_dv.add(join_type_cell)
-            
+
             # Add data validation for Table Type
             table_type_cell = mapping_sheet.cell(row=row, column=2)
             table_type_dv = openpyxl.worksheet.datavalidation.DataValidation(
@@ -2083,37 +2132,37 @@ class DAGGeneratorApp:
             )
             mapping_sheet.add_data_validation(table_type_dv)
             table_type_dv.add(table_type_cell)
-        
+
         # Add WHERE_CONDITIONS section
         where_row = join_header_row + 2
         where_cell = mapping_sheet.cell(row=where_row, column=1, value='WHERE_CONDITIONS')
         where_cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-        
+
         # Add where condition input cell with more space
         where_input_cell = mapping_sheet.cell(row=where_row, column=2)
         # Merge cells for more space
         mapping_sheet.merge_cells(start_row=where_row, start_column=2, end_row=where_row, end_column=6)
-        
+
         # Add GROUP_BY section
         group_row = where_row + 2
         group_cell = mapping_sheet.cell(row=group_row, column=1, value='GROUP BY')
         group_cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-        
+
         # Add group by input cell with more space
         group_input_cell = mapping_sheet.cell(row=group_row, column=2)
         # Merge cells for more space
         mapping_sheet.merge_cells(start_row=group_row, start_column=2, end_row=group_row, end_column=6)
-        
+
         # Adjust column widths
         column_widths = {
-            'A': 15,   # S.NO/Join Type
-            'B': 40,   # TargetColumn/Table Type
-            'C': 40,   # Source Table/Source Name
-            'D': 50,   # Logic/Table Name
-            'E': 20,   # Alias
-            'F': 60,   # Join Condition
+            'A': 15,  # S.NO/Join Type
+            'B': 40,  # TargetColumn/Table Type
+            'C': 40,  # Source Table/Source Name
+            'D': 50,  # Logic/Table Name
+            'E': 20,  # Alias
+            'F': 60,  # Join Condition
         }
-        
+
         for col, width in column_widths.items():
             mapping_sheet.column_dimensions[col].width = width
 
@@ -2128,7 +2177,7 @@ class DAGGeneratorApp:
 
         # Add DAG Configuration section
         config_sheet.cell(row=2, column=1, value='DAG Configuration').font = openpyxl.styles.Font(bold=True)
-        
+
         # Update DAG config options
         dag_options = [
             {
@@ -2150,14 +2199,14 @@ class DAGGeneratorApp:
             # Parameter name with yellow background
             param_cell = config_sheet.cell(row=current_row, column=1, value=config['param'])
             param_cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-            
+
             # Value cell
             value_cell = config_sheet.cell(row=current_row, column=2)
             value_cell.value = config['value']
-            
+
             # Description
             desc_cell = config_sheet.cell(row=current_row, column=3, value=config['description'])
-            
+
             # If it's DAG Type, create a data validation dropdown
             if config['param'] == 'DAG Type':
                 dv = openpyxl.worksheet.datavalidation.DataValidation(
@@ -2167,7 +2216,7 @@ class DAGGeneratorApp:
                 )
                 config_sheet.add_data_validation(dv)
                 dv.add(value_cell)
-            
+
             current_row += 1
 
         # Add Dependencies section
@@ -2189,12 +2238,12 @@ class DAGGeneratorApp:
             current_row += 1
             row_num = config_sheet.cell(row=current_row, column=1, value=i + 1)
             row_num.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-            
+
             # Add example values for the first row
             if i == 0:
                 config_sheet.cell(row=current_row, column=2, value="DW")
                 config_sheet.cell(row=current_row, column=3, value="D_CUSTOMER")
-                
+
                 # Add comment to explain the format
                 comment = openpyxl.comments.Comment('Enter the schema and table name of the dependency', 'System')
                 config_sheet.cell(row=current_row, column=2).comment = comment
@@ -2203,7 +2252,8 @@ class DAGGeneratorApp:
         current_row += 2
 
         # Add Snowflake Configuration section
-        config_sheet.cell(row=current_row, column=1, value='Snowflake Configuration').font = openpyxl.styles.Font(bold=True)
+        config_sheet.cell(row=current_row, column=1, value='Snowflake Configuration').font = openpyxl.styles.Font(
+            bold=True)
         current_row += 1
 
         # Snowflake config options
@@ -2245,13 +2295,13 @@ class DAGGeneratorApp:
             # Parameter name with yellow background
             param_cell = config_sheet.cell(row=current_row, column=1, value=config['param'])
             param_cell.fill = openpyxl.styles.PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-            
+
             # Value cell
             value_cell = config_sheet.cell(row=current_row, column=2, value=config['value'])
-            
+
             # Description
             desc_cell = config_sheet.cell(row=current_row, column=3, value=config['description'])
-            
+
             current_row += 1
 
         # Adjust column widths
@@ -2280,7 +2330,7 @@ class DAGGeneratorApp:
         try:
             with open(ddl_path, 'r') as file:
                 ddl_content = file.read()
-            
+
             # Find the table name in CREATE TABLE statement
             # This pattern will handle:
             # - IF NOT EXISTS clause
@@ -2288,20 +2338,20 @@ class DAGGeneratorApp:
             # - Quoted and unquoted identifiers
             table_pattern = r'CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?(?:\"?(\w+)\"?\.)?"?(\w+)"?'
             match = re.search(table_pattern, ddl_content, re.IGNORECASE)
-            
+
             if match:
                 # Get schema and table name
                 schema = match.group(1) or ''  # First group (schema) - optional
-                table = match.group(2)         # Second group (table name)
-                
+                table = match.group(2)  # Second group (table name)
+
                 # Remove any quotes and trim
                 schema = schema.strip('"').strip('`').strip()
                 table = table.strip('"').strip('`').strip()
-                
+
                 # Combine schema and table if schema exists
                 full_table_name = f"{schema}.{table}" if schema else table
                 return full_table_name.upper()  # Convert to uppercase
-            
+
             return "Unknown_Table"
         except Exception:
             return "Unknown_Table"
@@ -2311,40 +2361,6 @@ class DAGGeneratorApp:
         self.progress.stop()
         self.progress.pack_forget()  # Changed from grid_remove to pack_forget
         self.root.after(350, self.root.destroy)  # Close the app within a seconds
-
-    def on_tab_change(self, event):
-        """Handle tab change with smooth animation"""
-        try:
-            current_tab = self.notebook.select()
-            if not current_tab:
-                return
-            
-            # Get the currently selected tab widget
-            tab_frame = self.notebook.children[current_tab.split('.')[-1]]
-            
-            # Start fade-in animation
-            self.animate_frame(tab_frame)
-            
-        except Exception as e:
-            print(f"Animation error: {str(e)}")
-
-    def animate_frame(self, frame, step=0):
-        """Smooth frame animation"""
-        try:
-            if step <= self.animation_steps:
-                # Calculate opacity
-                opacity = step / self.animation_steps
-                
-                # Apply the fade effect
-                frame.update()
-                
-                if step < self.animation_steps:
-                    # Schedule next animation step
-                    delay = self.animation_duration // self.animation_steps
-                    self.root.after(delay, lambda: self.animate_frame(frame, step + 1))
-                
-        except Exception as e:
-            print(f"Animation step error: {str(e)}")
 
     def add_to_history(self, file_path, history_list):
         """Add file to history and maintain uniqueness"""
@@ -2359,7 +2375,7 @@ class DAGGeneratorApp:
         try:
             history = {
                 'mapping_files': self.file_history[-10:],  # Keep last 10 files
-                'ddl_files': self.ddl_file_history[-10:],   # Keep last 10 files
+                'ddl_files': self.ddl_file_history[-10:],  # Keep last 10 files
                 'json_files': self.json_file_history[-10:]  # Keep last 10 files
             }
             history_file = os.path.join(os.getcwd(), 'file_history.json')
@@ -2373,17 +2389,14 @@ class DAGGeneratorApp:
         try:
             # Update combobox values with formatted paths
             if hasattr(self, 'file_combo'):
-                formatted_values = [self.format_path(path) for path in self.file_history]
+                formatted_values = [path for path in self.file_history]
                 self.file_combo['values'] = formatted_values
             if hasattr(self, 'ddl_combo'):
-                formatted_values = [self.format_path(path) for path in self.ddl_file_history]
+                formatted_values = [path for path in self.ddl_file_history]
                 self.ddl_combo['values'] = formatted_values
             if hasattr(self, 'mapping_combo'):
-                formatted_values = [self.format_path(path) for path in self.file_history]
+                formatted_values = [path for path in self.file_history]
                 self.mapping_combo['values'] = formatted_values
-            # if hasattr(self, 'json_combo'):
-            #     formatted_values = [self.format_path(path) for path in self.json_file_history]
-            #     self.json_combo['values'] = formatted_values
 
             # Define fields with their details
             fields = [
@@ -2394,14 +2407,14 @@ class DAGGeneratorApp:
                 ("DBT File Names:", "dbt_file_names_2", False),
                 ("DDL File Names:", "ddl_file_names_3", False),
                 ("DML File Names:", "dml_file_names_4", False),
-                ("Pipeline File Names:","pipeline_mapping", False),
+                ("Pipeline File Names:", "pipeline_mapping", False),
                 ("DW DDL File Names:", "DW_DDL_file", False)
             ]
 
             for field, var_name, is_dir in fields:
                 combo = getattr(self, f"{var_name}_combo")
-                combo['values'] = [self.format_path(path) for path in self.json_file_history[-10:]]
-            
+                combo['values'] = [path for path in self.json_file_history[-10:]]
+
             self.root.update_idletasks()
 
         except Exception as e:
@@ -2411,11 +2424,20 @@ class DAGGeneratorApp:
         """Handle combobox selection"""
         combo = event.widget
         selected_display = combo.get()
-        
+
         # Find the full path from the display value
         for full_path in self.file_history:
             if self.format_path(full_path) == selected_display:
-                self.mapping_file_path.set(full_path)
+                # Update only the relevant path based on which combo triggered the event
+                if combo == self.ddl_combo:
+                    self.ddl_file_path.set(full_path)
+                elif combo == self.file_combo:
+                    self.mapping_file_path.set(full_path)
+                elif combo == self.pipeline_mapping_combo:
+                    self.mapping_file_path.set(full_path)
+                elif combo == self.DW_DDL_file_combo:
+                    self.ddl_file_path.set(full_path)
+                # Add other combobox conditions as needed
                 break
 
     def format_path(self, path):
@@ -2465,53 +2487,47 @@ class DAGGeneratorApp:
 
     def create_sample_pipeline_mapping_template(self):
         """Create a mapping template Excel file"""
-        # Create mappings directory if it doesn't exist
-        # Use a more reliable path - create mappings in the current workspace
-        global workbook
-        mappings_dir = os.path.join(os.getcwd(), "mappings")
-        os.makedirs(mappings_dir, exist_ok=True)
-
-        # Generate default Excel file path
-        ddl_name = os.path.splitext(os.path.basename("data/sample_table_ddl.sql"))[0]
-        default_excel_path = os.path.join(mappings_dir, f"{ddl_name}_pipeline_mapping.xlsx")
-        self.mapping_file_path.set(default_excel_path)
-
-        """Run the mapping generation in a separate thread"""
         try:
-            # Create or load workbook
-            if not os.path.exists(self.mapping_file_path.get()):
-                workbook = openpyxl.Workbook()
-                # Remove default sheet
-                default_sheet = workbook['Sheet']
-                workbook.remove(default_sheet)
+            # Create mappings directory
+            mappings_dir = os.path.join(os.getcwd(), "mappings")
+            os.makedirs(mappings_dir, exist_ok=True)
+            default_excel_path = os.path.join(mappings_dir, "sample_table_pipeline_mapping.xlsx")
 
-            pipeline_config_sheet=workbook.create_sheet("Pipeline Mapping", 0)
+            # Create new workbook
+            workbook = Workbook()
+            # Get the active sheet and let write_pipeline_details rename it
+            pipeline_config_sheet = workbook.active
+
+            # Use the existing function to setup the sheet
             init_pipeline_generator.write_pipeline_details(pipeline_config_sheet)
-            # Update status
-            self.set_status("Sample pipeline file created successfully!")
+            config_sheet = workbook.create_sheet(title="config")
+            init_pipeline_generator.create_config_sheet(config_sheet)
 
             try:
-                workbook.save(self.mapping_file_path.get())
-                messagebox.showinfo("Success", f"Mapping file created:\n{self.mapping_file_path.get()}")
-            except PermissionError:
-                raise Exception("Cannot save Excel file. Please close it if it's open.")
-            self.hide_progress()
+                # Save to the default path first
+                workbook.save(default_excel_path)
+                self.set_status("Sample pipeline file created successfully!")
+                messagebox.showinfo("Success", f"Mapping file created:\n{default_excel_path}")
+            except PermissionError as pe:
+                raise PermissionError("Cannot save Excel file. Please close it if it's open.") from pe
 
         except Exception as e:
             self.set_status(f"Error: {str(e)}")
-            self.hide_progress()
             messagebox.showerror("Error", str(e))
+        finally:
+            self.hide_progress()
+
 
 if __name__ == "__main__":
     # Initialize logging first
     setup_logging()
-    
+
     # Save original stdout for printing themes
     original_stdout = sys.stdout
-    
+
     try:
         root = ThemedTk()
-        
+
         # # Temporarily restore stdout to print themes to console
         # sys.stdout = original_stdout
         # print("Available themes:", root.get_themes())
@@ -2525,7 +2541,7 @@ if __name__ == "__main__":
         #
         # root.set_theme("breeze")
         # logging.info("Using theme: breeze")
-        
+
         app = DAGGeneratorApp(root)
         root.mainloop()
     except Exception as e:

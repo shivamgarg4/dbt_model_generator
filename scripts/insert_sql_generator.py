@@ -141,6 +141,8 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     target_schema = config['Target']['Schema']
     target_table = config['Target']['Table Name']
     main_table_alias = 'source_table'
+    pre_hook = config['Target']['pre_hook']
+    post_hook = config['Target']['post_hook']
 
     # Generate file name
     macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
@@ -175,9 +177,12 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     model_content+="    {% set query %}"
     # Construct the INSERT SQL statement
     model_content += f"""
+    {pre_hook}
+    -- Insert data into {target_schema}.{target_table}
     INSERT INTO {target_schema}.{target_table} ({insert_columns_str})
     SELECT {insert_values_str}
     FROM {source_schema}.{source_table} as {main_table_alias}
+    {post_hook}
 """
 
     # Add JOIN clauses if mapping_sheet is provided and contains joins
@@ -211,6 +216,15 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
 
     # Format the SQL statement using sqlparse
     formatted_insert_sql = format_sql_content(model_content)
+
+    # Ensure unique file name if file already exists
+    if os.path.exists(file_path):
+        base_name, ext = os.path.splitext(file_name)
+        counter = 1
+        while os.path.exists(file_path):
+            file_name = f"{base_name}_{counter}{ext}"
+            file_path = os.path.join(output_dir, file_name)
+            counter += 1
 
     # Write model file
     with open(file_path, 'w') as f:
