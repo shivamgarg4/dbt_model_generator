@@ -49,7 +49,7 @@ class SourceColumnMapper:
                     source_info = self._get_source_info(mapping_config)
 
                     # Get Snowflake columns
-                    if source_info['schema'] and source_info['table']:
+                    if source_info['schema'] and source_info['table'] and source_info['database']:
                         columns = self._get_snowflake_columns(snowflake_config, source_info)
 
                         # Update both Excel and JSON
@@ -103,16 +103,17 @@ class SourceColumnMapper:
         # Get source and target table info from mapping config
         source_table = mapping_config['Source']['Table Name']
         target_table = mapping_config['Target']['Table Name']
+        target_schema = mapping_config['Target']['Schema']
 
         # Define audit column transformations
         audit_mappings = {
-            'DATA_SRC': lambda: f"'{target_table}'",
+            'DATA_SRC': lambda: f"'{target_schema}.{target_table}'",
             'CREATE_DT': lambda: "CURRENT_TIMESTAMP()",
             'CREATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
-            'CREATE_PGM': lambda: f"'{target_table}'",
+            'CREATE_PGM': lambda: f"'{target_schema}.{target_table}'",
             'UPDATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
             'UPDATE_DT': lambda: "CURRENT_TIMESTAMP()",
-            'UPDATE_PGM': lambda: f"'{target_table}'"
+            'UPDATE_PGM': lambda: f"'{target_schema}.{target_table}'"
         }
 
         logger.info(f"Processing sheet with {mapping_sheet.max_row} rows")
@@ -248,12 +249,14 @@ class SourceColumnMapper:
         """Extracts source table information from mapping configuration"""
         try:
             source = mapping_config.get('Source', {})
+            database = source.get('Database', '')
             schema = source.get('Schema', '')
             table = source.get('Table Name', '')
             if schema and table:
                 return {
                     'schema': schema,
-                    'table': table
+                    'table': table,
+                    'database': database
                 }
             logger.warning(f"Invalid source configuration: {source}")
             return {'schema': '', 'table': ''}
@@ -296,14 +299,22 @@ class SourceColumnMapper:
             # Use a context manager to ensure proper cursor handling
             with db_connection.get_cursor() as cursor:
                 query = """
-                    SELECT COLUMN_NAME, DATA_TYPE, IS_NULLABLE 
-                    FROM INFORMATION_SCHEMA.COLUMNS 
-                    WHERE TABLE_SCHEMA = %s
-                    AND TABLE_NAME = %s
-                    ORDER BY ORDINAL_POSITION
+             SELECT 
+                 COLUMN_NAME,
+                 DATA_TYPE,
+                 IS_NULLABLE
+             FROM {}.INFORMATION_SCHEMA.COLUMNS
+             WHERE TABLE_SCHEMA = %s
+             AND TABLE_NAME = %s
+             ORDER BY ORDINAL_POSITION
                 """
-                logger.info(f"Executing Snowflake query for {source_info['schema']}.{source_info['table']}")
-                cursor.execute(query, (source_info['schema'], source_info['table']))
+                logger.info(
+                    f"Executing Snowflake query for {source_info['database']}.{source_info['schema']}.{source_info['table']}")
+
+                # Use .format() for database name to avoid parameter interpolation issue
+                # Use %s for schema and table to prevent SQL injection
+                cursor.execute(query.format(source_info['database']), (source_info['schema'], source_info['table']))
+
                 columns = [
                     {
                         'name': row[0],
