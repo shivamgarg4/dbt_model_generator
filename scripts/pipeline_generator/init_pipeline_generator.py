@@ -35,7 +35,8 @@ def read_pipeline_sheet(pipeline_details_sheet):
         1: "Model Type",
         2: "Source Model",
         3: "Target Model",
-        4: "Generated Mapping Sheet"
+        4: "Generated Mapping Sheet",
+        5: "Generated Object Name"
     }
 
     for row in range(2, pipeline_details_sheet.max_row + 1):
@@ -67,7 +68,7 @@ def write_pipeline_details(pipeline_config_sheet):
 
     # Write the header row with simplified columns
     headers = [
-        "Model Type", "Source Model", "Target Model", "Generated Mapping Sheet"
+        "Model Type", "Source Model", "Target Model", "Generated Mapping Sheet","Generated Object Name"
     ]
 
     # Write headers and apply formatting
@@ -121,6 +122,7 @@ def create_mapping_sheet(sheet, pipeline, columns):
         ('SOURCE_NAME', ''),
         ('MATERIALIZATION', ''),  # Empty for dropdown
         ('UNIQUE_KEY', ''),
+        ('MERGE_TYPE',''),
         ('MINUS_LOGIC_REQUIRED', 'N'),
         ('TRANSIENT_TABLE', 'N'),
         ('PRE_HOOK', ''),
@@ -139,6 +141,10 @@ def create_mapping_sheet(sheet, pipeline, columns):
             dv.add(value_cell)
         elif item[0] == 'MATERIALIZATION':
             dv = DataValidation(type="list", formula1='"incremental,truncate_load,lnd_load"', allow_blank=True)
+            sheet.add_data_validation(dv)
+            dv.add(value_cell)
+        elif item[0] == 'MERGE_TYPE':
+            dv = DataValidation(type="list", formula1='"update_insert,update_only,insert_only"', allow_blank=True)
             sheet.add_data_validation(dv)
             dv.add(value_cell)
         elif item[0] == 'MINUS_LOGIC_REQUIRED' or item[0] == 'TRANSIENT_TABLE':
@@ -163,7 +169,7 @@ def create_mapping_sheet(sheet, pipeline, columns):
     # Add blank row for separation
     current_row += 1
 
-    if model_type == 'DW Load':
+    if model_type == 'DW Load' or model_type == 'LND Load' :
         # Add DAG Configuration section
         sheet.cell(row=current_row, column=1, value='DAG Configuration').font = Font(bold=True)
         current_row += 1
@@ -398,6 +404,14 @@ def create_mapping_sheet(sheet, pipeline, columns):
     # Add GROUP_BY section
     group_cell = sheet.cell(row=current_row, column=1, value='GROUP BY')
     group_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+    sheet.merge_cells(start_row=current_row, start_column=2, end_row=current_row, end_column=6)
+
+    # Add blank row for separation
+    current_row += 2
+
+    # Add GROUP_BY section
+    having_cell = sheet.cell(row=current_row, column=1, value='HAVING')
+    having_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
     sheet.merge_cells(start_row=current_row, start_column=2, end_row=current_row, end_column=6)
 
     # Adjust column widths
@@ -808,6 +822,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 model_type = pipeline.get("Model Type", "Unknown")
                 target_model = pipeline.get("Target Model", "Unknown")
                 mapping_sheet_name = pipeline.get("Generated Mapping Sheet", "")
+                generated_object_name = pipeline.get("Generated Object Name", "")
 
                 # Find corresponding mapping sheet
                 mapping_sheet = None
@@ -832,34 +847,40 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                     model_content = create_dbt_model_from_json(
                         config_file=config_file_path,
                         mapping_sheet=mapping_sheet,
-                        target_ddl_path=target_ddl_path
+                        target_ddl_path=target_ddl_path,
+                        object_name=generated_object_name
                     )
                     generate_dag_file("DW", config_file_path, "dags/")
                     create_dbt_yml_from_config(config_file_path, "yml/")
 
                 elif "Merge Macro" in model_type:
                     model_content = generate_merge_sql_for_pipelines(
-                        config_file=config_file_path
+                        config_file=config_file_path,
+                        mapping_sheet=mapping_sheet,
+                        object_name=generated_object_name
                     )
 
                 elif "Insert Macro" in model_type:
                     model_content = insert_sql_generator(
                         config_file=config_file_path,
-                        mapping_sheet=mapping_sheet
+                        mapping_sheet=mapping_sheet,
+                        object_name=generated_object_name
                     )
 
                 elif "LND Load" in model_type:
                     model_content = create_dbt_model_from_json(
                         config_file=config_file_path,
                         mapping_sheet=mapping_sheet,
-                        target_ddl_path=target_ddl_path
+                        target_ddl_path=target_ddl_path,
+                        object_name=generated_object_name
                     )
-                    generate_dag_file("LND", None, "dags/", workbook_path)
+                    generate_dag_file("LND", config_file_path, "dags/", workbook_path)
                     create_dbt_yml_from_config(config_file_path, "yml/")
 
                 elif "DP/BI View" in model_type:
                     model_content = create_dp_view_file(
-                        file_path=workbook_path
+                        file_path=workbook_path,
+                        object_name=generated_object_name
                     )
                     generate_dag_file("DP", None, "dags/", workbook_path)
                     create_dbt_yml_from_config(config_file_path, "yml/")
@@ -945,14 +966,12 @@ def generate_dag_file(type_of_model, json_output_path, dag_output_path, workbook
                 model_type_value = pipeline_sheet.cell(row=row, column=model_type_col).value
                 target_model_value = pipeline_sheet.cell(row=row, column=target_model_col).value
 
-                if ((type_of_model == "LND" and "LND Load" in str(model_type_value)) or
-                    (type_of_model == "DP" and "DP/BI View" in str(model_type_value))) and \
-                        target_model_value == target_model:
+                if (type_of_model == "DP" and "DP/BI View" in str(model_type_value)) and target_model_value == target_model:
                     target_row = row
                     break
 
-            if not target_row:
-                raise ValueError(f"No matching row found for {type_of_model} and target model {target_model}")
+            # if not target_row:
+            #     raise ValueError(f"No matching row found for {type_of_model} and target model {target_model}")
 
             # Extract source and target information
             source_table = pipeline_sheet.cell(row=target_row, column=source_model_col).value
@@ -977,14 +996,6 @@ def generate_dag_file(type_of_model, json_output_path, dag_output_path, workbook
             target_table_name = target_parts[-1]
             table_name = target_table_name.lower()
 
-            if type_of_model in ["LND"]:
-                dag_type = "sns"
-                schedule_interval = "0 */4 * * *"
-                dependencies = []
-                schema_name = schema_name
-                table_name = target_table_name
-                source_name = source_name
-
             if type_of_model in ["DP"]:
                 dag_type = "cron"
                 schedule_interval = "0 */4 * * *"
@@ -1005,7 +1016,7 @@ def generate_dag_file(type_of_model, json_output_path, dag_output_path, workbook
                         "dependencies": []
                     }
 
-                if type_of_model == "DW":
+                if type_of_model == "DW" or type_of_model == "LND":
                     dag_type = dag_config.get("DAG Type", "DATASET DEPENDENCY").lower()
                     schedule_interval = dag_config.get("Schedule Interval", "0 */4 * * *")
                     dependencies = dag_config.get("dependencies", [])

@@ -2,6 +2,7 @@ import json
 import os
 import openpyxl
 import yaml
+from openpyxl.reader.excel import load_workbook
 
 
 def load_json_file(file_path):
@@ -58,6 +59,8 @@ def _extract_mappings_from_sheet(mapping_sheet):
             "Table Name": "",
             "materialization": "",
             "unique_key": "",
+            "merge_type":"",
+            "minus_logic": "",
             "pre_hook": "",
             "post_hook": ""
         },
@@ -69,6 +72,7 @@ def _extract_mappings_from_sheet(mapping_sheet):
         },
         "where_conditions": [],
         "group_by": [],
+        "having":[],
         "join_tables": []
     }
 
@@ -110,11 +114,39 @@ def _extract_mappings_from_sheet(mapping_sheet):
         elif key == 'UNIQUE_KEY':
             model_config['Target']['unique_key'] = value
 
+        elif key == 'MERGE_TYPE':
+            model_config['Target']['merge_type'] = value
+
+        elif key == 'MINUS_LOGIC_REQUIRED':
+            model_config['Target']['minus_logic'] = value
+
         elif key == 'PRE_HOOK':
             model_config['Target']['pre_hook'] = value
 
         elif key == 'POST_HOOK':
             model_config['Target']['post_hook'] = value
+
+        elif key == 'DAG Type':
+            model_config['dag_configuration']['DAG Type'] = value
+        elif key  == 'Schedule Interval':
+            model_config['dag_configuration']['Schedule Interval'] = value
+        elif key == 'Dependencies':
+            dependency_row = None
+            column_header_row = row
+            for column_header_row in range(3, mapping_sheet.max_row):
+                if mapping_sheet.cell(row=row, column=1).value == 'Dependencies':
+                    dependency_row = row + 1
+                    break
+
+            if dependency_row:
+                dependency_header_row = dependency_row
+                for i in range(dependency_header_row, dependency_header_row + 5):
+                    schema = mapping_sheet.cell(row=i, column=2).value
+                    table = mapping_sheet.cell(row=i, column=3).value
+
+                    if schema and table and schema != 'Dependency Schema' and table != 'Dependency Table':
+                        model_config['dag_configuration']['dependencies'].append(f"{schema}.{table}")
+
 
         # Column Mapping Section
         elif key == 'S.NO':
@@ -138,17 +170,20 @@ def _extract_mappings_from_sheet(mapping_sheet):
 
         # Join Tables Section
         elif key == 'JOIN_TABLES':
-            join_row = row + 1
+            join_row = row + 2
             while join_row < mapping_sheet.max_row + 1:
                 join_type = get_cell_value(join_row, 1)
+                join_src_type = get_cell_value(join_row, 2)
+                join_src_name = get_cell_value(join_row, 3)
                 join_table = get_cell_value(join_row, 4)
                 join_condition = get_cell_value(join_row, 5)
 
-                if not join_table or not join_condition:
+                if not join_type:
                     break
-
                 join_info = {
                     'type': join_type,
+                    'source_type': join_src_type,
+                    'source_name': join_src_name,
                     'table': join_table,
                     'condition': join_condition
                 }
@@ -162,10 +197,15 @@ def _extract_mappings_from_sheet(mapping_sheet):
                 model_config['where_conditions'].append(condition)
 
         # Group By Conditions
-        elif key == 'GROUP_BY':
+        elif key == 'GROUP BY':
             group_by_col = get_cell_value(row, 2)
             if group_by_col:
                 model_config['group_by'].append(group_by_col)
+
+        elif key == 'HAVING':
+            having_col = get_cell_value(row, 2)
+            if having_col:
+                model_config['having'].append(having_col)
 
     # Validate required configurations
     required_source_fields = ['Database', 'Schema', 'Table Name']
@@ -300,3 +340,13 @@ def create_dbt_yml_from_config(model_config, output_path):
 
 
 
+if __name__ == "__main__":
+    # Example usage
+    config_file = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\config\mappings\M01_F_RPT_TBA_Map.json'
+    mapping_sheet = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\mappings\DW.F_DEPL_RETAIL_INVOICE_CBBD.xlsx'
+ # Replace with actual mapping sheet object
+    workbook = load_workbook(mapping_sheet)
+    mapping_sheet=workbook["D01_F_DEPL_RETAIL_I_Map"]
+    result =  _extract_mappings_from_sheet(mapping_sheet)
+
+    print(result)

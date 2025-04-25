@@ -40,3 +40,5 @@ def create_dbt_job_file(config_file,model_dbt_job_additon_flg=False ,output_dir=
 
     except Exception as e:
         raise Exception(f"Failed to create dbt job file: {str(e)}")
+
+

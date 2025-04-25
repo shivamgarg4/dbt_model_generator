@@ -1,58 +1,9 @@
 import os
 import json
 from scripts.utils import parse_ddl_file
-import re
-import sqlfluff
-import tempfile
 
 
-def format_sql_content(sql_content):
-    """
-    Format SQL content using SQLFluff with dbt templating support
-
-    Args:
-        sql_content (str): The SQL content to format
-
-    Returns:
-        str: Formatted SQL content
-    """
-    try:
-        # Create temporary file for SQLFluff to process
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.sql', delete=False) as temp_file:
-            temp_file.write(sql_content)
-            temp_file.flush()
-
-        # Configure SQLFluff
-        config = sqlfluff.config.FluffConfig(
-            configs={
-                "dialect": "snowflake",
-                "templater": "dbt",
-                "exclude_rules": "L031,L034",
-                "max_line_length": 120,
-                "indent_unit": "space",
-                "tab_space_size": 4,
-            }
-        )
-
-        # Format the SQL content
-        result = sqlfluff.fix(
-            temp_file.name,
-            config=config
-        )
-
-        return result
-
-    except Exception as e:
-        print(f"Warning: SQL formatting failed: {str(e)}")
-        return sql_content  # Return original content if formatting fails
-    finally:
-        # Clean up temporary file
-        import os
-        if os.path.exists(temp_file.name):
-            os.unlink(temp_file.name)
-
-
-def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=None):
+def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=None,object_name=None):
     """Generate a DBT model file from JSON configuration"""
     with open(config_file) as f:
         config = json.load(f)
@@ -66,6 +17,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
     pre_hook = config['Target']['pre_hook']
     post_hook = config['Target']['post_hook']
+    having= config.get('having', [''])[0] if config.get('having') else ''
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -94,7 +46,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     minus_logic_required = False
     transient_logic_required = False
     if mapping_sheet:
-        for row in range(1, 10):  # Check first few rows
+        for row in range(1, 20):  # Check first few rows
 
             if mapping_sheet.cell(row=row, column=1).value == 'MINUS_LOGIC_REQUIRED':
                 minus_value = mapping_sheet.cell(row=row, column=2).value
@@ -254,6 +206,9 @@ SELECT
         if group_by:
             model_content += f"\nGROUP BY {group_by}"
 
+        if having:
+            model_content += f"\nHAVING {having}"
+
     # Add minus logic if required
     if minus_logic_required:
         # Define audit columns to exclude from the MINUS operation
@@ -404,6 +359,13 @@ SELECT
             if where_condition:
                 final_model_content += f"\nWHERE {where_condition}"
 
+            group_by = extract_group_by(mapping_sheet, main_table_alias)
+            if group_by:
+                final_model_content += f"\nGROUP BY {group_by}"
+
+            if having:
+                final_model_content += f"\nHAVING {having}"
+
         # Add MINUS section
         final_model_content += f"\n\nMINUS\n\nSELECT\n"
 
@@ -428,14 +390,17 @@ SELECT
         # Replace the original model content with the new one
         model_content = final_model_content
 
-    formatted_content = format_sql_content(model_content)
+    formatted_content = model_content
 
     # Create output directory if it doesn't exist
     output_dir = 'models'
     os.makedirs(output_dir, exist_ok=True)
 
+    if object_name:
+        model_name = f"{object_name}"
+    else:
+        model_name = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
     # Generate file name
-    model_name = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
     file_name = f"{model_name}.sql"
     file_path = os.path.join(output_dir, file_name)
 

@@ -135,7 +135,7 @@ def generate_lnd_dbt_model_file(mapping_file_path):
         raise Exception(f"An error occurred while generating the dbt model: {e}")
 
 
-def create_dp_view_file(file_path):
+def create_dp_view_file(file_path,object_name=None):
     """Generate the dbt model file for DP view."""
     logger.info(f"Starting to create DP view file using {file_path}")
     try:
@@ -234,7 +234,11 @@ def create_dp_view_file(file_path):
         output_dir = 'views'
         os.makedirs(output_dir, exist_ok=True)
 
-        model_name = f"{target_schema}.{target_table_name}"
+        if object_name:
+            model_name = f"{object_name}"
+        else:
+            model_name = f"{target_schema}.{target_table_name}"
+
         file_name = f"{model_name}.sql"
         file_path = os.path.join(output_dir, file_name)
 

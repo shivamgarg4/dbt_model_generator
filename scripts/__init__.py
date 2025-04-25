@@ -11,8 +11,7 @@ from .dbt_model_generator import (
     extract_where_condition,
     extract_group_by,
     get_materialization,
-    should_exclude_from_minus,
-    format_sql_content
+    should_exclude_from_minus
 )
 from .insert_sql_generator import insert_sql_generator
 from .merge_sql_generator import (
@@ -56,7 +55,6 @@ __all__ = [
     'insert_sql_generator',
     'merge_sql_generator',
     'generate_merge_sql_for_pipelines',
-    'format_sql_content',
     'create_dbt_model_from_json',
 
     # Job file generator

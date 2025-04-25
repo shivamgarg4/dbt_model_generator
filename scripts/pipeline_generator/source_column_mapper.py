@@ -101,19 +101,18 @@ class SourceColumnMapper:
         start_row = 2  # Start from row 2 assuming row 1 is header
 
         # Get source and target table info from mapping config
+        source_schema = mapping_config['Source']['Schema']
         source_table = mapping_config['Source']['Table Name']
-        target_table = mapping_config['Target']['Table Name']
-        target_schema = mapping_config['Target']['Schema']
 
         # Define audit column transformations
         audit_mappings = {
-            'DATA_SRC': lambda: f"'{target_schema}.{target_table}'",
+            'DATA_SRC': lambda: f"'{source_schema}.{source_table}'",
             'CREATE_DT': lambda: "CURRENT_TIMESTAMP()",
             'CREATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
-            'CREATE_PGM': lambda: f"'{target_schema}.{target_table}'",
+            'CREATE_PGM': lambda: f"'{source_schema}.{source_table}'",
             'UPDATE_BY': lambda: "CAST(CURRENT_USER() AS VARCHAR(200))",
             'UPDATE_DT': lambda: "CURRENT_TIMESTAMP()",
-            'UPDATE_PGM': lambda: f"'{target_schema}.{target_table}'"
+            'UPDATE_PGM': lambda: f"'{source_schema}.{source_table}'"
         }
 
         logger.info(f"Processing sheet with {mapping_sheet.max_row} rows")
@@ -133,7 +132,7 @@ class SourceColumnMapper:
                     if target_column in audit_mappings:
                         # Column 2: Target column (already set)
                         # Column 3: Source Schema.Table
-                        mapping_sheet.cell(row=row, column=3).value = source_table
+                        mapping_sheet.cell(row=row, column=3).value = source_schema+'.'+source_table
                         # Column 4: Transformation logic
                         mapping_sheet.cell(row=row, column=4).value = audit_mappings[target_column]()
                         mapped_count += 1
@@ -147,7 +146,7 @@ class SourceColumnMapper:
 
                         if matching_col:
                             # Column 2: Target column (already set)
-                            mapping_sheet.cell(row=row, column=3).value = source_table
+                            mapping_sheet.cell(row=row, column=3).value = source_schema+'.'+source_table
                             mapping_sheet.cell(row=row, column=4).value = matching_col['name']
                             mapped_count += 1
                             logger.info(f"Mapped column: {target_column} -> {matching_col['name']} in row {row}")

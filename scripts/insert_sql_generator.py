@@ -1,6 +1,5 @@
 import json
 import os
-import sqlparse
 from scripts.utils import parse_ddl_file,format_sql_content
 
 def extract_join_clauses(mapping_sheet, main_table_alias='source'):
@@ -126,7 +125,7 @@ def extract_group_by(mapping_sheet, main_table_alias='source'):
 
     return None
 
-def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
+def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None,object_name=None):
     """Generate an INSERT SQL statement from JSON configuration"""
 
     with open(config_file) as f:
@@ -143,6 +142,7 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     main_table_alias = 'source_table'
     pre_hook = config['Target']['pre_hook']
     post_hook = config['Target']['post_hook']
+    having= config.get('having', [''])[0] if config.get('having') else ''
 
     # Generate file name
     macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
@@ -159,15 +159,16 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     insert_values = []
 
     for column in config['Columns']:
-        target_col = column['Target Column']
-        logic = str(column['Logic'])
+        if isinstance(column, dict) and column.get('Logic') != "''":
+            target_col = column['Target Column']
+            logic = str(column['Logic'])
 
-        # Skip unwanted columns
-        if target_col in ["List (Y,N)", "Table Type", "ref"]:
-            continue
+            # Skip unwanted columns
+            if target_col in ["List (Y,N)", "Table Type", "ref"]:
+                continue
 
-        insert_columns.append(target_col)
-        insert_values.append(logic)
+            insert_columns.append(target_col)
+            insert_values.append(logic)
 
     insert_columns_str = ", ".join(insert_columns)
     insert_values_str = ", ".join(insert_values)
@@ -177,11 +178,11 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     model_content+="    {% set query %}"
     # Construct the INSERT SQL statement
     model_content += f"""
-    {pre_hook}
+    {pre_hook}\n
     -- Insert data into {target_schema}.{target_table}
     INSERT INTO {target_schema}.{target_table} ({insert_columns_str})
     SELECT {insert_values_str}
-    FROM {source_schema}.{source_table} as {main_table_alias}
+    FROM {source_schema}.{source_table} as {main_table_alias}\n
     {post_hook}
 """
 
@@ -201,6 +202,9 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     if group_by:
         model_content += f"\n\tGROUP BY {group_by}"
 
+    if having:
+        model_content += f"\n\tHAVING {having}"
+
     model_content+=";\n"
 
     model_content += "    {% endset %}\n"
@@ -210,8 +214,12 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None):
     output_dir = 'macros'
     os.makedirs(output_dir, exist_ok=True)
 
+    if object_name:
+        model_name = f"{object_name}"
+    else:
+        model_name = macro_name
 
-    file_name = f"{macro_name}.sql"
+    file_name = f"{model_name}.sql"
     file_path = os.path.join(output_dir, file_name)
 
     # Format the SQL statement using sqlparse

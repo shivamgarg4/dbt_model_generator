@@ -1,7 +1,18 @@
-import tempfile
-import sqlfluff
-from openpyxl import load_workbook
-import openpyxl
+import os
+import logging
+import sqlparse
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('dbt_model_generator.log'),
+        logging.StreamHandler()
+    ]
+)
+
+logger = logging.getLogger(__name__)
+
 
 def get_config_from_sheet(config_sheet):
     """Extract Snowflake configuration from Config sheet"""
@@ -34,47 +45,52 @@ def get_table_info_from_sheet(mapping_sheet):
             break
     return target_table, source_table
 
-def format_sql_content(sql_content):
+def format_sql_content(sql_content, verbose=False):
     """
-    Format SQL content using SQLFluff with dbt templating support
+    Advanced SQL formatting with precise configuration controls
 
     Args:
         sql_content (str): The SQL content to format
+        verbose (bool): Enable detailed logging for debugging
 
     Returns:
         str: Formatted SQL content
     """
+    # Configure logging
+    logging.basicConfig(
+        level=logging.DEBUG if verbose else logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+
     try:
-        # Create temporary file for SQLFluff to process
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.sql', delete=False) as temp_file:
-            temp_file.write(sql_content)
-            temp_file.flush()
+        # Log formatting details if verbose
+        logger.debug(f"Original SQL length: {len(sql_content)}")
 
-        # Configure SQLFluff
-        config = sqlfluff.config.FluffConfig(
-            configs={
-                "dialect": "snowflake",
-                "templater": "dbt",
-                "exclude_rules": "L031,L034",
-                "max_line_length": 120,
-                "indent_unit": "space",
-                "tab_space_size": 4,
-            }
-        )
+        try:
+            # Try formatting with T-SQL dialect
 
-        # Format the SQL content
-        result = sqlfluff.fix(
-            temp_file.name,
-            config=config
-        )
+            # Fix the SQL code (automatically corrects identified issues)
 
-        return result
+            # Use sqlparse for initial formatting
+            formatted_sql = sqlparse.format(
+                sql_content,
+                reindent=True,
+                keyword_case='upper',
+            )
+            logger.info(f"SQL formatting completed successfully {formatted_sql}")
+            logger.debug(f"Formatted SQL length: {len(formatted_sql)}")
+            return formatted_sql
+
+        except Exception as format_error:
+            logger.error(f"Formatting error: {format_error}")
+            # Log the specific SQL content that caused the error
+            logger.error(f"Problematic SQL Content:\n{sql_content}")
+
+            # Optional: Try alternative formatting or return original
+            return sql_content
 
     except Exception as e:
-        print(f"Warning: SQL formatting failed: {str(e)}")
-        return sql_content  # Return original content if formatting fails
-    finally:
-        # Clean up temporary file
-        import os
-        if os.path.exists(temp_file.name):
-            os.unlink(temp_file.name)
+        logger.error(f"Unexpected error during SQL formatting: {e}")
+        return sql_content
+
+
