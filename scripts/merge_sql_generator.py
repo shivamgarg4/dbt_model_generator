@@ -522,13 +522,13 @@ def generate_merge_sql_for_pipelines(config_file, mapping_sheet,object_name=None
 
     # Add specific audit column updates
     audit_columns_mapping = [
-        f"source.DATA_SRC = '{source_details['schema']}.{source_details['table']}'",
-        "source.CREATE_DT = SYSDATE()",
-        "source.CREATE_BY = 'SVC_DBT'",
-        f"source.CREATE_PGM = '{model_name}'",
-        "source.UPDATE_DT = SYSDATE()",
-        "source.UPDATE_BY = 'SVC_DBT'",
-        f"source.UPDATE_PGM = '{model_name}'",
+        f"target.DATA_SRC = '{source_details['schema']}.{source_details['table']}'",
+        "target.CREATE_DT = SYSDATE()",
+        "target.CREATE_BY = 'SVC_DBT'",
+        f"target.CREATE_PGM = '{model_name}'",
+        "target.UPDATE_DT = SYSDATE()",
+        "target.UPDATE_BY = 'SVC_DBT'",
+        f"target.UPDATE_PGM = '{model_name}'",
     ]
 
     update_columns = [
