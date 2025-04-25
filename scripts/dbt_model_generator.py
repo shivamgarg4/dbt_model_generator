@@ -18,6 +18,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     pre_hook = config['Target']['pre_hook']
     post_hook = config['Target']['post_hook']
     having= config.get('having', [''])[0] if config.get('having') else ''
+    having= config.get('having', [''])[0] if config.get('having') else ''
 
     # Get target DDL columns and unique keys if path provided
     target_columns = []
@@ -86,7 +87,7 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
 
     # Add unique keys for incremental models if provided
     unique_keys = []
-    if materialization == 'incremental' and 'unique_key' in config['Target']:
+    if materialization == 'incremental' and 'unique_key' in config['Target'] and config['Target']['unique_key'] and config['Target']['unique_key'].strip() != '':
         unique_keys = config['Target']['unique_key']
         if isinstance(unique_keys, list):
             # Format list of keys as a comma-separated string
@@ -138,12 +139,6 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
             # Print debug info with the actual columns that are added to the model configuration
             formatted_columns = [f"'{col}'" for col in update_columns]
             print(f"Added merge_update_columns to model config: {formatted_columns}")
-    elif materialization == 'incremental':
-        # If no unique key is provided but model is incremental, add a warning comment
-        model_config += """
-    /* WARNING: No unique_key specified for incremental model.
-       This may cause duplicate records. Please specify a unique_key. */"""
-        print("WARNING: No unique_key specified for incremental model.")
 
     # Close the config block
     model_config += """
