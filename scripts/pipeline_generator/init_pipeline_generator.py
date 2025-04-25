@@ -898,23 +898,23 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
         generate_dbt_jobs(workbook_path, "config/mappings/", "jobs/")
 
         logging.info("DBT model generation completed")
-        # Clean up existing JSON files before generation
-        try:
-            # Clean up config directory
-            config_dir = "config/"
-            for root, dirs, files in os.walk(config_dir):
-                for file in files:
-                    if file.endswith('.json'):
-                        file_path = os.path.join(root, file)
-                        try:
-                            os.remove(file_path)
-                            logging.info(f"Deleted existing JSON file: {file_path}")
-                        except OSError as e:
-                            logging.error(f"Error deleting file {file_path}: {str(e)}")
-
-            logging.info("Cleanup of existing JSON files completed")
-        except Exception as e:
-            logging.error(f"Error during cleanup process: {str(e)}")
+        # # Clean up existing JSON files before generation
+        # try:
+        #     # Clean up config directory
+        #     config_dir = "config/"
+        #     for root, dirs, files in os.walk(config_dir):
+        #         for file in files:
+        #             if file.endswith('.json'):
+        #                 file_path = os.path.join(root, file)
+        #                 try:
+        #                     os.remove(file_path)
+        #                     logging.info(f"Deleted existing JSON file: {file_path}")
+        #                 except OSError as e:
+        #                     logging.error(f"Error deleting file {file_path}: {str(e)}")
+        #
+        #     logging.info("Cleanup of existing JSON files completed")
+        # except Exception as e:
+        #     logging.error(f"Error during cleanup process: {str(e)}")
 
     except Exception as e:
         logging.error(f"Fatal error in model generation: {e}")

@@ -406,7 +406,7 @@ def generate_merge_sql_for_pipelines(config_file, mapping_sheet,object_name=None
         'table': config['Target']['Table Name'],
         'unique_key': config['Target']['unique_key'],
         'merge_type': config['Target'].get('merge_type', 'update_insert'),
-        'minus_logic_required': config['Target'].get('minus_logic_required', False),
+        'minus_logic_required': config['Target'].get('minus_logic', False),
         'pre_hook': config['Target'].get('pre_hook', ''),
         'post_hook': config['Target'].get('post_hook', ''),
         'having': config.get('having', [''])[0] if config.get('having') else ''
@@ -515,21 +515,25 @@ def generate_merge_sql_for_pipelines(config_file, mapping_sheet,object_name=None
                 main_sql += f"\n\t\t\t HAVING {target_details['having']}"
 
 
-    macro_name = f"MAC_{target_details['schema']}_{target_details['table']}_MERGE"
+    if object_name:
+        model_name = f"{object_name}"
+    else:
+        model_name = f"MAC_{target_details['schema']}_{target_details['table']}_MERGE"
+
     # Add specific audit column updates
     audit_columns_mapping = [
         f"source.DATA_SRC = '{source_details['schema']}.{source_details['table']}'",
         "source.CREATE_DT = SYSDATE()",
         "source.CREATE_BY = 'SVC_DBT'",
-        f"source.CREATE_PGM = '{macro_name}'",
+        f"source.CREATE_PGM = '{model_name}'",
         "source.UPDATE_DT = SYSDATE()",
         "source.UPDATE_BY = 'SVC_DBT'",
-        f"source.UPDATE_PGM = '{macro_name}'",
+        f"source.UPDATE_PGM = '{model_name}'",
     ]
 
     update_columns = [
         textwrap.dedent(f"target.{col['Target Column']} = source.{col['Target Column']}")
-        for col in all_columns if col['Target Column'] not in audit_columns
+        for col in all_columns if col['Target Column'] not in audit_columns and col['Logic'] != "''" and col['Target Column'] not in target_details['unique_key']
     ]
     update_columns.extend(audit_columns_mapping)
 
@@ -610,8 +614,13 @@ def generate_merge_sql_for_pipelines(config_file, mapping_sheet,object_name=None
 
     formatted_merge_sql = format_sql_content(merge_sql)
 
+    if object_name:
+        model_name = f"{object_name}_MERGE"
+    else:
+        model_name = f"MAC_{target_details['schema']}_{target_details['table']}_MERGE"
+
     dbt_enclosed_merge= textwrap.dedent(f'''
-     {{% macro MAC_{target_details['schema']}_{target_details['table']}_MERGE() %}}
+     {{% macro {model_name}() %}}
     {{% set query %}}
     
     {formatted_merge_sql}
