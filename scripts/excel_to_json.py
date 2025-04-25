@@ -340,13 +340,13 @@ def create_dbt_yml_from_config(model_config, output_path):
 
 
 
-if __name__ == "__main__":
-    # Example usage
-    config_file = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\config\mappings\M01_F_RPT_TBA_Map.json'
-    mapping_sheet = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\mappings\DW.F_DEPL_RETAIL_INVOICE_CBBD.xlsx'
- # Replace with actual mapping sheet object
-    workbook = load_workbook(mapping_sheet)
-    mapping_sheet=workbook["D01_F_DEPL_RETAIL_I_Map"]
-    result =  _extract_mappings_from_sheet(mapping_sheet)
-
-    print(result)
+# if __name__ == "__main__":
+#     # Example usage
+#     config_file = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\config\mappings\M01_F_RPT_TBA_Map.json'
+#     mapping_sheet = r'C:\Users\shivamgarg4\Documents\Python Work\dbt_model_generator\dbt_model_generator\mappings\DW.F_DEPL_RETAIL_INVOICE_CBBD.xlsx'
+#  # Replace with actual mapping sheet object
+#     workbook = load_workbook(mapping_sheet)
+#     mapping_sheet=workbook["D01_F_DEPL_RETAIL_I_Map"]
+#     result =  _extract_mappings_from_sheet(mapping_sheet)
+#
+#     print(result)

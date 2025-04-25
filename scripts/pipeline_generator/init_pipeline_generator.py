@@ -508,7 +508,6 @@ def create_config_sheet(config_sheet):
 
 def process_pipeline_sheet(workbook_path, ddl_path):
     # Load the workbook and get the pipeline details sheet
-    process_filled_workbook_to_json(workbook_path)
     workbook = load_workbook(workbook_path)
     pipeline_details_sheet = workbook['Pipeline Details']
     config_sheet = workbook['config']
@@ -557,7 +556,7 @@ def process_pipeline_sheet(workbook_path, ddl_path):
                 short_target = target_model_split[:15]
 
                 # Create sheet name with counter (padded with zero)
-                generated_mapping_sheet_name = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}_Map"
+                generated_mapping_sheet_name = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}" + ("_Map" if not short_target.endswith('_') else "Map")
 
         # Create mapping sheet using either the existing or newly generated name
         if generated_mapping_sheet_name and generated_mapping_sheet_name != "Unknown":
@@ -583,6 +582,7 @@ def process_pipeline_sheet(workbook_path, ddl_path):
             pipeline_details_sheet.cell(row=pipeline_index, column=4, value=generated_mapping_sheet_name)
 
     workbook.save(workbook_path)
+    process_filled_workbook_to_json(workbook_path)
     return workbook
 
 def read_source_table_columns(source_model):
@@ -628,7 +628,6 @@ def read_source_table_columns(source_model):
         ]
         return source_columns
 
-
 def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict], Optional[List[Dict]]]:
     """
     Process an Excel workbook and extract configuration and mapping data to JSON files.
@@ -637,6 +636,10 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
     Returns:
         Tuple containing config_data and list of mapping_data
     """
+    # Configure logging
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+
     try:
         workbook = load_workbook(workbook_path)
         pipeline_details_sheet = workbook['Pipeline Details']
@@ -654,6 +657,7 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
 
         # Read pipeline configurations
         pipelines = read_pipeline_sheet(pipeline_details_sheet)
+        logger.info(f"Loaded {len(pipelines)} pipelines from workbook")
 
         config_data = _extract_config_from_sheet(workbook['config'])
         output_directory = Path("config")
@@ -663,8 +667,9 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
         try:
             with open(file_path, 'w') as f:
                 json.dump(config_data, f, indent=2)
+            logger.info(f"Successfully wrote config to {file_path}")
         except IOError as e:
-            print(f"Error writing config file: {e}")
+            logger.error(f"Error writing config file: {e}")
 
         # Create mapping sheets for each pipeline
         for pipeline_index, pipeline in enumerate(pipelines, start=2):
@@ -674,51 +679,53 @@ def process_filled_workbook_to_json(workbook_path: str) -> Tuple[Optional[Dict],
                 target_sheet = pipeline.get("Generated Mapping Sheet")
 
                 # Generate mapping sheet name if not present
-                if not target_sheet:
-                    model_type_split = model_type.split()[0]
-                    target_model_split = target_model.split('.')[-1]
+                model_type_split = model_type.split()[0]
+                target_model_split = target_model.split('.')[-1]
 
-                    if model_type in ['DW Load', 'Merge Macro', 'Insert Macro', 'LND Load']:
-                        type_short = type_abbrev.get(model_type_split, model_type_split[0])
-                        table_key = f"{type_short}_{target_model_split}"
+                if model_type in ['DW Load', 'Merge Macro', 'Insert Macro', 'LND Load']:
+                    type_short = type_abbrev.get(model_type_split, model_type_split[0])
+                    table_key = f"{type_short}_{target_model_split}"
 
-                        # Initialize or increment counter for this table
-                        if table_key not in table_counter:
-                            table_counter[table_key] = 1
-                        else:
-                            table_counter[table_key] += 1
-
-                        short_target = target_model_split[:15]
-                        target_sheet = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}_Map"
-
-                        # Update the pipeline details sheet with the new mapping sheet name
-                        pipeline_details_sheet.cell(row=pipeline_index, column=4, value=target_sheet)
+                    # Initialize or increment counter for this table
+                    if table_key not in table_counter:
+                        table_counter[table_key] = 1
                     else:
-                        print(f"Warning: Unsupported model type for pipeline: {model_type}")
-                        continue
+                        table_counter[table_key] += 1
 
-                target_workbook = _load_workbook(workbook_path, target_sheet)
-                mapping_data = _extract_mappings_from_sheet(target_workbook)
-                all_mapping_data.append(mapping_data)
+                    short_target = target_model_split[:15]
+                    # Conditionally add underscore based on whether short_target already ends with an underscore
+                    target_sheet = f"{type_short}{str(table_counter[table_key]).zfill(2)}_{short_target}" + (
+                        "_Map" if not short_target.endswith('_') else "Map")
 
-                # Write the extracted mappings to a JSON file
-                output_directory = Path("config/mappings")
-                output_directory.mkdir(parents=True, exist_ok=True)
-                file_path = output_directory / f"{target_sheet}.json"
+                    # Update the pipeline details sheet with the new mapping sheet name
+                    pipeline_details_sheet.cell(row=pipeline_index, column=4, value=target_sheet)
 
-                with open(file_path, 'w') as f:
-                    json.dump(mapping_data, f, indent=2)
+                    target_workbook = _load_workbook(workbook_path, target_sheet)
+                    mapping_data = _extract_mappings_from_sheet(target_workbook)
+                    all_mapping_data.append(mapping_data)
+
+                    # Write the extracted mappings to a JSON file
+                    output_directory = Path("config/mappings")
+                    output_directory.mkdir(parents=True, exist_ok=True)
+                    file_path = output_directory / f"{target_sheet}.json"
+
+                    with open(file_path, 'w') as f:
+                        json.dump(mapping_data, f, indent=2)
+
+                    logger.info(f"Successfully processed and wrote mapping for {target_sheet}")
 
             except Exception as e:
-                print(f"Error processing pipeline {target_sheet if target_sheet else 'unknown'}: {e}")
+                logger.error(f"Error processing pipeline {target_sheet if target_sheet else 'unknown'}: {e}",
+                             exc_info=True)
                 continue
 
         # Save the workbook with updated mapping sheet names
         workbook.save(workbook_path)
+        logger.info(f"Successfully saved workbook with updated mapping sheet names")
         return config_data, all_mapping_data
 
     except Exception as e:
-        print(f"Error processing workbook: {e}")
+        logger.error(f"Error processing workbook: {e}", exc_info=True)
         return None, None
 
 
