@@ -124,6 +124,7 @@ def create_mapping_sheet(sheet, pipeline, columns):
         ('UNIQUE_KEY', ''),
         ('MERGE_TYPE',''),
         ('MINUS_LOGIC_REQUIRED', 'N'),
+        ('DISTINCT_REQUIRED','N'),
         ('TRANSIENT_TABLE', 'N'),
         ('PRE_HOOK', ''),
         ('POST_HOOK', '')
@@ -169,79 +170,78 @@ def create_mapping_sheet(sheet, pipeline, columns):
     # Add blank row for separation
     current_row += 1
 
-    if model_type == 'DW Load' or model_type == 'LND Load' :
-        # Add DAG Configuration section
-        sheet.cell(row=current_row, column=1, value='DAG Configuration').font = Font(bold=True)
+    # Add DAG Configuration section
+    sheet.cell(row=current_row, column=1, value='DAG Configuration').font = Font(bold=True)
+    current_row += 1
+
+    # DAG config options
+    dag_options = [
+        {
+            'param': 'DAG Type',
+            'value': '',
+            'options': ['DATASET DEPENDENCY', 'CRON', 'SNS'],
+            'description': 'Select the type of DAG to generate'
+        },
+        {
+            'param': 'Schedule Interval',
+            'value': '0 */4 * * *',
+            'description': 'Cron expression for scheduling (e.g., 0 */4 * * * for every 4 hours)'
+        }
+    ]
+
+    # Add DAG config rows
+    for config in dag_options:
+        # Parameter name with yellow background
+        param_cell = sheet.cell(row=current_row, column=1, value=config['param'])
+        param_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+
+        # Value cell
+        value_cell = sheet.cell(row=current_row, column=2)
+        value_cell.value = config['value']
+
+        # Description
+        desc_cell = sheet.cell(row=current_row, column=3, value=config['description'])
+
+        # If it's DAG Type, create a data validation dropdown
+        if config['param'] == 'DAG Type':
+            dv = DataValidation(
+                type="list",
+                formula1=f'"{",".join(config["options"])}"',
+                allow_blank=True
+            )
+            sheet.add_data_validation(dv)
+            dv.add(value_cell)
+
         current_row += 1
 
-        # DAG config options
-        dag_options = [
-            {
-                'param': 'DAG Type',
-                'value': '',
-                'options': ['DATASET DEPENDENCY', 'CRON', 'SNS'],
-                'description': 'Select the type of DAG to generate'
-            },
-            {
-                'param': 'Schedule Interval',
-                'value': '0 */4 * * *',
-                'description': 'Cron expression for scheduling (e.g., 0 */4 * * * for every 4 hours)'
-            }
-        ]
+    # Add blank row for separation
+    current_row += 1
 
-        # Add DAG config rows
-        for config in dag_options:
-            # Parameter name with yellow background
-            param_cell = sheet.cell(row=current_row, column=1, value=config['param'])
-            param_cell.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
+    # Add Dependencies section
+    dep_header = sheet.cell(row=current_row, column=1, value='Dependencies')
+    dep_header.font = Font(bold=True)
+    dep_header.fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
+    current_row += 1
 
-            # Value cell
-            value_cell = sheet.cell(row=current_row, column=2)
-            value_cell.value = config['value']
+    # Add dependency column headers
+    headers = ['#', 'Dependency Schema', 'Dependency Table']
+    for col, header in enumerate(headers, start=1):
+        cell = sheet.cell(row=current_row, column=col, value=header)
+        cell.font = Font(bold=True, color='FFFFFF')
+        cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
 
-            # Description
-            desc_cell = sheet.cell(row=current_row, column=3, value=config['description'])
-
-            # If it's DAG Type, create a data validation dropdown
-            if config['param'] == 'DAG Type':
-                dv = DataValidation(
-                    type="list",
-                    formula1=f'"{",".join(config["options"])}"',
-                    allow_blank=True
-                )
-                sheet.add_data_validation(dv)
-                dv.add(value_cell)
-
-            current_row += 1
-
-        # Add blank row for separation
+    # Add 5 empty rows for dependencies
+    for i in range(5):
         current_row += 1
+        row_num = sheet.cell(row=current_row, column=1, value=i + 1)
+        row_num.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
 
-        # Add Dependencies section
-        dep_header = sheet.cell(row=current_row, column=1, value='Dependencies')
-        dep_header.font = Font(bold=True)
-        dep_header.fill = PatternFill(start_color="E0E0E0", end_color="E0E0E0", fill_type="solid")
-        current_row += 1
-
-        # Add dependency column headers
-        headers = ['#', 'Dependency Schema', 'Dependency Table']
-        for col, header in enumerate(headers, start=1):
-            cell = sheet.cell(row=current_row, column=col, value=header)
-            cell.font = Font(bold=True, color='FFFFFF')
-            cell.fill = PatternFill(start_color="1F4E78", end_color="1F4E78", fill_type="solid")
-
-        # Add 5 empty rows for dependencies
-        for i in range(5):
-            current_row += 1
-            row_num = sheet.cell(row=current_row, column=1, value=i + 1)
-            row_num.fill = PatternFill(start_color="FFFF00", end_color="FFFF00", fill_type="solid")
-
-            # Add example values for the first row
-            if i == 0:
-                sheet.cell(row=current_row, column=2, value="DW")
-                sheet.cell(row=current_row, column=3, value="D_CUSTOMER")
-                comment = Comment('Enter the schema and table name of the dependency', 'System')
-                sheet.cell(row=current_row, column=2).comment = comment
+        # Add example values for the first row
+        if i == 0:
+            sheet.cell(row=current_row, column=2, value="DW")
+            sheet.cell(row=current_row, column=3, value="D_CUSTOMER")
+            comment = Comment('Enter the schema and table name of the dependency', 'System')
+            sheet.cell(row=current_row, column=2).comment = comment
 
     # Add blank row for separation
     current_row += 2
@@ -384,7 +384,7 @@ def create_mapping_sheet(sheet, pipeline, columns):
         table_type_cell = sheet.cell(row=current_row, column=2)
         table_type_dv = DataValidation(
             type="list",
-            formula1='"source,ref"',
+            formula1='"source,ref,table"',
             allow_blank=True
         )
         sheet.add_data_validation(table_type_dv)
@@ -866,6 +866,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                         mapping_sheet=mapping_sheet,
                         object_name=generated_object_name
                     )
+                    generate_dag_file("DW", config_file_path, "dags/")
 
                 elif "Insert Macro" in model_type:
                     model_content = insert_sql_generator(
@@ -873,6 +874,7 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                         mapping_sheet=mapping_sheet,
                         object_name=generated_object_name
                     )
+                    generate_dag_file("DW", config_file_path, "dags/")
 
                 elif "LND Load" in model_type:
                     model_content = create_dbt_model_from_json(
@@ -1127,25 +1129,37 @@ def generate_dbt_jobs(workbook_path, json_config_dir, output_dir='jobs'):
                 # Process pipelines based on Model Type
                 for pipeline in sorted_pipelines:
                     model_type = pipeline.get("Model Type", "")
+                    generated_object_name = pipeline.get("Generated Object Name", "")
 
-                    if model_type == "LND Load":
-                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+                    if generated_object_name:
 
-                    elif model_type == "DW Load":
-                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+                        if model_type == "Merge Macro":
+                            macro_name = f"MAC_{generated_object_name}_MERGE"
+                            job_content += f"dbt run-operation {macro_name}\n"
+                        if model_type == "Insert Macro":
+                            macro_name = f"MAC_{generated_object_name}_INSERT"
+                            job_content += f"dbt run-operation {macro_name}\n"
 
-                        # Add any merge and insert operations that follow
-                        for subsequent_pipeline in sorted_pipelines:
-                            subsequent_type = subsequent_pipeline.get("Model Type", "")
-                            if subsequent_type == "Merge Macro":
-                                macro_name = f"MAC_{target_schema}_{target_table}_MERGE"
-                                job_content += f"dbt run-operation {macro_name}\n"
-                            elif subsequent_type == "Insert Macro":
-                                macro_name = f"MAC_{target_schema}_{target_table}_INSERT"
-                                job_content += f"dbt run-operation {macro_name}\n"
+                    else:
+                        if model_type == "LND Load":
+                            job_content = f"dbt build --select {target_schema}.{target_table}\n"
 
-                    elif model_type == "DP Load":
-                        job_content = f"dbt build --select {target_schema}.{target_table}\n"
+                        elif model_type == "DW Load":
+                            job_content = f"dbt build --select {target_schema}.{target_table}\n"
+
+                            # Add any merge and insert operations that follow
+                            for subsequent_pipeline in sorted_pipelines:
+                                subsequent_type = subsequent_pipeline.get("Model Type", "")
+                                if subsequent_type == "Merge Macro":
+                                    macro_name = f"MAC_{target_schema}_{target_table}_MERGE"
+                                    job_content += f"dbt run-operation {macro_name}\n"
+                                elif subsequent_type == "Insert Macro":
+                                    macro_name = f"MAC_{target_schema}_{target_table}_INSERT"
+                                    job_content += f"dbt run-operation {macro_name}\n"
+
+                        elif model_type == "DP Load":
+                            job_content = f"dbt build --select {target_schema}.{target_table}\n"
+
 
                 # Write job file if we have content
                 if job_content:

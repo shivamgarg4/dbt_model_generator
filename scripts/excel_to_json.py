@@ -61,6 +61,7 @@ def _extract_mappings_from_sheet(mapping_sheet):
             "unique_key": "",
             "merge_type":"",
             "minus_logic": "",
+            "distint_key": "",
             "pre_hook": "",
             "post_hook": ""
         },
@@ -140,12 +141,16 @@ def _extract_mappings_from_sheet(mapping_sheet):
 
             if dependency_row:
                 dependency_header_row = dependency_row
-                for i in range(dependency_header_row, dependency_header_row + 5):
+
+                for i in range(dependency_header_row, mapping_sheet.max_row):
                     schema = mapping_sheet.cell(row=i, column=2).value
                     table = mapping_sheet.cell(row=i, column=3).value
 
                     if schema and table and schema != 'Dependency Schema' and table != 'Dependency Table':
                         model_config['dag_configuration']['dependencies'].append(f"{schema}.{table}")
+
+                    if not schema or not table:
+                        break
 
 
         # Column Mapping Section

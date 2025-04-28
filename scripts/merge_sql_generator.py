@@ -45,11 +45,14 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
         # Build the join clause
         join_clause = f"{join_type} JOIN "
 
-        # Add the table reference based on type
-        if table_type and table_type.lower() == 'source' and source_name:
+        if table_type == 'table':
+            join_clause += f" {source_name}.{table_name} "
+        elif table_type and table_type.lower() == 'source' and source_name:
             join_clause += f"{{{{ source('{source_name}', '{table_name}') }}}}"
+        elif table_type and table_type.lower() == 'ref' and table_name:
+           join_clause += f"{{{{ ref('{table_name}') }}}}"
         else:
-            join_clause += f"{{{{ ref('{table_name}') }}}}"
+            join_clause += f" {source_name}.{table_name} "
 
         # Add alias if provided
         if alias:

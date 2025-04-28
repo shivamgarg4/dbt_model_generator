@@ -1,5 +1,8 @@
 import os
 import json
+
+from Tools.demo.sortvisu import distinct
+
 from scripts.utils import parse_ddl_file
 
 
@@ -17,7 +20,6 @@ def create_dbt_model_from_json(config_file, mapping_sheet=None, target_ddl_path=
     target_table = f"{config['Target']['Schema']}.{config['Target']['Table Name']}"
     pre_hook = config['Target']['pre_hook']
     post_hook = config['Target']['post_hook']
-    having= config.get('having', [''])[0] if config.get('having') else ''
     having= config.get('having', [''])[0] if config.get('having') else ''
 
     # Get target DDL columns and unique keys if path provided
@@ -160,7 +162,7 @@ SELECT
         target_pos = {col[0]: idx for idx, col in enumerate(target_columns)}
 
         # Sort columns based on target DDL order
-        ordered_columns.sort(key=lambda x: str(target_pos.get(x['Target Column'], float('inf'))))
+        # ordered_columns.sort(key=lambda x: str(target_pos.get(x['Target Column'], float('inf'))))
         print(f"Ordered columns based on target DDL: {[col['Target Column'] for col in ordered_columns]}")
 
     # Add column mappings in the correct order
@@ -444,11 +446,16 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
         # Build the join clause
         join_clause = f"{join_type} JOIN "
 
-        # Add the table reference based on type
-        if table_type and table_type.lower() == 'source' and source_name:
+        if table_type == 'table':
+            join_clause += f" {source_name}.{table_name} "
+        elif table_type and table_type.lower() == 'source' and source_name:
             join_clause += f"{{{{ source('{source_name}', '{table_name}') }}}}"
+        elif table_type and table_type.lower() == 'ref' and table_name:
+           join_clause += f"{{{{ ref('{table_name}') }}}}"
         else:
-            join_clause += f"{{{{ ref('{table_name}') }}}}"
+            join_clause += f" {source_name}.{table_name} "
+
+
 
         # Add alias if provided
         if alias:

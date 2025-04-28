@@ -40,11 +40,14 @@ def extract_join_clauses(mapping_sheet, main_table_alias='source'):
         # Build the join clause
         join_clause = f"{join_type} JOIN "
 
-        # Add the table reference based on type
-        if table_type and table_type.lower() == 'source' and source_name:
+        if table_type == 'table':
+            join_clause += f" {source_name}.{table_name} "
+        elif table_type and table_type.lower() == 'source' and source_name:
             join_clause += f"{{{{ source('{source_name}', '{table_name}') }}}}"
+        elif table_type and table_type.lower() == 'ref' and table_name:
+           join_clause += f"{{{{ ref('{table_name}') }}}}"
         else:
-            join_clause += f"{{{{ ref('{table_name}') }}}}"
+            join_clause += f" {source_name}.{table_name} "
 
         # Add alias if provided
         if alias:
@@ -144,8 +147,11 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None,obj
     post_hook = config['Target']['post_hook']
     having= config.get('having', [''])[0] if config.get('having') else ''
 
+    if object_name:
+        macro_name = f"{object_name}"
+    else:
+        macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
     # Generate file name
-    macro_name = f"MAC_{config['Target']['Schema']}_{config['Target']['Table Name']}_INSERT"
 
     # Get target DDL columns if path provided
     target_columns = []
@@ -157,6 +163,18 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None,obj
     # Build the INSERT clause
     insert_columns = []
     insert_values = []
+    # Add specific audit column updates
+    # Audit columns mapping with dynamic logic
+    audit_columns_mapping = {
+        'DATA_SRC': f"'{source_schema}.{source_table}'",
+        'CREATE_DT': 'SYSDATE()',
+        'CREATE_BY': "'SVC_DBT'",
+        'CREATE_PGM': f"'{macro_name}'",
+        'UPDATE_DT': 'SYSDATE()',
+        'UPDATE_BY': "'SVC_DBT'",
+        'UPDATE_PGM': f"'{macro_name}'"
+    }
+
 
     for column in config['Columns']:
         if isinstance(column, dict) and column.get('Logic') != "''":
@@ -167,8 +185,17 @@ def insert_sql_generator(config_file,mapping_sheet=None,target_ddl_path=None,obj
             if target_col in ["List (Y,N)", "Table Type", "ref"]:
                 continue
 
-            insert_columns.append(target_col)
-            insert_values.append(logic)
+            # Check if the column is an audit column
+            if target_col in audit_columns_mapping:
+                # Use predefined audit column logic
+                insert_columns.append(target_col)
+                insert_values.append(audit_columns_mapping[target_col])
+            else:
+                # Use the original logic for non-audit columns
+                logic = str(column['Logic'])
+                insert_columns.append(target_col)
+                insert_values.append(logic)
+
 
     insert_columns_str = ", ".join(insert_columns)
     insert_values_str = ", ".join(insert_values)
