@@ -1,8 +1,5 @@
 import os
 import json
-
-from Tools.demo.sortvisu import distinct
-
 from scripts.utils import parse_ddl_file
 
 
