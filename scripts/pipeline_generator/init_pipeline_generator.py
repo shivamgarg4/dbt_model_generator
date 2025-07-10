@@ -841,9 +841,9 @@ def generate_dbt_models(workbook_path, output_dir, json_config_dir, target_ddl_p
                 config_file_path = os.path.join(json_config_dir, config_filename)
 
                 if not os.path.exists(config_file_path) and not any(
-                        mt in model_type for mt in ["DP/BI View"]):
-                    logging.warning(f"No config file found for {target_model}")
-                    continue
+                    mt in model_type for mt in ["DP/BI View"]):
+                        logging.warning(f"No config file found for {target_model}")
+                        continue
 
                 # Generate model based on type
                 model_content = None

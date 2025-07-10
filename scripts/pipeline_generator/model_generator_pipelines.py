@@ -17,7 +17,6 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-
 def generate_lnd_dbt_model_file(mapping_file_path):
     """Generate the dbt model file."""
     logger.info(f"Starting to generate dbt model file from {mapping_file_path}")
@@ -52,83 +51,85 @@ def generate_lnd_dbt_model_file(mapping_file_path):
         source_table = None
         target_table = None
 
+        logger.info("Extracting Snowflake configuration")
+        snowflake_config = read_snowflake_config(mapping_file_path)
+
         for row in range(2, pipeline_sheet.max_row + 1):
             model_type = pipeline_sheet.cell(row=row, column=model_type_col).value
             if model_type == 'LND Load':
                 source_table = pipeline_sheet.cell(row=row, column=source_model_col).value
                 target_table = pipeline_sheet.cell(row=row, column=target_model_col).value
-                break
 
-        if not source_table or not target_table:
-            logger.error("Source or target table not found for LND Load type")
-            raise ValueError("Source or target table not found for LND Load type")
+                if not source_table or not target_table:
+                    logger.error("Source or target table not found for LND Load type")
+                    raise ValueError("Source or target table not found for LND Load type")
 
-        logger.debug(f"Processing source table: {source_table} and target table: {target_table}")
-        source_parts = source_table.split('.')
-        source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
+                logger.debug(f"Processing source table: {source_table} and target table: {target_table}")
+                source_parts = source_table.split('.')
+                source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
 
-        target_parts = target_table.split('.')
-        target_schema = target_parts[0] if len(target_parts) > 1 else None
-        target_table_name = target_parts[-1]
+                target_parts = target_table.split('.')
+                target_schema = target_parts[0] if len(target_parts) > 1 else None
+                target_table_name = target_parts[-1]
 
-        logger.info("Extracting Snowflake configuration")
-        snowflake_config = read_snowflake_config(mapping_file_path)
+                logger.info("Getting Snowflake connection")
+                # Get or create singleton connection
+                connection = get_snowflake_connection(snowflake_config)
 
-        logger.info("Getting Snowflake connection")
-        # Get or create singleton connection
-        connection = get_snowflake_connection(snowflake_config)
+                with get_cursor(connection) as cursor:
+                    cursor.execute("USE WAREHOUSE {}".format(snowflake_config['WAREHOUSE']))
+                    version = cursor.fetchone()
+                    print(f"Snowflake Version: {version}")
 
-        with get_cursor(connection) as cursor:
-            logger.debug(f"Executing query to get columns for {source_table_name}")
-            cursor.execute(f"""
-                        SELECT COLUMN_NAME
-                        FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
-                        WHERE TABLE_SCHEMA = '{source_schema}'
-                        AND TABLE_NAME = '{source_table_name}'
-                        ORDER BY ORDINAL_POSITION
-                    """)
+                    logger.debug(f"Executing query to get columns for {source_table_name}")
+                    cursor.execute(f"""
+                                SELECT COLUMN_NAME
+                                FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+                                WHERE TABLE_SCHEMA = '{source_schema}'
+                                AND TABLE_NAME = '{source_table_name}'
+                                ORDER BY ORDINAL_POSITION
+                            """)
 
-            columns = cursor.fetchall()
-            logger.debug(f"Retrieved {len(columns)} columns")
+                    columns = cursor.fetchall()
+                    logger.debug(f"Retrieved {len(columns)} columns")
 
-            formatted_columns = format_columns(columns)
-            replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema,
-                                                     target_table_name)
+                    formatted_columns = format_columns(columns)
+                    replaced_columns = replace_audit_columns(formatted_columns, source_schema, source_table_name, target_schema,
+                                                             target_table_name)
 
+                logger.info("Generating model configuration")
+                model_config = f"""
+                {{
+                    {{
+                        config(
+                            schema = '{target_schema}',
+                            tags=['{target_table_name}'],
+                            alias='{target_table_name}',
+                            materialized='table',
+                            transient = false
+                        )
+                    }}
+                }}
+                -- Model: {target_schema}.{target_table_name}
+                -- Source: {source_db}.{source_schema}.{source_table_name}
+                """
 
-        logger.info("Generating model configuration")
-        model_config = f"""
-        {{
-            {{
-                config(
-                    schema = '{target_schema}',
-                    tags=['{target_table_name}'],
-                    alias='{target_table_name}',
-                    materialized='table',
-                    transient = false
-                )
-            }}
-        }}
-        -- Model: {target_schema}.{target_table_name}
-        -- Source: {source_db}.{source_schema}.{source_table_name}
-        """
+                model_config += "\n\nSELECT\n"
+                model_config += ",\n".join(replaced_columns) + "\n"
+                model_config += f"FROM {{{{ source('{source_name}', '{source_table_name}') }}}}\n"
 
-        model_config += "\n\nSELECT\n"
-        model_config += ",\n".join(replaced_columns) + "\n"
-        model_config += f"FROM {{{{ source('{source_name}', '{source_table_name}') }}}}\n"
+                output_dir = 'models'
+                os.makedirs(output_dir, exist_ok=True)
 
-        output_dir = 'models'
-        os.makedirs(output_dir, exist_ok=True)
+                model_name = f"{target_schema}.{target_table_name}"
+                file_name = f"{model_name}.sql"
+                file_path = os.path.join(output_dir, file_name)
 
-        model_name = f"{target_schema}.{target_table_name}"
-        file_name = f"{model_name}.sql"
-        file_path = os.path.join(output_dir, file_name)
+                logger.info(f"Writing model file to {file_path}")
+                with open(file_path, 'w') as f:
+                    f.write(model_config)
 
-        logger.info(f"Writing model file to {file_path}")
-        with open(file_path, 'w') as f:
-            f.write(model_config)
-
-        logger.info("Successfully generated dbt model file")
+                logger.info("Successfully generated dbt model file")
         return True, file_path
     except Exception as e:
         logger.error(f"Error generating dbt model: {str(e)}", exc_info=True)
@@ -168,84 +169,85 @@ def create_dp_view_file(file_path,object_name=None):
         source_table = None
         target_table = None
 
+        logger.info("Extracting Snowflake configuration")
+        snowflake_config = read_snowflake_config(file_path)
+
         for row in range(2, pipeline_sheet.max_row + 1):
             model_type = pipeline_sheet.cell(row=row, column=model_type_col).value
             if model_type == 'DP/BI View':
                 source_table = pipeline_sheet.cell(row=row, column=source_model_col).value
                 target_table = pipeline_sheet.cell(row=row, column=target_model_col).value
-                break
 
-        if not source_table or not target_table:
-            logger.error("Source or target table not found for DP View type")
-            raise ValueError("Source or target table not found for DP View type")
+                if not source_table or not target_table:
+                    logger.error("Source or target table not found for DP View type")
+                    raise ValueError("Source or target table not found for DP View type")
 
-        logger.debug(f"Processing source table: {source_table} and target table: {target_table}")
-        source_parts = source_table.split('.')
-        source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
+                logger.debug(f"Processing source table: {source_table} and target table: {target_table}")
+                source_parts = source_table.split('.')
+                source_db, source_schema, source_table_name = source_parts[0], source_parts[1], source_parts[2]
 
-        target_parts = target_table.split('.')
-        target_schema = target_parts[0] if len(target_parts) > 1 else None
-        target_table_name = target_parts[-1]
-
-        logger.info("Extracting Snowflake configuration")
-        snowflake_config = read_snowflake_config(file_path)
-
-        logger.info("Getting Snowflake connection")
-        # Get or create singleton connection
-        connection = get_snowflake_connection(snowflake_config)
-
-        with get_cursor(connection) as cursor:
-            # Get source columns
-            logger.debug(f"Fetching source columns for {source_table_name}")
-            cursor.execute(f"""
-                SELECT COLUMN_NAME
-                FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
-                WHERE TABLE_SCHEMA = '{source_schema}'
-                AND TABLE_NAME = '{source_table_name}'
-                ORDER BY ORDINAL_POSITION
-            """)
-            source_columns = cursor.fetchall()
-
-            # Rest of your existing code remains the same
-            target_columns = source_columns
-
-            # Process columns
-            logger.debug("Processing source and target columns")
-            source_formatted_columns = format_columns(source_columns)
-            source_replaced_columns = source_formatted_columns
-            target_formatted_columns = format_columns(target_columns)
+                target_parts = target_table.split('.')
+                target_schema = target_parts[0] if len(target_parts) > 1 else None
+                target_table_name = target_parts[-1]
 
 
-        # Generate model configuration
-        logger.info("Generating view SQL")
-        model_config = f"""
-            -- Model: {target_schema}.{target_table_name}
-            -- Source: {source_db}.{source_schema}.{source_table_name}
-        """
 
-        model_config += f"\n\ncreate or replace view {target_schema}.{target_table_name}(\n"
-        model_config += ",\n".join(target_formatted_columns) + "\n)copy grants as\n"
-        model_config += "\n\nSELECT\n"
-        model_config += ",\n".join(source_replaced_columns) + "\n"
-        model_config += f"FROM {source_schema}.{source_table_name}\n"
+                logger.info("Getting Snowflake connection")
+                # Get or create singleton connection
+                connection = get_snowflake_connection(snowflake_config)
 
-        # Create and write to file
-        logger.info("Writing view SQL to file")
-        output_dir = 'views'
-        os.makedirs(output_dir, exist_ok=True)
+                with get_cursor(connection) as cursor:
+                    # Get source columns
+                    logger.debug(f"Fetching source columns for {source_table_name}")
+                    cursor.execute(f"USE WAREHOUSE {snowflake_config['WAREHOUSE']}")
+                    cursor.execute(f"""
+                        SELECT COLUMN_NAME
+                        FROM {source_db}.INFORMATION_SCHEMA.COLUMNS
+                        WHERE TABLE_SCHEMA = '{source_schema}'
+                        AND TABLE_NAME = '{source_table_name}'
+                        ORDER BY ORDINAL_POSITION
+                    """)
+                    source_columns = cursor.fetchall()
+                    # Rest of your existing code remains the same
+                    target_columns = source_columns
 
-        if object_name:
-            model_name = f"{object_name}"
-        else:
-            model_name = f"{target_schema}.{target_table_name}"
+                    # Process columns
+                    logger.debug("Processing source and target columns")
+                    source_formatted_columns = format_columns(source_columns)
+                    source_replaced_columns = source_formatted_columns
+                    target_formatted_columns = format_columns(target_columns)
 
-        file_name = f"{model_name}.sql"
-        file_path = os.path.join(output_dir, file_name)
 
-        with open(file_path, 'w') as f:
-            f.write(model_config)
+                # Generate model configuration
+                logger.info("Generating view SQL")
+                model_config = f"""
+                    -- Model: {target_schema}.{target_table_name}
+                    -- Source: {source_db}.{source_schema}.{source_table_name}
+                """
 
-        logger.info(f"Successfully created DP view file at: {file_path}")
+                model_config += f"\n\ncreate or replace view {target_schema}.{target_table_name}(\n"
+                model_config += ",\n".join(target_formatted_columns) + "\n)copy grants as\n"
+                model_config += "\n\nSELECT\n"
+                model_config += ",\n".join(source_replaced_columns) + "\n"
+                model_config += f"FROM {source_schema}.{source_table_name}\n"
+
+                # Create and write to file
+                logger.info("Writing view SQL to file")
+                output_dir = 'views'
+                os.makedirs(output_dir, exist_ok=True)
+
+                if object_name:
+                    model_name = f"{object_name}"
+                else:
+                    model_name = f"{target_schema}.{target_table_name}"
+
+                file_name = f"{model_name}.sql"
+                file_path = os.path.join(output_dir, file_name)
+
+                with open(file_path, 'w') as f:
+                    f.write(model_config)
+
+                logger.info(f"Successfully created DP view file at: {file_path}")
         return True, file_path
 
     except Exception as e:
@@ -262,7 +264,6 @@ def format_columns(columns):
     except Exception as e:
         logger.error(f"Error formatting columns: {str(e)}", exc_info=True)
         raise Exception(f"An error occurred while formatting columns: {e}")
-
 
 def replace_audit_columns(columns, source_schema_name, source_view_name, target_schema_name, target_table_name):
     """Replace audit columns with static values."""
@@ -281,7 +282,6 @@ def replace_audit_columns(columns, source_schema_name, source_view_name, target_
     except Exception as e:
         logger.error(f"Error replacing audit columns: {str(e)}", exc_info=True)
         raise Exception(f"An error occurred while replacing audit columns: {e}")
-
 
 def read_snowflake_config(excel_path, sheet_name='config'):
     """
